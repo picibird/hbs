@@ -28,7 +28,7 @@ The hybrid bookshelf opensource code will have major changes and cleanup in 2016
 
 ## Nuget Server
 
-We host our own [nuget server](http://nuget.picibits.com/api/v2/) to distribute our picibits library for app development in different projects. Picibits is currently closed source but we aim to go opensource in 2017. The porject includes a **nuget.config** file so visual studio should automatically pick up our nuget server. If not apply http://nuget.picibits.com/api/v2/ manually.
+We host our own [nuget server](http://nuget.picibits.com/api/v2/) to distribute our picibits app development library. We aim to go opensource with picibits in 2017. This project's src folder includes a **nuget.config** file so visual studio should automatically pick up our nuget server. If not apply http://nuget.picibits.com/api/v2/ manually.
 
 ## Build ##
 

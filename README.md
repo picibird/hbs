@@ -1,6 +1,6 @@
 # Hybrid Bookshelf #
 
-This is the opensource version of the hybrid bookshelf. A product version with support is offered by [picibird](https://www.picibird.com "picibird"). 
+This is the opensource version of the hybrid bookshelf. A product version with support is offered by [picibird](http://www.picibird.com "picibird"). 
 
 ## Library Data Unifier ##
 

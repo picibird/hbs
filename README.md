@@ -3,8 +3,16 @@
 This is the opensource version of the hybrid bookshelf. A product version with support is offered by [picibird](https://www.picibird.com "picibird"). 
 
 ## Library Data Unifier ##
-The repository includes project hbs.ldu, a portable client implementation to connect to the Library Data Unifier. 
-The LDU is a customized opensource [pazpar2](http://www.indexdata.com/pazpar2) server by [BSZ] (https://www.bsz-bw.de/index.html) library services. 
+
+[LDU github repo](https://github.com/BSZBW/ldu)
+
+
+This repository includes the project hbs.ldu, a portable client implementation to connect to the Library Data Unifier. 
+The LDU is a customized opensource [pazpar2](http://www.indexdata.com/pazpar2) server by [BSZ] (https://www.bsz-bw.de/index.html) library services.
+
+To get access to demo data please contact:
+Clemens Elmlinger, BSZ
+clemens.elmlinger@bsz-bw.de
 
 ## For Early Adopters ##
 
@@ -17,6 +25,10 @@ The hybrid bookshelf opensource code will have major changes and cleanup in 2016
 * hbs.wpf.demo - wpf application implementation launching hbs with ldu opensource server configruation
 * hbs.ldu - portable library to communicate with library data unifier (pazpar2 server)
 * picibits.bib - portable base library
+
+## Nuget Server
+
+We host our own [nuget server](http://nuget.picibits.com/api/v2/) to distribute our picibits library for app development in different projects. Picibits is currently closed source but we aim to go opensource in 2017. The porject includes a **nuget.config** file so visual studio should automatically pick up our nuget server. If not apply http://nuget.picibits.com/api/v2/ manually.
 
 ## Build ##
 

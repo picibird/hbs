@@ -32,22 +32,10 @@ namespace picibird.hbs.wpf.demo
 
         protected override void ApplySettings()
         {
-            UseProxyUrlsNotForPublicGithub();
             ValidateDemoSettings();
             base.ApplySettings();
         }
-
-        private void UseProxyUrlsNotForPublicGithub()
-        {
-            //TODO Remove before going public
-            _lduUrl = "http://72270b9f929a3ef6-eu-west-1.getstatica.com/pazpar2/search.pz2";
-            _coverProviderUrl = "http://72270b9f929a3ef6-eu-west-1.getstatica.com/coverdata.php";
-            var pazpar2 = Pici.Settings.Get<LduSettings>();
-            pazpar2.Pazpar2Url = _lduUrl;
-            var cover = Pici.Settings.Get<CoverSettings>();
-            cover.CoverProviderUrl = _coverProviderUrl;
-        }
-
+        
         protected virtual void ValidateDemoSettings()
         {
             //set ldu defaults

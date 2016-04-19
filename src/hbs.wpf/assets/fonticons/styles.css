@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "bibshelf-fonticons";
+    font-style: normal;
+    font-weight: normal;
+    src: url("fonts/bibshelf-fonticons.eot");
+    src: url("fonts/bibshelf-fonticons.eot?#iefix") format("embedded-opentype"),
+         url("fonts/bibshelf-fonticons.woff") format("woff"),
+         url("fonts/bibshelf-fonticons.ttf") format("truetype"),
+         url("fonts/bibshelf-fonticons.svg#bibshelf-fonticons") format("svg");
+}
+
+[data-icon]:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    content: attr(data-icon);
+    font-family: "bibshelf-fonticons" !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "bibshelf-fonticons" !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}
+
+.icon-book-1-1:before { content: "j"; }
+
+.icon-book-7-1:before { content: "k"; }
+
+.icon-books-2-1:before { content: "l"; }
+
+.icon-cloud-1:before { content: "F"; }
+
+.icon-usb-2-1:before { content: "H"; }
+
+.icon-academic-cap-1:before { content: "J"; }
+
+.icon-newspaper-2-1:before { content: "L"; }
+
+.icon-video-camera-2-1:before { content: "M"; }
+
+.icon-map-location-1:before { content: "O"; }
+
+.icon-cloud-checked-1:before { content: "R"; }
+
+.icon-question-mark:before { content: "S"; }
+
+.icon-quote-1:before { content: "T"; }
+
+.icon-zoom-in:before { content: "e"; }
+
+.icon-zoom-out:before { content: "h"; }
+
+.icon-bookmark-4:before { content: "o"; }
+
+.icon-camera-symbol-3-1:before { content: "U"; }
+
+.icon-camera-symbol-2:before { content: "V"; }
+
+.icon-camera-symbol-1:before { content: "W"; }
+
+.icon-headphone:before { content: "X"; }
+
+.icon-bubble-comment-1:before { content: "Y"; }
+
+.icon-plane-paper-1-1:before { content: "Z"; }
+
+.icon-mail-1-1:before { content: "0"; }
+
+.icon-letter-3:before { content: "1"; }
+
+.icon-letter-1:before { content: "2"; }
+
+.icon-profile-graduate-1:before { content: "3"; }
+
+.icon-arrow-67:before { content: "6"; }
+
+.icon-arrow-68:before { content: "7"; }
+
+.icon-text-wrapping-1:before { content: "8"; }
+
+.icon-text-wrapping-3:before { content: "9"; }
+
+.icon-text-wrapping-2:before { content: "!"; }
+
+.icon-newspaper-1:before { content: "\""; }
+
+.icon-bookmark-3:before { content: "#"; }
+
+.icon-contact-book-4:before { content: "%"; }
+
+.icon-files:before { content: "g"; }
+
+.icon-disc:before { content: "i"; }
+
+.icon-usb-1:before { content: "m"; }
+
+.icon-cd-1-1:before { content: "$"; }
+
+.icon-floppy-disk:before { content: "&"; }
+
+.icon-memory-card:before { content: "'"; }
+
+.icon-map-pin:before { content: "("; }
+
+.icon-check:before { content: ")"; }
+
+.icon-sync-2:before { content: "*"; }
+
+.icon-scale-spread-2-1:before { content: "+"; }
+
+.icon-scale-reduce-1-1:before { content: ","; }
+
+.icon-note-paper-2:before { content: "-"; }
+
+.icon-document-1-1:before { content: "."; }
+
+.icon-cd-2:before { content: "/"; }
+
+.icon-gramophone-record-2:before { content: ":"; }
+
+.icon-headphone-2-1:before { content: "<"; }
+
+.icon-music-note-1:before { content: "="; }
+
+.icon-movie-play-2-1:before { content: ";"; }
+
+.icon-receipt-1:before { content: ">"; }
+
+.icon-qr-code:before { content: "?"; }
+
+.icon-delete-2:before { content: "@"; }
+
+.icon-bubble-quote-1:before { content: "a"; }
+
+.icon-film-2:before { content: "b"; }
+
+.icon-headphone-1:before { content: "c"; }
+
+.icon-arrow-67-1:before { content: "n"; }
+
+.icon-arrow-68-1:before { content: "p"; }
+
+.icon-arrow-39:before { content: "q"; }
+
+.icon-arrow-40:before { content: "r"; }
+
+.icon-zoom-in-1:before { content: "d"; }
+
+.icon-zoom-out-1:before { content: "f"; }
+
+.icon-sync-2-1:before { content: "s"; }
+
+.icon-delete-1:before { content: "t"; }

@@ -1,0 +1,22 @@
+﻿{
+  "supports": {
+    "net46.app": {},
+    "uwp.10.0.app": {}
+  },
+  "dependencies": {
+    "Flurl.Http": "0.7.0",
+    "Microsoft.NETCore": "5.0.0",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.0",
+    "Newtonsoft.Json": "8.0.2",
+    "Nito.AsyncEx": "3.0.1",
+    "PCLStorage": "1.0.2",
+    "picibits": "0.1.2",
+    "Rx-Main": "2.2.5",
+    "SimpleInjector": "3.1.2"
+  },
+  "frameworks": {
+    "dotnet": {
+      "imports": "portable-net452+win81"
+    }
+  }
+}

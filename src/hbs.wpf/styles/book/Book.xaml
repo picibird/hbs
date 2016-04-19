@@ -1,0 +1,391 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+                    xmlns:piciconv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app"
+                    xmlns:converter="clr-namespace:picibird.hbs.wpf.converter"
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/FontIcons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/book/AvailabilityStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/book/BookLinks.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/modernui/ScrollBarStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- FRONT COVER -->
+
+
+    <Style x:Key="CoverDebugStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{StaticResource HBS_WHITE_BRUSH}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- FRONT COVER -->
+
+    <SolidColorBrush x:Key="PrimaryColorBrush">
+        <SolidColorBrush.Color>
+            <Binding Path="Model.CoverColorScheme.Primary" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="SecondaryColorBrush">
+        <SolidColorBrush.Color>
+            <Binding Path="Model.CoverColorScheme.Secondary" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <Style x:Key="CoverTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource HBS_BLUE}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="{StaticResource TextBoxPaddingDefault}" />
+    </Style>
+
+    <Style x:Key="CoverTitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CoverTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource CoverTitleFontSize}" />
+        <!--<Setter Property="Text" Value="{Binding Model.title, Converter={StaticResource ResourceKey=FormCConverter}}"/>-->
+        <Setter Property="Text">
+            <Setter.Value>
+                <Binding Path="Model.title" ConverterParameter="75">
+                    <Binding.Converter>
+                        <piciconv:ConverterGroup>
+                            <converter:StringFormCConverter />
+                            <piciconv:KearningConverter />
+                        </piciconv:ConverterGroup>
+                    </Binding.Converter>
+                </Binding>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CoverAuthorTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource CoverTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource CoverAuthorFontSize}" />
+        <Setter Property="Text" Value="{Binding Model.authorCoverString, Mode=OneWay}" />
+    </Style>
+
+    <Style x:Key="CoverBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource HBS_WHITE}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource HBS_BLUE}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource CoverMargin}" />
+    </Style>
+
+    <Style x:Key="GenericFrontCoverStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+
+                    <Grid>
+                        <Border Style="{StaticResource CoverBorderStyle}">
+                            <Grid x:Name="root">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.6*" />
+                                    <RowDefinition Height="0.4*" />
+                                </Grid.RowDefinitions>
+                                <Viewbox Grid.Row="0" Margin="20">
+                                    <TextBox Style="{StaticResource CoverTitleTextBoxStyle}"
+                                             MaxWidth="{Binding ElementName=root, Path=ActualWidth}"
+                                             MinWidth="400" />
+                                </Viewbox>
+                                <Viewbox Grid.Row="1" Margin="20">
+                                    <TextBox Style="{StaticResource ResourceKey=CoverAuthorTextBoxStyle}"
+                                             MaxWidth="{Binding ElementName=root, Path=ActualWidth}"
+                                             MinWidth="450" />
+                                </Viewbox>
+                            </Grid>
+                        </Border>
+                        <Image Source="{Binding Model.CoverImage.Native}" />
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FrontCoverStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="{Binding Model.CoverImage.Native}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- SPINE -->
+
+    <Style x:Key="SpineWithoutContentStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="BackgroundBorder">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary}" />
+                        </Border.Background>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SpineStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="BackgroundBorder">
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BackgroundBrush" Color="{Binding Model.CoverColorScheme.Primary}" />
+                        </Border.Background>
+                        <DockPanel x:Name="rootBorder" LastChildFill="False" Opacity="{Binding ContentOpacity}">
+                            <DockPanel.Background>
+                                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Secondary}" />
+                            </DockPanel.Background>
+
+                            <StackPanel DockPanel.Dock="Top" Orientation="Vertical"
+                                        Margin="{StaticResource CoverMargin}">
+                                <!-- medium icon & name-->
+                                <TextBlock Style="{StaticResource FontIconTextblockStyleExtrem}"
+                                           HorizontalAlignment="Center"
+                                           Text="{Binding Model.medium, Converter={StaticResource MediumToFontIconConverter}}"
+                                           Foreground="{Binding Model.CoverColorScheme.Primary}" />
+                                <TextBox Text="{Binding Model.Medium, Mode=OneWay}"
+                                         Style="{StaticResource SpineTitleTextBoxStyle}"
+                                         Margin="0,5,0,25" />
+                                <!-- page count -->
+                                <TextBox Text="{Binding Resources[pages]}" Style="{StaticResource SpineTextBoxStyle}"
+                                         Visibility="{Binding Model.pages_number, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                <TextBox Text="{Binding Model.pages_number, Mode=OneWay}"
+                                         Style="{StaticResource SpineTitleTextBoxStyle}"
+                                         Visibility="{Binding Model.pages_number, Converter={StaticResource CollapsedNoDataConverter}}"
+                                         Margin="0,5,0,25" />
+                                <!-- DEPARTMENT -->
+                                <TextBox Text="{Binding Resources[department]}"
+                                         Style="{StaticResource SpineTextBoxStyle}"
+                                         Visibility="{Binding Model.Department, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                <TextBox Text="{Binding Model.Department, Mode=OneWay}"
+                                         Style="{StaticResource SpineTitleTextBoxStyle}"
+                                         Visibility="{Binding Model.Department, Converter={StaticResource CollapsedNoDataConverter}}" />
+                            </StackPanel>
+
+                            <TextBox Text="{Binding QrCodeUrl, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=17}" DockPanel.Dock="Bottom"
+                                     Style="{StaticResource SpineTextBoxSmallStyle}" TextWrapping="WrapWithOverflow"/>
+
+                            <Button DockPanel.Dock="Bottom" Margin="4" Command="{Binding QRCodeClickCommand}"
+                                    Style="{StaticResource ButtonContentOnlyStyle}">
+                                <Image Source="{Binding Model.QRCodeImage.Native}" Stretch="Uniform" />
+                            </Button>
+
+                            <TextBox Text="{Binding Resources[qr_code_description]}" DockPanel.Dock="Bottom"
+                                     Style="{StaticResource SpineTextBoxTinyStyle}" />
+
+                        </DockPanel>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- BACK COVER -->
+
+    <Style x:Key="BackCoverDataGridStyle" TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
+    </Style>
+
+    <Style x:Key="BackCoverStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Padding="{StaticResource CoverMargin}">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary}" />
+                        </Border.Background>
+                        <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                            <StackPanel Orientation="Vertical">
+                                <TextBox Text="{Binding Model.title}"
+                                         FontSize="{StaticResource BackCoverTitleFontSize}"
+                                         Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                <TextBox Text="{Binding Model.title_remainder}"
+                                         Style="{StaticResource BackCoverTextBoxStyle}"
+                                         Visibility="{Binding Model.title_remainder, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                <Rectangle Height="8" />
+                                <!-- series title -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.SeriesTitle, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[series_title]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.SeriesTitle, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- journal title -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.JournalTitle, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[journal_title]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.JournalTitle, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- author -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.authorBackCoverString, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[author]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.authorBackCoverString, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- language -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.Language, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[language]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.Language, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- publication date-->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.date, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[publication_date]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.date, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- publication places  -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.publicationPlaces, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[publication_place]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.publicationPlaces, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- publication name  -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.publicationName, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[publisher]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.publicationName, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+                                <!-- ISBN  -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[isbn]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                </Grid>
+
+                                <!-- availability  -->
+                                <Rectangle Height="8" />
+                                <views:ItemsView DataContext="{Binding Availabilities}"
+                                           Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
+
+                                <!-- Full Text Links -->
+                                <StackPanel Orientation="Vertical"
+                                            Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <TextBox Text="{Binding Resources[fulltext]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <ItemsControl ItemsSource="{Binding Model.LinksFullText}"
+                                                  Style="{StaticResource BookLinksStyle}" />
+                                </StackPanel>
+
+                                <!-- Other Links -->
+                                <StackPanel Orientation="Vertical"
+                                            Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <TextBox Text="{Binding Resources[links]}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                    <ItemsControl ItemsSource="{Binding Model.Links}"
+                                                  Style="{StaticResource BookLinksStyle}" />
+                                </StackPanel>
+
+
+                                <!-- description  -->
+                                <Rectangle Height="8" />
+                                <TextBox Text="{Binding Resources[description]}"
+                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
+                                         Visibility="{Binding Model.Description, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                <TextBox Grid.Column="2" Text="{Binding Model.Description, Mode=OneWay}"
+                                         Style="{StaticResource BackCoverTextBoxStyle}"
+                                         TextAlignment="Left" />
+
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- EDGES -->
+
+    <Style x:Key="EdgePagesStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="{StaticResource ResourceKey=EdgePagesImageSource}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

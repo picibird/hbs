@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:piciconv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app"
+                    xmlns:converter="clr-namespace:picibird.hbs.wpf.converter">
+
+    <converter:StringFormCConverter x:Key="FormCConverter" />
+    <converter:CollapsedIfNoDataConverter x:Key="CollapsedNoDataConverter" />
+    <converter:ResourcesConverter x:Key="ResourcesConverter" />
+    <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    <converter:MediumToFontIconConverter x:Key="MediumToFontIconConverter" />
+    <piciconv:ConverterGroup x:Key="ConverterGroup" />
+    <piciconv:KearningConverter x:Key="KearningConverter" />
+
+</ResourceDictionary>

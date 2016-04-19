@@ -1,0 +1,126 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+
+                    xmlns:conv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/states/TransitionStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/wpf/Combobox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/shelf/InfoShieldRadioButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/modernui/ComboBoxStyles.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+
+    <conv:VisibilityConverter x:Key="VisibilityConverter" />
+
+    <Style x:Key="InfoShieldTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="InfoShieldTinyTextBoxStyle" TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource InfoShieldTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSizeTiny}" />
+    </Style>
+
+    <Style x:Key="InfoShieldFatTextBoxStyle" TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource InfoShieldTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSizeFat}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+    </Style>
+
+    <Style x:Key="InfoShieldStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="25,15,25,0"
+                               x:Name="root">
+
+                        <!-- pages x of y -->
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBox Text="{Binding Resources[shelf]}" Style="{StaticResource InfoShieldTextBoxStyle}" />
+                            <TextBox Text="{Binding Model.Page.IndexReadable, Mode=OneWay}"
+                                     Style="{StaticResource InfoShieldTextBoxStyle}" />
+                            <TextBox Text="{Binding Resources[of]}" Style="{StaticResource InfoShieldTextBoxStyle}" />
+                            <TextBox Text="{Binding Sorting.PagesCount}"
+                                     Style="{StaticResource InfoShieldTextBoxStyle}" />
+                        </StackPanel>
+
+                        <!--info from -->
+                        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,40,0,0"
+                                    Visibility="{Binding Info.From, Converter={StaticResource CollapsedIfNoDataConverter}}">
+                            <TextBox Text="{Binding Info.From}" Style="{StaticResource InfoShieldFatTextBoxStyle}" />
+                            <TextBox Text="{Binding Resources[to]}" Style="{StaticResource InfoShieldTinyTextBoxStyle}" />
+                            <TextBox Text="{Binding Info.To}" Style="{StaticResource InfoShieldFatTextBoxStyle}" />
+                        </StackPanel>
+
+                        <TextBox Text="{Binding Info.Text}" Style="{StaticResource InfoShieldFatTextBoxStyle}"
+                                 MaxWidth="{Binding ElementName=root, Path=ActualWidth}"
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                 DockPanel.Dock="Top" Margin="0,10,0,0" Height="120"
+                                 Visibility="{Binding Info.Text, Converter={StaticResource CollapsedIfNoDataConverter}}" />
+
+
+                        <!--sorted by -->
+                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Vertical">
+                            <TextBox HorizontalAlignment="Center" Text="{Binding Resources[sorted_by]}"
+                                     Style="{StaticResource InfoShieldTextBoxStyle}" />
+                            <!--combobox and radiobuttons to choose order and sort direction -->
+                            <Border Margin="0,2,0,0" BorderBrush="{StaticResource HBS_BLUE_BRUSH}" BorderThickness="1">
+                                <StackPanel>
+                                    <!-- combobox -->
+                                    <ComboBox SelectedItem="{Binding Sorting.SelectedSortOrderFunction}"
+                                              ItemsSource="{Binding Sorting.SortOrderFunctions}"
+                                              IsEditable="False" Style="{StaticResource HBSComboBox}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding StringValue}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <!-- radio buttons -->
+                                    <Grid Margin="-1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="{StaticResource SortDirectionRadioButtonHeight}" />
+                                        </Grid.RowDefinitions>
+                                        <RadioButton x:Name="Ascending" Grid.Column="0"
+                                                     Style="{StaticResource AscendingRadioButtonStyle}"
+                                                     IsChecked="{Binding Sorting.IsAscendingSelected}" />
+                                        <RadioButton x:Name="Descending" Grid.Column="1"
+                                                     Style="{StaticResource DescendingRadioButtonStyle}"
+                                                     IsChecked="{Binding Sorting.IsDescendingSelected}" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                            <!--selected sort direction -->
+                            <TextBox HorizontalAlignment="Center" Margin="0,2,0,0"
+                                     Style="{StaticResource InfoShieldTextBoxStyle}"
+                                     Text="{Binding Sorting.SelectedSortDirection, Converter={StaticResource ResourcesConverter}}" />
+                        </StackPanel>
+
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

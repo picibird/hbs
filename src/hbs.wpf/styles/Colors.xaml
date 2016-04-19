@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="HBS_GRAY">#FF34393C</Color>
+    <Color x:Key="HBS_GRAY_LIGHT">#FF93A2A9</Color>
+
+    <Color x:Key="HBS_BLUE">#FF2D6178</Color>
+    <Color x:Key="HBS_BLUE_LIGHT">#FF5AC1EF</Color>
+
+    <Color x:Key="HBS_WHITE">#FFFBFEFF</Color>
+
+    <SolidColorBrush x:Key="HBS_GRAY_BRUSH" Color="{StaticResource HBS_GRAY}" />
+    <SolidColorBrush x:Key="HBS_GRAY_LIGHT_BRUSH" Color="{StaticResource HBS_GRAY_LIGHT}" />
+
+
+    <SolidColorBrush x:Key="HBS_BLUE_BRUSH" Color="{StaticResource HBS_BLUE}" />
+    <SolidColorBrush x:Key="HBS_BLUE_LIGHT_BRUSH" Color="{StaticResource HBS_BLUE_LIGHT}" />
+
+    <SolidColorBrush x:Key="HBS_WHITE_BRUSH" Color="{StaticResource HBS_WHITE}" />
+
+</ResourceDictionary>

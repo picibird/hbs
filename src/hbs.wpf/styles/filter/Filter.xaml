@@ -1,0 +1,383 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:helper="clr-namespace:picibird.wpf.app.helper;assembly=picibits.wpf.app"
+
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+                    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                    xmlns:conv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app"
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/states/TransitionStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/filter/FilterCheckboxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/modernui/ScrollBarStyles.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+
+    <conv:CollapsedIfNoDataConverter x:Key="CollapsedIfNoDataConverter" />
+
+    <Style x:Key="ActiveFilterListViewStyle" TargetType="{x:Type ItemsControl}"
+           BasedOn="{StaticResource ItemsViewStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <!--<ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}" Background="Crimson">
+                            <ItemsPresenter />
+                        </ScrollViewer>-->
+                        <ItemsPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="FilterBaseViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
+        <Setter Property="Margin" Value="0,5,0,5" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="CardBackground" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" CornerRadius="{StaticResource CornerRadiusDefault}"
+                            Background="{StaticResource HBS_WHITE_BRUSH}">
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                          Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterChooserTextBoxStyle" TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource FilterTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FilterChooserFontSize}" />
+    </Style>
+    <Style x:Key="FilterChooserSmallTextBoxStyle" TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource FilterTextBoxStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FilterChooserSmallFontSize}" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+    </Style>
+
+    <Style x:Key="ChooserButtonViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <UserControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Vertical" Background="Transparent">
+                            <TextBox Text="{Binding Name}" Style="{StaticResource FilterChooserTextBoxStyle}" />
+                        </StackPanel>
+                    </UserControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChooserButtonWithCountViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <UserControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Vertical" Background="Transparent">
+                            <TextBox Text="{Binding Name}" Style="{StaticResource FilterChooserTextBoxStyle}" />
+                            <TextBox Text="{Binding Frequency}" Style="{StaticResource FilterChooserSmallTextBoxStyle}" />
+                        </StackPanel>
+                    </UserControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterChooserViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource FilterBaseViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ContentControl x:Name="CollapsableRoot" Style="{StaticResource CollapsedTransitionStyle}">
+                        <i:Interaction.Triggers>
+                            <ei:DataTrigger Binding="{Binding VisualState}" Value="Discarded">
+                                <ei:GoToStateAction StateName="Hide"
+                                                    TargetObject="{Binding ElementName=CollapsableRoot}" />
+                            </ei:DataTrigger>
+                        </i:Interaction.Triggers>
+                        <ContentControl Style="{StaticResource CardBackground}" HorizontalAlignment="Stretch"
+                                        Height="{StaticResource FilterChooserCardHeight}">
+                            <Grid x:Name="root" Margin="0,15,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="0.25*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.25*" />
+                                        <RowDefinition Height="0.25*" />
+                                        <RowDefinition Height="0.25*" />
+                                        <RowDefinition Height="0.25*" />
+                                    </Grid.RowDefinitions>
+                                    <!-- departement  -->
+                                    <views:View DataContext="{Binding DepartmentChooser}" Grid.ColumnSpan="2" />
+                                    <!-- media  -->
+                                    <views:View DataContext="{Binding MediaChooser}" Grid.Column="2" Grid.ColumnSpan="2" />
+                                    <!-- language  -->
+                                    <views:View DataContext="{Binding LanguageChooser}" Grid.Row="1" Grid.ColumnSpan="2" />
+                                    <!-- date -->
+                                    <views:View DataContext="{Binding DateChooser}" Grid.Row="1" Grid.Column="2"
+                                          Grid.ColumnSpan="2" />
+                                    <!-- only available -->
+                                    <views:View DataContext="{Binding OnlyAvailableChooser}" Grid.Row="2" Grid.ColumnSpan="4" />
+                                    <!-- only digital -->
+                                    <views:View DataContext="{Binding OnlyDigitalChooser}" Grid.Row="3" Grid.ColumnSpan="4" />
+                                </Grid>
+
+                                <Border x:Name="ClosedLayer" Margin="0,-15,0,0" Padding="5"
+                                        Background="{StaticResource HBS_BLUE_BRUSH}">
+                                    <TextBox Text="Filter" Style="{StaticResource FilterTitleTextBoxStyle}"
+                                             Foreground="{StaticResource HBS_WHITE_BRUSH}"
+                                             HorizontalContentAlignment="Left" VerticalContentAlignment="Top" />
+                                </Border>
+                                <!-- visual states-->
+                                <i:Interaction.Triggers>
+                                    <ei:DataTrigger Binding="{Binding VisualState}" Value="Closed">
+                                        <ei:GoToStateAction StateName="Closed"
+                                                            TargetObject="{Binding ElementName=root}" />
+                                    </ei:DataTrigger>
+                                    <ei:DataTrigger Binding="{Binding VisualState}" Value="Opened">
+                                        <ei:GoToStateAction StateName="Opened"
+                                                            TargetObject="{Binding ElementName=root}" />
+                                    </ei:DataTrigger>
+                                </i:Interaction.Triggers>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup ei:ExtendedVisualStateManager.UseFluidLayout="True">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition GeneratedDuration="0:0:0.3">
+                                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                                    <ee:FadeTransitionEffect />
+                                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                            </VisualTransition>
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState x:Name="Closed" />
+                                        <VisualState x:Name="Opened">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ClosedLayer"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Hidden}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <VisualStateManager.CustomVisualStateManager>
+                                    <ei:ExtendedVisualStateManager />
+                                </VisualStateManager.CustomVisualStateManager>
+                            </Grid>
+                        </ContentControl>
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterContainerViewStyle" TargetType="{x:Type Control}"
+           BasedOn="{StaticResource FilterBaseViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <views:View DataContext="{Binding Chooser}" x:Name="ChooserView"
+                              VerticalAlignment="Top" />
+                        <views:View DataContext="{Binding Filter}" x:Name="FilterView"
+                              VerticalAlignment="Top" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- BUTTON -->
+
+    <Style x:Key="FilterButtonTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource FilterTextBoxStyle}">
+        <Setter Property="Text" Value="{Binding Text}" />
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
+    </Style>
+
+    <Style x:Key="FilterButtonViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="BackgroundBorder" Background="{StaticResource HBS_BLUE_BRUSH}"
+                            CornerRadius="{StaticResource CornerRadiusDefault}">
+                        <Grid>
+                            <Rectangle Fill="{StaticResource HBS_BLUE_BRUSH}" Margin="0,0,0,5" />
+                            <TextBox Style="{StaticResource FilterButtonTextBoxStyle}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterContentControlStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <ContentControl Style="{StaticResource CardBackground}"
+                                    HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Vertical">
+                            <Rectangle Height="15" />
+                            <TextBox Text="{Binding Category.Name, Mode=OneWay}"
+                                     Style="{StaticResource FilterTitleTextBoxStyle}"
+                                     Visibility="{Binding FilterName, Converter={StaticResource CollapsedIfNoDataConverter}}" />
+                            <!-- selected filters string -->
+                            <ContentControl x:Name="SeletedFiltersCollapsable"
+                                            Style="{StaticResource CollapsedTransitionStyle}">
+                                <TextBox Text="{Binding AppliedInfoString, Mode=OneWay}"
+                                         Style="{StaticResource FilterTextBoxStyle}" />
+                            </ContentControl>
+                            <!-- filter -->
+                            <ContentControl x:Name="FadingCC" Style="{StaticResource CollapsedTransitionStyle}">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" />
+                            </ContentControl>
+                            <Rectangle Height="15" />
+                            <!-- apply button -->
+                            <ContentControl x:Name="CollApplyButton" Style="{StaticResource CollapsedTransitionStyle}">
+                                <views:View DataContext="{Binding ApplyButtonViewModel}" />
+                            </ContentControl>
+                        </StackPanel>
+                        <!-- TRIGGER -->
+                        <i:Interaction.Triggers>
+                            <!-- Loaded -->
+                            <ei:DataTrigger Binding="{Binding ViewIsLoadedLater}" Value="True">
+                                <ei:GoToStateAction StateName="Hide"
+                                                    TargetObject="{Binding ElementName=CollApplyButton}"
+                                                    UseTransitions="False" />
+                            </ei:DataTrigger>
+                            <ei:DataTrigger Binding="{Binding VisualState}" Value="Edit">
+                                <ei:GoToStateAction StateName="Show" TargetObject="{Binding ElementName=FadingCC}" />
+                                <ei:GoToStateAction StateName="Show"
+                                                    TargetObject="{Binding ElementName=CollApplyButton}" />
+                            </ei:DataTrigger>
+                            <ei:DataTrigger Binding="{Binding VisualState}" Value="Normal">
+                                <ei:GoToStateAction StateName="Hide" TargetObject="{Binding ElementName=FadingCC}" />
+                                <ei:GoToStateAction StateName="Hide"
+                                                    TargetObject="{Binding ElementName=CollApplyButton}" />
+                            </ei:DataTrigger>
+                            <ei:DataTrigger Binding="{Binding VisualState}" Value="Delete">
+                                <ei:GoToStateAction StateName="Hide" TargetObject="{Binding ElementName=FadingCC}" />
+                                <ei:GoToStateAction StateName="Show"
+                                                    TargetObject="{Binding ElementName=CollApplyButton}" />
+                            </ei:DataTrigger>
+                            <ei:DataTrigger Binding="{Binding HasSelected}" Value="True">
+                                <ei:GoToStateAction StateName="Show"
+                                                    TargetObject="{Binding ElementName=CollApplyButton}" />
+                            </ei:DataTrigger>
+                        </i:Interaction.Triggers>
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource FilterBaseViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ContentControl Style="{StaticResource FilterContentControlStyle}" HorizontalAlignment="Stretch" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListFilterViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource FilterBaseViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ContentControl Style="{StaticResource FilterContentControlStyle}" HorizontalAlignment="Stretch">
+                        <views:ItemsView DataContext="{Binding FilterSelectionViewModel}" />
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterSelectionListViewStyle" TargetType="{x:Type ItemsControl}"
+           BasedOn="{StaticResource ItemsViewStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <!--<ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">-->
+                        <ContentControl x:Name="cc" helper:StateHelper.State="{Binding VisualState}"
+                                        Background="Transparent">
+                            <ItemsPresenter />
+                        </ContentControl>
+                        <!--</ScrollViewer>-->
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FilterSelectionItemViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <CheckBox DockPanel.Dock="Right" Style="{StaticResource FilterCheckBox}"
+                              IsChecked="{Binding IsChecked}"
+                              Margin="0,0,10,0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- DATE -->
+    <Style x:Key="DateFilterViewStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource FilterBaseViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ContentControl Style="{StaticResource FilterContentControlStyle}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Controls:RangeSlider />
+                        </Grid>
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

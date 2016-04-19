@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--<FontFamily x:Key="Roboto">Roboto</FontFamily>
+    <FontFamily x:Key="RobotoSlab">Roboto Slab</FontFamily>
+    <FontFamily x:Key="RobotoCondensed">Roboto Condensed</FontFamily>-->
+
+    <!-- Roboto -->
+    <FontFamily x:Key="RobotoBold">/hbs.wpf;component/assets/fonts/roboto/Roboto-Bold.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoRegular">/hbs.wpf;component/assets/fonts/roboto/Roboto-Regular.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoMedium">/hbs.wpf;component/assets/fonts/roboto/Roboto-Medium.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoLight">/hbs.wpf;component/assets/fonts/roboto/Roboto-Light.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoThin">/hbs.wpf;component/assets/fonts/roboto/Roboto-Thin.ttf#Roboto</FontFamily>
+
+    <!-- Roboto Slab -->
+    <FontFamily x:Key="RobotoSlab">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Regular.ttf#Roboto Slab</FontFamily>
+    <FontFamily x:Key="RobotoSlabBold">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Bold.ttf#Roboto Slab</FontFamily>
+    <FontFamily x:Key="RobotoSlabLight">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Light.ttf#Roboto Slab</FontFamily>
+    <FontFamily x:Key="RobotoSlabThin">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Thin.ttf#Roboto Slab</FontFamily>
+
+</ResourceDictionary>

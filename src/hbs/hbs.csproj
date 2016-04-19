@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E764283-B2AE-441A-AC0C-C3F306BA45B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>picibird.hbs</RootNamespace>
+    <AssemblyName>hbs</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\picibits.bib\picibits.bib.csproj">
+      <Project>{ffc47df7-8f90-49a6-b822-58438bb6c3ee}</Project>
+      <Name>picibits.bib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hbs.ldu\hbs.ldu.csproj">
+      <Project>{5F31C0DC-C38A-4378-A2F4-73C02FC8B535}</Project>
+      <Name>hbs.ldu</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="availabity\AvailabilityInfo.cs" />
+    <Compile Include="availabity\IAvailabilityService.cs" />
+    <Compile Include="behaviours\OpenBookSwipeBehaviour.cs" />
+    <Compile Include="behaviours\ShelfSwipeBehaviour.cs" />
+    <Compile Include="behaviours\SwipeBehaviour.cs" />
+    <Compile Include="config\BookConf.cs" />
+    <Compile Include="config\Config.cs" />
+    <Compile Include="config\CoverConf.cs" />
+    <Compile Include="config\HistomatConf.cs" />
+    <Compile Include="config\KioskConf.cs" />
+    <Compile Include="config\PointerConf.cs" />
+    <Compile Include="cover\HitCoverLoader.cs" />
+    <Compile Include="HBS.cs" />
+    <Compile Include="HbsAppViewModel.cs" />
+    <Compile Include="HbsPortableAssembly.cs" />
+    <Compile Include="HbsSettings.cs" />
+    <Compile Include="cover\Covers.cs" />
+    <Compile Include="helper\MathHelper.cs" />
+    <Compile Include="HbsApp.cs" />
+    <Compile Include="Intents\CloseBookIntentHandler.cs" />
+    <Compile Include="Intents\HbsIntents.cs" />
+    <Compile Include="Intents\OpenBookIntentHandler.cs" />
+    <Compile Include="models\Book.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resources\department.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>department.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\hbs.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hbs.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\language.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>language.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\medium.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medium.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\sortorder.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sortorder.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="transition\CloseBookTransition.cs" />
+    <Compile Include="transition\OpenBookSwipeTransition.cs" />
+    <Compile Include="transition\OpenBookTransition.cs" />
+    <Compile Include="transition\ShelfSwipeTransition.cs" />
+    <Compile Include="viewmodels\availability\AvailabilityItemsVM.cs" />
+    <Compile Include="viewmodels\availability\AvailabilityVM.cs" />
+    <Compile Include="viewmodels\BlackBlendingViewModel.cs" />
+    <Compile Include="viewmodels\book\BackCoverViewModel.cs" />
+    <Compile Include="viewmodels\book\OpenedBookViewModel.cs" />
+    <Compile Include="viewmodels\book\SpineViewModel.cs" />
+    <Compile Include="viewmodels\buttons\TitleButtonVM.cs" />
+    <Compile Include="viewmodels\FilterDictionary.cs" />
+    <Compile Include="viewmodels\filter\behaviour\FilterSwipeBehaviour.cs" />
+    <Compile Include="viewmodels\filter\ChooserButtonViewModel.cs" />
+    <Compile Include="viewmodels\filter\DateFilterVM.cs" />
+    <Compile Include="viewmodels\filter\DigitalChooserButtonVM.cs" />
+    <Compile Include="viewmodels\filter\DigitalFilterVM.cs" />
+    <Compile Include="viewmodels\filter\FilterChooserViewModel.cs" />
+    <Compile Include="viewmodels\filter\ActiveFilterListViewModel.cs" />
+    <Compile Include="viewmodels\filter\FilterContainerViewModel.cs" />
+    <Compile Include="viewmodels\filter\ListFilterViewModel.cs" />
+    <Compile Include="viewmodels\filter\FilterSelectionItemViewModel.cs" />
+    <Compile Include="viewmodels\filter\FilterSelectionListViewModel.cs" />
+    <Compile Include="viewmodels\filter\FilterViewModel.cs" />
+    <Compile Include="viewmodels\filter\AvailableFilterViewModel.cs" />
+    <Compile Include="viewmodels\infoShield\InfoShieldVM.cs" />
+    <Compile Include="viewmodels\infoShield\ShelfContentInfo.cs" />
+    <Compile Include="viewmodels\infoShield\Sorting.cs" />
+    <Compile Include="viewmodels\infoShield\SortOrderFunction.cs" />
+    <Compile Include="viewmodels\OpenedBookLayerViewModel.cs" />
+    <Compile Include="Search.cs" />
+    <Compile Include="viewmodels\book3D\Book3DViewModel.cs" />
+    <Compile Include="viewmodels\book3D\BookPlane3DViewModel.cs" />
+    <Compile Include="viewmodels\book\BookPlaneViewModel.cs" />
+    <Compile Include="viewmodels\shelf\Bookshelf3DViewModel.cs" />
+    <Compile Include="viewmodels\HBSViewModel.cs" />
+    <Compile Include="viewmodels\search\SearchTextViewModel.cs" />
+    <Compile Include="viewmodels\ShelfViewModel.cs" />
+    <Compile Include="viewmodels\book\FrontCoverViewModel.cs" />
+    <Compile Include="viewmodels\book3D\OpenedBook3DViewModel.cs" />
+    <Compile Include="viewmodels\shelf\BookshelfLabelsViewModel.cs" />
+    <Compile Include="viewmodels\shelf\BookshelfViewModel.cs" />
+    <Compile Include="viewmodels\shelf\BookFlyout3dVM.cs" />
+    <Compile Include="viewmodels\shelf\ShelfDrawViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\department.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>department.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\department.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\hbs.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>hbs.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\hbs.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\language.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>language.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\medium.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>medium.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\medium.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\sortorder.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sortorder.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\sortorder.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="License_LGPL3.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

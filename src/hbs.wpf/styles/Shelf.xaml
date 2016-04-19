@@ -1,0 +1,113 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:picibird.hbs.wpf.converter"
+                    xmlns:controls="clr-namespace:picibird.hbs.wpf.controls"
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/FontIcons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/shelf/InfoShieldSyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:MediumToFontIconConverter x:Key="MediumToFontIconConverter" />
+
+    <Style x:Key="ShelfLabelItemsViewStyle" TargetType="{x:Type views:ItemsView}" BasedOn="{StaticResource ItemsViewStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ShelfLabelLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+        <Setter Property="FontSize" Value="{StaticResource ShelfLabelFontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style x:Key="ShelfLabelLabelTinyStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource ShelfLabelLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource ShelfLabelFontSizeTiny}" />
+    </Style>
+
+    <Style x:Key="AvailabilityLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource ShelfLabelLabelStyle}">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize" Value="{StaticResource ShelfLabelFontSizeSmall}" />
+    </Style>
+
+    <Style x:Key="AvailabilityIcon" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="root" Width="{Binding AvailabilityIconWidth}" Height="20">
+                        <Label Content="{Binding Availability.Available}"
+                               Style="{StaticResource AvailabilityLabelStyle}"
+                               HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Line X1="9" Y1="15" X2="13" Y2="5" Stroke="{StaticResource HBS_BLUE_BRUSH}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="22" Height="20" />
+                        <Label Content="{Binding Availability.Existing}"
+                               Style="{StaticResource AvailabilityLabelStyle}"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ShelfLabelStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <TextBlock Style="{StaticResource FontIconTextblockStyle}" VerticalAlignment="Center"
+                                   Text="{Binding Medium, Converter={StaticResource MediumToFontIconConverter}}" />
+
+                        <Label Content="{Binding Info}" Style="{StaticResource ShelfLabelLabelStyle}" Margin="10,0"
+                               FontFamily="{StaticResource RobotoBold}" VerticalAlignment="Center" />
+
+                        <TextBlock Style="{DynamicResource CloudFontIcon}" VerticalAlignment="Center"
+                                   Visibility="{Binding IsOnlineAvailable, Converter={StaticResource CollapsedNoDataConverter}}" />
+
+                        <Control Style="{StaticResource AvailabilityIcon}" VerticalAlignment="Center"
+                                 Visibility="{Binding Availability, Converter={StaticResource CollapsedNoDataConverter}}" />
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Bookshelf3DStyle" TargetType="{x:Type views:ItemsViewport3D}"
+           BasedOn="{StaticResource ResourceKey=ItemsViewport3DStyle}">
+        <Setter Property="Opacity" Value="{Binding Opacity}" />
+    </Style>
+
+    <Style x:Key="BookshelfStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Margin="{StaticResource ShelfMargin}" Background="Transparent">
+                        <controls:ShelfDrawCanvas DataContext="{Binding ShelfDrawViewModel}" IsHitTestVisible="False" />
+                        <views:ItemsViewport3D DataContext="{Binding Books3D}" Style="{StaticResource Bookshelf3DStyle}" />
+                        <views:ItemsView DataContext="{Binding Labels}" IsHitTestVisible="False" />
+                        <Canvas>
+                            <views:View DataContext="{Binding InfoShield}" />
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

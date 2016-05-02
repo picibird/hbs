@@ -102,5 +102,23 @@ namespace picibird.hbs.availabity
         }
 
         #endregion Info
+
+        private string mHref;
+
+        public string Href
+        {
+            get { return mHref; }
+            set
+            {
+                if (mHref != value)
+                {
+                    var old = mInfo;
+                    mHref = value;
+                    RaisePropertyChanged(nameof(Href), old, value);
+                }
+            }
+        }
+       
+
     }
 }

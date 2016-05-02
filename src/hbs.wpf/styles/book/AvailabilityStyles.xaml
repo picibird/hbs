@@ -63,7 +63,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border BorderBrush="{Binding  CoverColorScheme.Secondary}" BorderThickness="1" Margin="0,0,6,0">
+                    <Border BorderBrush="{Binding  CoverColorScheme.Secondary}" BorderThickness="1" Margin="0,0,6,0" Background="Transparent">
                         <StackPanel Orientation="Vertical">
                             <TextBox Text="{Binding Model.Signature}" Style="{StaticResource AvailabilityTextBoxStyle}" />
                             <TextBox Text="{Binding Model.Status}"

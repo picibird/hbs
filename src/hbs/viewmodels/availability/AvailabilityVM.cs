@@ -16,19 +16,49 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using picibird.hbs.availabity;
+using picibits.app.mvvm;
 using picibits.bib;
+using picibits.core;
+using picibits.core.intent;
 using picibits.core.mvvm;
 
 namespace picibird.hbs.viewmodels.availability
 {
-    public class AvailabilityVM : ViewModel
+    public class AvailabilityVM : ButtonViewModel
     {
         public AvailabilityVM(HistomatColorScheme colorScheme, AvailabilityInfo info)
         {
             Style = new ViewStyle("AvailabilityViewStyle");
             CoverColorScheme = colorScheme;
             Model = info;
+            Pointing.IsEnabled = true;
+            Manipulation.IsEnabled = true;
+            TapBehaviour.Tap += OnTap;
+        }
+
+        private void OnTap(object sender, System.EventArgs e)
+        {
+            var av = Model as AvailabilityInfo;
+            if (av != null)
+            {
+
+                Uri uri = null;
+                if (Uri.TryCreate(av.Href, UriKind.Absolute, out uri))
+                {
+                    Intent openUrlIntent = new Intent(Intent.ACTION_OPEN, uri);
+                    openUrlIntent.AddExtra("title", av.Signature);
+                    openUrlIntent.AddExtra("subtitle", av.Href);
+                    Pici.Intent.Send(openUrlIntent);
+                }
+                else
+                {
+                    Pici.Log.warn(typeof(AvailabilityInfo), "cannot parse availability href to uri: {0}", av.Href);
+                }
+
+            }
         }
 
         public HistomatColorScheme CoverColorScheme { get; private set; }

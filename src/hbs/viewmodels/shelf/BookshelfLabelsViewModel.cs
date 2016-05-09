@@ -166,7 +166,7 @@ namespace picibird.hbs.viewmodels.shelf
 
         private Availability GetAvailability(Hit hit)
         {
-            var medium = hit.medium.RemoveWhitespace();
+            var medium = hit.medium?.RemoveWhitespace();
             Availability availability = null;
             if (medium != null)
             {

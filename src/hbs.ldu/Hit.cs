@@ -598,6 +598,7 @@ namespace picibird.hbs.ldu
         {
             get
             {
+                if (string.IsNullOrEmpty(medium)) return "";
                 string medium_string = Pici.Resources.Find(medium);
                 return medium_string;
             }

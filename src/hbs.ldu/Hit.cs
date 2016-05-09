@@ -137,7 +137,8 @@ namespace picibird.hbs.ldu
 
         [XmlElement("md-issn")]
         [JsonProperty("md_issn")]
-        public string issn { get; set; }
+        [JsonConverter(typeof(ValueToListConverter<string>))]
+        public List<string> issn { get; set; }
 
         [XmlElement("md-doi")]
         [JsonProperty("md_doi")]

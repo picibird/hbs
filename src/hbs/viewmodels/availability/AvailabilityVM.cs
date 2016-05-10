@@ -27,16 +27,16 @@ using picibits.core.mvvm;
 
 namespace picibird.hbs.viewmodels.availability
 {
-    public class AvailabilityVM : ButtonViewModel
+    public class AvailabilityVM : ViewModel
     {
         public AvailabilityVM(HistomatColorScheme colorScheme, AvailabilityInfo info)
         {
             Style = new ViewStyle("AvailabilityViewStyle");
             CoverColorScheme = colorScheme;
             Model = info;
-            Pointing.IsEnabled = true;
-            Manipulation.IsEnabled = true;
-            TapBehaviour.Tap += OnTap;
+            //Pointing.IsEnabled = true;
+            //Manipulation.IsEnabled = true;
+            //TapBehaviour.Tap += OnTap;
         }
 
         private void OnTap(object sender, System.EventArgs e)

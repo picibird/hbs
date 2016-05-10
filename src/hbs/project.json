@@ -10,7 +10,7 @@
     "Newtonsoft.Json": "8.0.2",
     "Nito.AsyncEx": "3.0.1",
     "PCLStorage": "1.0.2",
-    "picibits": "0.1.2",
+    "picibits": "0.1.3",
     "Rx-Main": "2.2.5",
     "SimpleInjector": "3.1.2"
   },

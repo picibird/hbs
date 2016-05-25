@@ -4,15 +4,23 @@ This is the open source version of the hybrid bookshelf. A [commercial version](
 
 The project started off with the master thesis [Blended Shelf](http://zenodo.org/record/17947#.V0QpQZGLRaQ) of [Eike Kleinert](http://www.eikekleiner.de/) at the [human-computer interaction department](http://hci.uni-konstanz.de/) at [the university of Konstanz](https://www.uni-konstanz.de/). The thesis evaluates a 3D bookshelf metaphor to visualize and interact with books and ebooks in a natural and appealing way and is part of the research project [blended library](http://hci.uni-konstanz.de/index.php?a=research&b=projects&c=8609071). Convinced by the prototype's potential the [Kommunikations-, Informations-, Medienzentrum (KIM)](https://www.kim.uni-konstanz.de/) library service of the university of Konstanz started the hybrid bookshelf project funded by the [MWK Baden-Württemberg](https://mwk.baden-wuerttemberg.de/de/ministerium/). The   software startup [picibird](http://www.picibird.com/) which specialized in HCI won the contract and is developing the Hybrid Bookshelf and services around it.
 
-## Open Source Version & Backend ##
+## Open Source Version and Library Data Unifier ##
 
 The open source version contains the basic .Net WPF application and works with the [Library Data Unifier LDU](https://github.com/BSZBW/ldu), a [pazpar2](http://www.indexdata.com/pazpar2) server maintained by the [BSZ] (https://www.bsz-bw.de/index.html).
 
-To get access to demo data please contact: [Clemens Elmlinger, BSZ](clemens.elmlinger@bsz-bw.de)
+To get access to demo data please contact: Clemens Elmlinger, BSZ - clemens.elmlinger@bsz-bw.de
 
 ##  Commercial Version ##
 
+The commercial version builds upon the open source version and offers extended functionality and web services around it like:
+* connect to other backends than LDU like Solr or EBSCO
+* colorize the 3D books based on the book cover's primary colors using our cover image analyzing service
+* take media information like availability or location on your smartphone using qr-codesn and our webservice [bibshelf](http://kn.bibshelf.de/#/dashboard)
+* collect media and maintain lists on your smartphone or tablet on our webservice [bibshelf](http://kn.bibshelf.de/#/dashboard)
+* share books and other media directly from the Hybrid Bookshelf via email
+* a setup.exe with your configuration preloaded for easy installation and start up
 
+To get more information or request a demo please contact: mail@picibird.com
 
 ## Visual Studio Solution ##
 

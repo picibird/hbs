@@ -1,13 +1,12 @@
 # Hybrid Bookshelf #
 
-This is the opensource version of the hybrid bookshelf. A [commercial version](http://www.hybridbookshelf.de/#welcome) with additional features and support is offered by [picibird](http://www.picibird.com "picibird"). 
+This is the opensource version of the hybrid bookshelf. A [commercial version](http://www.hybridbookshelf.de/#welcome) with additional features and support is offered by [picibird](http://www.picibird.com). 
 
-The project started off with the master thesis [Blended Shelf](http://zenodo.org/record/17947#.V0QpQZGLRaQ) of [Eike Kleinert](http://www.eikekleiner.de/) at the [human computer interaction department](http://hci.uni-konstanz.de/) at [the university of konstanz](https://www.uni-konstanz.de/). The thesis evaluates a 3D bookshelf metaphor to visualize and interact with books and ebooks in a natural and appealing way and is part of the research project [blended library](http://hci.uni-konstanz.de/index.php?a=research&b=projects&c=8609071). Convinced by the prorotype's potential the [Kommunikations-, Informations-, Medienzentrum (KIM)](https://www.kim.uni-konstanz.de/) library service of the university of konstanz started the hybrid bookshelf project funded by the [MWK Baden-Württemberg](https://mwk.baden-wuerttemberg.de/de/ministerium/).     
+The project started off with the master thesis [Blended Shelf](http://zenodo.org/record/17947#.V0QpQZGLRaQ) of [Eike Kleinert](http://www.eikekleiner.de/) at the [human computer interaction department](http://hci.uni-konstanz.de/) at [the university of konstanz](https://www.uni-konstanz.de/). The thesis evaluates a 3D bookshelf metaphor to visualize and interact with books and ebooks in a natural and appealing way and is part of the research project [blended library](http://hci.uni-konstanz.de/index.php?a=research&b=projects&c=8609071). Convinced by the prorotype's potential the [Kommunikations-, Informations-, Medienzentrum (KIM)](https://www.kim.uni-konstanz.de/) library service of the university of konstanz started the hybrid bookshelf project funded by the [MWK Baden-Württemberg](https://mwk.baden-wuerttemberg.de/de/ministerium/). The   software startup [picibird](http://www.picibird.com/) which spezialized in HCI is developing the Hybrid Bookshelf and services around it.
 
 ## Library Data Unifier ##
 
 [LDU github repo](https://github.com/BSZBW/ldu)
-
 
 This repository includes the project hbs.ldu, a portable client implementation to connect to the Library Data Unifier. 
 The LDU is a customized opensource [pazpar2](http://www.indexdata.com/pazpar2) server by [BSZ] (https://www.bsz-bw.de/index.html) library services.

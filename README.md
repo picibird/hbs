@@ -8,9 +8,7 @@ The project started off with the master thesis [Blended Shelf](http://zenodo.org
 
 The open source version contains the basic .Net WPF application and works with the [Library Data Unifier LDU](https://github.com/BSZBW/ldu), a [pazpar2](http://www.indexdata.com/pazpar2) server maintained by the [BSZ] (https://www.bsz-bw.de/index.html).
 
-To get access to demo data please contact:
-Clemens Elmlinger, BSZ
-clemens.elmlinger@bsz-bw.de
+To get access to demo data please contact: [Clemens Elmlinger, BSZ](clemens.elmlinger@bsz-bw.de)
 
 ##  Commercial Version ##
 

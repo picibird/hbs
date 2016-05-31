@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:picibird.hbs.wpf.controls"
-                    xmlns:helper="clr-namespace:picibird.hbs.wpf.helper">
+                    xmlns:helper="clr-namespace:picibird.hbs.wpf.helper"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:helper1="clr-namespace:picibird.wpf.core.helper;assembly=picibits.wpf.core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
@@ -63,6 +65,14 @@
                     <Border>
                         <controls:SearchTextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource HBSTextBoxStyle}" InputScope="Default">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="GotFocus">
+                                    <helper1:EventToCommand Command="{Binding GotFocusCommand, Mode=OneWay}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <helper1:EventToCommand Command="{Binding LostFocusCommand, Mode=OneWay}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <TextBox.InputBindings>
                                 <helper:KeyUpBinding Key="Enter" Command="{Binding EnterSearchCommand}" />
                             </TextBox.InputBindings>

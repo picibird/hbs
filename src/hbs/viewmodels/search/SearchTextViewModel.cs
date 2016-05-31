@@ -18,6 +18,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Windows.Input;
+using picibits.core.helper;
 using picibits.core.mvvm;
 using picibits.core.util;
 
@@ -25,11 +26,7 @@ namespace picibird.hbs.viewmodels.search
 {
     public class SearchTextViewModel : ViewModel
     {
-        public SearchTextViewModel()
-        {
-            Style = new ViewStyle("SearchBoxTextStyle");
-        }
-
+        
         #region SearchText
 
         private string mSearchText;
@@ -86,40 +83,48 @@ namespace picibird.hbs.viewmodels.search
 
         #endregion EmptyText
 
-        #region EnterSearchCommand
+        public EnterSearchCommand EnterSearchCommand { get; private set; }
+        public DelegateCommand GotFocusCommand { get; private set; }
+        public DelegateCommand LostFocusCommand { get; private set; }
 
-        private EnterSearchCommand mEnterSearchCommand;
-
-        public EnterSearchCommand EnterSearchCommand
+        public SearchTextViewModel()
         {
-            get
+            Style = new ViewStyle("SearchBoxTextStyle");
+            EnterSearchCommand = new EnterSearchCommand();
+            GotFocusCommand = new DelegateCommand((p) =>
             {
-                if (mEnterSearchCommand == null)
-                    mEnterSearchCommand = new EnterSearchCommand();
-                return mEnterSearchCommand;
-            }
+                EnterSearchCommand.CanExecuteProp = true;
+            });
+            LostFocusCommand = new DelegateCommand((p) =>
+            {
+                EnterSearchCommand.CanExecuteProp = false;
+            });
         }
 
-        #endregion EnterSearchCommand
     }
 
     public class EnterSearchCommand : ICommand
     {
+
+        public bool CanExecuteProp;
+
+        public event SimpleEventHandler<EnterSearchCommand> OnEnter;
+
         public bool CanExecute(object parameter)
         {
-            return true;
+            return CanExecuteProp;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
-            if (OnEnter != null)
+            if (CanExecuteProp && OnEnter != null)
             {
                 OnEnter(this);
             }
         }
 
-        public event SimpleEventHandler<EnterSearchCommand> OnEnter;
+        
     }
 }

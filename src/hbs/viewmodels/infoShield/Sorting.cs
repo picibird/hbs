@@ -70,7 +70,7 @@ namespace picibird.hbs.viewmodels.infoShield
             SortOrderFunction newSelectedSortOrderFunction)
         {
             RaisePropertyChanged("SelectedSortOrderFunction", oldSelectedSortOrderFunction, newSelectedSortOrderFunction);
-            //set prefered direction for specific order function
+            //set preferred direction for specific order function
             //block search updates while setting direction
             blockUpdateSearchSorting = true;
             switch (newSelectedSortOrderFunction.EnumValue)

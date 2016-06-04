@@ -45,7 +45,7 @@ namespace picibird.hbs.cover
                 return coverData;
             }).ContinueWith(coverTask =>
             {
-                //if successfull
+                //if successful
                 if (coverTask.IsCompleted && coverTask.Result != null)
                 {
                     //set image

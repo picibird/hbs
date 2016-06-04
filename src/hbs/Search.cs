@@ -104,12 +104,12 @@ namespace picibird.hbs
                 else if (ex is HttpRequestException)
                 {
                     Pici.Log.error(typeof (SearchSession),
-                        "\r\nA Web Exception occured! Internet available? Server down?\r\n\r\n", ex);
+                        "\r\nA Web Exception occurred! Internet available? Server down?\r\n\r\n", ex);
                     //MessageBox.Show("Service is not available!\r\nInternet active? Server down?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    Pici.Log.error(typeof (SearchSession), "An unexpected error occured!", ex);
+                    Pici.Log.error(typeof (SearchSession), "An unexpected error occurred!", ex);
                 }
                 return false;
             }

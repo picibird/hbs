@@ -11,7 +11,7 @@
     "Newtonsoft.Json": "8.0.2",
     "Nito.AsyncEx": "3.0.1",
     "PCLStorage": "1.0.2",
-    "picibits": "0.1.5",
+    "picibits": "0.1.7",
     "System.Xml.XmlSerializer": "4.0.10"
   },
   "frameworks": {

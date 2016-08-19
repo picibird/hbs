@@ -137,9 +137,9 @@
       <HintPath>..\packages\Flurl.2.2.0\lib\netstandard1.4\Flurl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Flurl.Http, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Flurl.Http, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\hbs.product\src\packages\Flurl.Http.0.10.1\lib\net45\Flurl.Http.dll</HintPath>
+      <HintPath>..\packages\Flurl.Http.1.0.1\lib\net45\Flurl.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -187,24 +187,24 @@
       <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.app, Version=0.1.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.9\lib\dotnet\picibits.app.dll</HintPath>
+      <HintPath>..\packages\picibits.0.1.12\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.core, Version=0.1.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.9\lib\dotnet\picibits.core.dll</HintPath>
+      <HintPath>..\packages\picibits.0.1.12\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.wpf.app, Version=0.1.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.9\lib\dotnet\picibits.wpf.app.dll</HintPath>
+      <HintPath>..\packages\picibits.wpf.0.1.12\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.wpf.core, Version=0.1.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.9\lib\dotnet\picibits.wpf.core.dll</HintPath>
+      <HintPath>..\packages\picibits.wpf.0.1.12\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -232,14 +232,12 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.IO.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\hbs.product\src\packages\System.IO.FileSystem.4.0.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>..\packages\System.IO.FileSystem.4.0.1\lib\net46\System.IO.FileSystem.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\hbs.product\src\packages\System.IO.FileSystem.Primitives.4.0.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

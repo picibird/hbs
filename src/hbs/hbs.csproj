@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1E764283-B2AE-441A-AC0C-C3F306BA45B3}</ProjectGuid>
@@ -13,9 +13,8 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -129,25 +128,50 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>department.de-DE.resx</DependentUpon>
     </Compile>
+    <Compile Include="resources\department.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>department.resx</DependentUpon>
+    </Compile>
     <Compile Include="resources\hbs.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>hbs.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\hbs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hbs.resx</DependentUpon>
     </Compile>
     <Compile Include="resources\language.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>language.de-DE.resx</DependentUpon>
     </Compile>
+    <Compile Include="resources\language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>language.resx</DependentUpon>
+    </Compile>
     <Compile Include="resources\medium.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>medium.de-DE.resx</DependentUpon>
     </Compile>
+    <Compile Include="resources\medium.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medium.resx</DependentUpon>
+    </Compile>
     <Compile Include="resources\sortorder.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>sortorder.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\sortorder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sortorder.resx</DependentUpon>
     </Compile>
     <Compile Include="transition\CloseBookTransition.cs" />
     <Compile Include="transition\OpenBookSwipeTransition.cs" />
@@ -205,6 +229,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resources\department.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>department.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\hbs.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -213,6 +238,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resources\hbs.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>hbs.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\language.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -220,6 +246,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resources\language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\medium.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -227,6 +254,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resources\medium.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>medium.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\sortorder.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -234,6 +262,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resources\sortorder.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sortorder.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

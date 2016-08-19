@@ -17,6 +17,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Threading.Tasks;
 using picibits.core;
 
 namespace picibird.hbs.config
@@ -51,7 +52,8 @@ namespace picibird.hbs.config
             {
                 if (mCover == null)
                 {
-                    mCover = Pici.Config.ReadOrCreate<CoverConf>();
+                    mCover = Task.Run<CoverConf>(async () => await Pici.Config.ReadOrCreate<CoverConf>())
+                        .GetAwaiter().GetResult();
                 }
                 return mCover;
             }
@@ -88,7 +90,8 @@ namespace picibird.hbs.config
             {
                 if (mKioskConf == null)
                 {
-                    mKioskConf = Pici.Config.ReadOrCreate<KioskConf>();
+                    mKioskConf = Task.Run<KioskConf>(async () => await Pici.Config.ReadOrCreate<KioskConf>())
+                        .GetAwaiter().GetResult();
                 }
                 return mKioskConf;
             }

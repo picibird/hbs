@@ -1,16 +1,13 @@
 ﻿{
+  "supports": {},
   "dependencies": {
     "Flurl": "2.2.0",
-    "Microsoft.NETCore": "5.0.0",
-    "Microsoft.NETCore.Portable.Compatibility": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
     "Nito.AsyncEx": "3.0.1",
     "PCLStorage": "1.0.2",
-    "picibits": "0.1.9"
+    "picibits": "0.1.12"
   },
   "frameworks": {
-    "dotnet": {
-      "imports": "portable-net452+win81"
-    }
+    ".NETPortable,Version=v4.5,Profile=Profile7": {}
   }
 }

@@ -185,24 +185,24 @@
       <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.app, Version=0.1.16.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.13\lib\dotnet\picibits.app.dll</HintPath>
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.16\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.core, Version=0.1.16.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.13\lib\dotnet\picibits.core.dll</HintPath>
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.16\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.wpf.app, Version=0.1.16.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.13\lib\dotnet\picibits.wpf.app.dll</HintPath>
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.16\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="picibits.wpf.core, Version=0.1.16.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.13\lib\dotnet\picibits.wpf.core.dll</HintPath>
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.16\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -385,7 +385,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Content Include="assets\fonticons\fonts\bibshelf-fonticons.woff" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

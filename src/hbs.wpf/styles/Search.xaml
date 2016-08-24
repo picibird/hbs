@@ -65,14 +65,14 @@
                     <Border>
                         <controls:SearchTextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource HBSTextBoxStyle}" InputScope="Default">
-                            <!--<i:Interaction.Triggers>
+                            <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
                                     <helper1:EventToCommand Command="{Binding GotFocusCommand, Mode=OneWay}"/>
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="LostFocus">
                                     <helper1:EventToCommand Command="{Binding LostFocusCommand, Mode=OneWay}"/>
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers>-->
+                            </i:Interaction.Triggers>
                             <TextBox.InputBindings>
                                 <helper:KeyUpBinding Key="Enter" Command="{Binding EnterSearchCommand}" />
                             </TextBox.InputBindings>

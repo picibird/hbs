@@ -1,12 +1,11 @@
 ﻿{
   "supports": {},
   "dependencies": {
-    "Flurl": "2.2.0",
-    "Flurl.Http": "1.0.1",
+    "Flurl.Http": "0.10.1",
     "Newtonsoft.Json": "9.0.1",
     "Nito.AsyncEx": "3.0.1",
     "PCLStorage": "1.0.2",
-    "picibits": "0.1.12"
+    "picibits": "0.1.13"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile7": {}

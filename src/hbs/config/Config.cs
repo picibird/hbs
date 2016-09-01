@@ -42,25 +42,6 @@ namespace picibird.hbs.config
 
         #endregion Pointer
 
-        #region Cover
-
-        private static CoverConf mCover;
-
-        public static CoverConf Cover
-        {
-            get
-            {
-                if (mCover == null)
-                {
-                    mCover = Task.Run<CoverConf>(async () => await Pici.Config.ReadOrCreate<CoverConf>())
-                        .GetAwaiter().GetResult();
-                }
-                return mCover;
-            }
-        }
-
-        #endregion Cover
-
         #region BookConf
 
         private static BookConf mShelf3D;
@@ -80,42 +61,5 @@ namespace picibird.hbs.config
 
         #endregion BookConf
 
-        #region KioskConfig
-
-        private static KioskConf mKioskConf;
-
-        public static KioskConf KioskConf
-        {
-            get
-            {
-                if (mKioskConf == null)
-                {
-                    mKioskConf = Task.Run<KioskConf>(async () => await Pici.Config.ReadOrCreate<KioskConf>())
-                        .GetAwaiter().GetResult();
-                }
-                return mKioskConf;
-            }
-        }
-
-        #endregion KioskConfig
-
-        #region Histomat
-
-        private static HistomatConf mHistomat;
-
-        public static HistomatConf Histomat
-        {
-            get
-            {
-                if (mHistomat == null)
-                {
-                    //mHistomat = Pici.Config.ReadOrCreate<HistomatConf>();
-                    mHistomat = new HistomatConf();
-                }
-                return mHistomat;
-            }
-        }
-
-        #endregion Histomat
     }
 }

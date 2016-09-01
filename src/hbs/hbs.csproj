@@ -107,9 +107,6 @@
     <Compile Include="behaviours\SwipeBehaviour.cs" />
     <Compile Include="config\BookConf.cs" />
     <Compile Include="config\Config.cs" />
-    <Compile Include="config\CoverConf.cs" />
-    <Compile Include="config\HistomatConf.cs" />
-    <Compile Include="config\KioskConf.cs" />
     <Compile Include="config\PointerConf.cs" />
     <Compile Include="cover\HitCoverLoader.cs" />
     <Compile Include="HBS.cs" />
@@ -208,6 +205,7 @@
     <Compile Include="viewmodels\book3D\Book3DViewModel.cs" />
     <Compile Include="viewmodels\book3D\BookPlane3DViewModel.cs" />
     <Compile Include="viewmodels\book\BookPlaneViewModel.cs" />
+    <Compile Include="viewmodels\search\SearchButtonViewModel.cs" />
     <Compile Include="viewmodels\shelf\Bookshelf3DViewModel.cs" />
     <Compile Include="viewmodels\HBSViewModel.cs" />
     <Compile Include="viewmodels\search\SearchTextViewModel.cs" />

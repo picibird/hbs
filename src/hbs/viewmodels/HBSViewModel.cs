@@ -52,14 +52,14 @@ namespace picibird.hbs.viewmodels
             Style = new ViewStyle("HBSRootStyle");
             SearchBoxTextViewModel.EnterSearchCommand.OnEnter += OnSearchEnter;
             SearchButtonViewModel.TapBehaviour.Tap += OnSearchButtonTap;
-
+            SearchButtonViewModel.Clicked += OnSearchButtonClicked;
 
             HBS.Search.PageItemsCount = HBS.RowCount*HBS.ColumnCount - 1;
             var init = ShelfViewModel.IsRotating;
 
             BlackBlendingViewModel.TapBehaviour.Tap += OnBlackBlendingTap;
         }
-
+        
         public DateTime LastPointerDownTime { get; private set; }
 
         private void OnPointingEvent(object sender, PointerEventArgs e)
@@ -74,10 +74,17 @@ namespace picibird.hbs.viewmodels
 
         private void OnSearchEnter(EnterSearchCommand sender)
         {
+            //manual focus clear on enter to deselect textbox and trigger windows soft keyboard
+            Events.OnIdleOnce(() => { Pici.Services.Get<IKeyboard>().ClearFocus(); });
             OnSearch();
         }
 
         private void OnSearchButtonTap(object sender, EventArgs args)
+        {
+            //OnSearch();
+        }
+
+        private void OnSearchButtonClicked(object sender, EventArgs e)
         {
             OnSearch();
         }
@@ -90,7 +97,6 @@ namespace picibird.hbs.viewmodels
         public virtual void OnSearch(string searchText)
         {
             SearchBoxTextViewModel.SearchText = searchText;
-            Events.OnIdleOnce(() => { Pici.Services.Get<IKeyboard>().ClearFocus(); });
             Pici.Log.debug(typeof (HBSViewModel), string.Format("searching for {0}", searchText));
             Task t = HBS.Search.Start(searchText);
         }
@@ -171,15 +177,15 @@ namespace picibird.hbs.viewmodels
 
         #region SearchButtonViewModel
 
-        private ButtonViewModel mSearchButtonViewModel;
+        private SearchButtonViewModel mSearchButtonViewModel;
 
-        public ButtonViewModel SearchButtonViewModel
+        public SearchButtonViewModel SearchButtonViewModel
         {
             get
             {
                 if (mSearchButtonViewModel == null)
                 {
-                    mSearchButtonViewModel = new ButtonViewModel();
+                    mSearchButtonViewModel = new SearchButtonViewModel();
                     mSearchButtonViewModel.Style = new ViewStyle("SearchButtonStyle");
                 }
                 return mSearchButtonViewModel;

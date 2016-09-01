@@ -51,12 +51,6 @@ namespace picibird.hbs.wpf
         {
             base.OnStartup(e);
             if (!Started) return;
-            if (Config.KioskConf.EnableOnStartup)
-            {
-                MainWindow.WindowState = WindowState.Maximized;
-                MainWindow.WindowStyle = WindowStyle.None;
-                MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
         }
     }
 }

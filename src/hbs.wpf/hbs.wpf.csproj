@@ -185,24 +185,20 @@
       <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.18\lib\dotnet\picibits.app.dll</HintPath>
+    <Reference Include="picibits.app">
+      <HintPath>..\packages\picibits.0.1.19\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.0.1.18\lib\dotnet\picibits.core.dll</HintPath>
+    <Reference Include="picibits.core">
+      <HintPath>..\packages\picibits.0.1.19\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.18\lib\dotnet\picibits.wpf.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app">
+      <HintPath>..\packages\picibits.wpf.0.1.19\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\picibits.wpf.0.1.18\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core">
+      <HintPath>..\packages\picibits.wpf.0.1.19\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -232,20 +228,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <HintPath>..\packages\System.Reactive.Core.3.0.0\lib\net46\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.0.0\lib\net45\System.Reactive.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <HintPath>..\packages\System.Reactive.Linq.3.0.0\lib\net46\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.0.0\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.0.0\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reflection.TypeExtensions">

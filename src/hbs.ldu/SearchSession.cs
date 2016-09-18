@@ -145,7 +145,7 @@ namespace picibird.hbs.ldu
                 }
                 finally
                 {
-                    Pici.Log.info(typeof(SearchSession), "running inital search finished");
+                    Pici.Log.info(typeof(SearchSession), "running initial search finished");
                 }
             }
         }
@@ -352,20 +352,20 @@ namespace picibird.hbs.ldu
             }
             catch (OperationCanceledException)
             {
-                //end ping loop on cancelation
+                //end ping loop on cancellation
                 IsRunningPingLoop = false;
                 throw;
             }
             catch (Exception ex)
             {
-                //some error occured
+                //some error occurred
                 Pici.Log.error(typeof(SearchSession), "ping error", ex);
                 throw;
             }
             finally
             {
                 //log ping loop ending reason
-                string reason = IsRunningPingLoop ? "ERROR" : "CANCELATION";
+                string reason = IsRunningPingLoop ? "ERROR" : "CANCELLATION";
                 Pici.Log.info(typeof(SearchSession), String.Format("ping loop stopped because of {0}", reason));
             }
         }

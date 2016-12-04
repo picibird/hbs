@@ -16,12 +16,12 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using picibird.hbs.viewmodels;
-
 using picibits.app;
 using picibits.core;
 using picibits.core.export.services;
@@ -64,7 +64,7 @@ namespace picibird.hbs
                 Debug.Assert(hbsVm != null, "hbsVm != null");
                 hbsVm.SearchBoxTextViewModel.SearchText = searchString;
                 HBS.Search.Start(searchString)
-                    .ContinueWith(success => { Pici.Log.info(typeof (HbsApp), $"initial search {success}"); });
+                    .ContinueWith(success => { Pici.Log.info(typeof(HbsApp), $"initial search {success}"); });
             });
         }
 
@@ -88,7 +88,7 @@ namespace picibird.hbs
 
         public void InitResources()
         {
-            var hbsCoreAssembly = typeof (HbsApp).GetTypeInfo().Assembly;
+            var hbsCoreAssembly = typeof(HbsApp).GetTypeInfo().Assembly;
             Pici.Resources.AddManager("picibird.hbs.resources.hbs", hbsCoreAssembly);
             Pici.Resources.AddManager("picibird.hbs.resources.medium", hbsCoreAssembly);
             Pici.Resources.AddManager("picibird.hbs.resources.language", hbsCoreAssembly);

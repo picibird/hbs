@@ -19,7 +19,6 @@
 
 using System;
 using picibird.hbs.availabity;
-using picibits.app.mvvm;
 using picibits.bib;
 using picibits.core;
 using picibits.core.intent;
@@ -44,7 +43,6 @@ namespace picibird.hbs.viewmodels.availability
             var av = Model as AvailabilityInfo;
             if (av != null)
             {
-
                 Uri uri = null;
                 if (Uri.TryCreate(av.Href, UriKind.Absolute, out uri))
                 {
@@ -57,7 +55,6 @@ namespace picibird.hbs.viewmodels.availability
                 {
                     Pici.Log.warn(typeof(AvailabilityInfo), "cannot parse availability href to uri: {0}", av.Href);
                 }
-
             }
         }
 

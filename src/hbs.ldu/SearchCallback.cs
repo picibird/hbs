@@ -16,16 +16,15 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.ComponentModel;
 using System.Threading;
 using picibits.core.util;
 
 namespace picibird.hbs.ldu
 {
-
     public class SearchCallback<SearchStatus> : AsyncCallback<SearchStatus>
     {
-
         public FilterList<FilterCategory> FilterList { get; private set; }
 
         public event PropertyChangedEventHandler ResultCountChanged;
@@ -36,10 +35,7 @@ namespace picibird.hbs.ldu
 
         public int ResultCount
         {
-            get
-            {
-                return _ResultCount;
-            }
+            get { return _ResultCount; }
 
             internal set
             {
@@ -48,21 +44,19 @@ namespace picibird.hbs.ldu
                     _ResultCount = value;
                     //post event
                     Post(new SendOrPostCallback((state) =>
-                        {
-                            if (ResultCountChanged != null)
-                                ResultCountChanged(state, new PropertyChangedEventArgs("ResultCount"));
-                        }), _ResultCount);
+                    {
+                        if (ResultCountChanged != null)
+                            ResultCountChanged(state, new PropertyChangedEventArgs("ResultCount"));
+                    }), _ResultCount);
                 }
             }
         }
 
         private int _MaxPageIndex;
+
         public int MaxPageIndex
         {
-            get
-            {
-                return _MaxPageIndex;
-            }
+            get { return _MaxPageIndex; }
 
             internal set
             {
@@ -76,7 +70,6 @@ namespace picibird.hbs.ldu
                             MaxPageIndexChanged(state, new PropertyChangedEventArgs("MaxPageIndex"));
                     }), _MaxPageIndex);
                 }
-
             }
         }
 
@@ -90,8 +83,5 @@ namespace picibird.hbs.ldu
         {
             this.FilterList = new FilterList<FilterCategory>();
         }
-
-
-
     }
 }

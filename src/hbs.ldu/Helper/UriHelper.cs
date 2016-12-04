@@ -16,24 +16,24 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Flurl;
 using Flurl.Http;
-
 using picibits.core;
 
 namespace picibird.hbs.ldu.Helper
 {
     public class UrlHelper
     {
-
         private static void LogReq(HttpCall obj)
         {
             if (Pazpar2Settings.LOG_HTTP_REQUESTS)
             {
-                Pici.Log.debug(typeof(UrlHelper), String.Format("\r\n\tREQUEST:  {0}\r\n\t{1} {2}", obj.GetHashCode(), obj.Request.Method, obj.Url));
+                Pici.Log.debug(typeof(UrlHelper),
+                    String.Format("\r\n\tREQUEST:  {0}\r\n\t{1} {2}", obj.GetHashCode(), obj.Request.Method, obj.Url));
             }
         }
 
@@ -43,11 +43,13 @@ namespace picibird.hbs.ldu.Helper
             {
                 if (obj.Response != null)
                 {
-                    Pici.Log.debug(typeof(UrlHelper), String.Format("\r\n\tRESPONSE: {0}\r\n\t{1}", obj.GetHashCode(), obj.Response));
+                    Pici.Log.debug(typeof(UrlHelper),
+                        String.Format("\r\n\tRESPONSE: {0}\r\n\t{1}", obj.GetHashCode(), obj.Response));
                 }
                 else
                 {
-                    Pici.Log.debug(typeof(UrlHelper), String.Format("\r\n\tRESPONSE: {0}\r\n\t{1}", obj.GetHashCode(), obj));
+                    Pici.Log.debug(typeof(UrlHelper),
+                        String.Format("\r\n\tRESPONSE: {0}\r\n\t{1}", obj.GetHashCode(), obj));
                 }
             }
         }
@@ -74,11 +76,12 @@ namespace picibird.hbs.ldu.Helper
             if (searchRequest.MaximumRecords.HasValue)
             {
                 res.SetQueryParam("maxrecs", searchRequest.MaximumRecords.Value);
-            }else
+            }
+            else
             {
                 res.SetQueryParam("maxrecs", Pazpar2Settings.MAX_RECORDS);
             }
-            
+
             string limit = CreateLimitFilterStringFromSearchRequest(searchRequest);
             if (!String.IsNullOrEmpty(limit))
             {
@@ -102,12 +105,13 @@ namespace picibird.hbs.ldu.Helper
             }
             return res;
         }
+
         private static string CreateLimitFilterStringFromSearchRequest(SearchRequest searchRequest)
         {
-
             IEnumerable<IGrouping<FilterCategoryId, Filter>> queryFiltersByCategory =
                 from f in searchRequest.GetActiveFilters()
-                group f by f.Catgegory into fcat
+                group f by f.Catgegory
+                into fcat
                 where fcat.Key != FilterCategoryId.author
                       && fcat.Key != FilterCategoryId.subject
                       && fcat.Key != FilterCategoryId.xtargets
@@ -116,7 +120,8 @@ namespace picibird.hbs.ldu.Helper
             List<string> cat = new List<string>();
             foreach (IGrouping<FilterCategoryId, Filter> fcat in queryFiltersByCategory)
             {
-                cat.Add(String.Format("{0}={1}", fcat.Key, String.Join("|", (from f in fcat select f.Id).ToList<string>())));
+                cat.Add(String.Format("{0}={1}", fcat.Key,
+                    String.Join("|", (from f in fcat select f.Id).ToList<string>())));
             }
 
             return String.Join(",", cat);
@@ -131,7 +136,8 @@ namespace picibird.hbs.ldu.Helper
 
         public static string CreateSortStringFromSearchRequest(SearchRequest searchRequest)
         {
-            return String.Format("{0}:{1}", searchRequest.SortOrder.ToPazpar2ParameterString(), (searchRequest.SortDirection == SortDirection.descending) ? 0 : 1);
+            return String.Format("{0}:{1}", searchRequest.SortOrder.ToPazpar2ParameterString(),
+                (searchRequest.SortDirection == SortDirection.descending) ? 0 : 1);
         }
 
 
@@ -169,6 +175,5 @@ namespace picibird.hbs.ldu.Helper
                 .SetQueryParam("command", "ping")
                 .SetQueryParam("session", sid);
         }
-
     }
 }

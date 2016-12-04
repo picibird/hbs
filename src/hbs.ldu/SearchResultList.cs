@@ -16,23 +16,22 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Runtime.InteropServices;
 using System.Threading;
 using picibits.core.collection;
 using picibits.core.util;
 
 [assembly: ComVisible(false)]
+
 namespace picibird.hbs.ldu
 {
-
     public class ItemList<Hit> : PiciObservableCollectionWithCancellationToken<Hit>
     {
-
     }
 
     public class FilterList<FilterCategory> : PiciObservableCollectionWithCancellationToken<FilterCategory>
     {
-
     }
 
     public class PiciObservableCollectionWithCancellationToken<T> : PiciObservableCollection<T>
@@ -43,6 +42,7 @@ namespace picibird.hbs.ldu
         public CancellationToken? CancellationToken { get; private set; }
 
         public event SimpleEventHandler<PiciObservableCollectionWithCancellationToken<T>> ListUpdated;
+
         /// <summary>A cached delegate used to post invocation to the synchronization context.</summary>
         private readonly SendOrPostCallback m_StatusHandler;
 
@@ -79,6 +79,4 @@ namespace picibird.hbs.ldu
             if (changedEvent != null) changedEvent(this);
         }
     }
-
-
 }

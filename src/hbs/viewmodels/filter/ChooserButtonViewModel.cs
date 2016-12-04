@@ -16,8 +16,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using picibird.hbs.ldu;
 
+using picibird.hbs.ldu;
 using picibits.app.mvvm;
 using picibits.core;
 using picibits.core.mvvm;

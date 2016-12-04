@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace picibird.hbs.ldu
     public class SearchRequest : NotifyPropertyChanged
     {
         private int itemsPerPage = Pazpar2Settings.RESULTS_PER_PAGE;
-        
+
         private HashSet<Filter> activeFilters = new HashSet<Filter>();
         public event PropertyChangedEventHandler FilterListChanged;
 
@@ -127,7 +128,9 @@ namespace picibird.hbs.ldu
 
         public List<string> GetSourceFilterIds()
         {
-            return (from f in activeFilters where f.Catgegory == FilterCategoryId.xtargets select f.TargetId).ToList<string>();
+            return
+                (from f in activeFilters where f.Catgegory == FilterCategoryId.xtargets select f.TargetId)
+                    .ToList<string>();
         }
 
         public void ClearAllFilters()
@@ -148,13 +151,11 @@ namespace picibird.hbs.ldu
         public int ItemsPerPage
         {
             get { return itemsPerPage; }
-            set
-            {
-                SetProperty(ref itemsPerPage, value);
-            }
+            set { SetProperty(ref itemsPerPage, value); }
         }
 
         private int pageIdx;
+
         public int PageIdx
         {
             get { return pageIdx; }
@@ -180,7 +181,9 @@ namespace picibird.hbs.ldu
 
         internal List<string> GetActiveQueryFilterStrings()
         {
-            return (from filter in activeFilters where filter.Catgegory == FilterCategoryId.author || filter.Catgegory == FilterCategoryId.subject select filter.CatgegoryKey + "=" + filter.Id).ToList<string>();
+            return (from filter in activeFilters
+                where filter.Catgegory == FilterCategoryId.author || filter.Catgegory == FilterCategoryId.subject
+                select filter.CatgegoryKey + "=" + filter.Id).ToList<string>();
         }
 
         internal HashSet<Filter> GetActiveFilters()
@@ -188,6 +191,4 @@ namespace picibird.hbs.ldu
             return activeFilters;
         }
     }
-
-
 }

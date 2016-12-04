@@ -16,11 +16,10 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using picibird.hbs.ldu;
-
 using picibits.core;
 using picibits.core.helper;
 using picibits.core.settings;

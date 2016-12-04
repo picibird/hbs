@@ -16,11 +16,11 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Linq;
 using picibird.hbs.ldu;
 using picibird.hbs.viewmodels.filter.behaviour;
-
 using picibits.app.animation;
 using picibits.app.transition;
 using picibits.core;
@@ -145,7 +145,7 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnSelectedFilterCategoryChanged(FilterCategoryId categoryName)
         {
-            Pici.Log.info(typeof (FilterChooserViewModel),
+            Pici.Log.info(typeof(FilterChooserViewModel),
                 string.Format("selected filter category {0}", Chooser.SelectedFilterCategory));
             var category = HBS.Search.FilterList.FirstOrDefault(fc => fc.Id == categoryName);
             if (category != null)

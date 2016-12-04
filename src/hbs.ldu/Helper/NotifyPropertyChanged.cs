@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -34,7 +35,8 @@ namespace picibird.hbs.ldu.Helper
 
     public class PropertyChangedHelper
     {
-        public static void SetProperty<T>(ref T field, T value, PropertyChangedEventHandler PropertyChanged, object caller, [CallerMemberName] string name = "")
+        public static void SetProperty<T>(ref T field, T value, PropertyChangedEventHandler PropertyChanged,
+            object caller, [CallerMemberName] string name = "")
         {
             if (!EqualityComparer<T>.Default.Equals(field, value))
             {

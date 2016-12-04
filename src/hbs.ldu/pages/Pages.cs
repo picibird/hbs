@@ -16,13 +16,13 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
-
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
@@ -31,7 +31,6 @@ namespace picibird.hbs.ldu.pages
 {
     public class Pages : Model
     {
-
         internal Dictionary<int, Page> RequestedPages = new Dictionary<int, Page>();
 
         public int PageOffset { get; private set; }
@@ -41,6 +40,7 @@ namespace picibird.hbs.ldu.pages
         #region Session
 
         private SearchSession mSession;
+
         public SearchSession Session
         {
             get { return mSession; }
@@ -112,7 +112,6 @@ namespace picibird.hbs.ldu.pages
 
         protected void OnRequestPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-
             if (e.PropertyName.Equals("PageIdx"))
             {
                 SearchRequest sr = sender as SearchRequest;
@@ -144,7 +143,6 @@ namespace picibird.hbs.ldu.pages
                 }
             }
             throw new ArgumentException("page already requested");
-
         }
 
         public void ReleasePage(Page page)
@@ -177,13 +175,13 @@ namespace picibird.hbs.ldu.pages
         {
             lock (PageLock)
             {
-                
                 Pici.Log.warn(typeof(Pages), "GET PAGES TO UPDATE");
-		
+
                 List<Page> copy = new List<Page>(RequestedPages.Values.ToList<Page>());
                 //order by closest to index
                 Func<Page, int> closeToIndexFunc = (p) => Math.Abs(p.Index - Session.Request.PageIdx);
-                IEnumerable<Page> closeToIndex = copy.Where((p) => closeToIndexFunc.Invoke(p) <= 1).OrderBy(closeToIndexFunc);
+                IEnumerable<Page> closeToIndex =
+                    copy.Where((p) => closeToIndexFunc.Invoke(p) <= 1).OrderBy(closeToIndexFunc);
                 //return all pages that are not filled
                 IEnumerable<Page> notFilledPages = closeToIndex.Where((p) => p.Hits.Count < Session.Request.ItemsPerPage);
                 if (notFilledPages.Count() > 0)
@@ -269,7 +267,6 @@ namespace picibird.hbs.ldu.pages
                     Pici.Log.error(typeof(SearchSession), "request page error", ex);
                     throw;
                 }
-
             }
             finally
             {
@@ -277,7 +274,8 @@ namespace picibird.hbs.ldu.pages
             }
         }
 
-        private Dictionary<int, CancellationTokenSource> cancelPageUpdateTokenDict = new Dictionary<int, CancellationTokenSource>();
+        private Dictionary<int, CancellationTokenSource> cancelPageUpdateTokenDict =
+            new Dictionary<int, CancellationTokenSource>();
 
         private CancellationToken EnterRequestPage(int pageIdx)
         {
@@ -297,8 +295,5 @@ namespace picibird.hbs.ldu.pages
         {
             cancelPageUpdateTokenDict.Remove(pageIdx);
         }
-
-
-
     }
 }

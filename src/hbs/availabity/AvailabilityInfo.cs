@@ -118,7 +118,5 @@ namespace picibird.hbs.availabity
                 }
             }
         }
-       
-
     }
 }

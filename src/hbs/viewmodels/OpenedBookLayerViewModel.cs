@@ -16,9 +16,9 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using picibird.hbs.behaviours;
 using picibird.hbs.viewmodels.book;
-
 using picibits.core;
 using picibits.core.models;
 using picibits.core.mvvm;

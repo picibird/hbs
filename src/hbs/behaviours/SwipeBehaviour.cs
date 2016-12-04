@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,8 +73,6 @@ namespace picibird.hbs.behaviours
             {
                 if (isSwiping)
                 {
-
-
                     DeltaX.Reverse();
                     var lastDeltaX = DeltaX.FirstOrDefault(dX => Math.Abs(dX) > 1);
 
@@ -88,7 +87,6 @@ namespace picibird.hbs.behaviours
 
 
                     Pici.Log.info(typeof(SwipeBehaviour), "deltaX={0}; cumX={1}", lastDeltaX, cummulatedX);
-
 
 
                     OnSwipeCompleted(lastDeltaX, cummulatedX);

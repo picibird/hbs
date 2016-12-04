@@ -35,7 +35,7 @@ namespace picibird.hbs.wpf.demo
             ValidateDemoSettings();
             base.ApplySettings();
         }
-        
+
         protected virtual void ValidateDemoSettings()
         {
             //set ldu defaults

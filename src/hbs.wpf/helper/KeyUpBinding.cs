@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -26,11 +27,11 @@ namespace picibird.hbs.wpf.helper
     public class KeyUpBinding : InputBinding
     {
         public static readonly DependencyProperty KeyProperty =
-            DependencyProperty.Register("Key", typeof (Key), typeof (KeyUpBinding),
+            DependencyProperty.Register("Key", typeof(Key), typeof(KeyUpBinding),
                 new PropertyMetadata(Key.A, KeyChanged));
 
         public static readonly DependencyProperty CommandProperty =
-            DependencyProperty.Register("Command", typeof (ICommand), typeof (KeyUpBinding), new PropertyMetadata(null));
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(KeyUpBinding), new PropertyMetadata(null));
 
         public Key Key
         {

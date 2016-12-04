@@ -16,12 +16,12 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Linq;
 using picibird.hbs.transition;
 using picibird.hbs.viewmodels.book3D;
 using picibird.hbs.viewmodels.shelf;
-
 using picibits.app.transition;
 using picibits.core;
 
@@ -58,7 +58,7 @@ namespace picibird.hbs.behaviours
 
         public override void OnSwipeCompleted(double deltaX, double cummulatedX)
         {
-            Pici.Log.info(typeof (OpenBookSwipeBehaviour), "Swipe Completed");
+            Pici.Log.info(typeof(OpenBookSwipeBehaviour), "Swipe Completed");
 
             double completeProgress = 0;
             if (cummulatedX < -50 && Math.Sign(deltaX) == -1)

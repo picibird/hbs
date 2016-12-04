@@ -16,13 +16,13 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using picibird.hbs.config;
 using picibird.hbs.helper;
 using picibird.hbs.ldu;
 using picibird.hbs.viewmodels.book;
-
 using picibits.app.animation;
 using picibits.app.behaviour;
 using picibits.app.bitmap;

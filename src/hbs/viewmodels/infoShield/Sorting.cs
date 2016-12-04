@@ -16,10 +16,10 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Collections.Generic;
 using System.Linq;
 using picibird.hbs.ldu;
-
 using picibits.core;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
@@ -204,7 +204,7 @@ namespace picibird.hbs.viewmodels.infoShield
                 if (request.SortOrder != order || request.SortDirection != direction)
                 {
                     request.SetSortOrder(order, direction);
-                    Pici.Log.debug(typeof (InfoShieldVM), string.Format("sort changed to {0} {1}", order, direction));
+                    Pici.Log.debug(typeof(InfoShieldVM), string.Format("sort changed to {0} {1}", order, direction));
                 }
             }
         }

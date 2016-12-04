@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Windows.Media.Media3D;
 using picibird.hbs;
 using picibird.hbs.viewmodels.book3D;
@@ -27,6 +28,6 @@ using picibits.core.export.views;
 
 // VIEWS
 
-[assembly: ViewExport(typeof (HbsAppViewModel), typeof (HbsAppView))]
-[assembly: ViewExport(typeof (Book3DViewModel), typeof (ContainerUIElement3D), typeof (ItemsView3DAdapter))]
-[assembly: ViewExport(typeof (Bookshelf3DViewModel), typeof (Bookshelf3DView))]
+[assembly: ViewExport(typeof(HbsAppViewModel), typeof(HbsAppView))]
+[assembly: ViewExport(typeof(Book3DViewModel), typeof(ContainerUIElement3D), typeof(ItemsView3DAdapter))]
+[assembly: ViewExport(typeof(Bookshelf3DViewModel), typeof(Bookshelf3DView))]

@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Xml.Serialization;
 
 namespace picibird.hbs.ldu
@@ -23,7 +24,6 @@ namespace picibird.hbs.ldu
     [XmlRoot("record")]
     public class Record
     {
-
         //[XmlElement("md-subject")]
         //public HashSet<string> subject { get; set; }
 
@@ -33,6 +33,5 @@ namespace picibird.hbs.ldu
 
         //[XmlElement("md-merge-title")]
         //public HashSet<string> mergeTitle { get; set; }
-
     }
 }

@@ -16,11 +16,11 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-
 using picibits.core;
 using picibits.core.json;
 
@@ -28,7 +28,6 @@ namespace picibird.hbs.ldu
 {
     public class Location
     {
-
         //<location id="z3950n.bsz-bw.de:20210/swb367"
         //   name="Z3950-SWB Lokale Sicht UB Konstanz" checksum="160722249">
         // <md-id>304413836</md-id>
@@ -75,7 +74,7 @@ namespace picibird.hbs.ldu
         [JsonProperty("md_available")]
         [JsonConverter(typeof(BoolConverter))]
         public bool available { get; set; }
-        
+
         [XmlElement("md-avdata")]
         [JsonProperty("md-avdata")]
         public string avdata { get; set; }
@@ -188,7 +187,5 @@ namespace picibird.hbs.ldu
         {
             return locationId;
         }
-
-
     }
 }

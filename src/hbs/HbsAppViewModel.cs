@@ -16,9 +16,9 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using picibird.hbs.Intents;
 using picibird.hbs.viewmodels;
-
 using picibits.app;
 using picibits.core;
 using picibits.core.mvvm;

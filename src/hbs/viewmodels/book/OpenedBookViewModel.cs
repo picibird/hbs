@@ -19,7 +19,6 @@
 
 using picibird.hbs.models;
 using picibird.hbs.viewmodels.book3D;
-
 using picibits.app.animation;
 using picibits.core;
 using picibits.core.helper;

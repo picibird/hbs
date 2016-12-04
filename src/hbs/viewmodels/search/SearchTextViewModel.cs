@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Windows.Input;
 using picibits.core.helper;
@@ -26,7 +27,6 @@ namespace picibird.hbs.viewmodels.search
 {
     public class SearchTextViewModel : ViewModel
     {
-        
         #region SearchText
 
         private string mSearchText;
@@ -91,21 +91,13 @@ namespace picibird.hbs.viewmodels.search
         {
             Style = new ViewStyle("SearchBoxTextStyle");
             EnterSearchCommand = new EnterSearchCommand();
-            GotFocusCommand = new DelegateCommand((p) =>
-            {
-                EnterSearchCommand.CanExecuteProp = true;
-            });
-            LostFocusCommand = new DelegateCommand((p) =>
-            {
-                EnterSearchCommand.CanExecuteProp = false;
-            });
+            GotFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = true; });
+            LostFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = false; });
         }
-
     }
 
     public class EnterSearchCommand : ICommand
     {
-
         public bool CanExecuteProp;
 
         public event SimpleEventHandler<EnterSearchCommand> OnEnter;
@@ -124,7 +116,5 @@ namespace picibird.hbs.viewmodels.search
                 OnEnter(this);
             }
         }
-
-        
     }
 }

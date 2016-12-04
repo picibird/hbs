@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Threading.Tasks;
 using picibird.hbs.Intents;
@@ -23,8 +24,6 @@ using picibird.hbs.viewmodels.buttons;
 using picibird.hbs.viewmodels.filter;
 using picibird.hbs.viewmodels.search;
 using picibird.hbs.viewmodels.shelf;
-
-using picibits.app.mvvm;
 using picibits.core;
 using picibits.core.export.services;
 using picibits.core.helper;
@@ -59,7 +58,7 @@ namespace picibird.hbs.viewmodels
 
             BlackBlendingViewModel.TapBehaviour.Tap += OnBlackBlendingTap;
         }
-        
+
         public DateTime LastPointerDownTime { get; private set; }
 
         private void OnPointingEvent(object sender, PointerEventArgs e)
@@ -97,7 +96,7 @@ namespace picibird.hbs.viewmodels
         public virtual void OnSearch(string searchText)
         {
             SearchBoxTextViewModel.SearchText = searchText;
-            Pici.Log.debug(typeof (HBSViewModel), string.Format("searching for {0}", searchText));
+            Pici.Log.debug(typeof(HBSViewModel), string.Format("searching for {0}", searchText));
             Task t = HBS.Search.Start(searchText);
         }
 

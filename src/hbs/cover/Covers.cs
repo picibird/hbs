@@ -16,13 +16,13 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Nito.AsyncEx;
-
 using picibits.app.bitmap;
 using picibits.bib;
 using picibits.core;
@@ -49,7 +49,7 @@ namespace picibird.hbs.cover
                 AsyncLazy<IBitmapImage> removed;
                 COVER_CACHE.ConcurrentDictionary.TryRemove(COVER_CACHE.ConcurrentDictionary.Keys.First(), out removed);
             }
-            Pici.Log.warn(typeof (Covers), string.Format("validating cache size: {0} covers", COVER_CACHE.Count));
+            Pici.Log.warn(typeof(Covers), string.Format("validating cache size: {0} covers", COVER_CACHE.Count));
         }
 
         public Task<IBitmapImage> LoadCoverAsyncLazyCached(string url)
@@ -78,13 +78,13 @@ namespace picibird.hbs.cover
             }
             catch (FlurlHttpTimeoutException)
             {
-                Pici.Log.warn(typeof (Covers), "Timeout loading HasCover()");
+                Pici.Log.warn(typeof(Covers), "Timeout loading HasCover()");
                 return false;
             }
             catch (Exception ex)
             {
                 if (ex.InnerException != null && !(ex.InnerException is OperationCanceledException))
-                    Pici.Log.error(typeof (Covers), string.Format("has cover {0} failed", coverUrl), ex);
+                    Pici.Log.error(typeof(Covers), string.Format("has cover {0} failed", coverUrl), ex);
                 return false;
             }
         }
@@ -108,7 +108,7 @@ namespace picibird.hbs.cover
             }
             catch (Exception ex)
             {
-                Pici.Log.error(typeof (Covers), string.Format("loading cover {0} failed", url), ex);
+                Pici.Log.error(typeof(Covers), string.Format("loading cover {0} failed", url), ex);
                 return null;
             }
             finally

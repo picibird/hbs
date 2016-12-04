@@ -16,8 +16,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
 
+using System;
 using picibits.core;
 using picibits.core.helper;
 using picibits.core.intent;
@@ -27,13 +27,12 @@ namespace picibird.hbs.ldu
 {
     public class Link : Model
     {
-
         public static readonly string TYPE_TEXT = "Volltext";
         public static readonly string TYPE_LINK = "Link";
 
         public string Type { get; private set; }
         public Uri Uri { get; private set; }
-        
+
         public string Title { get; private set; }
         public string Subtitle { get; private set; }
 
@@ -47,6 +46,7 @@ namespace picibird.hbs.ldu
         #region ClickCommand
 
         private DelegateCommand mClickCommand;
+
         public DelegateCommand ClickCommand
         {
             get
@@ -58,7 +58,6 @@ namespace picibird.hbs.ldu
         }
 
         #endregion ClickCommand
-
 
         public Link(string type, string uri, string title, string subtitle, Hit hit)
         {
@@ -78,6 +77,5 @@ namespace picibird.hbs.ldu
             openUrlIntent.AddExtra("subtitle", Subtitle);
             Pici.Intent.Send(openUrlIntent);
         }
-
     }
 }

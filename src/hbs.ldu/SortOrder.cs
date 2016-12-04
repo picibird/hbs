@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace picibird.hbs.ldu
 {
     public enum SortOrder
@@ -29,7 +30,6 @@ namespace picibird.hbs.ldu
 
     public static class SortOrderExtensions
     {
-
         public static string ToPazpar2ParameterString(this SortOrder sortOrder)
         {
             switch (sortOrder)
@@ -48,6 +48,5 @@ namespace picibird.hbs.ldu
                     return "relevance";
             }
         }
-
     }
 }

@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,6 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Flurl;
 using Newtonsoft.Json;
-
 using picibits.app.bitmap;
 using picibits.bib;
 using picibits.core;
@@ -35,7 +35,6 @@ using picibits.core.mvvm;
 
 namespace picibird.hbs.ldu
 {
-
     public class CoverData
     {
         public IBitmapImage Image;
@@ -44,7 +43,12 @@ namespace picibird.hbs.ldu
 
     public class Hit : Model, IEquatable<Hit>, IEqualityComparer<Hit>
     {
-        public enum CoverSizes { small, medium, large };
+        public enum CoverSizes
+        {
+            small,
+            medium,
+            large
+        };
 
         #region Pazpar2Properties
 
@@ -125,7 +129,9 @@ namespace picibird.hbs.ldu
                 }
                 catch (Exception ex)
                 {
-                    Pici.Log.error(typeof(Hit), String.Format("Error parsing page-number \"{0}\" of Hit: \r\n{1}", pages_number, this.ToString()), ex);
+                    Pici.Log.error(typeof(Hit),
+                        String.Format("Error parsing page-number \"{0}\" of Hit: \r\n{1}", pages_number, this.ToString()),
+                        ex);
                 }
                 return 0;
             }
@@ -159,6 +165,7 @@ namespace picibird.hbs.ldu
         #region relevance
 
         private string mrelevance;
+
         [XmlElement("relevance")]
         [JsonProperty("relevance")]
         public string relevance
@@ -176,7 +183,6 @@ namespace picibird.hbs.ldu
         }
 
         #endregion relevance
-
 
         [XmlElement("location")]
         [JsonProperty("location")]
@@ -207,33 +213,23 @@ namespace picibird.hbs.ldu
         [XmlIgnore]
         public string CoverUrl_S
         {
-            get
-            {
-                return GetCoverUrl(CoverSizes.small);
-            }
+            get { return GetCoverUrl(CoverSizes.small); }
         }
 
         [XmlIgnore]
         public string CoverUrl_M
         {
-            get
-            {
-                return GetCoverUrl(CoverSizes.medium);
-            }
+            get { return GetCoverUrl(CoverSizes.medium); }
         }
 
         [XmlIgnore]
         public string CoverUrl_L
         {
-            get
-            {
-                return GetCoverUrl(CoverSizes.large);
-            }
+            get { return GetCoverUrl(CoverSizes.large); }
         }
 
-
-
         #region Author String
+
         [XmlIgnore]
         public string authorString
         {
@@ -248,18 +244,17 @@ namespace picibird.hbs.ldu
         #endregion Author String
 
         #region Merge Author String
+
         [XmlIgnore]
         public string mergeAuthorString
         {
-            get
-            {
-                return String.Join("; ", merge_author);
-            }
+            get { return String.Join("; ", merge_author); }
         }
 
         #endregion Author String
 
         #region Author Cover String
+
         [XmlIgnore]
         public string authorCoverString
         {
@@ -275,6 +270,7 @@ namespace picibird.hbs.ldu
                 return authors;
             }
         }
+
         #endregion Author Cover String
 
         #region Author Back Cover String
@@ -285,15 +281,17 @@ namespace picibird.hbs.ldu
             get
             {
                 IEnumerable<string> authorList = GetMergedAuthors();
-                return String.Join("\n", authorList); ;
+                return String.Join("\n", authorList);
+                ;
             }
         }
-        #endregion Author Back Cover String
 
+        #endregion Author Back Cover String
 
         #region JournalTitle
 
         private string mJournalTitle;
+
         public string JournalTitle
         {
             get
@@ -308,10 +306,10 @@ namespace picibird.hbs.ldu
 
         #endregion JournalTitle
 
-
         #region SeriesTitle
 
         private string mSeriesTitle;
+
         public string SeriesTitle
         {
             get
@@ -325,8 +323,6 @@ namespace picibird.hbs.ldu
         }
 
         #endregion SeriesTitle
-
-
 
         private IEnumerable<string> GetMergedAuthors()
         {
@@ -366,6 +362,7 @@ namespace picibird.hbs.ldu
         #region CoverPriority
 
         private int mCoverPriority = 1;
+
         public int CoverPriority
         {
             get { return mCoverPriority; }
@@ -383,6 +380,7 @@ namespace picibird.hbs.ldu
         #endregion CoverPriority
 
         #region CoverColorScheme
+
         public event EventHandler<HistomatColorScheme> CoverColorSchemeChanged;
 
         private HistomatColorScheme mCoverColorScheme = HistomatColorScheme.DEFAULT;
@@ -403,12 +401,13 @@ namespace picibird.hbs.ldu
                 }
             }
         }
-        #endregion CoverColorScheme
 
+        #endregion CoverColorScheme
 
         #region CoverSearchColors
 
         private HistomatSearchColors mCoverSearchColors = HistomatSearchColors.DEFAULT;
+
         [XmlIgnore]
         public HistomatSearchColors CoverSearchColors
         {
@@ -426,9 +425,10 @@ namespace picibird.hbs.ldu
 
         #endregion CoverSearchColors
 
-
         #region CoverImageUrl
+
         private string mCoverImageUrl;
+
         [XmlIgnore]
         public string CoverImageUrl
         {
@@ -444,7 +444,6 @@ namespace picibird.hbs.ldu
             }
         }
 
-        
 
         protected virtual void OnCoverImageUrlChanged(string oldCoverImageUrl, string newCoverImageUrl)
         {
@@ -461,6 +460,7 @@ namespace picibird.hbs.ldu
         #region QRCodeImage
 
         private IBitmapImage mQRCodeImage;
+
         [XmlIgnore]
         public IBitmapImage QRCodeImage
         {
@@ -484,7 +484,8 @@ namespace picibird.hbs.ldu
         {
             get
             {
-                if (locations == null || locations.Count == 0 || locations[0].publicationName == null || locations[0].publicationName.Count == 0)
+                if (locations == null || locations.Count == 0 || locations[0].publicationName == null ||
+                    locations[0].publicationName.Count == 0)
                     return "";
                 return locations[0].publicationName[0];
             }
@@ -608,10 +609,9 @@ namespace picibird.hbs.ldu
 
         #region Links
 
-        [XmlIgnore]
-        private bool mLinksFullTextResolved;
-        [XmlIgnore]
-        private PiciObservableCollection<Link> mLinksFullText;
+        [XmlIgnore] private bool mLinksFullTextResolved;
+        [XmlIgnore] private PiciObservableCollection<Link> mLinksFullText;
+
         [XmlIgnore]
         public PiciObservableCollection<Link> LinksFullText
         {
@@ -637,10 +637,9 @@ namespace picibird.hbs.ldu
             }
         }
 
-        [XmlIgnore]
-        private bool mLinksResolved;
-        [XmlIgnore]
-        private PiciObservableCollection<Link> mLinks;
+        [XmlIgnore] private bool mLinksResolved;
+        [XmlIgnore] private PiciObservableCollection<Link> mLinks;
+
         [XmlIgnore]
         public PiciObservableCollection<Link> Links
         {
@@ -667,7 +666,6 @@ namespace picibird.hbs.ldu
         }
 
         #endregion Links
-
 
         public async Task<Record> GetDetailsAsync(SearchSession session)
         {
@@ -697,7 +695,9 @@ namespace picibird.hbs.ldu
 
         public Location GetLocationWithDepartement()
         {
-            return locations.Where(loc => loc.department != null && !String.IsNullOrEmpty(loc.department.FirstOrDefault())).FirstOrDefault();
+            return
+                locations.Where(loc => loc.department != null && !String.IsNullOrEmpty(loc.department.FirstOrDefault()))
+                    .FirstOrDefault();
         }
 
         CancellationTokenSource LoadCoverTokenSource;

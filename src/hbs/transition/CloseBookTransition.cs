@@ -16,10 +16,10 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using picibird.hbs.models;
 using picibird.hbs.viewmodels.book3D;
-
 using picibits.app.transition;
 using picibits.core;
 using picibits.core.intent;

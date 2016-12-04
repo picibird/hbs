@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Xml.Serialization;
 
@@ -59,7 +60,7 @@ namespace picibird.hbs.ldu
 
         public int progressAsPercent()
         {
-            return int.Parse((progress * 100).ToString());
+            return int.Parse((progress*100).ToString());
         }
 
         public SearchStatus()
@@ -69,8 +70,8 @@ namespace picibird.hbs.ldu
 
         public override string ToString()
         {
-            return String.Format("progress={0}; hits={1}; records={2}; clients={3}; actClients={4};", progress, hits, records, clients, activeclients);
+            return String.Format("progress={0}; hits={1}; records={2}; clients={3}; actClients={4};", progress, hits,
+                records, clients, activeclients);
         }
-
     }
 }

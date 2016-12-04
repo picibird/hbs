@@ -16,9 +16,9 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Linq;
 using picibird.hbs.ldu;
-
 using picibits.core;
 using picibits.core.collection;
 using picibits.core.controls;
@@ -101,12 +101,12 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnSelectedFilterItemAdded(object sender, Filter item)
         {
-            Pici.Log.info(typeof (FilterSelectionListViewModel), string.Format("selected filter {0}", item.Name));
+            Pici.Log.info(typeof(FilterSelectionListViewModel), string.Format("selected filter {0}", item.Name));
         }
 
         private void OnSelectedFilterItemRemoved(object sender, Filter item)
         {
-            Pici.Log.info(typeof (FilterSelectionListViewModel), string.Format("unselected filter {0}", item.Name));
+            Pici.Log.info(typeof(FilterSelectionListViewModel), string.Format("unselected filter {0}", item.Name));
         }
 
         public FilterSelectionItemViewModel GetItemForFilter(Filter filter)

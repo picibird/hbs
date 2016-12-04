@@ -16,16 +16,15 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
-
 using picibits.core;
 
 namespace picibird.hbs.ldu.pages
 {
     public class Page
     {
-
         public ItemList<Hit> Hits { get; internal set; }
 
         public int Index { get; private set; }
@@ -102,7 +101,6 @@ namespace picibird.hbs.ldu.pages
 
     public class PageUpdateTimeComparer : IComparer<Page>
     {
-
         public int Compare(Page x, Page y)
         {
             return DateTime.Compare(x.LastUpdateTime, y.LastUpdateTime);

@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -31,7 +32,6 @@ namespace picibird.hbs.ldu
 
         [XmlElement("session")]
         public int Session { get; set; }
-
     }
 
 
@@ -64,7 +64,7 @@ namespace picibird.hbs.ldu
 
         public int progressAsInt()
         {
-            return int.Parse((progress * 100).ToString());
+            return int.Parse((progress*100).ToString());
         }
     }
 
@@ -94,13 +94,13 @@ namespace picibird.hbs.ldu
         public int start { get; set; }
 
 
-
         [XmlElement("hit")]
         public List<Hit> Hits { get; set; }
 
         public override string ToString()
         {
-            return String.Format("num={0}; merged={1}; total={2}; start={3}; hitCount={4};", num, merged, total, start, Hits.Count);
+            return String.Format("num={0}; merged={1}; total={2}; start={3}; hitCount={4};", num, merged, total, start,
+                Hits.Count);
         }
     }
 
@@ -162,7 +162,5 @@ namespace picibird.hbs.ldu
 
         [XmlElement("list")]
         public List<FilterCategory> filterCategories { get; set; }
-
     }
-
 }

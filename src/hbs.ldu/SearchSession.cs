@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +26,6 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Flurl.Http;
 using picibird.hbs.ldu.Helper;
-
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
@@ -33,11 +33,8 @@ using picibits.core.util;
 
 namespace picibird.hbs.ldu
 {
-    
-
     public class SearchSession : Model, IDisposable
     {
-        
         private static readonly XmlSerializer serializerPazPar2Init = new XmlSerializer(typeof(PazPar2Init));
         private static readonly XmlSerializer serializerPazPar2Stat = new XmlSerializer(typeof(SearchStatus));
         private static readonly XmlSerializer serializerPazPar2Show = new XmlSerializer(typeof(PazPar2Show));
@@ -46,13 +43,12 @@ namespace picibird.hbs.ldu
 
         public SearchCallback<SearchStatus> Callback;
 
-
-
         #region Request
 
         public event PropertyChangedHandler<SearchRequest> RequestChanged;
 
         private SearchRequest mRequest;
+
         public SearchRequest Request
         {
             get { return mRequest; }
@@ -81,6 +77,7 @@ namespace picibird.hbs.ldu
         public event PropertyChangedHandler<SearchStatus> StatusChanged;
 
         private SearchStatus mStatus;
+
         public SearchStatus Status
         {
             get { return mStatus; }
@@ -152,7 +149,6 @@ namespace picibird.hbs.ldu
 
         public void Start(List<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
         {
-
             WaitUntilQueryFinishes(statusCallback.CancellationToken.Value);
             this.Callback = statusCallback;
             this.Request = sr;
@@ -177,8 +173,6 @@ namespace picibird.hbs.ldu
             await RunQuery("filter list changed", false, false);
         }
 
-
-
         #region PP2 Init
 
         private async Task<int> PP2_Init()
@@ -187,7 +181,10 @@ namespace picibird.hbs.ldu
             {
                 // create session
                 Stream stream = await UrlHelper.GetInitUrl().GetStreamAsync();
-                PazPar2Init pInit = await Async.DeserializeXml<PazPar2Init>(serializerPazPar2Init, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
+                PazPar2Init pInit =
+                    await
+                        Async.DeserializeXml<PazPar2Init>(serializerPazPar2Init, stream,
+                            Pazpar2Settings.LOG_HTTP_RESPONSES);
                 Callback.ThrowIfCancellationRequested();
                 return pInit.Session;
             }
@@ -220,7 +217,8 @@ namespace picibird.hbs.ldu
                 }
                 else
                 {
-                    Pici.Log.error(typeof(SearchSession), String.Format("error running query: " + reason, ex.Message), ex);
+                    Pici.Log.error(typeof(SearchSession), String.Format("error running query: " + reason, ex.Message),
+                        ex);
                 }
                 if (throwError)
                     throw;
@@ -240,7 +238,9 @@ namespace picibird.hbs.ldu
             {
                 await RunQuerySemaphore.WaitAsync(token);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             finally
             {
                 RunQuerySemaphore.Release();
@@ -255,7 +255,8 @@ namespace picibird.hbs.ldu
                 //cancel running request
                 RunQueryCancelTokenSource.Cancel();
                 RunQueryCancelTokenSource = new CancellationTokenSource();
-                CancellationTokenSource CancelTokenSource = RunQueryCancelTokenSource.JoinToLinked(Callback.CancellationToken.Value);
+                CancellationTokenSource CancelTokenSource =
+                    RunQueryCancelTokenSource.JoinToLinked(Callback.CancellationToken.Value);
                 //wait & lock
                 await RunQuerySemaphore.WaitAsync(CancelTokenSource.Token);
                 //reset progress
@@ -272,7 +273,7 @@ namespace picibird.hbs.ldu
                 // run 'stat' loop (show, record)
                 Task progressLoopTask = RunProgressLoopAsync(CancelTokenSource.Token);
                 //wait all
-                Task[] tasks = new Task[] { termlistLoopTask, progressLoopTask };
+                Task[] tasks = new Task[] {termlistLoopTask, progressLoopTask};
                 await Task.WhenAll(tasks);
                 CancelTokenSource.ThrowIfCancellationRequested();
                 //prolong status progress updates to get changes after 100%
@@ -379,7 +380,10 @@ namespace picibird.hbs.ldu
                 cancelToken.ThrowIfCancellationRequested();
                 using (Stream stream = await UrlHelper.GetStatUrl(ID.ToString()).GetStreamAsync())
                 {
-                    SearchStatus newStatus = await Async.DeserializeXml<SearchStatus>(serializerPazPar2Stat, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
+                    SearchStatus newStatus =
+                        await
+                            Async.DeserializeXml<SearchStatus>(serializerPazPar2Stat, stream,
+                                Pazpar2Settings.LOG_HTTP_RESPONSES);
                     //cancel if requested
                     cancelToken.ThrowIfCancellationRequested();
                     return newStatus;
@@ -428,12 +432,11 @@ namespace picibird.hbs.ldu
         }
 
 
-
         public async Task<PazPar2Show> PP2_Show(int pageIdx, int itemCount, CancellationToken cancelToken)
         {
             try
             {
-                int start = pageIdx * itemCount;
+                int start = pageIdx*itemCount;
                 PazPar2Show pp2Show = null;
                 if (FakeHits != null)
                 {
@@ -452,7 +455,6 @@ namespace picibird.hbs.ldu
                     {
                         pp2Show.Hits = new List<Hit>();
                     }
-
                 }
                 else
                 {
@@ -461,18 +463,19 @@ namespace picibird.hbs.ldu
                     using (Stream stream = await showUrl.GetStreamAsync())
                     {
                         cancelToken.ThrowIfCancellationRequested();
-                        pp2Show = await Async.DeserializeXml<PazPar2Show>(serializerPazPar2Show, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
+                        pp2Show =
+                            await
+                                Async.DeserializeXml<PazPar2Show>(serializerPazPar2Show, stream,
+                                    Pazpar2Settings.LOG_HTTP_RESPONSES);
                         //debug
                         //Pici.Log.warn(typeof(SearchSession), "SHOW: " + pp2Show.ToString());
                         //cancel if
                         cancelToken.ThrowIfCancellationRequested();
-
-
                     }
                 }
                 //update
                 Callback.ResultCount = pp2Show.merged;
-                int maxPageIndex = (int)Math.Ceiling(Callback.ResultCount * (1.0d / itemCount)) - 1;
+                int maxPageIndex = (int) Math.Ceiling(Callback.ResultCount*(1.0d/itemCount)) - 1;
                 maxPageIndex = Math.Max(0, maxPageIndex);
                 Callback.MaxPageIndex = maxPageIndex;
 
@@ -508,7 +511,8 @@ namespace picibird.hbs.ldu
                 string recordUrl = UrlHelper.GetRecordUrl(ID.ToString(), recid);
                 using (Stream stream = await recordUrl.GetStreamAsync())
                 {
-                    return await Async.DeserializeXml<Record>(serializerRecord, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
+                    return
+                        await Async.DeserializeXml<Record>(serializerRecord, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
                 }
             }
             catch (OperationCanceledException)
@@ -529,7 +533,10 @@ namespace picibird.hbs.ldu
                 string termListUrl = UrlHelper.GetTermlistUrl(ID.ToString());
                 using (Stream stream = await termListUrl.GetStreamAsync())
                 {
-                    return await Async.DeserializeXml<Pazpar2Termlist>(serializerPazPar2Termlist, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
+                    return
+                        await
+                            Async.DeserializeXml<Pazpar2Termlist>(serializerPazPar2Termlist, stream,
+                                Pazpar2Settings.LOG_HTTP_RESPONSES);
                 }
             }
             catch (OperationCanceledException)

@@ -16,9 +16,9 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Xml.Serialization;
-
 using picibits.core;
 using picibits.core.collection;
 using picibits.core.mvvm;
@@ -27,8 +27,6 @@ namespace picibird.hbs.ldu
 {
     public class FilterCategory : Model
     {
-
-
         [XmlAttribute("name")]
         public FilterCategoryId Id { get; set; }
 
@@ -54,10 +52,7 @@ namespace picibird.hbs.ldu
         [XmlIgnore]
         public string Name
         {
-            get
-            {
-                return Pici.Resources.Find(Id.ToString());
-            }
+            get { return Pici.Resources.Find(Id.ToString()); }
         }
 
         public override string ToString()

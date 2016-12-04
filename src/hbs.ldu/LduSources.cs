@@ -16,11 +16,14 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace picibird.hbs.ldu
 {
     public enum LduSourceUsage
     {
-        ALL, SWB, SUMMON
+        ALL,
+        SWB,
+        SUMMON
     }
 
     public static class LduSourceUsageHelper
@@ -34,6 +37,4 @@ namespace picibird.hbs.ldu
             return "";
         }
     }
-
-
 }

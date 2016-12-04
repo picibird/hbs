@@ -16,10 +16,10 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using picibird.hbs.behaviours;
 using picibird.hbs.viewmodels.shelf;
-
 using picibits.app.behaviour;
 using picibits.app.transition;
 using picibits.core;
@@ -83,7 +83,7 @@ namespace picibird.hbs.viewmodels
                 if (pageIndex != HBS.Search.SearchRequest.PageIdx)
                 {
                     HBS.Search.SearchRequest.PageIdx = pageIndex;
-                    Pici.Log.debug(typeof (BookshelfViewModel),
+                    Pici.Log.debug(typeof(BookshelfViewModel),
                         string.Format("idx={0}  pageIdx={1}", SelectedIndex, pageIndex));
                 }
             }

@@ -16,8 +16,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System.Xml.Serialization;
 
+using System.Xml.Serialization;
 using picibits.core;
 
 namespace picibird.hbs.ldu
@@ -40,10 +40,7 @@ namespace picibird.hbs.ldu
         [XmlIgnore]
         public string CatgegoryKey
         {
-            get
-            {
-                return FilterDictionary.GetCategoryKey(this);
-            }
+            get { return FilterDictionary.GetCategoryKey(this); }
         }
 
         [XmlIgnore]
@@ -59,10 +56,7 @@ namespace picibird.hbs.ldu
         [XmlIgnore]
         public string Label
         {
-            get
-            {
-                return ToString();
-            }
+            get { return ToString(); }
         }
 
         public override string ToString()

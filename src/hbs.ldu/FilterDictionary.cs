@@ -16,9 +16,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
+
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace picibird.hbs.ldu
@@ -148,10 +147,11 @@ namespace picibird.hbs.ldu
 
         private static Dictionary<FilterCategoryId, FilterDictionaryEntry> initDictionary()
         {
-            Dictionary<FilterCategoryId, FilterDictionaryEntry> res = JsonConvert.DeserializeObject<Dictionary<FilterCategoryId, FilterDictionaryEntry>>(JSON);
+            Dictionary<FilterCategoryId, FilterDictionaryEntry> res =
+                JsonConvert.DeserializeObject<Dictionary<FilterCategoryId, FilterDictionaryEntry>>(JSON);
 
 #if !DEBUG
-            //res = ReadFromOrCreateJsonFile(res);
+//res = ReadFromOrCreateJsonFile(res);
 #endif
 
             return res;
@@ -204,6 +204,5 @@ namespace picibird.hbs.ldu
             }
             return valueId;
         }
-
     }
 }

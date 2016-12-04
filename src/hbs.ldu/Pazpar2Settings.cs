@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using Flurl;
 
@@ -33,7 +34,7 @@ namespace picibird.hbs.ldu
         public static TimeSpan DELAY_TERMLIST_REQUEST = TimeSpan.FromSeconds(1);
         public static TimeSpan WEB_REQUEST_TIMEOUT = TimeSpan.FromSeconds(20);
         public static TimeSpan DELAY_PING = TimeSpan.FromSeconds(30);
-        
+
         public static bool LOG_HTTP_REQUESTS = false;
         public static bool LOG_HTTP_RESPONSES = false;
         public static int RESULTS_PER_PAGE = 18;

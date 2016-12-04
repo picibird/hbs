@@ -16,10 +16,9 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Windows;
-using picibird.hbs.config;
-
 using picibird.wpf.app;
 using picibits.core;
 using picibits.core.style;
@@ -32,14 +31,18 @@ namespace picibird.hbs.wpf
         {
             base.ApplyStyles();
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Values.xaml", UriKind.Relative)));
-            Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Buttons.xaml", UriKind.Relative)));
+            Pici.StyleResources.Add(
+                new StyleResource(new Uri("/hbs.wpf;component/styles/Buttons.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Colors.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Fonts.xaml", UriKind.Relative)));
-            Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/FontIcons.xaml", UriKind.Relative)));
+            Pici.StyleResources.Add(
+                new StyleResource(new Uri("/hbs.wpf;component/styles/FontIcons.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Images.xaml", UriKind.Relative)));
-            Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/HBSStyles.xaml", UriKind.Relative)));
+            Pici.StyleResources.Add(
+                new StyleResource(new Uri("/hbs.wpf;component/styles/HBSStyles.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Search.xaml", UriKind.Relative)));
-            Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/book/Book.xaml", UriKind.Relative)));
+            Pici.StyleResources.Add(
+                new StyleResource(new Uri("/hbs.wpf;component/styles/book/Book.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(
                 new StyleResource(new Uri("/hbs.wpf;component/styles/book/BookOpened.xaml", UriKind.Relative)));
             Pici.StyleResources.Add(new StyleResource(new Uri("/hbs.wpf;component/styles/Shelf.xaml", UriKind.Relative)));

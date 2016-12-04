@@ -16,12 +16,12 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Linq;
 using picibird.hbs.Intents;
 using picibird.hbs.viewmodels.book3D;
 using picibird.hbs.viewmodels.shelf;
-
 using picibits.app.transition;
 using picibits.core;
 using picibits.core.helper;

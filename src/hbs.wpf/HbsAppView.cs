@@ -16,8 +16,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System.Threading;
 
+using System.Threading;
 using picibird.wpf.app;
 using picibird.wpf.core.views;
 using picibits.core;
@@ -38,7 +38,7 @@ namespace picibird.hbs.wpf
             var workerThreads = 0;
             var completionPortThreads = 0;
             ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
-            Pici.Log.info(typeof (HbsAppView),
+            Pici.Log.info(typeof(HbsAppView),
                 string.Format("AvailableWorkerThreads={0}; AvailableCompletionPortThreads={1}", workerThreads,
                     completionPortThreads));
             //ThreadPool.SetMaxThreads((int)(workerThreads * 0.5), (int)(completionPortThreads * 0.5));

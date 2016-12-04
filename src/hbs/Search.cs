@@ -16,6 +16,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -24,7 +25,6 @@ using System.Threading.Tasks;
 using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
 using picibird.hbs.viewmodels;
-
 using picibits.core;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
@@ -99,17 +99,17 @@ namespace picibird.hbs
             {
                 if (ex is OperationCanceledException)
                 {
-                    Pici.Log.debug(typeof (HBSViewModel), "Search Request cancelled!");
+                    Pici.Log.debug(typeof(HBSViewModel), "Search Request cancelled!");
                 }
                 else if (ex is HttpRequestException)
                 {
-                    Pici.Log.error(typeof (SearchSession),
+                    Pici.Log.error(typeof(SearchSession),
                         "\r\nA Web Exception occured! Internet available? Server down?\r\n\r\n", ex);
                     //MessageBox.Show("Service is not available!\r\nInternet active? Server down?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    Pici.Log.error(typeof (SearchSession), "An unexpected error occured!", ex);
+                    Pici.Log.error(typeof(SearchSession), "An unexpected error occured!", ex);
                 }
                 return false;
             }
@@ -152,7 +152,7 @@ namespace picibird.hbs
             if (SearchStarting != null)
                 SearchStarting(this, new SearchStartingEventArgs(reason, searchText, filters));
             SearchStartTime = DateTime.Now;
-            Pici.Log.warn(typeof (Search), "SEARCH STARTING");
+            Pici.Log.warn(typeof(Search), "SEARCH STARTING");
         }
 
         private void OnIsSearchingChanged(bool isSearching)
@@ -164,7 +164,7 @@ namespace picibird.hbs
             {
                 SearchEndTime = DateTime.Now;
                 Duration = (SearchEndTime - SearchStartTime).TotalSeconds;
-                Pici.Log.warn(typeof (Search), "SEARCH COMPLETED");
+                Pici.Log.warn(typeof(Search), "SEARCH COMPLETED");
             }
         }
 

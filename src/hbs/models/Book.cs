@@ -16,11 +16,11 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Linq;
 using picibird.hbs.config;
 using picibird.hbs.ldu;
-
 using picibits.app.services;
 using picibits.core;
 using picibits.core.intent;

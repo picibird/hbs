@@ -129,30 +129,24 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+    <Reference Include="picibits.app, Version=0.1.22.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.dll</HintPath>
+      <HintPath>..\packages\picibits.0.1.22\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+    <Reference Include="picibits.core, Version=0.1.22.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
+      <HintPath>..\packages\picibits.0.1.22\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app">
-      <HintPath>..\packages\picibits.0.1.19\lib\dotnet\picibits.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app, Version=0.1.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\picibits.wpf.0.1.22\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.core">
-      <HintPath>..\packages\picibits.0.1.19\lib\dotnet\picibits.core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="picibits.wpf.app">
-      <HintPath>..\packages\picibits.wpf.0.1.19\lib\dotnet\picibits.wpf.app.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="picibits.wpf.core">
-      <HintPath>..\packages\picibits.wpf.0.1.19\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core, Version=0.1.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\picibits.wpf.0.1.22\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">

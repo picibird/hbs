@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PCLStorage;
 
 namespace picibird.hbs.ldu
 {
@@ -155,29 +154,6 @@ namespace picibird.hbs.ldu
             //res = ReadFromOrCreateJsonFile(res);
 #endif
 
-            return res;
-        }
-
-        private static Dictionary<FilterCategoryId, FilterDictionaryEntry> ReadFromOrCreateJsonFile(Dictionary<FilterCategoryId, FilterDictionaryEntry> res)
-        {
-            //WriteJsonFile(res);
-            IFolder rootFolder = FileSystem.Current.LocalStorage;
-            IFolder folder = rootFolder.CreateFolderAsync("assets", CreationCollisionOption.OpenIfExists).Result;
-            try
-            {
-                IFile file = folder.CreateFileAsync("FilterLanguageMapping.json", CreationCollisionOption.FailIfExists).Result;
-
-                // write file - code will only be reached if file is not existing
-                Task writeFileTask = file.WriteAllTextAsync(JsonConvert.SerializeObject(res));
-                Task.WaitAll(new Task[] { writeFileTask });
-            }
-            catch (Exception)
-            {
-            }
-
-            //file should exist now in any case -> read
-            IFile f = folder.GetFileAsync("FilterLanguageMapping.json").Result;
-            res = JsonConvert.DeserializeObject<Dictionary<FilterCategoryId, FilterDictionaryEntry>>(f.ReadAllTextAsync().Result);
             return res;
         }
 

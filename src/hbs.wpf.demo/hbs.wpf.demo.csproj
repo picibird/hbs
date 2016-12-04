@@ -228,9 +228,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFTabTip, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WPFTabTip.1.0.2\lib\net45\WPFTabTip.dll</HintPath>
+    <Reference Include="WPFTabTip">
+      <HintPath>..\..\..\hbs.product\src\packages\WPFTabTip.1.0.4\lib\net45\WPFTabTip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="zxing">

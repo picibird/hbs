@@ -23,6 +23,7 @@ using picibird.hbs.ldu;
 using picibits.core;
 using picibits.core.helper;
 using picibits.core.settings;
+using picibits.core.util;
 
 namespace picibird.hbs
 {
@@ -35,6 +36,9 @@ namespace picibird.hbs
     [JsonObject(MemberSerialization.OptIn, Title = "Hybrid Bookshelf Settings")]
     public class HbsSettings : SettingsModel
     {
+        public static event SimpleEventHandler<SettingsModel> Loaded;
+        public static event SimpleEventHandler<SettingsModel> Saved;
+
         public HbsSettings()
         {
             General = Pici.Settings.Get<GeneralSettings>();
@@ -56,7 +60,10 @@ namespace picibird.hbs
             await General.Save();
             await Ldu.Save();
             await Cover.Save();
+            Saved?.Invoke(this);
         }
+
+        
     }
 
 
@@ -67,6 +74,7 @@ namespace picibird.hbs
         {
             StartupSearch = "User Experience";
             Language = LanguageEnum.German;
+
         }
 
         [JsonProperty("Startup Search", Required = Required.Always)]

@@ -41,7 +41,7 @@ namespace picibird.hbs.viewmodels.buttons
         private void OnTap(object sender, EventArgs e)
         {
 #if DEBUG
-            //Pici.CrashApplicationNow();
+            Pici.CrashApplicationNow();
 #endif
             //abort if kiosk is currently enabled
             IKiosk kiosk = Pici.Injections.Container.GetInstance<IKiosk>();

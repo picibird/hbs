@@ -178,18 +178,22 @@
     <Reference Include="picibits.app">
       <HintPath>..\packages\picibits.0.1.27\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="picibits.core">
       <HintPath>..\packages\picibits.0.1.27\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="picibits.wpf.app">
       <HintPath>..\packages\picibits.wpf.0.1.27\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="picibits.wpf.core">
       <HintPath>..\packages\picibits.wpf.0.1.27\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -560,7 +564,7 @@
     <Folder Include="styles\email\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

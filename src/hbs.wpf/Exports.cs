@@ -25,9 +25,14 @@ using picibird.hbs.wpf;
 using picibird.hbs.wpf.view;
 using picibird.wpf.core.views;
 using picibits.core.export.views;
+using picibits.core.export.services;
+using picibits.app.services;
+using picibird.hbs.wpf.qrcode;
 
 // VIEWS
 
 [assembly: ViewExport(typeof(HbsAppViewModel), typeof(HbsAppView))]
 [assembly: ViewExport(typeof(Book3DViewModel), typeof(ContainerUIElement3D), typeof(ItemsView3DAdapter))]
 [assembly: ViewExport(typeof(Bookshelf3DViewModel), typeof(Bookshelf3DView))]
+
+[assembly: ServiceExport(typeof(IQRCodes), typeof(QRCodes))]

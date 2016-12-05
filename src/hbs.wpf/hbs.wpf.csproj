@@ -212,6 +212,7 @@
       <HintPath>..\packages\Courier.3.0.0\lib\net40\System.CoreEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive, Version=1.0.2856.104, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Courier.3.0.0\lib\net40\System.Reactive.dll</HintPath>
@@ -264,6 +265,14 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adapter\Book3DViewAdapter.cs" />
@@ -277,6 +286,7 @@
     <Compile Include="controls\CoverTextBox.cs" />
     <Compile Include="HbsApplication.cs" />
     <Compile Include="helper\KeyUpBinding.cs" />
+    <Compile Include="qrcode\QRCodes.cs" />
     <Compile Include="viewmodels\LauncherVM.cs" />
     <Compile Include="view\Bookshelf3DView.cs" />
   </ItemGroup>

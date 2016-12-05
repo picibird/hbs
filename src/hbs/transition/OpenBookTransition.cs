@@ -71,6 +71,8 @@ namespace picibird.hbs.transition
             HBS.ViewModel.Opened.BookVM.AnimateToDropShadow();
             HBS.IsAnimating = false;
 
+            HBS.ViewModel.ShelfViewModel.IsBitmapCacheEnabled = false;
+
             Book.WriteNfcUri();
         }
     }

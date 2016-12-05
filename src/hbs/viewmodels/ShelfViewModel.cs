@@ -102,16 +102,16 @@ namespace picibird.hbs.viewmodels
                 var rotatedIndex = bookshelf.RotatedIndex;
                 var indexDistance = Math.Abs(SelectedIndex - rotatedIndex);
                 //update is hittestvisible
-                if (indexDistance == 0)
-                {
-                    bookshelf.Books3D.IsHitTestVisible = true;
-                    bookshelf.IsBitmapCacheEnabled = false;
-                }
-                else
-                {
-                    bookshelf.Books3D.IsHitTestVisible = false;
-                    bookshelf.IsBitmapCacheEnabled = true;
-                }
+                //if (indexDistance == 0)
+                //{
+                //    bookshelf.Books3D.IsHitTestVisible = true;
+                //    bookshelf.IsBitmapCacheEnabled = false;
+                //}
+                //else
+                //{
+                //    bookshelf.Books3D.IsHitTestVisible = false;
+                //    bookshelf.IsBitmapCacheEnabled = true;
+                //}
 
                 //update opacity
                 if (indexDistance < 1.5 && rotatedIndex >= 0)

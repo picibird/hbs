@@ -20,6 +20,7 @@
 using System;
 using picibird.hbs.behaviours;
 using picibird.hbs.viewmodels;
+using picibird.hbs.viewmodels.shelf;
 using picibits.app.animation;
 using picibits.app.transition;
 using picibits.core.math;
@@ -42,6 +43,26 @@ namespace picibird.hbs.transition
         public override void OnTransitionStarting()
         {
             StartIndex = Shelf.SelectedIndex;
+            TogglePerformance(true);
+        }
+
+        private void TogglePerformance(bool isAnimating)
+        {
+            foreach (var viewModel in HBS.ViewModel.ShelfViewModel.Items)
+            {
+                var bookshelf = (BookshelfViewModel)viewModel;
+                if (isAnimating)
+                {
+                    bookshelf.Books3D.IsHitTestVisible = false;
+                    bookshelf.IsBitmapCacheEnabled = true;
+                }
+                else
+                {
+                    bookshelf.Books3D.IsHitTestVisible = true;
+                    bookshelf.IsBitmapCacheEnabled = false;
+                }
+            }
+
         }
 
         public override void OnTransitionProgress(double progress)
@@ -61,7 +82,11 @@ namespace picibird.hbs.transition
             if (SwipeBehaviour.Direction == Direction.Right)
                 index = Math.Floor(index);
             index = MathX.Clamp(index, 0, HBS.Search.Callback.MaxPageIndex);
-            Shelf.AnimateSelectedIndexTo(index, 0.5, AnimationTransitions.CircEaseOut);
+            var ease = Shelf.AnimateSelectedIndexTo(index, 0.5, AnimationTransitions.CircEaseOut);
+            ease.Complete += (sender, e) =>
+            {
+                TogglePerformance(false);
+            };
         }
     }
 }

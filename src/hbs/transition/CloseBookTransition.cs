@@ -49,6 +49,8 @@ namespace picibird.hbs.transition
 
             HBS.ViewModel.BookFlyout3dVM.Visibility = true;
             HBS.ViewModel.BookFlyout3dVM.Book = Book;
+
+            HBS.ViewModel.ShelfViewModel.IsBitmapCacheEnabled = true;
         }
 
         public override void OnTransitionProgress(double progress)

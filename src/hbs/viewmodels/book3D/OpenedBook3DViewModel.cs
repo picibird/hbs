@@ -28,15 +28,6 @@ namespace picibird.hbs.viewmodels.book3D
             base.CreatBookSides();
             Spine.Style = new ViewStyle("SpineStyle");
             BackCover.Style = new ViewStyle("BackCoverStyle");
-
-            FrontCover.IsBitmapCacheEnabled = true;
-            Spine.IsBitmapCacheEnabled = true;
-            BackCover.IsBitmapCacheEnabled = true;
-            TopBackCoverPages.IsBitmapCacheEnabled = true;
-            TopSpinePages.IsBitmapCacheEnabled = true;
-            TopFrontCoverPages.IsBitmapCacheEnabled = true;
-            InnerPageRight.IsBitmapCacheEnabled = true;
-            //InnerPageLeft.IsBitmapCacheEnabled = true;
         }
 
         protected override void OnOpenedProgressChanged(double progress)

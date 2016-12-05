@@ -129,25 +129,21 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app">
-      <HintPath>..\packages\picibits.0.1.27\lib\dotnet\picibits.app.dll</HintPath>
+    <Reference Include="picibits.app, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.28\lib\dotnet\picibits.app.dll</HintPath>
       <Private>True</Private>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="picibits.core">
-      <HintPath>..\packages\picibits.0.1.27\lib\dotnet\picibits.core.dll</HintPath>
+    <Reference Include="picibits.core, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.28\lib\dotnet\picibits.core.dll</HintPath>
       <Private>True</Private>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="picibits.wpf.app">
-      <HintPath>..\packages\picibits.wpf.0.1.27\lib\dotnet\picibits.wpf.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.28\lib\dotnet\picibits.wpf.app.dll</HintPath>
       <Private>True</Private>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="picibits.wpf.core">
-      <HintPath>..\packages\picibits.wpf.0.1.27\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.28\lib\dotnet\picibits.wpf.core.dll</HintPath>
       <Private>True</Private>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -270,6 +266,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

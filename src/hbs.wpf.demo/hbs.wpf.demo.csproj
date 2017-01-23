@@ -275,6 +275,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shelfhub\clients\dotnet\Shelfhub\Shelfhub.csproj">
+      <Project>{1bae9a89-e5d1-48e1-b003-0b44a4f329d0}</Project>
+      <Name>Shelfhub</Name>
+    </ProjectReference>
     <ProjectReference Include="..\hbs\hbs.csproj">
       <Project>{1e764283-b2ae-441a-ac0c-c3f306ba45b3}</Project>
       <Name>hbs</Name>

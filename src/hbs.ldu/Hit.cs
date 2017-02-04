@@ -187,7 +187,7 @@ namespace picibird.hbs.ldu
         [XmlElement("location")]
         [JsonProperty("location")]
         [JsonConverter(typeof(ValueToListConverter<Location>))]
-        public List<Location> locations { get; set; }
+        public List<Location> locations { get; set; } = new List<Location>();
 
         #endregion
 

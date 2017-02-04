@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
 using picibird.hbs.viewmodels;
+using picibird.shelfhub;
 using picibits.core;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
@@ -61,6 +62,9 @@ namespace picibird.hbs
 
         public async Task<bool> Start(string searchText)
         {
+            await StartShelfhubSearch(searchText);
+            return true;
+
             //abort if search text is the same as last one
             //if (searchText.Equals(SearchText))
             //{
@@ -114,6 +118,48 @@ namespace picibird.hbs
                 return false;
             }
             return true;
+        }
+
+        public async Task StartShelfhubSearch(string text)
+        {
+            BeforeShelfhubSearch(text);
+            Shelfhub shelfhub = new Shelfhub();
+            var queryResult = await shelfhub.QueryAsync(new QueryParams()
+            {
+                Query = text,
+                Offset = 0,
+                Limit = 50,
+                Shelfhub = new ShelfhubParams()
+                {
+                    Service = "ch.swissbib.solr.basel"
+                }
+            });
+            AfterShelfhubSearch(queryResult.Mediums.ToHits());
+        }
+
+
+
+        private void BeforeShelfhubSearch(string text)
+        {
+            if (cts != null)
+                cts.Cancel();
+
+            cts = new CancellationTokenSource();
+            Callback = new SearchCallback<SearchStatus>(cts.Token);
+            Callback.ResultCountChanged += OnSearchCallbackResultCountChanged;
+            FilterList = Callback.FilterList;
+
+            SearchRequest = new SearchRequest(text);
+            SearchRequest.ItemsPerPage = PageItemsCount;
+
+            Session = new SearchSession();
+            Pages.Session = Session;
+            OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
+        }
+
+        private void AfterShelfhubSearch(List<Hit> hits)
+        {
+            Session.Start(hits, SearchRequest, Callback);
         }
 
         public void StartFake(string text, List<Hit> hits)
@@ -401,5 +447,30 @@ namespace picibird.hbs
         FiltersUpdated,
         SortChanged,
         Fake
+    }
+
+    public static class LduToShelfhubExtensions
+    {
+        public static Hit ToHit(this Medium m)
+        {
+            Hit hit = new Hit()
+            {
+                title = m.Title,
+                title_remainder = m.TitleLong,
+                recid = m.Id
+            };
+            return hit;
+        }
+
+        public static List<Hit> ToHits(this IList<Medium> m)
+        {
+            var hits = new List<Hit>(m.Count);
+            foreach (Medium medium in m)
+            {
+                hits.Add(medium.ToHit());
+            }
+            return hits;
+        }
+
     }
 }

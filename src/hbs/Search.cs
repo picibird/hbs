@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -133,7 +134,7 @@ namespace picibird.hbs
                 {
                     Query = text,
                     Offset = 0,
-                    Limit = 10,
+                    Limit = 40,
                     Shelfhub = new ShelfhubParams()
                     {
                         Service = "ch.swissbib.solr.basel"
@@ -463,10 +464,12 @@ namespace picibird.hbs
     {
         public static Hit ToHit(this Medium m)
         {
+            
             Hit hit = new Hit()
             {
                 title = m.Title,
-                title_remainder = m.TitleShort,
+                title_remainder = m.Subtitle,
+                author = m.Authors?.ToList(),
                 recid = m.Id
             };
             if (m.Isbn != null)

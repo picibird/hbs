@@ -140,7 +140,7 @@ namespace picibird.hbs
                         Service = "ch.swissbib.solr.basel"
                     }
                 });
-                AfterShelfhubSearch(queryResult.Mediums.ToHits());
+                AfterShelfhubSearch(queryResult.Mediums, queryResult.Mediums.ToHits());
             }
             catch (Exception ex)
             {
@@ -168,9 +168,21 @@ namespace picibird.hbs
             OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
         }
 
-        private void AfterShelfhubSearch(List<Hit> hits)
+        private void AfterShelfhubSearch(IList<Medium> mediums, List<Hit> hits)
         {
             Session.Start(hits, SearchRequest, Callback);
+            Task.Run(async () =>
+            {
+                Shelfhub shelfhub = new Shelfhub();
+                foreach (var medium in mediums)
+                {
+                    CoverResponse cr = await shelfhub.CoverAsync(new CoverParams()
+                    {
+                        Id = medium.Isbn.DefaultIfEmpty("0").FirstOrDefault()
+                    });
+                    var r = cr.Responses;
+                }
+            });
         }
 
         public void StartFake(string text, List<Hit> hits)
@@ -470,6 +482,7 @@ namespace picibird.hbs
                 title = m.Title,
                 title_remainder = m.Subtitle,
                 author = m.Authors?.ToList(),
+                language = m.Language?.ToList(),
                 recid = m.Id
             };
             if (m.Isbn != null)

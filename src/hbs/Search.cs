@@ -128,7 +128,7 @@ namespace picibird.hbs
             {
                 Query = text,
                 Offset = 0,
-                Limit = 50,
+                Limit = 10,
                 Shelfhub = new ShelfhubParams()
                 {
                     Service = "ch.swissbib.solr.basel"
@@ -456,7 +456,7 @@ namespace picibird.hbs
             Hit hit = new Hit()
             {
                 title = m.Title,
-                title_remainder = m.TitleLong,
+                title_remainder = m.TitleShort,
                 recid = m.Id
             };
             return hit;

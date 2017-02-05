@@ -191,22 +191,25 @@ namespace picibird.hbs.ldu
 
         #endregion
 
+        private List<Url> m_WebshelfUris;
         [XmlIgnore]
         public List<Url> WebshelfUris
         {
             get
             {
-                List<Url> res = new List<Url>();
-                foreach (var loc in locations)
+                if (m_WebshelfUris == null)
                 {
-                    Url url = new Url(Pazpar2Settings.BIBSHELF_URL)
-                        .AppendPathSegment("m")
-                        .AppendPathSegments(loc.locationId)
-                        .AppendPathSegment(loc.ppn);
-                    res.Add(url);
+                    m_WebshelfUris = new List<Url>();
+                    foreach (var loc in locations)
+                    {
+                        Url url = new Url(Pazpar2Settings.BIBSHELF_URL)
+                            .AppendPathSegment("m")
+                            .AppendPathSegments(loc.locationId)
+                            .AppendPathSegment(loc.ppn);
+                        m_WebshelfUris.Add(url);
+                    }
                 }
-
-                return res;
+                return m_WebshelfUris;
             }
         }
 

@@ -35,7 +35,7 @@ namespace picibird.hbs.models
             try
             {
                 var qrCodes = Pici.Services.Get<IQRCodes>();
-                string webshelfUri = Hit.WebshelfUris.First();
+                string webshelfUri = Hit.WebshelfUris.DefaultIfEmpty().First();
                 if (!string.IsNullOrEmpty(webshelfUri))
                 {
                     var qrCodeSize = (int) Config.Shelf3D.DefaultSpineWidth;
@@ -52,10 +52,13 @@ namespace picibird.hbs.models
 
         public void WriteNfcUri()
         {
-            string webshelfUri = Hit.WebshelfUris.First();
-            if (!string.IsNullOrEmpty(webshelfUri))
+            if (Hit.WebshelfUris?.Count > 0)
             {
-                Pici.Intent.Send(new Intent(Intent.ACTION_WRITE_NFC_URI, new Uri(webshelfUri)));
+                string webshelfUri = Hit.WebshelfUris.First();
+                if (!string.IsNullOrEmpty(webshelfUri))
+                {
+                    Pici.Intent.Send(new Intent(Intent.ACTION_WRITE_NFC_URI, new Uri(webshelfUri)));
+                }
             }
         }
 

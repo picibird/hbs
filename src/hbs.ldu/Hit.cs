@@ -515,12 +515,18 @@ namespace picibird.hbs.ldu
 
         #region ISBNs
 
+        private string m_ISBNs;
         public string ISBNs
         {
+            set { m_ISBNs = value; }
             get
             {
-                string isbnsString = String.Join("\n", GetISBNs());
-                return isbnsString;
+                if (m_ISBNs == null)
+                {
+                    m_ISBNs = String.Join("\n", GetISBNs());
+                }
+                
+                return m_ISBNs;
             }
         }
 

@@ -122,19 +122,29 @@ namespace picibird.hbs
 
         public async Task StartShelfhubSearch(string text)
         {
-            BeforeShelfhubSearch(text);
-            Shelfhub shelfhub = new Shelfhub();
-            var queryResult = await shelfhub.QueryAsync(new QueryParams()
+            try
             {
-                Query = text,
-                Offset = 0,
-                Limit = 10,
-                Shelfhub = new ShelfhubParams()
+                BeforeShelfhubSearch(text);
+                Shelfhub shelfhub = new Shelfhub();
+#if DEBUG
+                shelfhub.BaseUrl = @"http://localhost:8080/api";
+#endif
+                var queryResult = await shelfhub.QueryAsync(new QueryParams()
                 {
-                    Service = "ch.swissbib.solr.basel"
-                }
-            });
-            AfterShelfhubSearch(queryResult.Mediums.ToHits());
+                    Query = text,
+                    Offset = 0,
+                    Limit = 10,
+                    Shelfhub = new ShelfhubParams()
+                    {
+                        Service = "ch.swissbib.solr.basel"
+                    }
+                });
+                AfterShelfhubSearch(queryResult.Mediums.ToHits());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -459,6 +469,8 @@ namespace picibird.hbs
                 title_remainder = m.TitleShort,
                 recid = m.Id
             };
+            if (m.Isbn != null)
+                hit.ISBNs = String.Join("\n", m.Isbn);
             return hit;
         }
 

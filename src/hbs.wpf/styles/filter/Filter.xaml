@@ -206,7 +206,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid>
+                    <Grid Visibility="Hidden">
                         <views:View DataContext="{Binding Chooser}" x:Name="ChooserView"
                               VerticalAlignment="Top" />
                         <views:View DataContext="{Binding Filter}" x:Name="FilterView"

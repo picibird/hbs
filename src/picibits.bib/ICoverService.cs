@@ -26,6 +26,7 @@ namespace picibits.bib
     {
         Task<bool> HasCover(string coverUrl);
         Task<IBitmapImage> LoadCoverAsyncLazyCached(string url);
+        Task<IBitmapImage> LoadCoverAsync(string url);
         void ValidateCacheSize();
     }
 }

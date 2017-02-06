@@ -77,7 +77,7 @@
 
 
                         <!--sorted by -->
-                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Vertical">
+                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Vertical" Visibility="Hidden">
                             <TextBox HorizontalAlignment="Center" Text="{Binding Resources[sorted_by]}"
                                      Style="{StaticResource InfoShieldTextBoxStyle}" />
                             <!--combobox and radiobuttons to choose order and sort direction -->

@@ -40,7 +40,7 @@ namespace picibird.hbs.cover
                 CoverLoadSemaphore.Wait();
                 var coverData = new CoverData();
                 //laod cover
-                coverData.Image = await CoverService.LoadCoverAsyncLazyCached(url);
+                coverData.Image = await CoverService.LoadCoverAsync(url);
                 CoverLoadSemaphore.Release();
                 return coverData;
             }).ContinueWith(coverTask =>

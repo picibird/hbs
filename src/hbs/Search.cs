@@ -25,9 +25,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
+using picibird.hbs.resources;
 using picibird.hbs.viewmodels;
 using picibird.shelfhub;
 using picibits.core;
+using picibits.core.extension;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
@@ -168,21 +170,33 @@ namespace picibird.hbs
             OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
         }
 
+        private readonly Shelfhub _shelfhub = new Shelfhub()
+        {
+#if DEBUG
+            BaseUrl = @"http://localhost:8080/api"
+#endif
+        };
+
         private void AfterShelfhubSearch(IList<Medium> mediums, List<Hit> hits)
         {
             Session.Start(hits, SearchRequest, Callback);
-            Task.Run(async () =>
+            for (int i = 0; i < mediums.Count; i++)
             {
-                Shelfhub shelfhub = new Shelfhub();
-                foreach (var medium in mediums)
+                var m = mediums[i];
+                var hit = hits[i];
+                _shelfhub.CoverAsync(new CoverParams()
                 {
-                    CoverResponse cr = await shelfhub.CoverAsync(new CoverParams()
+                    Id = m.Isbn != null ? m.Isbn.DefaultIfEmpty("X").FirstOrDefault() : "X"
+                }).ContinueWithCurrentContext((t) =>
+                {
+                    if (t.Status == TaskStatus.RanToCompletion)
                     {
-                        Id = medium.Isbn.DefaultIfEmpty("0").FirstOrDefault()
-                    });
-                    var r = cr.Responses;
-                }
-            });
+                        string url = t.Result.Responses.DefaultIfEmpty(new Cover()).FirstOrDefault(a => a.Exists.HasValue && a.Exists.Value)?.Url;
+                        hit.CoverImageUrl = url;
+                    }
+                });
+
+            }
         }
 
         public void StartFake(string text, List<Hit> hits)
@@ -476,7 +490,7 @@ namespace picibird.hbs
     {
         public static Hit ToHit(this Medium m)
         {
-            
+
             Hit hit = new Hit()
             {
                 title = m.Title,

@@ -64,8 +64,8 @@ namespace picibird.hbs.cover
             try
             {
                 var message =
-                    await coverUrl.WithTimeout((int) ldu.Pazpar2Settings.WEB_REQUEST_TIMEOUT.TotalSeconds).HeadAsync();
-                var statusCodeInt = (int) message.StatusCode;
+                    await coverUrl.WithTimeout((int)ldu.Pazpar2Settings.WEB_REQUEST_TIMEOUT.TotalSeconds).HeadAsync();
+                var statusCodeInt = (int)message.StatusCode;
                 if (statusCodeInt >= 200 && statusCodeInt <= 399)
                 {
                     return true;
@@ -95,12 +95,8 @@ namespace picibird.hbs.cover
             //await LoadCoverSemaphore.WaitAsync();
             try
             {
-                if (await HasCover(url))
-                {
-                    var ImageLoadingArgs = new AsyncCallback<double>();
-                    return await Async.LoadBitmap(new Uri(url, UriKind.Absolute), ImageLoadingArgs);
-                }
-                return null;
+                var ImageLoadingArgs = new AsyncCallback<double>();
+                return await Async.LoadBitmap(new Uri(url, UriKind.Absolute), ImageLoadingArgs);
             }
             catch (OperationCanceledException)
             {

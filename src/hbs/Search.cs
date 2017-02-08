@@ -184,18 +184,20 @@ namespace picibird.hbs
             {
                 var m = mediums[i];
                 var hit = hits[i];
-                _shelfhub.CoverAsync(new CoverParams()
+                if (m.Isbn != null && m.Isbn.Count > 0)
                 {
-                    Id = m.Isbn != null ? m.Isbn.DefaultIfEmpty("X").FirstOrDefault() : "X"
-                }).ContinueWithCurrentContext((t) =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
+                    _shelfhub.CoverAsync(new CoverParams()
                     {
-                        string url = t.Result.Responses.DefaultIfEmpty(new Cover()).FirstOrDefault(a => a.Exists.HasValue && a.Exists.Value)?.Url;
-                        hit.CoverImageUrl = url;
-                    }
-                });
-
+                        Id = m.Isbn[0]
+                    }).ContinueWithCurrentContext((t) =>
+                    {
+                        if (t.Status == TaskStatus.RanToCompletion)
+                        {
+                            string url = t.Result.Responses.DefaultIfEmpty(new Cover()).FirstOrDefault(a => a.Exists.HasValue && a.Exists.Value)?.Url;
+                            hit.CoverImageUrl = url;
+                        }
+                    });
+                }
             }
         }
 

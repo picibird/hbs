@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -136,7 +137,7 @@ namespace picibird.hbs
                 {
                     Query = text,
                     Offset = 0,
-                    Limit = 40,
+                    Limit = 10,
                     Shelfhub = new ShelfhubParams()
                     {
                         Service = "ch.swissbib.solr.basel"
@@ -180,25 +181,24 @@ namespace picibird.hbs
         private void AfterShelfhubSearch(IList<Medium> mediums, List<Hit> hits)
         {
             Session.Start(hits, SearchRequest, Callback);
-            for (int i = 0; i < mediums.Count; i++)
+            var isbns = from m in mediums
+                        where m.Isbn != null && m.Isbn.Count > 0
+                        select m.Isbn[0];
+            _shelfhub.CoverAsync(new CoverParams()
             {
-                var m = mediums[i];
-                var hit = hits[i];
-                if (m.Isbn != null && m.Isbn.Count > 0)
+                Ids = new ObservableCollection<string>(isbns),
+                IdType = CoverParamsIdType.ISBN
+            }).ContinueWithCurrentContext((t) =>
+            {
+                if (t.Status == TaskStatus.RanToCompletion)
                 {
-                    _shelfhub.CoverAsync(new CoverParams()
+                    var covers = t.Result.Covers;
+                    foreach (var c in covers)
                     {
-                        Id = m.Isbn[0]
-                    }).ContinueWithCurrentContext((t) =>
-                    {
-                        if (t.Status == TaskStatus.RanToCompletion)
-                        {
-                            string url = t.Result.Responses.DefaultIfEmpty(new Cover()).FirstOrDefault(a => a.Exists.HasValue && a.Exists.Value)?.Url;
-                            hit.CoverImageUrl = url;
-                        }
-                    });
+                        hits[c.Index].CoverImageUrl = c.ImageLarge;
+                    }
                 }
-            }
+            });
         }
 
         public void StartFake(string text, List<Hit> hits)

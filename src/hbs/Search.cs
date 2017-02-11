@@ -137,7 +137,7 @@ namespace picibird.hbs
                 {
                     Query = text,
                     Offset = 0,
-                    Limit = 10,
+                    Limit = 34,
                     Shelfhub = new ShelfhubParams()
                     {
                         Service = "ch.swissbib.solr.basel"

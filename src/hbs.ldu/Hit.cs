@@ -530,6 +530,7 @@ namespace picibird.hbs.ldu
             }
         }
 
+        public string CoverIsbn { get; set; }
 
         public IEnumerable<string> GetISBNs()
         {

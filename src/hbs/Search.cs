@@ -137,7 +137,7 @@ namespace picibird.hbs
                 {
                     Query = text,
                     Offset = 0,
-                    Limit = 34,
+                    Limit = 100,
                     Shelfhub = new ShelfhubParams()
                     {
                         Service = "ch.swissbib.solr.basel"
@@ -187,7 +187,8 @@ namespace picibird.hbs
             _shelfhub.CoverAsync(new CoverParams()
             {
                 Ids = new ObservableCollection<string>(isbns),
-                IdType = CoverParamsIdType.ISBN
+                IdType = CoverParamsIdType.ISBN,
+                PageItemCount = 17
             }).ContinueWithCurrentContext((t) =>
             {
                 if (t.Status == TaskStatus.RanToCompletion)
@@ -195,7 +196,9 @@ namespace picibird.hbs
                     var covers = t.Result.Covers;
                     foreach (var c in covers)
                     {
-                        hits[c.Index].CoverImageUrl = c.ImageLarge;
+                        var hit = hits[c.Index];
+                        hit.CoverIsbn = c.Id;
+                        hit.CoverImageUrl = c.ImageLarge;
                     }
                 }
             });

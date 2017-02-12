@@ -137,13 +137,13 @@ namespace picibird.hbs
                 {
                     Query = text,
                     Offset = 0,
-                    Limit = 100,
+                    Limit = 34,
                     Shelfhub = new ShelfhubParams()
                     {
                         Service = "ch.swissbib.solr.basel"
                     }
                 });
-                AfterShelfhubSearch(queryResult.Mediums, queryResult.Mediums.ToHits());
+                AfterShelfhubSearch(queryResult.Items, queryResult.Items.ToHits());
             }
             catch (Exception ex)
             {
@@ -178,10 +178,10 @@ namespace picibird.hbs
 #endif
         };
 
-        private void AfterShelfhubSearch(IList<Medium> mediums, List<Hit> hits)
+        private void AfterShelfhubSearch(IList<ShelfhubItem> items, List<Hit> hits)
         {
             Session.Start(hits, SearchRequest, Callback);
-            var isbns = from m in mediums
+            var isbns = from m in items
                         where m.Isbn != null && m.Isbn.Count > 0
                         select m.Isbn[0];
             _shelfhub.CoverAsync(new CoverParams()
@@ -194,12 +194,16 @@ namespace picibird.hbs
                 if (t.Status == TaskStatus.RanToCompletion)
                 {
                     var covers = t.Result.Covers;
-                    foreach (var c in covers)
+                    foreach (Cover c in covers)
                     {
                         var hit = hits[c.Index];
                         hit.CoverIsbn = c.Id;
                         hit.CoverImageUrl = c.ImageLarge;
                     }
+                }
+                else
+                {
+                    var ex = t.Exception;
                 }
             });
         }
@@ -493,28 +497,32 @@ namespace picibird.hbs
 
     public static class LduToShelfhubExtensions
     {
-        public static Hit ToHit(this Medium m)
+        public static Hit ToHit(this ShelfhubItem m)
         {
 
             Hit hit = new Hit()
             {
+                recid = m.Id,
                 title = m.Title,
                 title_remainder = m.Subtitle,
                 author = m.Authors?.ToList(),
-                language = m.Language?.ToList(),
-                recid = m.Id
+                language = new string[] { m.Language }.ToList(),
             };
             if (m.Isbn != null)
                 hit.ISBNs = String.Join("\n", m.Isbn);
+            else
+            {
+                hit.ISBNs = String.Empty;   
+            }
             return hit;
         }
 
-        public static List<Hit> ToHits(this IList<Medium> m)
+        public static List<Hit> ToHits(this IList<ShelfhubItem> items)
         {
-            var hits = new List<Hit>(m.Count);
-            foreach (Medium medium in m)
+            var hits = new List<Hit>(items.Count);
+            foreach (ShelfhubItem item in items)
             {
-                hits.Add(medium.ToHit());
+                hits.Add(item.ToHit());
             }
             return hits;
         }

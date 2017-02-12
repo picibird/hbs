@@ -633,7 +633,7 @@ namespace picibird.hbs.ldu
                     Location main = GetMainLocation();
                     //add main location electronic urls
                     string link = "";
-                    if (main.linkResolver != null)
+                    if (main?.linkResolver != null)
                         link = main.linkResolver.FirstOrDefault((l) => !String.IsNullOrEmpty(l));
                     if (!String.IsNullOrEmpty(link))
                         links.Add(new Link(Link.TYPE_TEXT, link, title, title_remainder, this));
@@ -660,13 +660,13 @@ namespace picibird.hbs.ldu
                     PiciObservableCollection<Link> links = new PiciObservableCollection<Link>();
                     Location main = GetMainLocation();
                     //add main location electronic urls
-                    if (main.urls != null)
+                    if (main?.urls != null)
                     {
                         foreach (string url in main.urls)
                             links.Add(new Link(Link.TYPE_LINK, url, title, title_remainder, this));
                     }
                     //set as links if has any
-                    if (links.Count > 0)
+                    if (links?.Count > 0)
                         mLinks = links;
                     //mark links as resolved
                     mLinksResolved = true;

@@ -279,6 +279,7 @@
     <Compile Include="controls\SearchTextBox.cs" />
     <Compile Include="controls\ShelfDrawCanvas.cs" />
     <Compile Include="converter\CollapsedIfNoDataConverter.cs" />
+    <Compile Include="converter\ListToStringConverter.cs" />
     <Compile Include="converter\MediumToFontIconConverter.cs" />
     <Compile Include="converter\ColorToBrushConverter.cs" />
     <Compile Include="converter\ResourcesConverter.cs" />

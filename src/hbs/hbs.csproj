@@ -175,6 +175,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>sortorder.resx</DependentUpon>
     </Compile>
+    <Compile Include="ShelfhubExtensions.cs" />
     <Compile Include="transition\CloseBookTransition.cs" />
     <Compile Include="transition\OpenBookSwipeTransition.cs" />
     <Compile Include="transition\OpenBookTransition.cs" />

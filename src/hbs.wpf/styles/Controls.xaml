@@ -86,6 +86,16 @@
         <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
     </Style>
 
+    <Style x:Key="BackCoverExtrasTextBoxFatStyle" TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource BackCoverTextBoxFatStyle}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, 
+                    AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="SpineTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BackCoverTextBoxStyle}">
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
         <Setter Property="VerticalContentAlignment" Value="Top" />

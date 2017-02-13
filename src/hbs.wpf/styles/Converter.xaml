@@ -8,6 +8,7 @@
     <converter:ResourcesConverter x:Key="ResourcesConverter" />
     <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     <converter:MediumToFontIconConverter x:Key="MediumToFontIconConverter" />
+    <converter:ListToStringConverter x:Key="ListToStringConverter" />
     <piciconv:ConverterGroup x:Key="ConverterGroup" />
     <piciconv:KearningConverter x:Key="KearningConverter" />
 

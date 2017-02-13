@@ -143,7 +143,7 @@ namespace picibird.hbs
                         Service = "ch.swissbib.solr.basel"
                     }
                 });
-                AfterShelfhubSearch(queryResult.Items, queryResult.Items.ToHits());
+                AfterShelfhubSearch(queryResult.Items);
             }
             catch (Exception ex)
             {
@@ -178,9 +178,12 @@ namespace picibird.hbs
 #endif
         };
 
-        private void AfterShelfhubSearch(IList<ShelfhubItem> items, List<Hit> hits)
+        private void AfterShelfhubSearch(IList<ShelfhubItem> items)
         {
+            //convert shelfhubitems to hits and call Session
+            var hits = items.ToHits();
             Session.Start(hits, SearchRequest, Callback);
+            //cover
             var isbns = from m in items
                         where m.Isbn != null && m.Isbn.Count > 0
                         select m.Isbn[0];
@@ -188,7 +191,7 @@ namespace picibird.hbs
             {
                 Ids = new ObservableCollection<string>(isbns),
                 IdType = CoverParamsIdType.ISBN,
-                PageItemCount = 17
+                PageItemCount = 34
             }).ContinueWithCurrentContext((t) =>
             {
                 if (t.Status == TaskStatus.RanToCompletion)
@@ -493,39 +496,5 @@ namespace picibird.hbs
         FiltersUpdated,
         SortChanged,
         Fake
-    }
-
-    public static class LduToShelfhubExtensions
-    {
-        public static Hit ToHit(this ShelfhubItem m)
-        {
-
-            Hit hit = new Hit()
-            {
-                recid = m.Id,
-                title = m.Title,
-                title_remainder = m.Subtitle,
-                author = m.Authors?.ToList(),
-                language = new string[] { m.Language }.ToList(),
-            };
-            if (m.Isbn != null)
-                hit.ISBNs = String.Join("\n", m.Isbn);
-            else
-            {
-                hit.ISBNs = String.Empty;   
-            }
-            return hit;
-        }
-
-        public static List<Hit> ToHits(this IList<ShelfhubItem> items)
-        {
-            var hits = new List<Hit>(items.Count);
-            foreach (ShelfhubItem item in items)
-            {
-                hits.Add(item.ToHit());
-            }
-            return hits;
-        }
-
     }
 }

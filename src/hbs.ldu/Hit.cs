@@ -43,6 +43,13 @@ namespace picibird.hbs.ldu
 
     public class Hit : Model, IEquatable<Hit>, IEqualityComparer<Hit>
     {
+        private object _shelfhubItem;
+        public object shelfhubItem
+        {
+            get { return _shelfhubItem; }
+            set { _shelfhubItem = value; }
+        }
+
         public enum CoverSizes
         {
             small,
@@ -498,17 +505,23 @@ namespace picibird.hbs.ldu
 
         #region publicationPlaces
 
+        private string m_publicationPlaces;
         public string publicationPlaces
         {
             get
             {
-                if (locations == null || locations.Count == 0)
-                    return "";
-                List<string> places = locations[0].publicationPlaces;
-                if (places == null || places.Count == 0)
-                    return "";
-                return String.Join("\n", places);
+                if (m_publicationPlaces == null)
+                {
+                    if (locations == null || locations.Count == 0)
+                        return "";
+                    List<string> places = locations[0].publicationPlaces;
+                    if (places == null || places.Count == 0)
+                        return "";
+                    m_publicationPlaces = String.Join("\n", places);
+                }
+                return m_publicationPlaces;
             }
+            set { m_publicationPlaces = value; }
         }
 
         #endregion publicationPlaces
@@ -711,6 +724,7 @@ namespace picibird.hbs.ldu
         }
 
         CancellationTokenSource LoadCoverTokenSource;
+        
 
         public string GetCoverUrl(CoverSizes size)
         {

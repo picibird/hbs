@@ -195,7 +195,8 @@
                                          Visibility="{Binding Model.Department, Converter={StaticResource CollapsedNoDataConverter}}" />
                             </StackPanel>
 
-                            <TextBox Text="{Binding QrCodeUrl, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=17}" DockPanel.Dock="Bottom"
+                            <TextBox Visibility="Hidden" 
+                                     Text="{Binding QrCodeUrl, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=17}" DockPanel.Dock="Bottom"
                                      Style="{StaticResource SpineTextBoxSmallStyle}" TextWrapping="WrapWithOverflow"/>
 
                             <Button DockPanel.Dock="Bottom" Margin="4" Command="{Binding QRCodeClickCommand}"
@@ -357,6 +358,25 @@
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
 
+                                <!-- SHELFHUB EXTRAS  -->
+
+                                <ItemsControl ItemsSource="{Binding Model.shelfhubItem.Extras}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Style="{StaticResource BackCoverDataGridStyle}" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Text="{Binding Key, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
+                                                <TextBox Grid.Column="2" Text="{Binding Values, Mode=OneWay, Converter={StaticResource ListToStringConverter}}" 
+                                                         Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+
 
                                 <!-- description  -->
                                 <Rectangle Height="8" />
@@ -366,6 +386,7 @@
                                 <TextBox Grid.Column="2" Text="{Binding Model.Description, Mode=OneWay}"
                                          Style="{StaticResource BackCoverTextBoxStyle}"
                                          TextAlignment="Left" />
+
 
 
                             </StackPanel>

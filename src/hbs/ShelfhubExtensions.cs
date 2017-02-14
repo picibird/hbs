@@ -16,15 +16,16 @@ namespace picibird.hbs
             Hit hit = new Hit()
             {
                 recid = item.Id,
+                medium = item.Type,
                 title = item.Title,
                 title_remainder = item.Subtitle,
                 series_title = new string[] { item.SeriesTitle }.ToList(),
-                publicationPlaces = item.Publisher,
-                date = item.PublicationDate,
                 author = item.Authors?.ToList(),
                 language = new string[] { item.Language }.ToList(),
+                Department = item.Department,
+                publicationPlaces = item.Publisher,
+                date = item.PublicationDate,
                 pages_number = item.NumberOfPages,
-                QRCodeImage = 
                 shelfhubItem = item
             };
             if (item.Isbn != null)

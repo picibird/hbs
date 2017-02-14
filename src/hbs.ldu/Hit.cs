@@ -575,26 +575,32 @@ namespace picibird.hbs.ldu
 
         #region Departement
 
+        private string m_Department;
         public string Department
         {
             get
             {
-                if (locations == null || locations.Count == 0)
-                    return "";
-                Location loc = GetMainLocation();
-                if (loc != null && loc.department != null)
+                if (String.IsNullOrEmpty(m_Department))
                 {
-                    StringBuilder departements = new StringBuilder();
-                    foreach (string dep in loc.department)
+                    if (locations == null || locations.Count == 0)
+                        return "";
+                    Location loc = GetMainLocation();
+                    if (loc != null && loc.department != null)
                     {
-                        string depString = Pici.Resources.Find(dep);
-                        departements.AppendLine(depString);
+                        StringBuilder departements = new StringBuilder();
+                        foreach (string dep in loc.department)
+                        {
+                            string depString = Pici.Resources.Find(dep);
+                            departements.AppendLine(depString);
+                        }
+                        string departementString = departements.ToString();
+                        m_Department = departementString;
                     }
-                    string departementString = departements.ToString();
-                    return departementString;
                 }
-                return "";
+                
+                return m_Department;
             }
+            set { m_Department = value; }
         }
 
         #endregion Departement

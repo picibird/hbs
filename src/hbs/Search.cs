@@ -187,28 +187,31 @@ namespace picibird.hbs
             var isbns = from m in items
                         where m.Isbn != null && m.Isbn.Count > 0
                         select m.Isbn[0];
-            _shelfhub.CoverAsync(new CoverParams()
+            if (isbns.Count() > 0)
             {
-                Ids = new ObservableCollection<string>(isbns),
-                IdType = CoverParamsIdType.ISBN,
-                PageItemCount = 34
-            }).ContinueWithCurrentContext((t) =>
-            {
-                if (t.Status == TaskStatus.RanToCompletion)
+                _shelfhub.CoverAsync(new CoverParams()
                 {
-                    var covers = t.Result.Covers;
-                    foreach (Cover c in covers)
+                    Ids = new ObservableCollection<string>(isbns),
+                    IdType = CoverParamsIdType.ISBN,
+                    PageItemCount = 34
+                }).ContinueWithCurrentContext((t) =>
+                {
+                    if (t.Status == TaskStatus.RanToCompletion)
                     {
-                        var hit = hits[c.Index];
-                        hit.CoverIsbn = c.Id;
-                        hit.CoverImageUrl = c.ImageLarge;
+                        var covers = t.Result.Covers;
+                        foreach (Cover c in covers)
+                        {
+                            var hit = hits[c.Index];
+                            hit.CoverIsbn = c.Id;
+                            hit.CoverImageUrl = c.ImageLarge;
+                        }
                     }
-                }
-                else
-                {
-                    var ex = t.Exception;
-                }
-            });
+                    else
+                    {
+                        var ex = t.Exception;
+                    }
+                });
+            }
         }
 
         public void StartFake(string text, List<Hit> hits)

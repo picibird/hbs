@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,13 @@ namespace picibird.hbs
                 pages_number = item.NumberOfPages,
                 shelfhubItem = item
             };
+            if (item.Extras == null) item.Extras = new ObservableCollection<KeyValues>();
+            if (item.Locations != null)
+                item.Extras.Add(new KeyValues()
+                {
+                    Key = "Standorte",
+                    Values = item.Locations
+                });
             if (item.Isbn != null)
                 hit.ISBNs = String.Join("\n", item.Isbn);
             else

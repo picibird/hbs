@@ -18,8 +18,12 @@ namespace picibird.hbs.wpf.converter
             if (targetType != typeof(string))
                 throw new InvalidOperationException("The target must be a String");
 
+            string seperator = "\n";
+            string stringParameter = (string) parameter;
+            if (!String.IsNullOrEmpty(stringParameter))
+                seperator = stringParameter;
 
-            return String.Join(", ", ((IEnumerable<string>)value).ToArray());
+            return String.Join(seperator, ((IEnumerable<string>)value).ToArray());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

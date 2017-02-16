@@ -538,7 +538,7 @@ namespace picibird.hbs.ldu
                 {
                     m_ISBNs = String.Join("\n", GetISBNs());
                 }
-                
+
                 return m_ISBNs;
             }
         }
@@ -597,7 +597,7 @@ namespace picibird.hbs.ldu
                         m_Department = departementString;
                     }
                 }
-                
+
                 return m_Department;
             }
             set { m_Department = value; }
@@ -638,8 +638,10 @@ namespace picibird.hbs.ldu
 
         #region Links
 
-        [XmlIgnore] private bool mLinksFullTextResolved;
-        [XmlIgnore] private PiciObservableCollection<Link> mLinksFullText;
+        [XmlIgnore]
+        private bool mLinksFullTextResolved;
+        [XmlIgnore]
+        private PiciObservableCollection<Link> mLinksFullText;
 
         [XmlIgnore]
         public PiciObservableCollection<Link> LinksFullText
@@ -666,8 +668,10 @@ namespace picibird.hbs.ldu
             }
         }
 
-        [XmlIgnore] private bool mLinksResolved;
-        [XmlIgnore] private PiciObservableCollection<Link> mLinks;
+        [XmlIgnore]
+        private bool mLinksResolved;
+        [XmlIgnore]
+        private PiciObservableCollection<Link> mLinks;
 
         [XmlIgnore]
         public PiciObservableCollection<Link> Links
@@ -691,6 +695,11 @@ namespace picibird.hbs.ldu
                     mLinksResolved = true;
                 }
                 return mLinks;
+            }
+            set
+            {
+                mLinks = value;
+                mLinksResolved = mLinks != null;
             }
         }
 
@@ -730,7 +739,7 @@ namespace picibird.hbs.ldu
         }
 
         CancellationTokenSource LoadCoverTokenSource;
-        
+
 
         public string GetCoverUrl(CoverSizes size)
         {

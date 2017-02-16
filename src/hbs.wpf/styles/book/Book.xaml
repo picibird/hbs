@@ -7,7 +7,8 @@
                     xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
                     xmlns:piciconv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app"
                     xmlns:converter="clr-namespace:picibird.hbs.wpf.converter"
-                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core"
+                    xml:space="preserve">
 
 
     <ResourceDictionary.MergedDictionaries>

@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using picibird.hbs.ldu;
 using picibird.shelfhub;
+using picibits.core.collection;
+using picibits.core.controls3D;
+using Link = picibird.hbs.ldu.Link;
 
 namespace picibird.hbs
 {
@@ -30,12 +33,22 @@ namespace picibird.hbs
                 shelfhubItem = item
             };
             if (item.Extras == null) item.Extras = new ObservableCollection<KeyValues>();
+
             if (item.Locations != null)
                 item.Extras.Add(new KeyValues()
                 {
                     Key = "Standorte",
                     Values = item.Locations
                 });
+
+            if (item.Links != null && item.Links.Count > 0)
+            {
+                hit.Links = new PiciObservableCollection<Link>();
+                foreach (var link in item.Links)
+                {
+                    hit.Links.Add(new Link(link.Type.ToString(), link.Url, link.Title, "", hit));
+                }
+            }
             if (item.Isbn != null)
                 hit.ISBNs = String.Join("\n", item.Isbn);
             else

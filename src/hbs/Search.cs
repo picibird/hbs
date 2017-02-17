@@ -163,6 +163,8 @@ namespace picibird.hbs
             Callback.ResultCountChanged += OnSearchCallbackResultCountChanged;
             FilterList = Callback.FilterList;
 
+            SearchText = text;
+
             SearchRequest = new SearchRequest(text);
             SearchRequest.ItemsPerPage = PageItemsCount;
 
@@ -187,33 +189,51 @@ namespace picibird.hbs
             Callback.MaxPageIndex = hits.Count;
 
             //cover
-            var isbns = from m in response.Items
+            var items = from m in response.Items
                         where m.Isbn != null && m.Isbn.Count > 0
-                        select m.Isbn[0];
-            if (isbns.Any())
+                        select new string[] { m.Id, m.Isbn[0] };
+            if (items.Any())
             {
-                _shelfhub.CoverAsync(new CoverParams()
+                var coverIds = from i in items
+                               select new CoverId()
+                               {
+                                   Id = i[1],
+                                   ItemId = i[0],
+                                   IdType = CoverIdIdType.ISBN
+                               };
+                try
                 {
-                    Ids = new ObservableCollection<string>(isbns),
-                    IdType = CoverParamsIdType.ISBN,
-                    PageItemCount = 34
-                }).ContinueWithCurrentContext((t) =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
+                    var coverParams = new CoverParams()
                     {
-                        var covers = t.Result.Covers;
-                        foreach (Cover c in covers)
+                        Ids = new ObservableCollection<CoverId>(coverIds),
+                        PageItemCount = 34
+                    };
+                    _shelfhub.CoverAsync(coverParams).ContinueWithCurrentContext((t) =>
+                    {
+                        if (t.Status == TaskStatus.RanToCompletion)
                         {
-                            var hit = hits[c.Index];
-                            hit.CoverIsbn = c.Id;
-                            hit.CoverImageUrl = c.ImageLarge;
+                            var covers = t.Result.Covers;
+                            foreach (Cover c in covers)
+                            {
+                                var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
+                                if (hit != null)
+                                {
+                                    hit.CoverIsbn = c.Id;
+                                    hit.CoverImageUrl = c.ImageLarge;
+                                }
+                            }
                         }
-                    }
-                    else
-                    {
-                        var ex = t.Exception;
-                    }
-                });
+                        else
+                        {
+                            var ex = t.Exception;
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Pici.Log.info(typeof(Search), ex.Message);
+                }
+
             }
         }
 

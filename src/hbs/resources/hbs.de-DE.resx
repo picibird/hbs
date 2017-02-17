@@ -225,4 +225,7 @@
   <data name="input_search" xml:space="preserve">
     <value>Suche eingeben</value>
   </data>
+  <data name="locations" xml:space="preserve">
+    <value>Standorte</value>
+  </data>
 </root>

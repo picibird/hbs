@@ -15,11 +15,17 @@ namespace picibird.hbs
 {
     public static class ShelfhubExtensions
     {
+        public static PiciObservableCollection<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source)
+        {
+            return new PiciObservableCollection<TSource>(source);
+        }
+
         public static Hit ToHit(this ShelfhubItem item)
         {
 
             Hit hit = new Hit()
             {
+                id = item.Id,
                 recid = item.Id,
                 medium = item.Medium,
                 title = item.Title,
@@ -42,13 +48,7 @@ namespace picibird.hbs
             {
                 hit.ISBNs = String.Empty;
             }
-            //add locations aka signatures
-            if (item.Locations != null)
-                item.Extras.Add(new KeyValues()
-                {
-                    Key = "Standorte",
-                    Values = item.Locations
-                });
+
             //add links
             if (item.Links != null && item.Links.Count > 0)
             {
@@ -59,15 +59,18 @@ namespace picibird.hbs
                 }
             }
             //add availability links
-            var avExtra = item.Extras.FirstOrDefault(kv => kv.Key == "availabilities");
-            if (avExtra != null)
+            if (item.Locations != null)
             {
-                if (hit.Links == null) hit.Links = new PiciObservableCollection<Link>();
-                foreach (var value in avExtra.Values)
-                {
-                    hit.Links.Add(new Link("", value, "Verfügbarkeit", "", hit));
-                }
-                item.Extras.Remove(avExtra);
+                //var avExtra = item.Extras.FirstOrDefault(kv => kv.Key == "availabilities");
+                //if (avExtra != null)
+                //{
+                //    if (hit.Links == null) hit.Links = new PiciObservableCollection<Link>();
+                //    foreach (var value in avExtra.Values)
+                //    {
+                //        hit.Links.Add(new Link("", value, "Verfügbarkeit", "", hit));
+                //    }
+                //    item.Extras.Remove(avExtra);
+                //}
             }
 
             //set qrcode link

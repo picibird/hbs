@@ -242,6 +242,15 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locations.
+        /// </summary>
+        internal static string locations {
+            get {
+                return ResourceManager.GetString("locations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medium.
         /// </summary>
         internal static string medium {

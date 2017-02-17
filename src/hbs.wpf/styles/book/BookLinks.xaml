@@ -37,12 +37,39 @@
                                 <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBox Text="{Binding Title, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
-                                     TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
+                            <TextBox Text="{Binding Title, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxStyle}"
+                                     TextWrapping="NoWrap" ClipToBounds="True"/>
                             <TextBox Grid.Column="2" Text="{Binding UriString, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}" 
                                      TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
                         </Grid>
                     </Button>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="LocationStyle" TargetType="{x:Type ItemsControl}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid Style="{StaticResource BackCoverDataGridStyle}" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding Title, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxStyle}"
+                                     TextWrapping="NoWrap" ClipToBounds="True"/>
+                        <TextBox Grid.Column="2" Text="{Binding Signature, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}" 
+                                     TextWrapping="NoWrap" ClipToBounds="True"/>
+                    </Grid>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

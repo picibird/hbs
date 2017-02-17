@@ -196,8 +196,7 @@
                                          Visibility="{Binding Model.Department, Converter={StaticResource CollapsedNoDataConverter}}" />
                             </StackPanel>
 
-                            <TextBox Visibility="Hidden" 
-                                     Text="{Binding QrCodeUrl, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=17}" DockPanel.Dock="Bottom"
+                            <TextBox Text="{Binding QrCodeUrl, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=17}" DockPanel.Dock="Bottom"
                                      Style="{StaticResource SpineTextBoxSmallStyle}" TextWrapping="WrapWithOverflow"/>
 
                             <Button DockPanel.Dock="Bottom" Margin="4" Command="{Binding QRCodeClickCommand}"
@@ -245,7 +244,7 @@
                                     <TextBox Text="{Binding Resources[series_title]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.SeriesTitle, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- journal title -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -257,7 +256,7 @@
                                     <TextBox Text="{Binding Resources[journal_title]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.JournalTitle, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- author -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -269,7 +268,7 @@
                                     <TextBox Text="{Binding Resources[author]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.authorBackCoverString, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- language -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -281,7 +280,7 @@
                                     <TextBox Text="{Binding Resources[language]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.Language, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- publication date-->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -293,7 +292,7 @@
                                     <TextBox Text="{Binding Resources[publication_date]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.date, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- publication places  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -305,7 +304,7 @@
                                     <TextBox Text="{Binding Resources[publication_place]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.publicationPlaces, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- publication name  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -317,7 +316,7 @@
                                     <TextBox Text="{Binding Resources[publisher]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.publicationName, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 <!-- ISBN  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
@@ -329,14 +328,34 @@
                                     <TextBox Text="{Binding Resources[isbn]}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                     <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
 
                                 <!-- availability  -->
                                 <Rectangle Height="8" />
                                 <views:ItemsView DataContext="{Binding Availabilities}"
                                            Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
-
+                                
+                                
+                                <!-- SHELFHUB EXTRAS  -->
+                                <ItemsControl ItemsSource="{Binding Model.shelfhubItem.Extras}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Style="{StaticResource BackCoverDataGridStyle}" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Text="{Binding Key, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
+                                                <TextBox Grid.Column="2" Text="{Binding Values, Mode=OneWay, Converter={StaticResource ListToStringConverter}}" 
+                                                         Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Rectangle Height="8" />
+                                
+                                
                                 <!-- Full Text Links -->
                                 <StackPanel Orientation="Vertical"
                                             Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
@@ -354,26 +373,6 @@
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
-
-                                <!-- SHELFHUB EXTRAS  -->
-
-                                <ItemsControl ItemsSource="{Binding Model.shelfhubItem.Extras}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Style="{StaticResource BackCoverDataGridStyle}" >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <TextBox Text="{Binding Key, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
-                                                <TextBox Grid.Column="2" Text="{Binding Values, Mode=OneWay, Converter={StaticResource ListToStringConverter}}" 
-                                                         Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-
-
 
                                 <!-- description  -->
                                 <Rectangle Height="8" />

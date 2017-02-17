@@ -37,7 +37,7 @@ namespace picibird.hbs.ldu
         {
             get { return _ResultCount; }
 
-            internal set
+            set
             {
                 if (value != _ResultCount)
                 {

@@ -143,7 +143,7 @@ namespace picibird.hbs
                         Service = "ch.swissbib.solr.basel"
                     }
                 });
-                AfterShelfhubSearch(queryResult.Items);
+                AfterShelfhubSearch(queryResult);
             }
             catch (Exception ex)
             {
@@ -178,16 +178,18 @@ namespace picibird.hbs
 #endif
         };
 
-        private void AfterShelfhubSearch(IList<ShelfhubItem> items)
+        private void AfterShelfhubSearch(QueryResponse response)
         {
             //convert shelfhubitems to hits and call Session
-            var hits = items.ToHits();
+            var hits = response.Items.ToHits();
             Session.Start(hits, SearchRequest, Callback);
+            Callback.ResultCount = response.ItemsFound;
+
             //cover
-            var isbns = from m in items
+            var isbns = from m in response.Items
                         where m.Isbn != null && m.Isbn.Count > 0
                         select m.Isbn[0];
-            if (isbns.Count() > 0)
+            if (isbns.Any())
             {
                 _shelfhub.CoverAsync(new CoverParams()
                 {

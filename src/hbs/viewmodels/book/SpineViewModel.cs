@@ -38,7 +38,7 @@ namespace picibird.hbs.viewmodels.book
 
         #region QrCodeUrl
 
-        private string mQrCodeUrl;
+        private string mQrCodeUrl = "baselbern.swissbib.ch";
 
         public string QrCodeUrl
         {

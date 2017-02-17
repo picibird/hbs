@@ -58,7 +58,7 @@ namespace picibird.hbs.ldu
         {
             get { return _MaxPageIndex; }
 
-            internal set
+            set
             {
                 if (value != _MaxPageIndex)
                 {

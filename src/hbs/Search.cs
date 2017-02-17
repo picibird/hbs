@@ -184,6 +184,7 @@ namespace picibird.hbs
             var hits = response.Items.ToHits();
             Session.Start(hits, SearchRequest, Callback);
             Callback.ResultCount = response.ItemsFound;
+            Callback.MaxPageIndex = hits.Count;
 
             //cover
             var isbns = from m in response.Items

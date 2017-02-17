@@ -81,6 +81,10 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BackCoverDataGridStyle" TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
+    </Style>
+
     <Style x:Key="BackCoverTextBoxFatStyle" TargetType="{x:Type TextBox}"
            BasedOn="{StaticResource BackCoverTextBoxStyle}">
         <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />

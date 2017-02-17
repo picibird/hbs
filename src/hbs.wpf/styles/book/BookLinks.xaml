@@ -32,11 +32,16 @@
             <Setter.Value>
                 <DataTemplate>
                     <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
-                        <Border Margin="0,5" Background="Transparent">
-                            <TextBox
-                                Text="{Binding UriString, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=48}"
-                                Style="{StaticResource BookLinkTextStyle}" />
-                        </Border>
+                        <Grid Style="{StaticResource BackCoverDataGridStyle}" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding Title, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
+                                     TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
+                            <TextBox Grid.Column="2" Text="{Binding UriString, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}" 
+                                     TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
+                        </Grid>
                     </Button>
                 </DataTemplate>
             </Setter.Value>

@@ -218,6 +218,7 @@ namespace picibird.hbs.ldu
                 }
                 return m_WebshelfUris;
             }
+            set { m_WebshelfUris = value; }
         }
 
         [XmlIgnore]

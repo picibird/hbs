@@ -474,7 +474,7 @@ namespace picibird.hbs.ldu
                     }
                 }
                 //update
-                Callback.ResultCount = pp2Show.merged;
+                //Callback.ResultCount = pp2Show.merged;
                 int maxPageIndex = (int) Math.Ceiling(Callback.ResultCount*(1.0d/itemCount)) - 1;
                 maxPageIndex = Math.Max(0, maxPageIndex);
                 Callback.MaxPageIndex = maxPageIndex;

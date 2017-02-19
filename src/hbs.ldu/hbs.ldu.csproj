@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="IHitCoverLoader.cs" />
     <Compile Include="Link.cs" />
+    <Compile Include="ShelfhubHelper.cs" />
     <Compile Include="Sources.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="FilterCategory.cs" />

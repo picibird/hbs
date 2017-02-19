@@ -70,14 +70,14 @@ namespace picibird.hbs
 
         #region Search
 
-        private static Search mSearch;
+        private static ShelfhubSearch mSearch;
 
-        public static Search Search
+        public static ShelfhubSearch Search
         {
             get
             {
                 if (mSearch == null)
-                    mSearch = new Search();
+                    mSearch = new ShelfhubSearch();
                 return mSearch;
             }
         }

@@ -38,9 +38,9 @@ namespace picibird.hbs
 {
     public class Search : Model
     {
-        private DateTime SearchEndTime;
+        protected DateTime SearchEndTime;
 
-        private DateTime SearchStartTime;
+        protected DateTime SearchStartTime;
 
         public Search()
         {
@@ -49,26 +49,23 @@ namespace picibird.hbs
 
         #region SearchString
 
-        public string SearchText { get; private set; }
+        public string SearchText { get; protected set; }
 
         #endregion SearchString
 
-        private CancellationTokenSource cts { get; set; }
+        protected CancellationTokenSource cts { get; set; }
 
-        public SearchSession Session { get; private set; }
+        public SearchSession Session { get; protected set; }
         public Pages Pages { get; }
 
         public event EventHandler<SearchStartingEventArgs> SearchStarting;
 
-        private void OnSearchResultsListUpdated(object sender)
+        protected void OnSearchResultsListUpdated(object sender)
         {
         }
 
-        public async Task<bool> Start(string searchText)
+        public virtual async Task Start(string searchText)
         {
-            await StartShelfhubSearch(searchText);
-            return true;
-
             //abort if search text is the same as last one
             //if (searchText.Equals(SearchText))
             //{
@@ -119,123 +116,10 @@ namespace picibird.hbs
                 {
                     Pici.Log.error(typeof(SearchSession), "An unexpected error occured!", ex);
                 }
-                return false;
-            }
-            return true;
-        }
-
-        public static Shelfhub createShelfhubClient()
-        {
-            var shelfhub = new Shelfhub();
-#if DEBUG
-            shelfhub.BaseUrl = @"http://localhost:8080/api";
-#endif
-            return shelfhub;
-        }
-
-        public async Task StartShelfhubSearch(string text)
-        {
-            try
-            {
-                BeforeShelfhubSearch(text);
-                Shelfhub shelfhub = Search.createShelfhubClient();
-                var queryResult = await shelfhub.QueryAsync(new QueryParams()
-                {
-                    Query = text,
-                    Offset = 0,
-                    Limit = 34,
-                    Shelfhub = new ShelfhubParams()
-                    {
-                        Service = "ch.swissbib.solr.basel"
-                    }
-                });
-                AfterShelfhubSearch(queryResult);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
         }
 
 
-
-        private void BeforeShelfhubSearch(string text)
-        {
-            if (cts != null)
-                cts.Cancel();
-
-            cts = new CancellationTokenSource();
-            Callback = new SearchCallback<SearchStatus>(cts.Token);
-            Callback.ResultCountChanged += OnSearchCallbackResultCountChanged;
-            FilterList = Callback.FilterList;
-
-            SearchText = text;
-
-            SearchRequest = new SearchRequest(text);
-            SearchRequest.ItemsPerPage = PageItemsCount;
-
-            Session = new SearchSession();
-            Pages.Session = Session;
-            OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
-        }
-
-        private void AfterShelfhubSearch(QueryResponse response)
-        {
-            //convert shelfhubitems to hits and call Session
-            var hits = response.Items.ToHits();
-            Session.Start(hits, SearchRequest, Callback);
-            Callback.ResultCount = response.ItemsFound;
-            Callback.MaxPageIndex = hits.Count;
-
-            //cover
-            var items = from m in response.Items
-                        where m.Isbn != null && m.Isbn.Count > 0
-                        select new string[] { m.Id, m.Isbn[0] };
-            if (items.Any())
-            {
-                var coverIds = from i in items
-                               select new CoverId()
-                               {
-                                   Id = i[1],
-                                   ItemId = i[0],
-                                   IdType = CoverIdIdType.ISBN
-                               };
-                try
-                {
-                    var coverParams = new CoverParams()
-                    {
-                        Ids = new ObservableCollection<CoverId>(coverIds),
-                        PageItemCount = 34
-                    };
-                    Shelfhub shelfhub = Search.createShelfhubClient();
-                    shelfhub.CoverAsync(coverParams).ContinueWithCurrentContext((t) =>
-                    {
-                        if (t.Status == TaskStatus.RanToCompletion)
-                        {
-                            var covers = t.Result.Covers;
-                            foreach (Cover c in covers)
-                            {
-                                var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
-                                if (hit != null)
-                                {
-                                    hit.CoverIsbn = c.Id;
-                                    hit.CoverImageUrl = c.ImageLarge;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            var ex = t.Exception;
-                        }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Pici.Log.info(typeof(Search), ex.Message);
-                }
-
-            }
-        }
 
         public void StartFake(string text, List<Hit> hits)
         {
@@ -258,17 +142,17 @@ namespace picibird.hbs
             Session.Start(hits, SearchRequest, Callback);
         }
 
-        private void OnSearchRequestSortOrderChanged(object sender, PropertyChangedEventArgs e)
+        protected void OnSearchRequestSortOrderChanged(object sender, PropertyChangedEventArgs e)
         {
             OnSearchStarting(SearchStartingReason.SortChanged, SearchText, FilterList);
         }
 
-        private void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
+        protected void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
         {
             OnSearchStarting(SearchStartingReason.FiltersUpdated, SearchText, FilterList);
         }
 
-        private void OnSearchStarting(SearchStartingReason reason, string searchText, FilterList<FilterCategory> filters)
+        protected void OnSearchStarting(SearchStartingReason reason, string searchText, FilterList<FilterCategory> filters)
         {
             if (SearchStarting != null)
                 SearchStarting(this, new SearchStartingEventArgs(reason, searchText, filters));
@@ -276,7 +160,7 @@ namespace picibird.hbs
             Pici.Log.warn(typeof(Search), "SEARCH STARTING");
         }
 
-        private void OnIsSearchingChanged(bool isSearching)
+        protected void OnIsSearchingChanged(bool isSearching)
         {
             if (isSearching)
             {
@@ -290,13 +174,13 @@ namespace picibird.hbs
         }
 
 
-        private void OnSearchCallbackResultCountChanged(object sender, PropertyChangedEventArgs e)
+        protected void OnSearchCallbackResultCountChanged(object sender, PropertyChangedEventArgs e)
         {
             ResultCount = Callback.ResultCount;
             Duration = (DateTime.Now - SearchStartTime).TotalSeconds;
         }
 
-        private void OnSearchStatusChanged(object sender, SearchStatus e)
+        protected void OnSearchStatusChanged(object sender, SearchStatus e)
         {
             Progress = e.progress;
             IsSearching = Progress < 1;
@@ -304,7 +188,7 @@ namespace picibird.hbs
 
         #region FilterList
 
-        private FilterList<FilterCategory> mFilterList;
+        protected FilterList<FilterCategory> mFilterList;
 
         public FilterList<FilterCategory> FilterList
         {
@@ -334,7 +218,7 @@ namespace picibird.hbs
             }
         }
 
-        private void OnSearchFilterListListUpdated(object sender)
+        protected void OnSearchFilterListListUpdated(object sender)
         {
         }
 
@@ -342,7 +226,7 @@ namespace picibird.hbs
 
         #region SearchRequest
 
-        private SearchRequest mSearchRequest;
+        protected SearchRequest mSearchRequest;
 
         public SearchRequest SearchRequest
         {
@@ -375,7 +259,7 @@ namespace picibird.hbs
 
         #region PageItemsCount
 
-        private int mPageItemsCount;
+        protected int mPageItemsCount;
 
         public int PageItemsCount
         {
@@ -400,7 +284,7 @@ namespace picibird.hbs
 
         #region Progress
 
-        private double mProgress;
+        protected double mProgress;
 
         public double Progress
         {
@@ -420,7 +304,7 @@ namespace picibird.hbs
 
         #region IsSearching
 
-        private bool mIsSearching;
+        protected bool mIsSearching;
 
         public bool IsSearching
         {
@@ -441,7 +325,7 @@ namespace picibird.hbs
 
         #region ResultCount
 
-        private int mResultCount;
+        protected int mResultCount;
 
         public int ResultCount
         {
@@ -461,7 +345,7 @@ namespace picibird.hbs
 
         #region SearchDuration
 
-        private double mSearchDuration;
+        protected double mSearchDuration;
 
         public double Duration
         {
@@ -481,7 +365,7 @@ namespace picibird.hbs
 
         #region Callback
 
-        private SearchCallback<SearchStatus> mCallback;
+        protected SearchCallback<SearchStatus> mCallback;
 
         public SearchCallback<SearchStatus> Callback
         {
@@ -510,10 +394,10 @@ namespace picibird.hbs
             Filters = filters;
         }
 
-        public SearchStartingReason Reason { get; private set; }
+        public SearchStartingReason Reason { get; protected set; }
 
-        public string SearchText { get; private set; }
-        public FilterList<FilterCategory> Filters { get; private set; }
+        public string SearchText { get; protected set; }
+        public FilterList<FilterCategory> Filters { get; protected set; }
     }
 
     public enum SearchStartingReason

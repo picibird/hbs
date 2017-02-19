@@ -113,7 +113,7 @@ namespace picibird.hbs.ldu
         {
         }
 
-        public async Task Start(SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
+        public virtual async Task Start(SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
         {
             this.Callback = statusCallback;
             this.Request = sr;
@@ -147,7 +147,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        public void Start(List<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
+        public virtual void Start(List<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
         {
             WaitUntilQueryFinishes(statusCallback.CancellationToken.Value);
             this.Callback = statusCallback;
@@ -163,19 +163,19 @@ namespace picibird.hbs.ldu
             };
         }
 
-        private async void OnSortOrderChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected virtual async void OnSortOrderChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             await RunQuery("sort order changed", false, false);
         }
 
-        private async void OnFilterListChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected virtual async void OnFilterListChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             await RunQuery("filter list changed", false, false);
         }
 
         #region PP2 Init
 
-        private async Task<int> PP2_Init()
+        protected virtual async Task<int> PP2_Init()
         {
             try
             {
@@ -203,7 +203,7 @@ namespace picibird.hbs.ldu
 
         #region QUERY
 
-        private async Task RunQuery(string reason, bool throwCancel, bool throwError)
+        protected virtual async Task RunQuery(string reason, bool throwCancel, bool throwError)
         {
             try
             {
@@ -247,7 +247,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        private async Task RunQuery(SearchRequest sr)
+        protected virtual async Task RunQuery(SearchRequest sr)
         {
             bool successful = false;
             try
@@ -301,7 +301,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        private async Task PP2_Query(SearchRequest searchRequest)
+        protected virtual async Task PP2_Query(SearchRequest searchRequest)
         {
             try
             {
@@ -325,7 +325,7 @@ namespace picibird.hbs.ldu
 
         internal bool IsRunningPingLoop { get; private set; }
 
-        private async Task StartPingLoop()
+        protected virtual async Task StartPingLoop()
         {
             //return if ping loop already running
             if (IsRunningPingLoop)
@@ -373,7 +373,7 @@ namespace picibird.hbs.ldu
 
         #endregion PING LOOP
 
-        private async Task<SearchStatus> PP2_Stat(CancellationToken cancelToken)
+        protected virtual async Task<SearchStatus> PP2_Stat(CancellationToken cancelToken)
         {
             try
             {
@@ -407,7 +407,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        private async Task ProlongStatusProgressAfterFinish(CancellationToken cancelToken)
+        protected virtual async Task ProlongStatusProgressAfterFinish(CancellationToken cancelToken)
         {
             int updateDelay = 1000;
             Func<Task, Task> statusUpdateTask = async (t) =>
@@ -432,7 +432,7 @@ namespace picibird.hbs.ldu
         }
 
 
-        public async Task<PazPar2Show> PP2_Show(int pageIdx, int itemCount, CancellationToken cancelToken)
+        public virtual async Task<PazPar2Show> PP2_Show(int pageIdx, int itemCount, CancellationToken cancelToken)
         {
             try
             {
@@ -477,7 +477,6 @@ namespace picibird.hbs.ldu
                 var resultCount = pp2Show.merged;
                 int maxPageIndex = (int) Math.Ceiling(Callback.ResultCount*(1.0d/itemCount)) - 1;
                 maxPageIndex = Math.Max(0, maxPageIndex);
-                maxPageIndex = 34;
                 Callback.MaxPageIndex = maxPageIndex;
 
                 return pp2Show;
@@ -527,7 +526,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        private async Task<Pazpar2Termlist> PP2_Termlist()
+        protected virtual async Task<Pazpar2Termlist> PP2_Termlist()
         {
             try
             {
@@ -551,7 +550,7 @@ namespace picibird.hbs.ldu
             }
         }
 
-        private async Task RunTermslistLoopAsync(CancellationToken cancelToken)
+        protected virtual async Task RunTermslistLoopAsync(CancellationToken cancelToken)
         {
             Pazpar2Termlist pp2Termlist = null;
             //Pici.Log.debug(typeof(SearchSession), "enter termlist loop");
@@ -595,7 +594,7 @@ namespace picibird.hbs.ldu
         }
 
 
-        private async Task RunProgressLoopAsync(CancellationToken cancelToken)
+        protected virtual async Task RunProgressLoopAsync(CancellationToken cancelToken)
         {
             //Pici.Log.debug(typeof(SearchSession), "enter progress loop");
             try

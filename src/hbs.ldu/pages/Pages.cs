@@ -218,6 +218,9 @@ namespace picibird.hbs.ldu.pages
                 token.ThrowIfCancellationRequested();
                 //get pages to update
                 IEnumerable<Page> pages = GetPagesToUpdate();
+
+                //ShelfhubHelper.Search.QueryPages(pages);
+
                 foreach (Page page in pages)
                 {
                     await UpdatePage(page, token);

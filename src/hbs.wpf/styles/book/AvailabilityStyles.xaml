@@ -47,7 +47,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <StackPanel Orientation="Vertical">
-                            <TextBox Text="{Binding Title}" Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                            <TextBox Text="{Binding Title}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                             <ScrollViewer Style="{StaticResource HorizonatalScrollViewerStyle}"
                                           pointer:PointerAdapter.DisableIfTouchDeviceTarget="True">
                                 <ItemsPresenter />

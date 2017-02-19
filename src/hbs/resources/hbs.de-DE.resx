@@ -139,7 +139,7 @@
     <value>Edition</value>
   </data>
   <data name="medium" xml:space="preserve">
-    <value>Medientyp</value>
+    <value>Format</value>
   </data>
   <data name="pages" xml:space="preserve">
     <value>Seiten</value>
@@ -163,7 +163,7 @@
     <value>Verfügbarkeit</value>
   </data>
   <data name="links" xml:space="preserve">
-    <value>Links</value>
+    <value>Online Zugang</value>
   </data>
   <data name="fulltext" xml:space="preserve">
     <value>Volltext</value>

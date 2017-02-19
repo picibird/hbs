@@ -270,6 +270,7 @@
                                     <TextBox Grid.Column="2" Text="{Binding Model.authorBackCoverString, Mode=OneWay}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
+                                
                                 <!-- language -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
                                       Visibility="{Binding Model.Language, Converter={StaticResource CollapsedNoDataConverter}}">
@@ -282,6 +283,20 @@
                                     <TextBox Grid.Column="2" Text="{Binding Model.Language, Mode=OneWay}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
+                                
+                                <!-- medium format -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.Medium, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[medium]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.Medium, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
+                                
                                 <!-- publication date-->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
                                       Visibility="{Binding Model.date, Converter={StaticResource CollapsedNoDataConverter}}">
@@ -318,24 +333,33 @@
                                     <TextBox Grid.Column="2" Text="{Binding Model.publicationName, Mode=OneWay}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
-                                <!-- ISBN  -->
+                                
+                                <!-- department  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
-                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
+                                      Visibility="{Binding Model.Department, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Resources[isbn]}"
+                                    <TextBox Text="{Binding Resources[department]}"
                                              Style="{StaticResource BackCoverTextBoxStyle}" />
-                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
+                                    <TextBox Grid.Column="2" Text="{Binding Model.Department, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
+                                
+                                <!-- number of pages  -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.pages_number, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[pages]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.pages_number, Mode=OneWay}"
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
 
-                                <!-- availability  -->
-                                <Rectangle Height="8" />
-                                <views:ItemsView DataContext="{Binding Availabilities}"
-                                           Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
-                                
                                 <!-- locations  -->
                                 <StackPanel Orientation="Vertical"
                                             Visibility="{Binding Model.shelfhubItem.Locations, Converter={StaticResource CollapsedNoDataConverter}}">
@@ -345,7 +369,14 @@
                                                   Style="{StaticResource LocationStyle}" />
                                 </StackPanel>
                                 
+                                <!-- availability  -->
+                                <Rectangle Height="8" />
+                                <views:ItemsView DataContext="{Binding Availabilities}"
+                                           Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                
+                                
                                 <!-- Full Text Links -->
+                                <Rectangle Height="8" />
                                 <StackPanel Orientation="Vertical"
                                             Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <TextBox Text="{Binding Resources[fulltext]}"
@@ -362,6 +393,20 @@
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
+                                
+                                <!-- ISBN  -->
+                                <Rectangle Height="8" />
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[isbn]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
 
                                 <!-- description  -->
                                 <Rectangle Height="8" />

@@ -124,15 +124,21 @@ namespace picibird.hbs
             return true;
         }
 
+        public static Shelfhub createShelfhubClient()
+        {
+            var shelfhub = new Shelfhub();
+#if DEBUG
+            shelfhub.BaseUrl = @"http://localhost:8080/api";
+#endif
+            return shelfhub;
+        }
+
         public async Task StartShelfhubSearch(string text)
         {
             try
             {
                 BeforeShelfhubSearch(text);
-                Shelfhub shelfhub = new Shelfhub();
-#if DEBUG
-                shelfhub.BaseUrl = @"http://localhost:8080/api";
-#endif
+                Shelfhub shelfhub = Search.createShelfhubClient();
                 var queryResult = await shelfhub.QueryAsync(new QueryParams()
                 {
                     Query = text,
@@ -173,13 +179,6 @@ namespace picibird.hbs
             OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
         }
 
-        private readonly Shelfhub _shelfhub = new Shelfhub()
-        {
-#if DEBUG
-            BaseUrl = @"http://localhost:8080/api"
-#endif
-        };
-
         private void AfterShelfhubSearch(QueryResponse response)
         {
             //convert shelfhubitems to hits and call Session
@@ -208,7 +207,8 @@ namespace picibird.hbs
                         Ids = new ObservableCollection<CoverId>(coverIds),
                         PageItemCount = 34
                     };
-                    _shelfhub.CoverAsync(coverParams).ContinueWithCurrentContext((t) =>
+                    Shelfhub shelfhub = Search.createShelfhubClient();
+                    shelfhub.CoverAsync(coverParams).ContinueWithCurrentContext((t) =>
                     {
                         if (t.Status == TaskStatus.RanToCompletion)
                         {

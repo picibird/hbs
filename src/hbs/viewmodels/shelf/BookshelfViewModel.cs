@@ -25,6 +25,7 @@ using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
 using picibird.hbs.viewmodels.infoShield;
 using picibits.app.transition;
+using picibits.core.extension;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
@@ -39,6 +40,7 @@ namespace picibird.hbs.viewmodels.shelf
             Style = new ViewStyle("BookshelfStyle");
             Attached.CollectionChanged += OnAttachedCollectionChanged;
             HBS.Search.SearchStarting += OnSearchStarting;
+            HBS.Search.SearchFinished += Search_SearchFinished;
         }
 
         #region Books3D
@@ -105,6 +107,12 @@ namespace picibird.hbs.viewmodels.shelf
             HBS.Search.Callback.MaxPageIndexChanged += OnMaxPageIndexChanged;
         }
 
+        private void Search_SearchFinished(object sender)
+        {
+            Page = null;
+            UpdatePageIndex();
+        }
+
         protected void OnMaxPageIndexChanged(object sender, PropertyChangedEventArgs e)
         {
             MaxPageIndex = HBS.Search.Callback.MaxPageIndex;
@@ -119,6 +127,7 @@ namespace picibird.hbs.viewmodels.shelf
             {
                 PageUpdated(this, Page);
             }
+            if (Page == null) return;
             //set new models for every hit in Page
             for (var i = 0; i < Page.Hits.Count; i++)
             {

@@ -76,6 +76,7 @@ namespace picibird.hbs.viewmodels.infoShield
 
         private void UpdateShelfContentInfo(Page page, SortOrderFunction order, SortDirection direction)
         {
+            if (page == null) return;
             Info.Text = null;
             Info.From = null;
             Info.To = null;

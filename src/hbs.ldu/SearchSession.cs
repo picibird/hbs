@@ -106,7 +106,7 @@ namespace picibird.hbs.ldu
 
         public int ID { get; private set; }
 
-        public List<Hit> FakeHits { get; private set; }
+        public IList<Hit> FakeHits { get; private set; }
 
 
         public SearchSession()
@@ -147,20 +147,14 @@ namespace picibird.hbs.ldu
             }
         }
 
-        public virtual void Start(List<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
+        public virtual void Start(IList<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
         {
             WaitUntilQueryFinishes(statusCallback.CancellationToken.Value);
             this.Callback = statusCallback;
             this.Request = sr;
             FakeHits = hits;
-            Status = new SearchStatus();
             if (QueryStarted != null)
                 QueryStarted(null);
-            Status = new SearchStatus()
-            {
-                progress = 1.0,
-                hits = hits.Count
-            };
         }
 
         protected virtual async void OnSortOrderChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -449,11 +443,11 @@ namespace picibird.hbs.ldu
                     }
                     if (FakeHits.Count >= (start + count))
                     {
-                        pp2Show.Hits = FakeHits.GetRange(start, count);
+                        //pp2Show.Hits = FakeHits.GetRange(start, count);
                     }
                     else
                     {
-                        pp2Show.Hits = new List<Hit>();
+                        //pp2Show.Hits = new List<Hit>();
                     }
                 }
                 else

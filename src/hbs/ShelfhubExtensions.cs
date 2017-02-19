@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Flurl;
 using picibird.hbs.ldu;
@@ -82,9 +83,9 @@ namespace picibird.hbs
             return hit;
         }
 
-        public static List<Hit> ToHits(this IList<ShelfhubItem> items)
+        public static ItemList<Hit> ToHits(this IList<ShelfhubItem> items, SynchronizationContext syncContext = null)
         {
-            var hits = new List<Hit>(items.Count);
+            var hits = new ItemList<Hit>(syncContext);
             foreach (ShelfhubItem item in items)
             {
                 hits.Add(item.ToHit());

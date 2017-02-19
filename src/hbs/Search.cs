@@ -32,6 +32,7 @@ using picibird.shelfhub;
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
+using picibits.core.util;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
 namespace picibird.hbs
@@ -59,6 +60,7 @@ namespace picibird.hbs
         public Pages Pages { get; }
 
         public event EventHandler<SearchStartingEventArgs> SearchStarting;
+        public event SimpleEventHandler<object> SearchFinished;
 
         protected void OnSearchResultsListUpdated(object sender)
         {
@@ -170,6 +172,8 @@ namespace picibird.hbs
                 SearchEndTime = DateTime.Now;
                 Duration = (SearchEndTime - SearchStartTime).TotalSeconds;
                 Pici.Log.warn(typeof(Search), "SEARCH COMPLETED");
+                if (SearchFinished != null)
+                    SearchFinished(null);
             }
         }
 

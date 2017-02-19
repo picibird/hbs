@@ -16,6 +16,6 @@ namespace picibird.hbs.ldu
 
     public interface IShelfhubSearch
     {
-        Task QueryPages(IEnumerable<Page> pages);
-    }        
+        Page LoadPage(int index);
+    }
 }

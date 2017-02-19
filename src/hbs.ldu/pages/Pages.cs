@@ -60,14 +60,14 @@ namespace picibird.hbs.ldu.pages
             RaisePropertyChanged("Session", oldSession, newSession);
             if (oldSession != null)
             {
-                oldSession.RequestChanged -= OnSessionRequestChanged;
-                oldSession.StatusChanged -= OnSessionStatusChanged;
+                //oldSession.RequestChanged -= OnSessionRequestChanged;
+                //oldSession.StatusChanged -= OnSessionStatusChanged;
                 newSession.QueryStarted -= OnQueryStarted;
             }
             if (newSession != null)
             {
-                newSession.RequestChanged += OnSessionRequestChanged;
-                newSession.StatusChanged += OnSessionStatusChanged;
+                //newSession.RequestChanged += OnSessionRequestChanged;
+                //newSession.StatusChanged += OnSessionStatusChanged;
                 newSession.QueryStarted += OnQueryStarted;
             }
         }
@@ -80,16 +80,16 @@ namespace picibird.hbs.ldu.pages
 
         private void OnSessionStatusChanged(object sender, PropertyChangedEventArgs<SearchStatus> args)
         {
-            SearchStatus oldStatus = args.Old;
-            SearchStatus newStatus = args.New;
-            if (newStatus == null || newStatus.progress < 0)
-                return;
-            if (oldStatus.progress < newStatus.progress ||
-                oldStatus.hits < newStatus.hits)
-            {
-                var cancelToken = Session.Callback.CancellationToken.Value;
-                Task pageUpdateTask = RunUpdateLoop(cancelToken);
-            }
+            //SearchStatus oldStatus = args.Old;
+            //SearchStatus newStatus = args.New;
+            //if (newStatus == null || newStatus.progress < 0)
+            //    return;
+            //if (oldStatus.progress < newStatus.progress ||
+            //    oldStatus.hits < newStatus.hits)
+            //{
+            //    var cancelToken = Session.Callback.CancellationToken.Value;
+            //    Task pageUpdateTask = RunUpdateLoop(cancelToken);
+            //}
         }
 
         void OnSessionRequestChanged(object sender, PropertyChangedEventArgs<SearchRequest> requestChanged)
@@ -112,63 +112,64 @@ namespace picibird.hbs.ldu.pages
 
         protected void OnRequestPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.Equals("PageIdx"))
-            {
-                SearchRequest sr = sender as SearchRequest;
-                try
-                {
-                    Task t = RunUpdateLoop(Session.Callback.CancellationToken.Value);
-                }
-                catch (OperationCanceledException)
-                {
-                    Pici.Log.info(typeof(SearchSession), "canceled page index changed update");
-                }
-                catch (Exception ex)
-                {
-                    Pici.Log.error(typeof(SearchSession), "An Exception occoured while updating page " + sr.PageIdx, ex);
-                }
-            }
+            //if (e.PropertyName.Equals("PageIdx"))
+            //{
+            //    SearchRequest sr = sender as SearchRequest;
+            //    try
+            //    {
+            //        Task t = RunUpdateLoop(Session.Callback.CancellationToken.Value);
+            //    }
+            //    catch (OperationCanceledException)
+            //    {
+            //        Pici.Log.info(typeof(SearchSession), "canceled page index changed update");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Pici.Log.error(typeof(SearchSession), "An Exception occoured while updating page " + sr.PageIdx, ex);
+            //    }
+            //}
         }
 
         public Page RequestPage(int pageIndex)
         {
-            Page requestedPage = null;
-            lock (PageLock)
-            {
-                if (!RequestedPages.TryGetValue(pageIndex, out requestedPage))
-                {
-                    requestedPage = new Page(pageIndex);
-                    RequestedPages.Add(pageIndex, requestedPage);
+            //Page requestedPage = null;
+            //lock (PageLock)
+            //{
+            //    if (!RequestedPages.TryGetValue(pageIndex, out requestedPage))
+            //    {
+                    var requestedPage = ShelfhubHelper.Search.LoadPage(pageIndex);
+                    //RequestedPages.Add(pageIndex, requestedPage);
                     return requestedPage;
-                }
-            }
-            throw new ArgumentException("page already requested");
+            //    }
+            //}
+            //throw new ArgumentException("page already requested");
         }
 
         public void ReleasePage(Page page)
         {
-            lock (PageLock)
-            {
-                if (RequestedPages.ContainsKey(page.Index))
-                {
-                    RequestedPages.Remove(page.Index);
-                    return;
-                }
-            }
-            throw new ArgumentException("cannot release, page not requested");
+            //lock (PageLock)
+            //{
+            //    if (RequestedPages.ContainsKey(page.Index))
+            //    {
+            //        RequestedPages.Remove(page.Index);
+            //        return;
+            //    }
+            //}
+            //throw new ArgumentException("cannot release, page not requested");
+            page.Reset();
         }
 
         public void ResetRequestedPages()
         {
-            lock (PageLock)
-            {
-                Pici.Log.warn(typeof(Pages), "RESET PAGES");
-                //reset
-                foreach (Page page in RequestedPages.Values)
-                {
-                    page.Reset();
-                }
-            }
+            //lock (PageLock)
+            //{
+            //    Pici.Log.warn(typeof(Pages), "RESET PAGES");
+            //    //reset
+            //    foreach (Page page in RequestedPages.Values)
+            //    {
+            //        page.Reset();
+            //    }
+            //}
         }
 
         private IEnumerable<Page> GetPagesToUpdate()

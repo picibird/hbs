@@ -39,7 +39,7 @@ namespace picibird.hbs.ldu
 
             set
             {
-                if (value != _ResultCount)
+                if (value != _ResultCount || value == 0)
                 {
                     _ResultCount = value;
                     //post event

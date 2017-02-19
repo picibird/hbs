@@ -28,10 +28,16 @@ namespace picibird.hbs.ldu
 {
     public class ItemList<Hit> : PiciObservableCollectionWithCancellationToken<Hit>
     {
+        public ItemList(SynchronizationContext context = null) : base(context)
+        {
+        }
     }
 
     public class FilterList<FilterCategory> : PiciObservableCollectionWithCancellationToken<FilterCategory>
     {
+        public FilterList(SynchronizationContext context = null) : base(context)
+        {
+        }
     }
 
     public class PiciObservableCollectionWithCancellationToken<T> : PiciObservableCollection<T>
@@ -46,13 +52,17 @@ namespace picibird.hbs.ldu
         /// <summary>A cached delegate used to post invocation to the synchronization context.</summary>
         private readonly SendOrPostCallback m_StatusHandler;
 
-        public PiciObservableCollectionWithCancellationToken()
+        public PiciObservableCollectionWithCancellationToken(SynchronizationContext context = null)
         {
             // Capture the current synchronization context.  "current" is determined by CurrentNoFlow,
             // which doesn't consider the [....] ctx flown with an ExecutionContext, avoiding
             // [....] ctx reference identity issues where the [....] ctx for one thread could be Current on another.
             // If there is no current context, we use a default instance targeting the ThreadPool.
-            m_synchronizationContext = SynchronizationContext.Current;
+
+            if (context != null)
+                m_synchronizationContext = context;
+            else
+                m_synchronizationContext = SynchronizationContext.Current;
 
             // NOTE: this methot is not implemented in mono and is for debugging purposes only anyway
             //Contract.Assert(m_synchronizationContext != null);

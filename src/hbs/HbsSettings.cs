@@ -42,24 +42,24 @@ namespace picibird.hbs
         public HbsSettings()
         {
             General = Pici.Settings.Get<GeneralSettings>();
-            Ldu = Pici.Settings.Get<LduSettings>();
-            Cover = Pici.Settings.Get<CoverSettings>();
+            //Ldu = Pici.Settings.Get<LduSettings>();
+            //Cover = Pici.Settings.Get<CoverSettings>();
         }
 
         [JsonProperty(Required = Required.Always)]
         public GeneralSettings General { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
+        //[JsonProperty(Required = Required.Always)]
         public LduSettings Ldu { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
+        //[JsonProperty(Required = Required.Always)]
         public CoverSettings Cover { get; set; }
 
         public override async Task Save()
         {
             await General.Save();
-            await Ldu.Save();
-            await Cover.Save();
+            //await Ldu.Save();
+            //await Cover.Save();
             Saved?.Invoke(this);
         }
 

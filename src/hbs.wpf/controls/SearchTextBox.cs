@@ -17,39 +17,41 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace picibird.hbs.wpf.controls
 {
     public class SearchTextBox : TextBox
     {
-        //protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
-        //{
-        //    base.OnGotKeyboardFocus(e);
-        //    SelectAll();
-        //}
+        protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        {
+            base.OnGotKeyboardFocus(e);
+            SelectAll();
+        }
 
-        //protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
-        //{
-        //    base.OnLostKeyboardFocus(e);
-        //    SelectNothing();
-        //}
+        protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        {
+            base.OnLostKeyboardFocus(e);
+            SelectNothing();
+        }
 
-        //private void SelectNothing()
-        //{
-        //    Dispatcher.BeginInvoke((Action)(() =>
-        //    {
-        //        SelectionLength = 0;
-        //    }));
-        //}
+        private void SelectNothing()
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                SelectionLength = 0;
+            }));
+        }
 
-        //private void SelectAll()
-        //{
-        //    Dispatcher.BeginInvoke((Action)(() =>
-        //    {
-        //        SelectionStart = 0;
-        //        SelectionLength = Text.Length;
-        //    }));
-        //}
+        private void SelectAll()
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                SelectionStart = 0;
+                SelectionLength = Text.Length;
+            }));
+        }
     }
 }

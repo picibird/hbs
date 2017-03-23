@@ -225,8 +225,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFTabTip, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFTabTip.1.2.0\lib\net45\WPFTabTip.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\hbs.product\src\packages\WPFTabTip.1.2.2\lib\net45\WPFTabTip.dll</HintPath>
     </Reference>
     <Reference Include="zxing">
       <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>

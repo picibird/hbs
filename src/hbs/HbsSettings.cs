@@ -63,25 +63,25 @@ namespace picibird.hbs
             Saved?.Invoke(this);
         }
 
-        
+
     }
 
 
     [JsonObject(MemberSerialization.OptIn, Title = "General")]
     public class GeneralSettings : SettingsModel
     {
-        public GeneralSettings()
-        {
-            StartupSearch = "User Experience";
-            Language = LanguageEnum.German;
 
-        }
+        [JsonProperty("Application Title", Required = Required.Always)]
+        public string ApplicationTitle { get; set; } = "Hybrid Bookshelf";
+
+        [JsonProperty("Application Subtitle", Required = Required.Always)]
+        public string ApplicationSubtitle { get; set; } = "search and explore library data in an exciting way";
 
         [JsonProperty("Startup Search", Required = Required.Always)]
-        public string StartupSearch { get; set; }
+        public string StartupSearch { get; set; } = "User Experience";
 
         [JsonProperty("Language")]
-        public LanguageEnum Language { get; set; }
+        public LanguageEnum Language { get; set; } = LanguageEnum.German;
     }
 
     [JsonObject(MemberSerialization.OptIn, Title = "Library Data Unifier")]

@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Flurl;
 using picibird.hbs.ldu;
 using picibird.shelfhub;
-using picibits.core.extension;
-using picibits.core.collection;
-using picibits.core.controls3D;
-using Link = picibird.hbs.ldu.Link;
 using System.Threading;
 using picibits.core;
 using picibird.hbs.ldu.pages;

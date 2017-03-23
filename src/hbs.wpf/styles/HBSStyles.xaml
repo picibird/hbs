@@ -82,7 +82,7 @@
 
     <Style x:Key="SearchInfotextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
         <Setter Property="FontFamily" Value="{StaticResource RobotoThin}" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
     </Style>
 
@@ -152,6 +152,9 @@
                                        Margin="10,0,10,0">
                                 <TextBox DockPanel.Dock="Right" Style="{StaticResource SearchInfotextBoxStyle}"
                                          Text="{Binding SearchInfo}" />
+                                <TextBox DockPanel.Dock="Left" Style="{StaticResource SearchInfotextBoxStyle}"
+                                         Text="{Binding AppSubtitle, Mode=OneWay}" 
+                                         Margin="8,-15,0,0"/>
                             </DockPanel>
 
                             <!-- black blending -->
@@ -159,7 +162,8 @@
 
                             <!-- Title -->
                             <DockPanel Grid.ColumnSpan="2" LastChildFill="False" Margin="10">
-                                <views:View DockPanel.Dock="Left" DataContext="{Binding TitleButton}" />
+                                <views:View DockPanel.Dock="Left" DataContext="{Binding TitleButton}" 
+                                            Margin="5,0,0,0"/>
                             </DockPanel>
 
                             <!-- shelf selected -->

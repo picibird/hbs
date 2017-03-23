@@ -75,7 +75,7 @@
     <clr:Double x:Key="DefaultFontSizeFat">24</clr:Double>
     <clr:Double x:Key="DefaultFontSizeExtrem">34</clr:Double>
 
-    <clr:Double x:Key="TitleFontSize">24</clr:Double>
+    <clr:Double x:Key="TitleFontSize">28</clr:Double>
 
     <clr:Double x:Key="ShelfLabelFontSize">16</clr:Double>
     <clr:Double x:Key="ShelfLabelFontSizeSmall">13</clr:Double>

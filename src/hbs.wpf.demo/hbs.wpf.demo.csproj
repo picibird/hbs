@@ -129,21 +129,17 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.42.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\picibits.0.1.42\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="picibits.app, Version=0.1.43.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.43\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.42.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\picibits.0.1.42\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="picibits.core, Version=0.1.43.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.43\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.42.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\picibits.wpf.0.1.42\lib\dotnet\picibits.wpf.app.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="picibits.wpf.app, Version=0.1.43.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.43\lib\dotnet\picibits.wpf.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.42.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\picibits.wpf.0.1.42\lib\dotnet\picibits.wpf.core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="picibits.wpf.core, Version=0.1.43.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.43\lib\dotnet\picibits.wpf.core.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

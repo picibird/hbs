@@ -18,21 +18,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core.mvvm;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class FilterSelectionItemViewModel : ViewModel
     {
-        public FilterSelectionItemViewModel(Filter filter)
+        public FilterSelectionItemViewModel(FacetValue filter)
         {
             Filter = filter;
-            Name = string.Format("{0} {1} ", filter.Name, filter.Frequency);
+            Name = string.Format("{0} {1} ", filter.Name, filter.Count);
             Style = new ViewStyle("FilterSelectionItemViewStyle");
         }
 
-        public Filter Filter { get; private set; }
+        public FacetValue Filter { get; private set; }
 
         public event EventHandler<bool> IsCheckedChanged;
 

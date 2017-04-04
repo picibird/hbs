@@ -19,25 +19,27 @@
 
 using System;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.helper;
 using picibits.core.mvvm;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class FilterViewModel : ButtonViewModel
     {
-        public FilterViewModel(FilterCategory category = null)
+        public FilterViewModel(Facet category = null)
         {
             Category = category;
-            SelectedFilter = new PiciObservableCollection<Filter>();
+            SelectedFilter = new PiciObservableCollection<FacetValue>();
             Style = new ViewStyle("FilterViewStyle");
             VisualState = FilterVisualStates.EDIT;
             if (category != null)
             {
                 FilterName = Category.Name;
-                foreach (var filter in category.Filter)
+                foreach (var filter in category.Values)
                     OnCategoryFilterAdded(filter);
             }
             TapBehaviour.Tap += OnTap;
@@ -46,13 +48,13 @@ namespace picibird.hbs.viewmodels.filter
 
         #region Category
 
-        public FilterCategory Category { get; }
+        public Facet Category { get; }
 
         #endregion Category
 
-        public PiciObservableCollection<Filter> SelectedFilter { get; protected set; }
+        public PiciObservableCollection<FacetValue> SelectedFilter { get; protected set; }
 
-        private void OnCategoryFilterAdded(Filter filter)
+        private void OnCategoryFilterAdded(FacetValue filter)
         {
         }
 

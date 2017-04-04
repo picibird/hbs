@@ -66,7 +66,7 @@ namespace picibird.hbs
         {
         }
 
-        public virtual async Task Start(string searchText)
+        public virtual async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
             //abort if search text is the same as last one
             //if (searchText.Equals(SearchText))
@@ -149,12 +149,12 @@ namespace picibird.hbs
             OnSearchStarting(SearchStartingReason.SortChanged, SearchText, FilterList);
         }
 
-        protected void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
+        protected virtual void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnSearchStarting(SearchStartingReason.FiltersUpdated, SearchText, FilterList);
+            //OnSearchStarting(SearchStartingReason.FiltersUpdated, SearchText, FilterList);
         }
 
-        protected void OnSearchStarting(SearchStartingReason reason, string searchText, FilterList<FilterCategory> filters)
+        protected void OnSearchStarting(SearchStartingReason reason, string searchText, FilterList<Facet> filters)
         {
             if (SearchStarting != null)
                 SearchStarting(this, new SearchStartingEventArgs(reason, searchText, filters));
@@ -192,9 +192,9 @@ namespace picibird.hbs
 
         #region FilterList
 
-        protected FilterList<FilterCategory> mFilterList;
+        protected FilterList<Facet> mFilterList;
 
-        public FilterList<FilterCategory> FilterList
+        public FilterList<Facet> FilterList
         {
             get { return mFilterList; }
             set
@@ -208,8 +208,8 @@ namespace picibird.hbs
             }
         }
 
-        protected virtual void OnFilterListChanged(FilterList<FilterCategory> oldFilterList,
-            FilterList<FilterCategory> newFilterList)
+        protected virtual void OnFilterListChanged(FilterList<Facet> oldFilterList,
+            FilterList<Facet> newFilterList)
         {
             RaisePropertyChanged("FilterList", oldFilterList, newFilterList);
             if (oldFilterList != null)
@@ -391,7 +391,7 @@ namespace picibird.hbs
     public class SearchStartingEventArgs
     {
         public SearchStartingEventArgs(SearchStartingReason reason, string searchText,
-            FilterList<FilterCategory> filters)
+            FilterList<Facet> filters)
         {
             Reason = reason;
             SearchText = searchText;
@@ -401,7 +401,7 @@ namespace picibird.hbs
         public SearchStartingReason Reason { get; protected set; }
 
         public string SearchText { get; protected set; }
-        public FilterList<FilterCategory> Filters { get; protected set; }
+        public FilterList<Facet> Filters { get; protected set; }
     }
 
     public enum SearchStartingReason

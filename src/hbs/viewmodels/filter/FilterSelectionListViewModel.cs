@@ -19,20 +19,22 @@
 
 using System.Linq;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core;
 using picibits.core.collection;
 using picibits.core.controls;
 using picibits.core.mvvm;
 using picibits.core.util;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class FilterSelectionListViewModel : ItemsViewModel
     {
-        public FilterSelectionListViewModel(FilterCategory filterCategory,
-            PiciObservableCollection<Filter> selectedFilter)
+        public FilterSelectionListViewModel(Facet filterCategory,
+            PiciObservableCollection<FacetValue> selectedFilter)
         {
-            CategoryName = filterCategory.Id;
+            CategoryName = filterCategory.Key;
             Style = new ViewStyle("FilterSelectionListViewStyle");
             VisualState = "Expanded";
 
@@ -40,34 +42,34 @@ namespace picibird.hbs.viewmodels.filter
             SelectedFilter.ItemAdded += OnSelectedFilterItemAdded;
             SelectedFilter.ItemRemoved += OnSelectedFilterItemRemoved;
 
-            foreach (var filter in filterCategory.Filter)
+            foreach (var filter in filterCategory.Values)
                 OnCategoryFilterAdded(filter);
 
             HBS.Search.FilterList.ItemAdded += OnSearchFilterListItemAdded;
             HBS.Search.FilterList.RemovedAll += OnSearchFilterListRemovedAll;
         }
 
-        public PiciObservableCollection<Filter> SelectedFilter { get; }
+        public PiciObservableCollection<FacetValue> SelectedFilter { get; }
 
-        public FilterCategoryId CategoryName { get; }
+        public string CategoryName { get; }
 
-        private void OnSearchFilterListRemovedAll(PiciObservableCollection<FilterCategory> sender)
+        private void OnSearchFilterListRemovedAll(PiciObservableCollection<Facet> sender)
         {
             Items.RemoveAll();
         }
 
-        private void OnSearchFilterListItemAdded(object sender, FilterCategory item)
+        private void OnSearchFilterListItemAdded(object sender, Facet item)
         {
-            if (item.Id.Equals(CategoryName))
+            if (item.Key.Equals(CategoryName))
             {
-                foreach (var filter in item.Filter)
+                foreach (var filter in item.Values)
                     OnCategoryFilterAdded(filter);
             }
         }
 
-        public event SimpleEventHandler<Filter> CategoryAdded;
+        public event SimpleEventHandler<FacetValue> CategoryAdded;
 
-        protected virtual void OnCategoryFilterAdded(Filter filter)
+        protected virtual void OnCategoryFilterAdded(FacetValue filter)
         {
             var item = new FilterSelectionItemViewModel(filter);
             foreach (var selected in SelectedFilter)
@@ -99,22 +101,22 @@ namespace picibird.hbs.viewmodels.filter
                 SelectedFilter.Remove(item.Filter);
         }
 
-        private void OnSelectedFilterItemAdded(object sender, Filter item)
+        private void OnSelectedFilterItemAdded(object sender, FacetValue item)
         {
             Pici.Log.info(typeof(FilterSelectionListViewModel), string.Format("selected filter {0}", item.Name));
         }
 
-        private void OnSelectedFilterItemRemoved(object sender, Filter item)
+        private void OnSelectedFilterItemRemoved(object sender, FacetValue item)
         {
             Pici.Log.info(typeof(FilterSelectionListViewModel), string.Format("unselected filter {0}", item.Name));
         }
 
-        public FilterSelectionItemViewModel GetItemForFilter(Filter filter)
+        public FilterSelectionItemViewModel GetItemForFilter(FacetValue filter)
         {
-            return Items.Cast<FilterSelectionItemViewModel>().FirstOrDefault(f => f.Filter.Id.Equals(filter.Id));
+            return Items.Cast<FilterSelectionItemViewModel>().FirstOrDefault(f => f.Filter.Value.Equals(filter.Value));
         }
 
-        public int ItemIndexOf(Filter filter)
+        public int ItemIndexOf(FacetValue filter)
         {
             return Items.IndexOf(GetItemForFilter(filter));
         }

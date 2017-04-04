@@ -20,6 +20,7 @@
 using System;
 using System.Linq;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.mvvm;
@@ -52,7 +53,7 @@ namespace picibird.hbs.viewmodels.filter
                 UpdateChoosers(fl);
         }
 
-        public void UpdateChoosers(FilterList<FilterCategory> categories)
+        public void UpdateChoosers(FilterList<Facet> categories)
         {
             foreach (var category in categories)
             {
@@ -60,7 +61,7 @@ namespace picibird.hbs.viewmodels.filter
             }
         }
 
-        public void UpdateChooser(FilterCategory category, bool forceDisable = false)
+        public void UpdateChooser(Facet category, bool forceDisable = false)
         {
             foreach (var chooser in Choosers)
             {
@@ -68,9 +69,9 @@ namespace picibird.hbs.viewmodels.filter
             }
         }
 
-        public ChooserButtonViewModel GetChooser(FilterCategory category)
+        public ChooserButtonViewModel GetChooser(string category)
         {
-            return Choosers.Where(c => c.CategoryName == category.Id).FirstOrDefault();
+            return Choosers.FirstOrDefault(c => c.CategoryName == category);
         }
 
         private void OnSearchStarting(object sender, SearchStartingEventArgs e)
@@ -79,12 +80,12 @@ namespace picibird.hbs.viewmodels.filter
             e.Filters.ItemRemoved += OnSearchFilterListItemRemoved;
         }
 
-        private void OnSearchFilterListItemAdded(object sender, FilterCategory category)
+        private void OnSearchFilterListItemAdded(object sender, Facet category)
         {
             UpdateChooser(category);
         }
 
-        private void OnSearchFilterListItemRemoved(object sender, FilterCategory category)
+        private void OnSearchFilterListItemRemoved(object sender, Facet category)
         {
             UpdateChooser(category);
         }
@@ -134,8 +135,9 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mDepartmentChooser == null)
                 {
-                    mDepartmentChooser = new ChooserButtonViewModel(FilterCategoryId.department,
+                    mDepartmentChooser = new ChooserButtonViewModel("department",
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
+                    mDepartmentChooser.Name = "Fachbereich";
                     mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
                 }
 
@@ -155,7 +157,7 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mMediaChooser == null)
                 {
-                    mMediaChooser = new ChooserButtonViewModel(FilterCategoryId.medium,
+                    mMediaChooser = new ChooserButtonViewModel("format",
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
                     mMediaChooser.TapBehaviour.Tap += OnChooserTap;
                 }
@@ -175,7 +177,7 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mLanguageChooser == null)
                 {
-                    mLanguageChooser = new ChooserButtonViewModel(FilterCategoryId.language,
+                    mLanguageChooser = new ChooserButtonViewModel("language",
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
                     mLanguageChooser.TapBehaviour.Tap += OnChooserTap;
                 }
@@ -196,7 +198,7 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mDateChooser == null)
                 {
-                    mDateChooser = new ChooserButtonViewModel(FilterCategoryId.date,
+                    mDateChooser = new ChooserButtonViewModel("publishDate",
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
                     mDateChooser.TapBehaviour.Tap += OnChooserTap;
                 }
@@ -216,7 +218,7 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mOnlyAvailableChooser == null)
                 {
-                    mOnlyAvailableChooser = new ChooserButtonViewModel(FilterCategoryId.available,
+                    mOnlyAvailableChooser = new ChooserButtonViewModel("available",
                         new ViewStyle("ChooserButtonViewStyle"));
                     mOnlyAvailableChooser.TapBehaviour.Tap += OnChooserTap;
                 }
@@ -273,9 +275,9 @@ namespace picibird.hbs.viewmodels.filter
 
         #region SelectedFilterCategory
 
-        private FilterCategoryId mSelectedFilterCategory;
+        private string mSelectedFilterCategory;
 
-        public FilterCategoryId SelectedFilterCategory
+        public string SelectedFilterCategory
         {
             get { return mSelectedFilterCategory; }
             set

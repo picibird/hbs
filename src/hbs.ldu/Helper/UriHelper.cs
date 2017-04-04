@@ -88,43 +88,44 @@ namespace picibird.hbs.ldu.Helper
                 res.SetQueryParam("limit", limit);
             }
 
-            if (searchRequest.HasSourceFilter())
-            {
-                string sourceFilterIds = String.Join("|", searchRequest.GetSourceFilterIds());
-                res.SetQueryParam("filter", String.Format("pz:id={0}", sourceFilterIds));
-            }
-            else
-            {
-                //if has no user source filter applied, check if settings has exclusive filter applied
-                if (Pazpar2Settings.LduSourceUsage != LduSourceUsage.ALL)
-                {
-                    string sourceFilterString = LduSourceUsageHelper.ToFilterString(Pazpar2Settings.LduSourceUsage);
-                    res.SetQueryParam("filter", String.Format("pz:id={0}", sourceFilterString));
-                    Pici.Log.warn(typeof(UrlHelper), String.Format("SETTING LDU ONLY SOURCE TO", sourceFilterString));
-                }
-            }
+            //if (searchRequest.HasSourceFilter())
+            //{
+            //    string sourceFilterIds = String.Join("|", searchRequest.GetSourceFilterIds());
+            //    res.SetQueryParam("filter", String.Format("pz:id={0}", sourceFilterIds));
+            //}
+            //else
+            //{
+            //    //if has no user source filter applied, check if settings has exclusive filter applied
+            //    if (Pazpar2Settings.LduSourceUsage != LduSourceUsage.ALL)
+            //    {
+            //        string sourceFilterString = LduSourceUsageHelper.ToFilterString(Pazpar2Settings.LduSourceUsage);
+            //        res.SetQueryParam("filter", String.Format("pz:id={0}", sourceFilterString));
+            //        Pici.Log.warn(typeof(UrlHelper), String.Format("SETTING LDU ONLY SOURCE TO", sourceFilterString));
+            //    }
+            //}
             return res;
         }
 
         private static string CreateLimitFilterStringFromSearchRequest(SearchRequest searchRequest)
         {
-            IEnumerable<IGrouping<FilterCategoryId, Filter>> queryFiltersByCategory =
-                from f in searchRequest.GetActiveFilters()
-                group f by f.Catgegory
-                into fcat
-                where fcat.Key != FilterCategoryId.author
-                      && fcat.Key != FilterCategoryId.subject
-                      && fcat.Key != FilterCategoryId.xtargets
-                select fcat;
+            //IEnumerable<IGrouping<FilterCategoryId, Filter>> queryFiltersByCategory =
+            //    from f in searchRequest.GetActiveFilters()
+            //    group f by f.Catgegory
+            //    into fcat
+            //    where fcat.Key != FilterCategoryId.author
+            //          && fcat.Key != FilterCategoryId.subject
+            //          && fcat.Key != FilterCategoryId.xtargets
+            //    select fcat;
 
-            List<string> cat = new List<string>();
-            foreach (IGrouping<FilterCategoryId, Filter> fcat in queryFiltersByCategory)
-            {
-                cat.Add(String.Format("{0}={1}", fcat.Key,
-                    String.Join("|", (from f in fcat select f.Id).ToList<string>())));
-            }
+            //List<string> cat = new List<string>();
+            //foreach (IGrouping<FilterCategoryId, Filter> fcat in queryFiltersByCategory)
+            //{
+            //    cat.Add(String.Format("{0}={1}", fcat.Key,
+            //        String.Join("|", (from f in fcat select f.Id).ToList<string>())));
+            //}
 
-            return String.Join(",", cat);
+            //return String.Join(",", cat);
+            return "";
         }
 
         private static string CreateQueryStringFromSearchRequest(SearchRequest searchRequest)

@@ -18,19 +18,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class AvailableFilterViewModel : FilterViewModel
     {
-        public AvailableFilterViewModel(FilterCategory category)
+        public AvailableFilterViewModel(Facet category)
             : base(category)
         {
             FilterName = "";
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.available, Id = "0"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.available, Id = "0"});
             VisualState = FilterVisualStates.NORMAL;
-            AppliedInfoString = Pici.Resources.Find(category.Id.ToString());
+            AppliedInfoString = Pici.Resources.Find(category.Key);
         }
     }
 }

@@ -20,14 +20,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core.mvvm;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class ListFilterViewModel : FilterViewModel
     {
-        public ListFilterViewModel(FilterCategory category = null)
+        public ListFilterViewModel(Facet category = null)
             : base(category)
         {
             Style = new ViewStyle("ListFilterViewStyle");
@@ -42,17 +43,17 @@ namespace picibird.hbs.viewmodels.filter
 
         #endregion FilterSelectionView
 
-        private void OnSelectedFilterItemAdded(object sender, Filter item)
+        private void OnSelectedFilterItemAdded(object sender, FacetValue item)
         {
             OnSelectedFiltersChanged(FilterSelectionViewModel.SelectedFilter);
         }
 
-        private void OnSelectedFilterItemRemoved(object sender, Filter item)
+        private void OnSelectedFilterItemRemoved(object sender, FacetValue item)
         {
             OnSelectedFiltersChanged(FilterSelectionViewModel.SelectedFilter);
         }
 
-        private void OnSelectedFiltersChanged(IEnumerable<Filter> filter)
+        private void OnSelectedFiltersChanged(IEnumerable<FacetValue> filter)
         {
             //update has selected
             HasSelected = FilterSelectionViewModel.SelectedFilter.Count > 0;

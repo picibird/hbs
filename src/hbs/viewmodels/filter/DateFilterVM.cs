@@ -17,25 +17,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using picibird.hbs.ldu;
+using picibird.shelfhub;
+using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class DateFilterVM : ListFilterViewModel
     {
-        public DateFilterVM(FilterCategory category)
+        public DateFilterVM(Facet category)
             : base(category)
         {
             FilterSelectionViewModel.CategoryAdded += OnCategoryAdded;
             OnCategoryAdded(null);
         }
 
-        private void OnCategoryAdded(Filter sender)
+        private void OnCategoryAdded(FacetValue sender)
         {
             FilterSelectionViewModel.Items.Sort(f =>
             {
                 var year = 0;
-                var yearString = (f as FilterSelectionItemViewModel).Filter.Id;
+                var yearString = (f as FilterSelectionItemViewModel).Filter.Value;
                 int.TryParse(yearString, out year);
                 return -year;
             });

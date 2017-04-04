@@ -19,6 +19,7 @@
 
 using System.Linq;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core.mvvm;
 
 namespace picibird.hbs.viewmodels.filter
@@ -26,17 +27,17 @@ namespace picibird.hbs.viewmodels.filter
     public class DigitalChooserButtonVM : ChooserButtonViewModel
     {
         public DigitalChooserButtonVM(ViewStyle style)
-            : base(FilterCategoryId.digital, style)
+            : base("digital", style)
         {
         }
 
-        public override void OnFilterChanged(FilterCategory filterCategory)
+        public override void OnFilterChanged(Facet filterCategory)
         {
-            if (filterCategory.Id == FilterCategoryId.medium && filterCategory.Count > 0)
+            if (filterCategory.Key == "medium" && filterCategory.Values.Count > 0)
             {
-                var filters = filterCategory.Filter.Where(f =>
+                var filters = filterCategory.Values.Where(f =>
                 {
-                    switch (f.Id)
+                    switch (f.Value)
                     {
                         case "ebook":
                             return true;
@@ -54,7 +55,7 @@ namespace picibird.hbs.viewmodels.filter
                 Frequency = 0;
                 foreach (var filter in filters)
                 {
-                    Frequency += filter.Frequency;
+                    Frequency += filter.Count.Value;
                 }
             }
         }

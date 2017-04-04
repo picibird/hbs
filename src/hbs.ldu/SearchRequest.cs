@@ -18,9 +18,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using picibird.hbs.ldu.Helper;
+using picibird.shelfhub;
 
 namespace picibird.hbs.ldu
 {
@@ -28,7 +30,7 @@ namespace picibird.hbs.ldu
     {
         private int itemsPerPage = Pazpar2Settings.RESULTS_PER_PAGE;
 
-        private HashSet<Filter> activeFilters = new HashSet<Filter>();
+        private List<shelfhub.Filter> activeFilters = new List<shelfhub.Filter>();
         public event PropertyChangedEventHandler FilterListChanged;
 
         public event PropertyChangedEventHandler SortingChanged;
@@ -59,79 +61,47 @@ namespace picibird.hbs.ldu
             }
         }
 
-        public bool AddFilter(Filter filter)
+        public void AddFilter(string key, List<FacetValue> filter)
         {
-            if (activeFilters.Add(filter))
+            IEnumerable<string> values = filter.Select((fv) => fv.Value);
+            activeFilters.Add(new shelfhub.Filter()
             {
-                notifyFilterListChanged();
-                return true;
-            }
-            return false;
+                Key = key,
+                Values = new ObservableCollection<string>(values)
+            });
+            notifyFilterListChanged();
         }
 
-        public bool AddFilter(List<Filter> filter)
+        public void RemoveFilter(string key, List<FacetValue> filter)
         {
-            if (filter.Count > 0)
-            {
-                int count = activeFilters.Count;
-                activeFilters.UnionWith(filter);
-                if (activeFilters.Count > count)
-                {
-                    notifyFilterListChanged();
-                    return true;
-                }
-            }
-            return false;
+            var removedfilter = activeFilters.FirstOrDefault((f) => f.Key == key);
+            activeFilters.Remove(removedfilter);
+            notifyFilterListChanged();
         }
 
-        public bool RemoveFilter(Filter filter)
+        public List<shelfhub.Filter> GetActiveFilter()
         {
-            if (activeFilters.Remove(filter))
-            {
-                notifyFilterListChanged();
-                return true;
-            }
-            return false;
+            return new List<shelfhub.Filter>(activeFilters);
         }
 
-        public bool RemoveFilter(List<Filter> filter)
-        {
-            if (filter.Count > 0)
-            {
-                int count = activeFilters.Count;
-                activeFilters.RemoveWhere(f => filter.Any(f2 => f.Equals(f2)));
-                if (activeFilters.Count < count)
-                {
-                    notifyFilterListChanged();
-                    return true;
-                }
-            }
-            return false;
-        }
+        //public bool HasSourceFilter()
+        //{
+        //    foreach (FacetValue f in activeFilters)
+        //    {
+        //        if (f.Value == "xtargets")
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
-        public HashSet<Filter> GetActiveFilter()
-        {
-            return new HashSet<Filter>(activeFilters);
-        }
-
-        public bool HasSourceFilter()
-        {
-            foreach (Filter f in activeFilters)
-            {
-                if (f.Catgegory == FilterCategoryId.xtargets)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public List<string> GetSourceFilterIds()
-        {
-            return
-                (from f in activeFilters where f.Catgegory == FilterCategoryId.xtargets select f.TargetId)
-                    .ToList<string>();
-        }
+        //public List<string> GetSourceFilterIds()
+        //{
+        //    return
+        //        (from f in activeFilters where f.Value == "xtargets" select f.Value)
+        //            .ToList<string>();
+        //}
 
         public void ClearAllFilters()
         {
@@ -181,12 +151,10 @@ namespace picibird.hbs.ldu
 
         internal List<string> GetActiveQueryFilterStrings()
         {
-            return (from filter in activeFilters
-                where filter.Catgegory == FilterCategoryId.author || filter.Catgegory == FilterCategoryId.subject
-                select filter.CatgegoryKey + "=" + filter.Id).ToList<string>();
+            return new List<string>();
         }
 
-        internal HashSet<Filter> GetActiveFilters()
+        internal List<shelfhub.Filter> GetActiveFilters()
         {
             return activeFilters;
         }

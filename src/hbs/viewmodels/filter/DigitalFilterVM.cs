@@ -28,11 +28,11 @@ namespace picibird.hbs.viewmodels.filter
             : base(null)
         {
             FilterName = "";
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "ebook"});
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "ejournal"});
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "article"});
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "bookchapter"});
-            SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "bookreview"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "ebook"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "ejournal"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "article"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "bookchapter"});
+            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.medium, Id = "bookreview"});
             VisualState = FilterVisualStates.NORMAL;
             AppliedInfoString = Pici.Resources.Find(FilterCategoryId.digital.ToString());
         }

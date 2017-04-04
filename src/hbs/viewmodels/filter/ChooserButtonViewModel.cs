@@ -18,6 +18,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.app.mvvm;
 using picibits.core;
 using picibits.core.mvvm;
@@ -26,24 +27,21 @@ namespace picibird.hbs.viewmodels.filter
 {
     public class ChooserButtonViewModel : ButtonViewModel
     {
-        public ChooserButtonViewModel(FilterCategoryId filterCategory, ViewStyle style)
-        {
-            CategoryName = filterCategory;
-            Init(style);
-        }
 
         public ChooserButtonViewModel(string filterCategory, ViewStyle style)
         {
+            CategoryName = filterCategory;
             Name = filterCategory;
             Init(style);
         }
 
-        public virtual void OnFilterChanged(FilterCategory filterCategory)
+        public virtual void OnFilterChanged(Facet filterCategory)
         {
-            if (filterCategory.Id == CategoryName)
+            if (filterCategory.Key == CategoryName)
             {
-                if (filterCategory.Filter != null)
-                    Frequency = filterCategory.Filter.Count;
+                Name = filterCategory.Name;
+                if (filterCategory.Values != null)
+                    Frequency = filterCategory.Values.Count;
                 else
                     Frequency = 0;
             }
@@ -60,16 +58,16 @@ namespace picibird.hbs.viewmodels.filter
             IsEnabled = frequency >= 0;
         }
 
-        protected virtual void OnCategoryNameEnumChanged(FilterCategoryId category)
+        protected virtual void OnCategoryNameEnumChanged(string category)
         {
-            Name = Pici.Resources.Find(category.ToString());
+            Name = Pici.Resources.Find(category);
         }
 
         #region Category
 
-        private FilterCategoryId mCategoryName;
+        private string mCategoryName;
 
-        public FilterCategoryId CategoryName
+        public string CategoryName
         {
             get { return mCategoryName; }
             set

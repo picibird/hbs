@@ -102,7 +102,7 @@
     <clr:Double x:Key="MaxFilterCardHeight">300</clr:Double>
 
 
-    <clr:Double x:Key="FilterChooserCardHeight">260</clr:Double>
+    <clr:Double x:Key="FilterChooserCardHeight">220</clr:Double>
     <clr:Double x:Key="FilterChooserFontSize">20</clr:Double>
     <clr:Double x:Key="FilterChooserSmallFontSize">13</clr:Double>
 

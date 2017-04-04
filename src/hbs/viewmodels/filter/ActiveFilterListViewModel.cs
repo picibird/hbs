@@ -19,11 +19,12 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core.collection;
 using picibits.core.controls;
 using picibits.core.helper;
 using picibits.core.mvvm;
+using Filter = picibird.hbs.ldu.Filter;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
 namespace picibird.hbs.viewmodels.filter
@@ -71,7 +72,8 @@ namespace picibird.hbs.viewmodels.filter
             fc.PropertyChanged -= OnFilterPropertyChanged;
             fc.FiltersApplied -= OnFiltersApplied;
             Events.OnIdleOnce(() => { EnsureFilterSelection(); });
-            RemoveActiveFiltersNotSelected();
+            if (fc?.Filter?.SelectedFilter != null)
+                RemoveActiveFiltersNotSelected(fc, fc.Filter.SelectedFilter);
         }
 
         private bool EnsureFilterSelection()
@@ -124,9 +126,9 @@ namespace picibird.hbs.viewmodels.filter
             }
         }
 
-        public List<Filter> GetAllSelectedFilter()
+        public List<FacetValue> GetAllSelectedFilter()
         {
-            IEnumerable<Filter> allSelectedFilter = new List<Filter>();
+            IEnumerable<FacetValue> allSelectedFilter = new List<FacetValue>();
             var validFilter = Items.Cast<FilterContainerViewModel>().Where(f => f.Filter != null);
             foreach (var fc in validFilter)
             {
@@ -135,19 +137,23 @@ namespace picibird.hbs.viewmodels.filter
             return allSelectedFilter.ToList();
         }
 
-        private void OnFiltersApplied(FilterContainerViewModel filterContainer, PiciObservableCollection<Filter> filter)
+        private void OnFiltersApplied(FilterContainerViewModel filterContainer, PiciObservableCollection<FacetValue> filter)
         {
-            var activeFilter = HBS.Search.SearchRequest.GetActiveFilter();
-            HBS.Search.SearchRequest.AddFilter(filter.ToList());
-            RemoveActiveFiltersNotSelected();
+
+            Facet facet = filterContainer.Filter.Category;
+
+            HBS.Search.SearchRequest.AddFilter(facet.Key, filter.ToList());
+            //RemoveActiveFiltersNotSelected();
         }
 
-        private void RemoveActiveFiltersNotSelected()
+        private void RemoveActiveFiltersNotSelected(FilterContainerViewModel filterContainer, PiciObservableCollection<FacetValue> removed)
         {
-            var allSelectedFilter = GetAllSelectedFilter();
-            var activeFilter = HBS.Search.SearchRequest.GetActiveFilter();
-            var removed = activeFilter.Where(f => !allSelectedFilter.Contains(f)).ToList();
-            HBS.Search.SearchRequest.RemoveFilter(removed);
+            //var allSelectedFilter = GetAllSelectedFilter();
+            //var activeFilter = HBS.Search.SearchRequest.GetActiveFilter();
+            //var removed = activeFilter.Where(f => !allSelectedFilter.Contains(f)).ToList();
+
+            Facet facet = filterContainer.Filter.Category;
+            HBS.Search.SearchRequest.RemoveFilter(facet.Key, removed.ToList());
         }
     }
 }

@@ -19,13 +19,14 @@
 
 using System.ComponentModel;
 using System.Threading;
+using picibird.shelfhub;
 using picibits.core.util;
 
 namespace picibird.hbs.ldu
 {
     public class SearchCallback<SearchStatus> : AsyncCallback<SearchStatus>
     {
-        public FilterList<FilterCategory> FilterList { get; private set; }
+        public FilterList<Facet> FilterList { get; private set; }
 
         public event PropertyChangedEventHandler ResultCountChanged;
         public event PropertyChangedEventHandler MaxPageIndexChanged;
@@ -81,7 +82,7 @@ namespace picibird.hbs.ldu
         public SearchCallback(CancellationToken? ct)
             : base(ct)
         {
-            this.FilterList = new FilterList<FilterCategory>();
+            this.FilterList = new FilterList<Facet>();
         }
     }
 }

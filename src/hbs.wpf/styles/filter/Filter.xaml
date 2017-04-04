@@ -100,9 +100,9 @@
             <Setter.Value>
                 <ControlTemplate>
                     <UserControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                        <StackPanel Orientation="Vertical" Background="Transparent">
+                        <StackPanel Orientation="Horizontal" Background="Transparent">
                             <TextBox Text="{Binding Name}" Style="{StaticResource FilterChooserTextBoxStyle}" />
-                            <TextBox Text="{Binding Frequency}" Style="{StaticResource FilterChooserSmallTextBoxStyle}" />
+                            <TextBox Text="{Binding Frequency}" Style="{StaticResource FilterChooserTextBoxStyle}" />
                         </StackPanel>
                     </UserControl>
                 </ControlTemplate>
@@ -123,7 +123,7 @@
                         </i:Interaction.Triggers>
                         <ContentControl Style="{StaticResource CardBackground}" HorizontalAlignment="Stretch"
                                         Height="{StaticResource FilterChooserCardHeight}">
-                            <Grid x:Name="root" Margin="0,15,0,0">
+                            <Grid x:Name="root" Margin="0,15,0,15">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.25*" />
@@ -138,18 +138,19 @@
                                         <RowDefinition Height="0.25*" />
                                     </Grid.RowDefinitions>
                                     <!-- departement  -->
-                                    <views:View DataContext="{Binding DepartmentChooser}" Grid.ColumnSpan="2" />
+                                    <views:View DataContext="{Binding DepartmentChooser}" Grid.Row="0" Grid.ColumnSpan="4" />
                                     <!-- media  -->
-                                    <views:View DataContext="{Binding MediaChooser}" Grid.Column="2" Grid.ColumnSpan="2" />
+                                    <views:View DataContext="{Binding MediaChooser}" Grid.Row="1" Grid.ColumnSpan="4" />
                                     <!-- language  -->
-                                    <views:View DataContext="{Binding LanguageChooser}" Grid.Row="1" Grid.ColumnSpan="2" />
+                                    <views:View DataContext="{Binding LanguageChooser}" Grid.Row="2" Grid.ColumnSpan="4" />
                                     <!-- date -->
-                                    <views:View DataContext="{Binding DateChooser}" Grid.Row="1" Grid.Column="2"
-                                          Grid.ColumnSpan="2" />
-                                    <!-- only available -->
+                                    <views:View DataContext="{Binding DateChooser}" Grid.Row="3"  Grid.ColumnSpan="4" />
+                                    
+                                    
+                                    <!-- only available --><!--
                                     <views:View DataContext="{Binding OnlyAvailableChooser}" Grid.Row="2" Grid.ColumnSpan="4" />
-                                    <!-- only digital -->
-                                    <views:View DataContext="{Binding OnlyDigitalChooser}" Grid.Row="3" Grid.ColumnSpan="4" />
+                                    --><!-- only digital --><!--
+                                    <views:View DataContext="{Binding OnlyDigitalChooser}" Grid.Row="3" Grid.ColumnSpan="4" />-->
                                 </Grid>
 
                                 <Border x:Name="ClosedLayer" Margin="0,-15,0,0" Padding="5"
@@ -206,7 +207,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid Visibility="Hidden">
+                    <Grid>
                         <views:View DataContext="{Binding Chooser}" x:Name="ChooserView"
                               VerticalAlignment="Top" />
                         <views:View DataContext="{Binding Filter}" x:Name="FilterView"

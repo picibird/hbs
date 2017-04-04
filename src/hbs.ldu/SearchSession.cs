@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Flurl.Http;
 using picibird.hbs.ldu.Helper;
+using picibird.shelfhub;
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
@@ -577,10 +578,10 @@ namespace picibird.hbs.ldu
 
                 // todo update filters 
 
-                foreach (FilterCategory fcat in pp2Termlist.filterCategories)
-                {
-                    Callback.FilterList.Add(fcat);
-                }
+                //foreach (Facet fcat in pp2Termlist.filterCategories)
+                //{
+                //    Callback.FilterList.Add(fcat);
+                //}
                 //delay with cancellation
                 await Task.Delay(Pazpar2Settings.DELAY_TERMLIST_REQUEST, cancelToken);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using picibird.hbs.ldu;
@@ -10,6 +11,7 @@ using picibits.core;
 using picibird.hbs.ldu.pages;
 using picibits.core.helper;
 using picibits.core.util;
+using Filter = picibird.shelfhub.Filter;
 
 namespace picibird.hbs
 {
@@ -28,6 +30,14 @@ namespace picibird.hbs
             PAGE_HITS_CACHE = new ConcurrentCache<int, ItemList<Hit>>(async key => await LoadPageHitsAsync(key));
         }
 
+        private List<Filter> activeFilters;
+
+        protected override void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnSearchRequestFilterChanged(sender, e);
+            activeFilters = (sender as SearchRequest).GetActiveFilter();
+            Start(SearchText, SearchStartingReason.FiltersUpdated);
+        }
 
         public Page LoadPage(int index)
         {
@@ -53,6 +63,7 @@ namespace picibird.hbs
             {
                 Query = QueryParams.Query,
                 Offset = index * 17,
+                Filters = activeFilters?.ToObservableCollection(),
                 Limit = 17,
                 Shelfhub = QueryParams.Shelfhub
             };
@@ -64,16 +75,17 @@ namespace picibird.hbs
             return hits;
         }
 
-        public override async Task Start(string searchText)
+        public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
             try
             {
-                BeforeShelfhubSearch(searchText);
+                BeforeShelfhubSearch(searchText, reason);
                 PAGE_HITS_CACHE.Clear();
                 Shelfhub shelfhub = createShelfhubClient();
                 QueryParams = new QueryParams()
                 {
                     Query = searchText,
+                    Filters = activeFilters?.ToObservableCollection(),
                     Offset = 0,
                     Limit = 34,
                     Shelfhub = new ShelfhubParams()
@@ -82,7 +94,7 @@ namespace picibird.hbs
                     }
                 };
                 var queryResult = await shelfhub.QueryAsync(QueryParams);
-                await AfterShelfhubSearch(queryResult);
+                await AfterShelfhubSearch(queryResult, reason);
             }
             catch (Exception ex)
             {
@@ -90,7 +102,7 @@ namespace picibird.hbs
             }
         }
 
-        private void BeforeShelfhubSearch(string text)
+        private void BeforeShelfhubSearch(string text, SearchStartingReason reason)
         {
             if (cts != null)
                 cts.Cancel();
@@ -103,21 +115,27 @@ namespace picibird.hbs
 
             SearchText = text;
 
-            SearchRequest = new SearchRequest(text);
-            SearchRequest.ItemsPerPage = PageItemsCount;
+            if (reason == SearchStartingReason.NewSearch)
+            {
+                SearchRequest = new SearchRequest(text);
+                SearchRequest.ItemsPerPage = PageItemsCount;
+                SearchRequest.FilterListChanged += OnSearchRequestFilterChanged;
+            }
 
             Session = new ShelfhubSearchSession();
             Pages.Session = Session;
-            OnSearchStarting(SearchStartingReason.NewSearch, text, FilterList);
+
+            OnSearchStarting(reason, text, FilterList);
             Session.Start(null, SearchRequest, Callback);
             Session.Status = new SearchStatus();
         }
 
-        private async Task AfterShelfhubSearch(QueryResponse response)
+        private async Task AfterShelfhubSearch(QueryResponse response, SearchStartingReason reason)
         {
             //convert shelfhubitems to hits and call Session
             var items = response.Items;
             var hits = items.ToHits();
+            var facets = response.Facets;
             //fill first two pages
             for (int i = 0; i < 2; i++)
             {
@@ -134,6 +152,12 @@ namespace picibird.hbs
                 //request covers
                 RequestCovers(pageItems, pageHits);
             }
+            //apply facets
+            foreach (var facet in facets)
+            {
+                FilterList.Add(facet);
+            }
+
             //finalize session
             Session.Status = new SearchStatus()
             {
@@ -145,6 +169,8 @@ namespace picibird.hbs
             maxPageIndex = Math.Max(maxPageIndex, 0);
             Callback.MaxPageIndex = (int)maxPageIndex;
         }
+        
+
 
         public void RequestCovers(IList<ShelfhubItem> shelfhubItems, IList<Hit> hits)
         {

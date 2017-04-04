@@ -21,6 +21,7 @@ using System;
 using System.Linq;
 using picibird.hbs.ldu;
 using picibird.hbs.viewmodels.filter.behaviour;
+using picibird.shelfhub;
 using picibits.app.animation;
 using picibits.app.transition;
 using picibits.core;
@@ -33,7 +34,7 @@ namespace picibird.hbs.viewmodels.filter
     public class FilterContainerViewModel : ViewModel
     {
         public delegate void FiltersAppliedHandler(
-            FilterContainerViewModel filterContainer, PiciObservableCollection<Filter> filter);
+            FilterContainerViewModel filterContainer, PiciObservableCollection<FacetValue> filter);
 
         public FilterContainerViewModel()
         {
@@ -143,19 +144,19 @@ namespace picibird.hbs.viewmodels.filter
         {
         }
 
-        private void OnSelectedFilterCategoryChanged(FilterCategoryId categoryName)
+        private void OnSelectedFilterCategoryChanged(string categoryName)
         {
             Pici.Log.info(typeof(FilterChooserViewModel),
                 string.Format("selected filter category {0}", Chooser.SelectedFilterCategory));
-            var category = HBS.Search.FilterList.FirstOrDefault(fc => fc.Id == categoryName);
+            var category = HBS.Search.FilterList.FirstOrDefault(fc => fc.Key == categoryName);
             if (category != null)
             {
-                if (category.Id == FilterCategoryId.date)
+                if (category.Key == "publishDate")
                 {
                     Filter = new DateFilterVM(category);
                     //Filter = new ListFilterViewModel(category);
                 }
-                else if (category.Id == FilterCategoryId.available)
+                else if (category.Key == "availability")
                 {
                     Filter = new AvailableFilterViewModel(category);
                     FiltersApplied(this, Filter.SelectedFilter);
@@ -167,7 +168,7 @@ namespace picibird.hbs.viewmodels.filter
             }
             else
             {
-                if (categoryName == FilterCategoryId.digital)
+                if (categoryName == "digital")
                 {
                     Filter = new DigitalFilterVM();
                     FiltersApplied(this, Filter.SelectedFilter);

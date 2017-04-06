@@ -17,12 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Linq;
+using System.Reflection;
 using picibird.hbs.ldu;
 using picibird.shelfhub;
+using picibits.app.services;
+using picibits.app.window;
 using picibits.core;
 using picibits.core.collection;
 using picibits.core.controls;
+using picibits.core.export.instances;
 using picibits.core.mvvm;
 using picibits.core.util;
 using Filter = picibird.hbs.ldu.Filter;
@@ -31,6 +36,45 @@ namespace picibird.hbs.viewmodels.filter
 {
     public class FilterSelectionListViewModel : ItemsViewModel
     {
+
+        public static Size MainWindowActualSize
+        {
+            get
+            {
+                return HBS.ViewModel.ActualSize;
+            }
+        }
+
+        #region MaxHeight
+
+        private double _mMaxHeight;
+
+        public double MaxHeight
+        {
+            get
+            {
+                if (_mMaxHeight <= 0)
+                {
+                    int activeFilterCount = HBS.ViewModel.Filters.Items.Count;
+                    double afShrinkFactor = (activeFilterCount - 1) * (0.15 * MainWindowActualSize.Height);
+                    _mMaxHeight = MainWindowActualSize.Height * 0.65 - afShrinkFactor;
+                }
+                    
+                return _mMaxHeight;
+            }
+            set
+            {
+                if (_mMaxHeight != value)
+                {
+                    var old = _mMaxHeight;
+                    _mMaxHeight = value;
+                    RaisePropertyChanged("MaxHeight", old, value);
+                }
+            }
+        }
+
+        #endregion MaxHeight
+
         public FilterSelectionListViewModel(Facet filterCategory,
             PiciObservableCollection<FacetValue> selectedFilter)
         {

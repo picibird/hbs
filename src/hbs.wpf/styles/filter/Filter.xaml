@@ -145,11 +145,14 @@
                                     <views:View DataContext="{Binding LanguageChooser}" Grid.Row="2" Grid.ColumnSpan="4" />
                                     <!-- date -->
                                     <views:View DataContext="{Binding DateChooser}" Grid.Row="3"  Grid.ColumnSpan="4" />
-                                    
-                                    
-                                    <!-- only available --><!--
+
+
+                                    <!-- only available -->
+                                    <!--
                                     <views:View DataContext="{Binding OnlyAvailableChooser}" Grid.Row="2" Grid.ColumnSpan="4" />
-                                    --><!-- only digital --><!--
+                                    -->
+                                    <!-- only digital -->
+                                    <!--
                                     <views:View DataContext="{Binding OnlyDigitalChooser}" Grid.Row="3" Grid.ColumnSpan="4" />-->
                                 </Grid>
 
@@ -341,13 +344,14 @@
                 <ControlTemplate TargetType="{x:Type ItemsControl}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <!--<ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">-->
-                        <ContentControl x:Name="cc" helper:StateHelper.State="{Binding VisualState}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            MaxHeight="{Binding MaxHeight}">
+                        <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                            <ContentControl x:Name="cc" helper:StateHelper.State="{Binding VisualState}"
                                         Background="Transparent">
-                            <ItemsPresenter />
-                        </ContentControl>
-                        <!--</ScrollViewer>-->
+                                <ItemsPresenter />
+                            </ContentControl>
+                        </ScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

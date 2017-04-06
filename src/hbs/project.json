@@ -4,7 +4,7 @@
     "Flurl.Http": "0.10.1",
     "Newtonsoft.Json": "9.0.1",
     "Nito.AsyncEx": "3.0.1",
-    "picibits": "0.1.43",
+    "picibits": "0.1.46",
     "SimpleInjector": "3.2.0",
     "System.Reactive": "3.0.0"
   },

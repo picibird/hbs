@@ -18,18 +18,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using picibird.hbs.ldu;
 using picibird.shelfhub;
 using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.helper;
 using picibits.core.mvvm;
-using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
     public class FilterViewModel : ButtonViewModel
     {
+
         public FilterViewModel(Facet category = null)
         {
             Category = category;
@@ -45,6 +44,8 @@ namespace picibird.hbs.viewmodels.filter
             TapBehaviour.Tap += OnTap;
             ApplyButtonViewModel.TapBehaviour.Tap += OnApplyTap;
         }
+
+
 
         #region Category
 
@@ -117,6 +118,7 @@ namespace picibird.hbs.viewmodels.filter
         }
 
         #endregion FilterName
+        
 
         #region AppliedInfoString
 

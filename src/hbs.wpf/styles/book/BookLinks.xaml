@@ -48,6 +48,31 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BookLinksSimpleStyle" TargetType="{x:Type ItemsControl}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
+                        <Grid Style="{StaticResource BackCoverDataGridStyle}" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding Title, Mode=OneWay}" Style="{StaticResource BackCoverExtrasTextBoxFatStyle}" 
+                                     TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <Style x:Key="LocationStyle" TargetType="{x:Type ItemsControl}" BasedOn="{StaticResource ViewBaseStyle}">
         <Setter Property="ItemsPanel">

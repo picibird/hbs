@@ -28,7 +28,7 @@ namespace picibird.hbs
             {
                 id = item.Id,
                 recid = item.Id,
-                medium = item.Medium,
+                medium = item.Medium.Title,
                 title = item.Title,
                 title_remainder = item.Subtitle,
                 series_title = new string[] { item.SeriesTitle }.ToList(),
@@ -40,6 +40,29 @@ namespace picibird.hbs
                 pages_number = item.NumberOfPages,
                 shelfhubItem = item
             };
+
+            if (item.Actions != null)
+            {
+                foreach (ShelfhubAction action in item.Actions)
+                {
+                    var queryParams = QueryParams.FromJson(action.Params.ToString());
+                    var client = ShelfhubSearch.createShelfhubClient();
+                    client.QueryAsync(queryParams).ContinueWith((t) =>
+                    {
+                        if (t.Status == TaskStatus.RanToCompletion)
+                        {
+                            QueryResponse response = t.Result;
+                            hit.MultiVolumeLinks = new PiciObservableCollection<Link>(); 
+                            foreach (ShelfhubItem subitem in response.Items)
+                            {
+                                var url = "https://baselbern.swissbib.ch/Record/" + subitem.Id + "/HierarchyTree?recordID=" + subitem.Id;
+                                hit.MultiVolumeLinks.Add(new Link("Band", url, subitem.Title, url, hit));
+                            }
+                        }
+                    });
+                }
+            }
+
             //prepare extras
             if (item.Extras == null) item.Extras = new ObservableCollection<KeyValues>();
             //set ISBNS

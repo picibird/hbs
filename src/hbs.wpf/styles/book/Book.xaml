@@ -394,6 +394,16 @@
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
                                 
+                                
+                                <!-- multivolume works -->
+                                <StackPanel Orientation="Vertical"
+                                            Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <TextBox Text="Bände"
+                                             Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
+                                    <ItemsControl ItemsSource="{Binding Model.MultiVolumeLinks}"
+                                                  Style="{StaticResource BookLinksSimpleStyle}" />
+                                </StackPanel>
+                                
                                 <!-- ISBN  -->
                                 <Rectangle Height="8" />
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"

@@ -135,9 +135,9 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mDepartmentChooser == null)
                 {
-                    mDepartmentChooser = new ChooserButtonViewModel("department",
+                    mDepartmentChooser = new ChooserButtonViewModel("navSub_orange",
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
-                    mDepartmentChooser.Name = "Fachbereich";
+                    mDepartmentChooser.Name = "Thema";
                     mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
                 }
 

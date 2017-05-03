@@ -18,4 +18,6 @@
     <FontFamily x:Key="RobotoSlabLight">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Light.ttf#Roboto Slab</FontFamily>
     <FontFamily x:Key="RobotoSlabThin">/hbs.wpf;component/assets/fonts/robotoSlab/RobotoSlab-Thin.ttf#Roboto Slab</FontFamily>
 
+    <FontFamily x:Key="DotsFont">/hbs.wpf;component/assets/fonts/dots/dotsfont.ttf#dotsfont</FontFamily>
+
 </ResourceDictionary>

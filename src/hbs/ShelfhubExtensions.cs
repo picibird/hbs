@@ -56,7 +56,7 @@ namespace picibird.hbs
                             foreach (ShelfhubItem subitem in response.Items)
                             {
                                 var url = "https://baselbern.swissbib.ch/Record/" + subitem.Id + "/HierarchyTree?recordID=" + subitem.Id;
-                                hit.MultiVolumeLinks.Add(new Link("Band", url, subitem.Title, url, hit));
+                                hit.MultiVolumeLinks.Add(new Link("Band", url, subitem.Title, "", hit));
                             }
                         }
                     });

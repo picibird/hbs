@@ -90,7 +90,7 @@ namespace picibird.hbs
                     Limit = 34,
                     Shelfhub = new ShelfhubParams()
                     {
-                        Service = "ch.swissbib.solr.basel"
+                        Service = "swissbib.basel"
                     }
                 };
                 var queryResult = await shelfhub.QueryAsync(QueryParams);

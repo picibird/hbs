@@ -5,6 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -24,8 +25,8 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
 
                     <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" Background="Transparent">
-                        <TextBox Text="{Binding Filter.Name, Mode=OneWay}" Style="{StaticResource FilterTextBoxStyle}"
-                                 DockPanel.Dock="Left" />
+                        <TextBox Text="{Binding Filter.Name, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=16}"
+                                 Style="{StaticResource FilterTextBoxStyle}" DockPanel.Dock="Left" />
 
                         <Border Width="18" Height="18" Background="Transparent" BorderThickness="1"
                                 BorderBrush="{StaticResource HBS_BLUE_BRUSH}"

@@ -47,14 +47,14 @@
                 <ControlTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.05*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.05*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.1*" />
+                            <RowDefinition Height="0.075*" />
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="0.1*" />
+                            <RowDefinition Height="0.075*" />
                         </Grid.RowDefinitions>
                         <!-- background -->
                         <Rectangle Fill="Black" Opacity="{StaticResource BackgroundOpacity}" Grid.RowSpan="3"
@@ -98,8 +98,8 @@
 
                             <!-- back button -->
                             <Button DockPanel.Dock="Left" Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ChromiumWebBrowser.BackCommand}"
-                                    IsEnabled="{Binding Content.CefBrowser.ChromiumWebBrowser.CanGoBack}"
+                                    Command="{Binding Content.CefBrowser.BackCommand}"
+                                    IsEnabled="{Binding Content.CefBrowser.CanGoBack}"
                                     VerticalAlignment="Center">
                                 <TextBlock Style="{DynamicResource BackFontIcon}"
                                            FontSize="{DynamicResource FontSizeMassive}"
@@ -109,8 +109,8 @@
                             <!-- forward button -->
                             <Button DockPanel.Dock="Left" Margin="20,0,0,0"
                                     Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ChromiumWebBrowser.ForwardCommand}"
-                                    IsEnabled="{Binding Content.CefBrowser.ChromiumWebBrowser.CanGoForward}"
+                                    Command="{Binding Content.CefBrowser.ForwardCommand}"
+                                    IsEnabled="{Binding Content.CefBrowser.CanGoForward}"
                                     VerticalAlignment="Center">
                                 <TextBlock Style="{DynamicResource ForwardFontIcon}"
                                            FontSize="{DynamicResource FontSizeMassive}"
@@ -120,7 +120,8 @@
                             <!-- reload button -->
                             <Button DockPanel.Dock="Left" Margin="20,0,0,0"
                                     Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ChromiumWebBrowser.ReloadCommand}"
+                                    Command="{Binding Content.CefBrowser.ReloadCommand}"
+                                    IsEnabled="{Binding Content.CefBrowser.CanReload}"
                                     VerticalAlignment="Center">
                                 <TextBlock Style="{DynamicResource ReloadFontIcon}"
                                            FontSize="{DynamicResource FontSizeMassive}"
@@ -131,8 +132,8 @@
                             <!-- zoom in -->
                             <Button DockPanel.Dock="Right" Margin="20,0,0,0"
                                     Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ChromiumWebBrowser.ZoomInCommand}"
-                                    VerticalAlignment="Center">
+                                    Command="{Binding Content.CefBrowser.ZoomInCommand}"
+                                    VerticalAlignment="Center" Visibility="Hidden">
                                 <TextBlock Style="{DynamicResource ZoomInFontIcon}"
                                            FontSize="{DynamicResource FontSizeMassive}"
                                            Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
@@ -141,8 +142,8 @@
                             <!-- zoom out -->
                             <Button DockPanel.Dock="Right" Margin="20,0,0,0"
                                     Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ChromiumWebBrowser.ZoomOutCommand}"
-                                    VerticalAlignment="Center">
+                                    Command="{Binding Content.CefBrowser.ZoomOutCommand}"
+                                    VerticalAlignment="Center" Visibility="Hidden">
                                 <TextBlock Style="{DynamicResource ZoomOutFontIcon}"
                                            FontSize="{DynamicResource FontSizeMassive}"
                                            Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />

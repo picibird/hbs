@@ -12,12 +12,12 @@ namespace picibird.hbs.wpf
 
         public HbsWindow() : base()
         {
-            
+
         }
 
         protected override void DisableWpfTabletSupport()
         {
             //base.DisableWpfTabletSupport();
-        } 
+        }
     }
 }

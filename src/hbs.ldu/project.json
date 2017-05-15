@@ -4,7 +4,7 @@
     "Flurl.Http": "0.10.1",
     "Newtonsoft.Json": "9.0.1",
     "Nito.AsyncEx": "3.0.1",
-    "picibits": "0.1.46"
+    "picibits": "0.1.51"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile7": {}

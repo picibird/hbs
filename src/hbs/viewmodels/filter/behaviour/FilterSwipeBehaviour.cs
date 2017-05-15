@@ -165,11 +165,11 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             var vm = GetTransformed();
             var startOpacity = vm.Opacity;
             var ease = AnimationTransitions.CircEaseOut;
-            var easeObject = ArtefactAnimator.AddEase(vm, new[] {"TransformMatrix"}, new object[] {m}, 0.5, ease);
+            var easeObject = ArtefactAnimator.AddEase(vm, new[] { "TransformMatrix" }, new object[] { m }, 0.5, ease);
             easeObject.Update +=
                 (s, progress) =>
                 {
-                    vm.Opacity = (double) Interpolation.Double.Interpolate(startOpacity, opacity, progress);
+                    vm.Opacity = (double)Interpolation.Double.Interpolate(startOpacity, opacity, progress);
                 };
             if (discardOnFinish)
                 easeObject.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
@@ -178,7 +178,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
 
         private void OnSwipeXDelta(double deltaX)
         {
-            OnSwipeXDeltaRelavtive(deltaX/Attached.ActualSize.Width);
+            OnSwipeXDeltaRelavtive(deltaX / Attached.ActualSize.Width);
         }
 
         private void OnSwipeXDeltaRelavtive(double deltaXRel)
@@ -187,7 +187,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
 
         private void OnSwipeCummulatedXDelta(double cummulatedDeltaX)
         {
-            OnSwipeCummulatedXDeltaRelative(cummulatedDeltaX/Attached.ActualSize.Width);
+            OnSwipeCummulatedXDeltaRelative(cummulatedDeltaX / Attached.ActualSize.Width);
         }
 
         private void OnSwipeCummulatedXDeltaRelative(double cummulatedDeltaX)
@@ -207,7 +207,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
         private IMatrix GetTransform(double cummulatedDeltaX)
         {
             var f = MxM.Identity;
-            var translateX = Math.Sign(cummulatedDeltaX)*FVCM.ActualSize.Width;
+            var translateX = Math.Sign(cummulatedDeltaX) * FVCM.ActualSize.Width;
             var t = MxM.Create(translateX, 0);
             var p = Math.Abs(cummulatedDeltaX);
             p = MathX.Clamp(p, 0, 1);

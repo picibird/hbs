@@ -285,6 +285,8 @@
     <Compile Include="converter\StringFormCConverter.cs" />
     <Compile Include="controls\CoverTextBox.cs" />
     <Compile Include="HbsApplication.cs" />
+    <Compile Include="HbsWindow.cs" />
+    <Compile Include="HbsWindows.cs" />
     <Compile Include="helper\KeyUpBinding.cs" />
     <Compile Include="qrcode\QRCodes.cs" />
     <Compile Include="viewmodels\LauncherVM.cs" />

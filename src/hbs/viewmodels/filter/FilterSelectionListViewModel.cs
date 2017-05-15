@@ -22,6 +22,7 @@ using picibird.hbs.ldu;
 using picibits.core;
 using picibits.core.collection;
 using picibits.core.controls;
+using picibits.core.export.instances;
 using picibits.core.mvvm;
 using picibits.core.util;
 
@@ -29,6 +30,42 @@ namespace picibird.hbs.viewmodels.filter
 {
     public class FilterSelectionListViewModel : ItemsViewModel
     {
+
+        public static Size MainWindowActualSize
+        {
+            get { return HBS.ViewModel.ActualSize; }
+        }
+
+        #region MaxHeight
+
+        private double _mMaxHeight;
+
+        public double MaxHeight
+        {
+            get
+            {
+                if (_mMaxHeight <= 0)
+                {
+                    int activeFilterCount = HBS.ViewModel.Filters.Items.Count;
+                    double afShrinkFactor = (activeFilterCount - 1) * (0.15 * MainWindowActualSize.Height);
+                    _mMaxHeight = MainWindowActualSize.Height * 0.65 - afShrinkFactor;
+                }
+
+                return _mMaxHeight;
+            }
+            set
+            {
+                if (_mMaxHeight != value)
+                {
+                    var old = _mMaxHeight;
+                    _mMaxHeight = value;
+                    RaisePropertyChanged("MaxHeight", old, value);
+                }
+            }
+        }
+
+        #endregion MaxHeight
+
         public FilterSelectionListViewModel(FilterCategory filterCategory,
             PiciObservableCollection<Filter> selectedFilter)
         {

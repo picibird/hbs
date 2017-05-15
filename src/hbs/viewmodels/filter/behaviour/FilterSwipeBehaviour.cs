@@ -35,6 +35,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
     public class FilterSwipeBehaviour : Behaviour<ViewModel>
     {
         private double cummulatedX;
+        private double cummulatedY;
 
         private readonly List<double> DeltaX = new List<double>();
 
@@ -94,6 +95,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             if (e.Type == PointerEventType.DOWN)
             {
                 cummulatedX = 0;
+                cummulatedY = 0;
                 var captured = e.Pointer.Capture(Attached.View);
                 lastPoint = e.Pointer.GetPosition(Attached.View);
                 isDown = true;
@@ -104,10 +106,13 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             {
                 var position = e.Pointer.GetPosition(Attached.View);
                 var deltaX = position.X - lastPoint.X;
+                var deltaY = position.Y - lastPoint.Y;
                 DeltaX.Insert(0, deltaX);
                 cummulatedX += deltaX;
+                cummulatedY += deltaY;
                 lastPoint = position;
-                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold)
+                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5 &&
+                    Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
                 {
                     OnSwipeXDelta(deltaX);
                     OnSwipeCummulatedXDelta(cummulatedX);
@@ -115,13 +120,13 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             }
             if (e.Type == PointerEventType.UP && isDown)
             {
-                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold)
+                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5)
                 {
                     var lastDeltaX = DeltaX.FirstOrDefault(dX => dX != 0);
                     var lastDeltaDirection = Math.Sign(lastDeltaX);
                     var cummulatedDirection = Math.Sign(cummulatedX);
                     var swipeOut = lastDeltaDirection == cummulatedDirection;
-                    if (swipeOut)
+                    if (swipeOut && Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
                     {
                         var m = GetTransform(cummulatedDirection);
                         var ani = FinishSwipeWithAnimation(m, 0);
@@ -160,11 +165,11 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             var vm = GetTransformed();
             var startOpacity = vm.Opacity;
             var ease = AnimationTransitions.CircEaseOut;
-            var easeObject = ArtefactAnimator.AddEase(vm, new[] {"TransformMatrix"}, new object[] {m}, 0.5, ease);
+            var easeObject = ArtefactAnimator.AddEase(vm, new[] { "TransformMatrix" }, new object[] { m }, 0.5, ease);
             easeObject.Update +=
                 (s, progress) =>
                 {
-                    vm.Opacity = (double) Interpolation.Double.Interpolate(startOpacity, opacity, progress);
+                    vm.Opacity = (double)Interpolation.Double.Interpolate(startOpacity, opacity, progress);
                 };
             if (discardOnFinish)
                 easeObject.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
@@ -173,7 +178,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
 
         private void OnSwipeXDelta(double deltaX)
         {
-            OnSwipeXDeltaRelavtive(deltaX/Attached.ActualSize.Width);
+            OnSwipeXDeltaRelavtive(deltaX / Attached.ActualSize.Width);
         }
 
         private void OnSwipeXDeltaRelavtive(double deltaXRel)
@@ -182,7 +187,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
 
         private void OnSwipeCummulatedXDelta(double cummulatedDeltaX)
         {
-            OnSwipeCummulatedXDeltaRelative(cummulatedDeltaX/Attached.ActualSize.Width);
+            OnSwipeCummulatedXDeltaRelative(cummulatedDeltaX / Attached.ActualSize.Width);
         }
 
         private void OnSwipeCummulatedXDeltaRelative(double cummulatedDeltaX)
@@ -202,7 +207,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
         private IMatrix GetTransform(double cummulatedDeltaX)
         {
             var f = MxM.Identity;
-            var translateX = Math.Sign(cummulatedDeltaX)*FVCM.ActualSize.Width;
+            var translateX = Math.Sign(cummulatedDeltaX) * FVCM.ActualSize.Width;
             var t = MxM.Create(translateX, 0);
             var p = Math.Abs(cummulatedDeltaX);
             p = MathX.Clamp(p, 0, 1);

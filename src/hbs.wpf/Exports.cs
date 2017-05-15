@@ -36,3 +36,4 @@ using picibird.hbs.wpf.qrcode;
 [assembly: ViewExport(typeof(Bookshelf3DViewModel), typeof(Bookshelf3DView))]
 
 [assembly: ServiceExport(typeof(IQRCodes), typeof(QRCodes))]
+[assembly: ServiceExport(typeof(IWindows), typeof(HbsWindows))]

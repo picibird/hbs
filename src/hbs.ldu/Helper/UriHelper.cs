@@ -158,7 +158,8 @@ namespace picibird.hbs.ldu.Helper
         {
             return new Url(Pazpar2Settings.PAZPAR2_URL)
                 .SetQueryParam("command", "termlist")
-                .SetQueryParam("session", sid);
+                .SetQueryParam("session", sid)
+                .SetQueryParam("num", "100");
         }
 
         public static Url GetRecordUrl(string sid, string recid)

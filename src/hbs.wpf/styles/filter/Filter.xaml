@@ -340,13 +340,14 @@
                 <ControlTemplate TargetType="{x:Type ItemsControl}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <!--<ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">-->
-                        <ContentControl x:Name="cc" helper:StateHelper.State="{Binding VisualState}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            MaxHeight="{Binding MaxHeight}">
+                        <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                            <ContentControl x:Name="cc" helper:StateHelper.State="{Binding VisualState}"
                                         Background="Transparent">
-                            <ItemsPresenter />
-                        </ContentControl>
-                        <!--</ScrollViewer>-->
+                                <ItemsPresenter />
+                            </ContentControl>
+                        </ScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

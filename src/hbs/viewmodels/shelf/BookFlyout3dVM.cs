@@ -72,7 +72,7 @@ namespace picibird.hbs.viewmodels.shelf
         {
             RaisePropertyChanged("Progress", oldProgress, newProgress);
             OpenedBook.OpenedProgress = newProgress;
-            UpdateOpenedBookTransform((float) newProgress);
+            UpdateOpenedBookTransform((float)newProgress);
         }
 
 
@@ -87,11 +87,11 @@ namespace picibird.hbs.viewmodels.shelf
         {
             if (Book != null)
             {
-                var openedBookWidth = (float) (2*Book.CoverWidth + Book.SpineWidth);
-                var openedBookHeight = (float) Book.CoverHeight;
+                var openedBookWidth = (float)(2 * Book.CoverWidth + Book.SpineWidth);
+                var openedBookHeight = (float)Book.CoverHeight;
 
-                var targetX = (float) ((ActualSize.Width - openedBookWidth)*0.5);
-                var targetY = (float) ((ActualSize.Height - openedBookHeight)*0.5);
+                var targetX = (float)((ActualSize.Width - openedBookWidth) * 0.5);
+                var targetY = (float)((ActualSize.Height - openedBookHeight) * 0.5);
 
                 OpenedBookRect = new Rect(targetX, targetY, openedBookWidth, openedBookHeight);
             }
@@ -99,6 +99,7 @@ namespace picibird.hbs.viewmodels.shelf
 
         private void UpdateOpenedBookTransform(float progress)
         {
+            if (OpenedBookRect == null) return;
             //scale
             var openedProgress = 1 - progress;
             var openedScale = MathUtility.Lerp(SelectedBookScale3D.X, 1, openedProgress);
@@ -110,12 +111,12 @@ namespace picibird.hbs.viewmodels.shelf
             var rotationM3D = Matrix3D.CreateFromQuaternion(openedBookQuaternion);
 
             //translation
-            var openedX = MathUtility.Lerp(SelectedBookTranslation3D.X, OpenedBookRect.X + (float) Book.CoverWidth,
+            var openedX = MathUtility.Lerp(SelectedBookTranslation3D.X, OpenedBookRect.X + (float)Book.CoverWidth,
                 openedProgress);
             var openedY = MathUtility.Lerp(SelectedBookTranslation3D.Y, OpenedBookRect.Y, openedProgress);
             var translationMatrix = Matrix3D.CreateTranslation(openedX, openedY, 0);
 
-            OpenedBook.TransformMatrix3D = rotationM3D*scaleMatrix*translationMatrix;
+            OpenedBook.TransformMatrix3D = rotationM3D * scaleMatrix * translationMatrix;
         }
 
         #region OpenedBookProgress

@@ -75,6 +75,10 @@ namespace picibird.hbs
             return hits;
         }
 
+
+        private const string SWISSBIB_BASEL = "swissbib.basel";
+        private const string SWISSBIB_ZUERICH = "swissbib.zuerich";
+
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
             try
@@ -90,7 +94,7 @@ namespace picibird.hbs
                     Limit = 34,
                     Shelfhub = new ShelfhubParams()
                     {
-                        Service = "swissbib.basel"
+                        Service = SWISSBIB_ZUERICH
                     }
                 };
                 var queryResult = await shelfhub.QueryAsync(QueryParams);
@@ -198,7 +202,7 @@ namespace picibird.hbs
                             PageItemCount = 34
                         };
                         Shelfhub shelfhub = createShelfhubClient();
-                        var coverResponse = await shelfhub.CoverAsync(coverParams);
+                        var coverResponse = await shelfhub.GetCoversAsync(coverParams);
                         var covers = coverResponse.Covers;
                         foreach (Cover c in covers)
                         {

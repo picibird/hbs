@@ -164,7 +164,7 @@ namespace picibird.hbs
                 progress = 1.0,
                 hits = hits.Count
             };
-            Callback.ResultCount = response.ItemsFound;
+            Callback.ResultCount = (int) response.ItemsFound;
             double maxPageIndex= Math.Ceiling(response.ItemsFound / 17.0d) - 1.0d;
             maxPageIndex = Math.Max(maxPageIndex, 0);
             Callback.MaxPageIndex = (int)maxPageIndex;
@@ -198,7 +198,7 @@ namespace picibird.hbs
                             PageItemCount = 34
                         };
                         Shelfhub shelfhub = createShelfhubClient();
-                        var coverResponse = await shelfhub.CoverAsync(coverParams);
+                        var coverResponse = await shelfhub.GetCoversAsync(coverParams);
                         var covers = coverResponse.Covers;
                         foreach (Cover c in covers)
                         {

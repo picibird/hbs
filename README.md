@@ -40,7 +40,7 @@ We host our own [nuget server](http://nuget.picibits.com/api/v2/) to distribute 
 
 * visual studio 2015 (uses .net 4.6 portable class libraries)
 * nuget 3.0 or later
-* restore nuget packages if not automatically
+* [blend sdk 4](https://www.microsoft.com/de-de/download/details.aspx?id=10801)
 * set **hbs.wpf.demo** as startup project
 
 ## License ##

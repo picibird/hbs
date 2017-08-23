@@ -78,7 +78,7 @@ namespace picibird.hbs.viewmodels.filter
         public FilterSelectionListViewModel(Facet filterCategory,
             PiciObservableCollection<FacetValue> selectedFilter)
         {
-            CategoryName = filterCategory.Key;
+            CategoryName = Pici.Resources.Find(filterCategory.Key);
             Style = new ViewStyle("FilterSelectionListViewStyle");
             VisualState = "Expanded";
 

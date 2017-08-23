@@ -39,11 +39,14 @@ namespace picibird.hbs.viewmodels.filter
         {
             if (filterCategory.Key == CategoryName)
             {
-                Name = filterCategory.Name;
+                var res = Pici.Resources.Find(filterCategory.Name);
+                Name = res;
                 if (filterCategory.Values != null)
                     Frequency = filterCategory.Values.Count;
                 else
                     Frequency = 0;
+
+                
             }
         }
 

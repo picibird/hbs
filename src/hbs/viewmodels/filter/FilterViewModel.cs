@@ -23,6 +23,7 @@ using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.helper;
 using picibits.core.mvvm;
+using picibits.core;
 
 namespace picibird.hbs.viewmodels.filter
 {
@@ -37,7 +38,7 @@ namespace picibird.hbs.viewmodels.filter
             VisualState = FilterVisualStates.EDIT;
             if (category != null)
             {
-                FilterName = Category.Name;
+                FilterName = Pici.Resources.Find(Category.Name);
                 foreach (var filter in category.Values)
                     OnCategoryFilterAdded(filter);
             }

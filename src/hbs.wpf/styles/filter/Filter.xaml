@@ -253,7 +253,7 @@
                                     HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Vertical">
                             <Rectangle Height="15" />
-                            <TextBox Text="{Binding Category.Name, Mode=OneWay}"
+                            <TextBox Text="{Binding FilterName, Mode=OneWay}"
                                      Style="{StaticResource FilterTitleTextBoxStyle}"
                                      Visibility="{Binding FilterName, Converter={StaticResource CollapsedIfNoDataConverter}}" />
                             <!-- selected filters string -->

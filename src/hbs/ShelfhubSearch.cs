@@ -17,6 +17,9 @@ namespace picibird.hbs
 {
     public class ShelfhubSearch : Search, IShelfhubSearch
     {
+
+        public static string SHELFHUB_SERVER_URI_OVERRIDE;
+
         private SynchronizationContext syncContext { get; set; }
 
         private readonly ConcurrentCache<int, ItemList<Hit>> PAGE_HITS_CACHE;
@@ -75,6 +78,16 @@ namespace picibird.hbs
             return hits;
         }
 
+
+        private const string SWISSBIB_BASEL = "swissbib.basel";
+        private const string SWISSBIB_ZUERICH = "swissbib.zuerich";
+        private const string SWISSBIB_STGALLEN = "swissbib.stgallen";
+
+        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams()
+        {
+            Service = SWISSBIB_STGALLEN
+        };
+
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
             try
@@ -88,10 +101,7 @@ namespace picibird.hbs
                     Filters = activeFilters?.ToObservableCollection(),
                     Offset = 0,
                     Limit = 34,
-                    Shelfhub = new ShelfhubParams()
-                    {
-                        Service = "swissbib.basel"
-                    }
+                    Shelfhub = PROFILE_ACTIVE
                 };
                 var queryResult = await shelfhub.QueryAsync(QueryParams);
                 await AfterShelfhubSearch(queryResult, reason);
@@ -223,8 +233,11 @@ namespace picibird.hbs
         {
             var shelfhub = new Shelfhub();
 #if DEBUG
-            shelfhub.BaseUrl = @"http://localhost:8080/api";
+            //shelfhub.BaseUrl = @"http://localhost:8080/api";
+            //shelfhub.BaseUrl = @"http://dev.shelfhub.io/api";
 #endif
+            if (SHELFHUB_SERVER_URI_OVERRIDE != null)
+                shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
             return shelfhub;
         }
 

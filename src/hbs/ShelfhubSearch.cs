@@ -174,7 +174,7 @@ namespace picibird.hbs
                 progress = 1.0,
                 hits = hits.Count
             };
-            Callback.ResultCount = (int)response.ItemsFound;
+            Callback.ResultCount = (int) response.ItemsFound;
             double maxPageIndex= Math.Ceiling(response.ItemsFound / 17.0d) - 1.0d;
             maxPageIndex = Math.Max(maxPageIndex, 0);
             Callback.MaxPageIndex = (int)maxPageIndex;

@@ -136,13 +136,20 @@ namespace picibird.hbs.viewmodels.filter
                 if (mDepartmentChooser == null)
                 {
                     var filterCat = "navSub_orange";
-                    if(ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH)
+                    var name = "Thema";
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH)
                     {
                         filterCat = "classif_ddc";
+                        name = "DDC";
+                    }
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_STGALLEN)
+                    {
+                        filterCat = "classif_rvk";
+                        name = "RVK";
                     }
                     mDepartmentChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
-                    mDepartmentChooser.Name = "Thema";
+                    mDepartmentChooser.Name = name;
                     mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
                 }
 

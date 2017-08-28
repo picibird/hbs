@@ -193,6 +193,26 @@ namespace picibird.hbs.viewmodels
 
         #endregion SearchButtonViewModel
 
+
+        #region SearchButtonViewModel
+
+        private LanguageButtonViewModel mLanguageButtonViewModel;
+
+        public LanguageButtonViewModel LanguageButtonViewModel
+        {
+            get
+            {
+                if (mLanguageButtonViewModel == null)
+                {
+                    mLanguageButtonViewModel = new LanguageButtonViewModel();
+                    mLanguageButtonViewModel.Style = new ViewStyle("LanguageButtonStyle");
+                }
+                return mLanguageButtonViewModel;
+            }
+        }
+
+        #endregion SearchButtonViewModel
+
         #region BlackBlendingViewModel
 
         private BlackBlendingViewModel mBlackBlendingViewModel;

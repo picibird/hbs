@@ -23,5 +23,7 @@ namespace picibird.hbs.viewmodels.search
         }
 
         #endregion ClickCommand
+
+        
     }
 }

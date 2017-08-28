@@ -178,7 +178,7 @@
                                         <VisualStateGroup.Transitions>
                                             <VisualTransition GeneratedDuration="0:0:0.3">
                                                 <ei:ExtendedVisualStateManager.TransitionEffect>
-                                                    <ee:FadeTransitionEffect />
+                                                    <ee:FadeTransitionEffect/>
                                                 </ei:ExtendedVisualStateManager.TransitionEffect>
                                             </VisualTransition>
                                         </VisualStateGroup.Transitions>

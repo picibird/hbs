@@ -21,6 +21,7 @@ using System;
 using picibird.shelfhub;
 using picibits.core.mvvm;
 using Filter = picibird.hbs.ldu.Filter;
+using picibits.core;
 
 namespace picibird.hbs.viewmodels.filter
 {

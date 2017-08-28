@@ -103,6 +103,24 @@
         </Setter>
     </Style>
 
+    <Style x:Key="LanguageButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}">
+                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
+                            Background="{StaticResource HBS_BLUE_BRUSH}" Margin="0,0,0,0">
+                            <Label Content="{Binding Text}" Margin="10,0,10,0"
+                               Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
+                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoLight}"
+                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        </Border>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="BibShelfListButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
         <Setter Property="IsEnabled" Value="true" />
         <Setter Property="Template">

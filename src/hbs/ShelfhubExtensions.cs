@@ -11,6 +11,7 @@ using picibird.shelfhub;
 using picibits.core.collection;
 using picibits.core.controls3D;
 using Link = picibird.hbs.ldu.Link;
+using Newtonsoft.Json.Linq;
 
 namespace picibird.hbs
 {
@@ -19,6 +20,11 @@ namespace picibird.hbs
         public static PiciObservableCollection<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source)
         {
             return new PiciObservableCollection<TSource>(source);
+        }
+
+        public static Dictionary<string, string> ToDictionary(this object dict)
+        {
+            return (dict as JObject).ToObject<Dictionary<string, string>>();
         }
 
         public static Hit ToHit(this ShelfhubItem item)
@@ -52,7 +58,7 @@ namespace picibird.hbs
                         if (t.Status == TaskStatus.RanToCompletion)
                         {
                             QueryResponse response = t.Result;
-                            hit.MultiVolumeLinks = new PiciObservableCollection<Link>(); 
+                            hit.MultiVolumeLinks = new PiciObservableCollection<Link>();
                             foreach (ShelfhubItem subitem in response.Items)
                             {
                                 var url = "https://baselbern.swissbib.ch/Record/" + subitem.Id + "/HierarchyTree?recordID=" + subitem.Id;

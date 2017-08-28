@@ -33,6 +33,8 @@ namespace picibird.hbs
             PAGE_HITS_CACHE = new ConcurrentCache<int, ItemList<Hit>>(async key => await LoadPageHitsAsync(key));
         }
 
+
+
         private List<Filter> activeFilters;
 
         protected override void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
@@ -61,14 +63,15 @@ namespace picibird.hbs
 
         private async Task<ItemList<Hit>> LoadPageHitsAsync(int index)
         {
-            Shelfhub shelfhub = createShelfhubClient();
+            var shelfhub = createShelfhubClient();
             var queryParams = new QueryParams()
             {
                 Query = QueryParams.Query,
                 Offset = index * 17,
                 Filters = activeFilters?.ToObservableCollection(),
                 Limit = 17,
-                Shelfhub = QueryParams.Shelfhub
+                Shelfhub = QueryParams.Shelfhub,
+                Locale = Pici.Resources.CultureInfo.Name
             };
             var response = await shelfhub.QueryAsync(queryParams);
             var items = response.Items;
@@ -83,7 +86,7 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
 
-        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
 
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
@@ -91,14 +94,15 @@ namespace picibird.hbs
             {
                 BeforeShelfhubSearch(searchText, reason);
                 PAGE_HITS_CACHE.Clear();
-                Shelfhub shelfhub = createShelfhubClient();
+                var shelfhub = createShelfhubClient();
                 QueryParams = new QueryParams()
                 {
                     Query = searchText,
                     Filters = activeFilters?.ToObservableCollection(),
                     Offset = 0,
                     Limit = 34,
-                    Shelfhub = PROFILE_ACTIVE
+                    Shelfhub = PROFILE_ACTIVE,
+                    Locale = Pici.Resources.CultureInfo.Name
                 };
                 var queryResult = await shelfhub.QueryAsync(QueryParams);
                 await AfterShelfhubSearch(queryResult, reason);
@@ -162,6 +166,8 @@ namespace picibird.hbs
             //apply facets
             foreach (var facet in facets)
             {
+                foreach(var fv in facet.Values)
+                    fv.Name = Pici.Resources.Find(fv.Name);
                 FilterList.Add(facet);
             }
 
@@ -204,7 +210,7 @@ namespace picibird.hbs
                             Ids = new ObservableCollection<CoverId>(coverIds),
                             PageItemCount = 34
                         };
-                        Shelfhub shelfhub = createShelfhubClient();
+                        var shelfhub = createShelfhubClient();
                         var coverResponse = await shelfhub.GetCoversAsync(coverParams);
                         var covers = coverResponse.Covers;
                         foreach (Cover c in covers)
@@ -226,15 +232,16 @@ namespace picibird.hbs
             });
         }
 
-        public static Shelfhub createShelfhubClient()
+        public static picibird.shelfhub.Shelfhub createShelfhubClient()
         {
-            var shelfhub = new Shelfhub();
+            var shelfhub = new picibird.shelfhub.Shelfhub();
+            if (SHELFHUB_SERVER_URI_OVERRIDE != null)
+                shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
 #if DEBUG
             shelfhub.BaseUrl = @"http://localhost:8080/api";
             //shelfhub.BaseUrl = @"http://dev.shelfhub.io/api";
 #endif
-            if (SHELFHUB_SERVER_URI_OVERRIDE != null)
-                shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
+
             return shelfhub;
         }
 

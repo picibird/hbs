@@ -18,6 +18,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -44,6 +45,25 @@ namespace picibird.hbs.wpf.converter
                 if (!boolValue)
                     return Visibility.Collapsed;
             }
+            if (value is Array)
+            {
+                var arrayValue = (Array)value;
+                if (arrayValue.Length == 0)
+                    return Visibility.Collapsed;
+            }
+            if (value is IList)
+            {
+                var listValue = (IList)value;
+                if (listValue.Count == 0)
+                    return Visibility.Collapsed;
+            }
+            if (value is ICollection)
+            {
+                var collValue = (ICollection)value;
+                if (collValue.Count == 0)
+                    return Visibility.Collapsed;
+            }
+
             return Visibility.Visible;
         }
 

@@ -23,40 +23,61 @@ using picibits.bib;
 using picibits.core;
 using picibits.core.intent;
 using picibits.core.mvvm;
+using picibits.app.behaviour;
+using picibits.app.mvvm;
+using picibits.core.helper;
 
 namespace picibird.hbs.viewmodels.availability
 {
     public class AvailabilityVM : ViewModel
     {
+
+        public event EventHandler Clicked;
+
+        #region ClickCommand
+
+        private DelegateCommand mClickCommand;
+
+        public DelegateCommand ClickCommand
+        {
+            get
+            {
+                if (mClickCommand == null)
+                    mClickCommand = new DelegateCommand((param) => Clicked?.Invoke(this, EventArgs.Empty));
+                return mClickCommand;
+            }
+        }
+
+        #endregion ClickCommand
+
         public AvailabilityVM(HistomatColorScheme colorScheme, AvailabilityInfo info)
         {
             Style = new ViewStyle("AvailabilityViewStyle");
             CoverColorScheme = colorScheme;
             Model = info;
-            //Pointing.IsEnabled = true;
-            //Manipulation.IsEnabled = true;
-            //TapBehaviour.Tap += OnTap;
+            Clicked += OnClicked;
         }
 
-        private void OnTap(object sender, System.EventArgs e)
+        private void OnClicked(object sender, EventArgs e)
         {
             var av = Model as AvailabilityInfo;
             if (av != null)
             {
                 Uri uri = null;
-                if (Uri.TryCreate(av.Href, UriKind.Absolute, out uri))
+                if (Uri.TryCreate(av.Url, UriKind.Absolute, out uri))
                 {
                     Intent openUrlIntent = new Intent(Intent.ACTION_OPEN, uri);
                     openUrlIntent.AddExtra("title", av.Signature);
-                    openUrlIntent.AddExtra("subtitle", av.Href);
+                    openUrlIntent.AddExtra("subtitle", av.Url);
                     Pici.Intent.Send(openUrlIntent);
                 }
                 else
                 {
-                    Pici.Log.warn(typeof(AvailabilityInfo), "cannot parse availability href to uri: {0}", av.Href);
+                    Pici.Log.warn(typeof(AvailabilityInfo), "cannot parse availability href to uri: {0}", av.Url);
                 }
             }
         }
+
 
         public HistomatColorScheme CoverColorScheme { get; private set; }
     }

@@ -232,6 +232,7 @@
     <EmbeddedResource Include="resources\department.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>department.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\department.resx">
       <Generator>ResXFileCodeGenerator</Generator>

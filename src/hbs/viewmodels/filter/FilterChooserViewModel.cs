@@ -24,6 +24,7 @@ using picibird.shelfhub;
 using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.mvvm;
+using picibits.core;
 
 namespace picibird.hbs.viewmodels.filter
 {
@@ -136,17 +137,15 @@ namespace picibird.hbs.viewmodels.filter
                 if (mDepartmentChooser == null)
                 {
                     var filterCat = "navSub_orange";
-                    var name = "Thema";
                     if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH)
                     {
                         filterCat = "classif_ddc";
-                        name = "DDC";
                     }
                     if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_STGALLEN)
                     {
                         filterCat = "classif_rvk";
-                        name = "RVK";
                     }
+                    var name  = Pici.Resources.Find(filterCat);
                     mDepartmentChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle("ChooserButtonWithCountViewStyle"));
                     mDepartmentChooser.Name = name;

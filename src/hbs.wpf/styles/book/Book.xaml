@@ -216,6 +216,8 @@
     </Style>
 
     <!-- BACK COVER -->
+    
+    <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="Purple" />
 
     <Style x:Key="BackCoverStyle" TargetType="{x:Type Control}">
         <Setter Property="Template">
@@ -369,27 +371,37 @@
                                                   Style="{StaticResource LocationStyle}" />
                                 </StackPanel>
                                 
+                                <!-- ISBN  -->
+                                
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}" 
+                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[isbn]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
+                                
                                 <!-- availability  -->
-                                <Rectangle Height="8" />
-                                <views:ItemsView DataContext="{Binding Availabilities}"
+                                <views:ItemsView DataContext="{Binding Availabilities}" Margin="0,20,0,0"
                                            Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
                                 
                                 
                                 <!-- Full Text Links -->
-                                <Rectangle Height="8" />
-                                <StackPanel Orientation="Vertical"
+                                
+                                <StackPanel Orientation="Vertical" Margin="0,10,0,0"
                                             Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
-                                    <TextBox Text="{Binding Resources[fulltext]}"
-                                             Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
-                                    <ItemsControl ItemsSource="{Binding Model.LinksFullText}"
-                                                  Style="{StaticResource BookLinksStyle}" />
+                                    <Rectangle Height="4"/>
+                                    <TextBox Text="{Binding Resources[fulltext]}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
+                                    <ItemsControl ItemsSource="{Binding Model.LinksFullText}" Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
 
                                 <!-- Other Links -->
-                                <StackPanel Orientation="Vertical"
+                                <StackPanel Orientation="Vertical" Margin="0,20,0,0"
                                             Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
-                                    <TextBox Text="{Binding Resources[links]}"
-                                             Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
@@ -404,19 +416,7 @@
                                                   Style="{StaticResource BookLinksSimpleStyle}" />
                                 </StackPanel>
                                 
-                                <!-- ISBN  -->
-                                <Rectangle Height="8" />
-                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
-                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Resources[isbn]}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
-                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
-                                </Grid>
+                                
 
                                 <!-- description  -->
                                 <Rectangle Height="8" />
@@ -453,7 +453,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
     <!-- EDGES -->
 
     <Style x:Key="EdgePagesStyle" TargetType="{x:Type Control}">

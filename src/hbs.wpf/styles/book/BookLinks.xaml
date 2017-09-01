@@ -43,8 +43,8 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}">
-                        <Border CornerRadius="{StaticResource CornerRadiusDefault}" 
+                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}" Margin="0,0,0,5">
+                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
                                 Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}">
                             <Label Content="{Binding Title}" Margin="10,0,10,0"
                                FontSize="{StaticResource FilterFontSize}" FontFamily="{StaticResource RobotoMedium}"
@@ -81,7 +81,7 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
+                    <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}" Margin="0,0,0,5">
                         <Grid Style="{StaticResource BackCoverDataGridStyle}" Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

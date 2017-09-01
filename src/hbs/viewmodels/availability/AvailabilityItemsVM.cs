@@ -26,6 +26,7 @@ using picibird.hbs.ldu;
 using picibits.app.animation;
 using picibits.core.controls;
 using picibits.core.mvvm;
+using picibits.core;
 
 namespace picibird.hbs.viewmodels.availability
 {
@@ -75,7 +76,7 @@ namespace picibird.hbs.viewmodels.availability
 
         private void UpdateTitle(Hit hit)
         {
-            var title = "Verfügbarkeit";
+            var title = Pici.Resources.Find("availability");
             if (hit != null)
             {
                 var swb = hit.GetLocationWithSource(Sources.SWB);

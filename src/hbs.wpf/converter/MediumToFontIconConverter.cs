@@ -35,6 +35,10 @@ namespace picibird.hbs.wpf.converter
             {
                 var medium = value as string;
                 medium = StringHelper.RemoveWhitespace(medium);
+
+                if (medium == "BK020053") return "k";
+                if (medium.StartsWith("BK020")) return "k";
+
                 switch (medium)
                 {
                     case "book":

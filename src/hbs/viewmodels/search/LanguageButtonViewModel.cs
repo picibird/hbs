@@ -48,14 +48,22 @@ namespace picibird.hbs.viewmodels.search
             AvailableLanguages.RemoveAt(0);
             AvailableLanguages.Add(buf);
             Pici.Resources.CultureInfo = AvailableLanguages[0];
+            Events.OnIdleOnce(() => HBS.ViewModel.OnSearch());
         }
 
 
         private void OnCultureChanged(System.Globalization.CultureInfo sender, System.Globalization.CultureInfo param)
         {
-            var languageTitle = Pici.Resources.CultureInfo.Name;
+            var languageTitle = Pici.Resources.CultureInfo.Name.Substring(0, 2);
+            while (!AvailableLanguages[0].Name.StartsWith(languageTitle))
+            {
+                var buf = AvailableLanguages[0];
+                AvailableLanguages.RemoveAt(0);
+                AvailableLanguages.Add(buf);
+            }
             languageTitle = Pici.Resources.Find(languageTitle);
             Text = languageTitle;
+
         }
     }
 }

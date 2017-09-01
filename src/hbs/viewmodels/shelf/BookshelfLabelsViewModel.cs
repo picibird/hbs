@@ -157,11 +157,13 @@ namespace picibird.hbs.viewmodels.shelf
 
         private string GetMedium(Hit hit)
         {
-            return hit.medium;
+            return hit.mediumCode;
         }
 
         private bool GetIsOnlineAvailable(Hit hit)
         {
+            if (hit.mediumCode.Equals("BK020053"))
+                return true;
             return hit.medium == null ? false : hit.medium.Equals("ebook");
         }
 

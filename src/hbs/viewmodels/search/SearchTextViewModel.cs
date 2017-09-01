@@ -22,6 +22,7 @@ using System.Windows.Input;
 using picibits.core.helper;
 using picibits.core.mvvm;
 using picibits.core.util;
+using picibits.core;
 
 namespace picibird.hbs.viewmodels.search
 {
@@ -93,6 +94,7 @@ namespace picibird.hbs.viewmodels.search
             EnterSearchCommand = new EnterSearchCommand();
             GotFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = true; });
             LostFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = false; });
+            Pici.Resources.CultureChanged += (s, p) => OnSearchTextChanged(SearchText, SearchText);
         }
     }
 

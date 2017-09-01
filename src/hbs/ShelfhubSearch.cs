@@ -99,6 +99,7 @@ namespace picibird.hbs
                 {
                     Query = searchText,
                     Filters = activeFilters?.ToObservableCollection(),
+                    FiltersEnabled = false,
                     Offset = 0,
                     Limit = 34,
                     Shelfhub = PROFILE_ACTIVE,

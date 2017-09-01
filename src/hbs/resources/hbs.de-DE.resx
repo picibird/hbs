@@ -228,4 +228,10 @@
   <data name="locations" xml:space="preserve">
     <value>Standorte</value>
   </data>
+  <data name="apply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

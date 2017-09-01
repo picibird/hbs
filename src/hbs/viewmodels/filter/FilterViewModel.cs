@@ -86,7 +86,7 @@ namespace picibird.hbs.viewmodels.filter
                                                       newVisualState.Equals(FilterVisualStates.Delete);
             if (newVisualState.Equals(FilterVisualStates.Delete))
             {
-                ApplyButtonViewModel.Text = "Löschen";
+                ApplyButtonViewModel.Text = Pici.Resources.Find("delete");
                 Timer.OnceAfter(3000, () =>
                 {
                     if (VisualState == FilterVisualStates.Delete)
@@ -97,7 +97,7 @@ namespace picibird.hbs.viewmodels.filter
             }
             if (newVisualState.Equals(FilterVisualStates.EDIT))
             {
-                ApplyButtonViewModel.Text = "Anwenden";
+                ApplyButtonViewModel.Text = Pici.Resources.Find("apply");
             }
         }
 
@@ -120,7 +120,7 @@ namespace picibird.hbs.viewmodels.filter
         }
 
         #endregion FilterName
-        
+
 
         #region AppliedInfoString
 
@@ -152,7 +152,7 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mApplyButtonViewModel == null)
                 {
-                    mApplyButtonViewModel = new ButtonViewModel("Anwenden");
+                    mApplyButtonViewModel = new ButtonViewModel(Pici.Resources.Find("apply"));
                     mApplyButtonViewModel.Style = new ViewStyle("FilterButtonViewStyle");
                     mApplyButtonViewModel.TapBehaviour.Tap += OnApplyTap;
                 }

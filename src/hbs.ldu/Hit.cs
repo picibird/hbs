@@ -102,6 +102,7 @@ namespace picibird.hbs.ldu
         [XmlElement("md-medium")]
         [JsonProperty("md_medium")]
         public string medium { get; set; }
+        public string mediumCode { get; set; }
 
         [XmlElement("md-series-title")]
         [JsonProperty("md_series_title")]

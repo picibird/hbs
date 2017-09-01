@@ -20,7 +20,7 @@ namespace picibird.hbs.resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class hbs {
@@ -58,6 +58,15 @@ namespace picibird.hbs.resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to apply.
+        /// </summary>
+        internal static string apply {
+            get {
+                return ResourceManager.GetString("apply", resourceCulture);
             }
         }
         
@@ -103,6 +112,15 @@ namespace picibird.hbs.resources {
         internal static string date {
             get {
                 return ResourceManager.GetString("date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        internal static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
             }
         }
         

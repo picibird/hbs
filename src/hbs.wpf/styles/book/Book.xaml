@@ -175,7 +175,7 @@
                                 <!-- medium icon & name-->
                                 <TextBlock Style="{StaticResource FontIconTextblockStyleExtrem}"
                                            HorizontalAlignment="Center"
-                                           Text="{Binding Model.medium, Converter={StaticResource MediumToFontIconConverter}}"
+                                           Text="{Binding Model.mediumCode, Converter={StaticResource MediumToFontIconConverter}}"
                                            Foreground="{Binding Model.CoverColorScheme.Primary}" />
                                 <TextBox Text="{Binding Model.Medium, Mode=OneWay}"
                                          Style="{StaticResource SpineTitleTextBoxStyle}"
@@ -385,35 +385,33 @@
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 
+                                <Rectangle Height="10"/>
+                                
                                 <!-- availability  -->
-                                <views:ItemsView DataContext="{Binding Availabilities}" Margin="0,20,0,0"
+                                <views:ItemsView DataContext="{Binding Availabilities}" 
                                            Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
                                 
                                 
                                 <!-- Full Text Links -->
                                 
-                                <StackPanel Orientation="Vertical" Margin="0,10,0,0"
-                                            Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Rectangle Height="4"/>
                                     <TextBox Text="{Binding Resources[fulltext]}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.LinksFullText}" Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
 
                                 <!-- Other Links -->
-                                <StackPanel Orientation="Vertical" Margin="0,20,0,0"
-                                            Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Margin="0,20,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
                                 
                                 
                                 <!-- multivolume works -->
-                                <StackPanel Orientation="Vertical"
-                                            Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <TextBox Text="Bände"
                                              Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
-                                    <ItemsControl ItemsSource="{Binding Model.MultiVolumeLinks}"
-                                                  Style="{StaticResource BookLinksSimpleStyle}" />
+                                    <ItemsControl ItemsSource="{Binding Model.MultiVolumeLinks}" Style="{StaticResource BookLinksSimpleStyle}" />
                                 </StackPanel>
                                 
                                 

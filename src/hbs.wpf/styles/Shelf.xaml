@@ -27,7 +27,7 @@
     </Style>
 
     <Style x:Key="ShelfLabelLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
         <Setter Property="FontSize" Value="{StaticResource ShelfLabelFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -70,13 +70,13 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 
                         <TextBlock Style="{StaticResource FontIconTextblockStyle}" VerticalAlignment="Center"
-                                   Text="{Binding Medium, Converter={StaticResource MediumToFontIconConverter}}" />
+                                   Text="{Binding Medium, Converter={StaticResource MediumToFontIconConverter}}"/>
+
+                        <Label Style="{StaticResource ShelfLabelLabelStyle}" VerticalAlignment="Center" Content="{Binding Resources[online]}" Margin="5,0,0,0"
+                                   Visibility="{Binding IsOnlineAvailable, Converter={StaticResource CollapsedNoDataConverter}}" />
 
                         <Label Content="{Binding Info}" Style="{StaticResource ShelfLabelLabelStyle}" Margin="10,0"
                                FontFamily="{StaticResource RobotoBold}" VerticalAlignment="Center" />
-
-                        <TextBlock Style="{DynamicResource CloudFontIcon}" VerticalAlignment="Center"
-                                   Visibility="{Binding IsOnlineAvailable, Converter={StaticResource CollapsedNoDataConverter}}" />
 
                         <Control Style="{StaticResource AvailabilityIcon}" VerticalAlignment="Center"
                                  Visibility="{Binding Availability, Converter={StaticResource CollapsedNoDataConverter}}" />

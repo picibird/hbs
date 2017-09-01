@@ -246,6 +246,7 @@
     <EmbeddedResource Include="resources\hbs.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>hbs.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="resources\language.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>

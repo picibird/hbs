@@ -12,6 +12,7 @@ using picibits.core.collection;
 using picibits.core.controls3D;
 using Link = picibird.hbs.ldu.Link;
 using Newtonsoft.Json.Linq;
+using picibits.core;
 
 namespace picibird.hbs
 {
@@ -35,6 +36,7 @@ namespace picibird.hbs
                 id = item.Id,
                 recid = item.Id,
                 medium = item.Medium.Title,
+                mediumCode = item.Medium.Code,
                 title = item.Title,
                 title_remainder = item.Subtitle,
                 series_title = new string[] { item.SeriesTitle }.ToList(),
@@ -85,7 +87,8 @@ namespace picibird.hbs
                 hit.Links = new PiciObservableCollection<Link>();
                 foreach (var link in item.Links)
                 {
-                    hit.Links.Add(new Link(link.Type.ToString(), link.Url, link.Title, "", hit));
+                    var title = Pici.Resources.Find(link.Title);
+                    hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit));
                 }
             }
             //add availability links

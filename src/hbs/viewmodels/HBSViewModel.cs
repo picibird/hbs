@@ -88,7 +88,7 @@ namespace picibird.hbs.viewmodels
             OnSearch();
         }
 
-        private void OnSearch()
+        public void OnSearch()
         {
             OnSearch(SearchBoxTextViewModel.SearchText);
         }

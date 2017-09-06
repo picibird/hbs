@@ -157,7 +157,7 @@
 
                                 <Border x:Name="ClosedLayer" Margin="0,-15,0,0" Padding="5"
                                         Background="{StaticResource HBS_BLUE_BRUSH}">
-                                    <TextBox Text="Filter" Style="{StaticResource FilterTitleTextBoxStyle}"
+                                    <TextBox Text="{Binding Resources[Filter]}" Style="{StaticResource FilterTitleTextBoxStyle}"
                                              Foreground="{StaticResource HBS_WHITE_BRUSH}"
                                              HorizontalContentAlignment="Left" VerticalContentAlignment="Top" />
                                 </Border>

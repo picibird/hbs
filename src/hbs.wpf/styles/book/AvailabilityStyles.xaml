@@ -20,7 +20,7 @@
         <Setter Property="CanContentScroll" Value="False" />
         <Setter Property="PanningMode" Value="HorizontalOnly" />
     </Style>
-    
+
 
     <Style x:Key="AvailabilityTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
         <Setter Property="MaxWidth" Value="{StaticResource AvailabilityMaxWidth}" />
@@ -39,9 +39,9 @@
 
     <Style x:Key="AvailabilityForegroundTextBoxStyle" TargetType="{x:Type TextBox}"
            BasedOn="{StaticResource AvailabilityTextBoxStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="Foreground" Value="{Binding CoverColorScheme.Primary}" />
-        <Setter Property="Background" Value="{Binding CoverColorScheme.Secondary}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="Foreground" Value="{Binding CoverColorScheme.Secondary}" />
+        <!--<Setter Property="Background" Value="{Binding CoverColorScheme.Secondary}" />-->
     </Style>
 
 
@@ -81,9 +81,13 @@
                         <Border BorderBrush="{Binding CoverColorScheme.Secondary}" BorderThickness="1" Margin="0,0,6,0" Background="Transparent">
                             <StackPanel Orientation="Vertical">
                                 <TextBox Text="{Binding Model.Signature}" Style="{StaticResource AvailabilityTextBoxStyle}" />
-                                <TextBox Text="{Binding Model.Status}"
-                                     Style="{StaticResource AvailabilityForegroundTextBoxStyle}" />
+                                <!--<Border BorderBrush="{Binding CoverColorScheme.Secondary}" BorderThickness="2">
+                                    <TextBox Text="{Binding Model.Status}" Style="{StaticResource AvailabilityForegroundTextBoxStyle}" />
+                                </Border>-->
+
+                                <TextBox Text="{Binding Model.Status}" Style="{StaticResource AvailabilityForegroundTextBoxStyle}" />
                                 <TextBox Text="{Binding Model.Info}" Style="{StaticResource AvailabilityTextBoxStyle}" />
+
                                 <Border Background="{Binding CoverColorScheme.Secondary}" Margin="10,0,10,10"
                                         Visibility="{Binding Model.Url, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Label Content="{Binding Model.UrlTitle}" Foreground="{Binding CoverColorScheme.Primary}"

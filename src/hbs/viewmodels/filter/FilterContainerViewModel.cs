@@ -243,10 +243,10 @@ namespace picibird.hbs.viewmodels.filter
         {
             ChooserLoadedTransition = new TransformTransition(chooser)
             {
-                FromX = 1.2,
+                FromX = 1.3,
                 FromY = -0.2,
                 FromAngle = -50,
-                ToX = 0.7,
+                ToX = 0.8,
                 ToY = 0.2,
                 ToAngle = -30,
                 Duration = TransitionDuration
@@ -260,7 +260,7 @@ namespace picibird.hbs.viewmodels.filter
         {
             ChooserOpenedTransition = new TransformTransition(chooser)
             {
-                FromX = 0.7,
+                FromX = 0.8,
                 FromY = 0.2,
                 FromAngle = -30,
                 Duration = TransitionDuration

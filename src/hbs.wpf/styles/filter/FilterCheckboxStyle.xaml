@@ -25,7 +25,7 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
 
                     <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" Background="Transparent">
-                        <TextBox Text="{Binding Filter.Name, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=16}"
+                        <TextBox Text="{Binding Filter.Name, Mode=OneWay,Converter={StaticResource KearningConverter}, ConverterParameter=28}"
                                  Style="{StaticResource FilterTextBoxStyle}" DockPanel.Dock="Left" />
 
                         <Border Width="18" Height="18" Background="Transparent" BorderThickness="1"

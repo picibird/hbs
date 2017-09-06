@@ -96,8 +96,8 @@
     <clr:Double x:Key="FilterFontSize">20</clr:Double>
     <clr:Double x:Key="FilterTitleFontSize">24</clr:Double>
 
-    <clr:Double x:Key="FilterCardWidth">330</clr:Double>
-    <GridLength x:Key="FilterCardGridWidth">330</GridLength>
+    <clr:Double x:Key="FilterCardWidth">430</clr:Double>
+    <GridLength x:Key="FilterCardGridWidth">430</GridLength>
 
     <clr:Double x:Key="MaxFilterCardHeight">300</clr:Double>
 

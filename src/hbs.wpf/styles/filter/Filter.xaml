@@ -117,8 +117,7 @@
                     <ContentControl x:Name="CollapsableRoot" Style="{StaticResource CollapsedTransitionStyle}">
                         <i:Interaction.Triggers>
                             <ei:DataTrigger Binding="{Binding VisualState}" Value="Discarded">
-                                <ei:GoToStateAction StateName="Hide"
-                                                    TargetObject="{Binding ElementName=CollapsableRoot}" />
+                                <ei:GoToStateAction StateName="Hide" TargetObject="{Binding ElementName=CollapsableRoot}" />
                             </ei:DataTrigger>
                         </i:Interaction.Triggers>
                         <ContentControl Style="{StaticResource CardBackground}" HorizontalAlignment="Stretch"
@@ -165,12 +164,10 @@
                                 <!-- visual states-->
                                 <i:Interaction.Triggers>
                                     <ei:DataTrigger Binding="{Binding VisualState}" Value="Closed">
-                                        <ei:GoToStateAction StateName="Closed"
-                                                            TargetObject="{Binding ElementName=root}" />
+                                        <ei:GoToStateAction StateName="Closed" TargetObject="{Binding ElementName=root}" />
                                     </ei:DataTrigger>
                                     <ei:DataTrigger Binding="{Binding VisualState}" Value="Opened">
-                                        <ei:GoToStateAction StateName="Opened"
-                                                            TargetObject="{Binding ElementName=root}" />
+                                        <ei:GoToStateAction StateName="Opened" TargetObject="{Binding ElementName=root}" />
                                     </ei:DataTrigger>
                                 </i:Interaction.Triggers>
                                 <VisualStateManager.VisualStateGroups>
@@ -185,10 +182,8 @@
                                         <VisualState x:Name="Closed" />
                                         <VisualState x:Name="Opened">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ClosedLayer"
-                                                                               Storyboard.TargetProperty="(FrameworkElement.Visibility)">
-                                                    <DiscreteObjectKeyFrame KeyTime="0"
-                                                                            Value="{x:Static Visibility.Hidden}" />
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ClosedLayer" Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>

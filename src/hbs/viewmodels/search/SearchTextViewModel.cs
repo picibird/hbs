@@ -94,7 +94,7 @@ namespace picibird.hbs.viewmodels.search
             EnterSearchCommand = new EnterSearchCommand();
             GotFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = true; });
             LostFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = false; });
-            Pici.Resources.CultureChanged += (s, p) => OnSearchTextChanged(SearchText, SearchText);
+            Pici.Resources.CultureChanged += (s, p) => Events.OnIdleOnce(() => OnSearchTextChanged(SearchText, SearchText));
         }
     }
 

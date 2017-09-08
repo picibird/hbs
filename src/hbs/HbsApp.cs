@@ -50,7 +50,11 @@ namespace picibird.hbs
         protected virtual void StartHbs()
         {
             ApplySettings();
+            StartupSearch();
+        }
 
+        protected virtual void StartupSearch()
+        {
             Events.OnIdleOnce(() =>
             {
                 var settings = Pici.Settings.Get<GeneralSettings>();

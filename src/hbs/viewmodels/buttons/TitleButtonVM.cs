@@ -28,12 +28,10 @@ namespace picibird.hbs.viewmodels.buttons
 {
     public class TitleButtonVM : ButtonViewModel
     {
-        private static readonly string TITLE = "Hybrid Bookshelf";
 
         public TitleButtonVM()
         {
             Style = new ViewStyle("TitleButtonStyle");
-            Text = TITLE;
             TapBehaviour.Tap += OnTap;
         }
 

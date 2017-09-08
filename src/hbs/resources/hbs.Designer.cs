@@ -62,6 +62,24 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to search and explore library data in an exciting way.
+        /// </summary>
+        internal static string app_subtitle {
+            get {
+                return ResourceManager.GetString("app_subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hybrid Bookshelf.
+        /// </summary>
+        internal static string app_title {
+            get {
+                return ResourceManager.GetString("app_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to apply.
         /// </summary>
         internal static string apply {

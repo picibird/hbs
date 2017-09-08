@@ -71,12 +71,6 @@ namespace picibird.hbs
     public class GeneralSettings : SettingsModel
     {
 
-        [JsonProperty("Application Title", Required = Required.Always)]
-        public string ApplicationTitle { get; set; } = "Hybrid Bookshelf";
-
-        [JsonProperty("Application Subtitle", Required = Required.Always)]
-        public string ApplicationSubtitle { get; set; } = "search and explore library data in an exciting way";
-
         [JsonProperty("Startup Search", Required = Required.Always)]
         public string StartupSearch { get; set; } = "User Experience";
 

@@ -234,4 +234,10 @@
   <data name="delete" xml:space="preserve">
     <value>delete</value>
   </data>
+  <data name="app_subtitle" xml:space="preserve">
+    <value>search and explore library data in an exciting way</value>
+  </data>
+  <data name="app_title" xml:space="preserve">
+    <value>Hybrid Bookshelf</value>
+  </data>
 </root>

@@ -51,7 +51,7 @@
     </Style>
 
     <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="Content" Value="{Binding Text}" />
+        <Setter Property="Content" Value="{Binding Resources[app_title]}" />
         <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
         <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
@@ -154,7 +154,7 @@
                                 <TextBox DockPanel.Dock="Right" Style="{StaticResource SearchInfotextBoxStyle}"
                                          Text="{Binding SearchInfo}" />
                                 <TextBox DockPanel.Dock="Left" Style="{StaticResource SearchInfotextBoxStyle}"
-                                         Text="{Binding AppSubtitle, Mode=OneWay}" 
+                                         Text="{Binding Resources[app_subtitle]}" 
                                          Margin="8,-15,0,0"/>
                             </DockPanel>
 

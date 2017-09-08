@@ -285,24 +285,6 @@ namespace picibird.hbs.viewmodels
 
         #endregion SearchInfo
 
-        #region SearchInfo
-
-        private string mAppSubtitle;
-
-        public string AppSubtitle
-        {
-            get {
-                if(mAppSubtitle == null)
-                {
-                    var settings = Pici.Settings.Get<GeneralSettings>();
-                    mAppSubtitle = settings.ApplicationSubtitle;
-                }
-                return mAppSubtitle;
-            }
-        }
-
-        #endregion SearchInfo
-
         #region Filters
 
         private ActiveFilterListViewModel mFilters;

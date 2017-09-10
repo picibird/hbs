@@ -42,18 +42,12 @@ namespace picibird.hbs
         public HbsSettings()
         {
             General = Pici.Settings.Get<GeneralSettings>();
-            //Ldu = Pici.Settings.Get<LduSettings>();
-            //Cover = Pici.Settings.Get<CoverSettings>();
         }
 
         [JsonProperty(Required = Required.Always)]
         public GeneralSettings General { get; set; }
-
-        //[JsonProperty(Required = Required.Always)]
-        public LduSettings Ldu { get; set; }
-
-        //[JsonProperty(Required = Required.Always)]
-        public CoverSettings Cover { get; set; }
+        
+        
 
         public override async Task Save()
         {
@@ -78,42 +72,5 @@ namespace picibird.hbs
         public LanguageEnum Language { get; set; } = LanguageEnum.German;
     }
 
-    [JsonObject(MemberSerialization.OptIn, Title = "Library Data Unifier")]
-    public class LduSettings : SettingsModel
-    {
-        public LduSettings()
-        {
-            //Test Sysstem
-            //Pazpar2Url = "http://hbs-kn.ldu.bsz-bw.de/pazpar2/search.pz2";
-            //Produktiv System
-            Pazpar2Url = "";
-            MaxRecords = 150;
-            LduSourceUsage = LduSourceUsage.ALL;
-        }
-
-        [JsonProperty("URL", Required = Required.Always)]
-        public string Pazpar2Url { get; set; }
-
-        [JsonProperty("Maximum Records", Required = Required.Always)]
-        public int MaxRecords { get; set; }
-
-        [JsonProperty("Source Database Filter", Required = Required.Always)]
-        public LduSourceUsage LduSourceUsage { get; set; }
-    }
-
-    [JsonObject(MemberSerialization.OptIn, Title = "Covers")]
-    public class CoverSettings : SettingsModel
-    {
-        public CoverSettings()
-        {
-            IsLoadCoverEnabled = BoolEnum.Yes;
-            CoverProviderUrl = "";
-        }
-
-        [JsonProperty("Load Covers")]
-        public BoolEnum IsLoadCoverEnabled { get; set; }
-
-        [JsonProperty("Cover Provider URL", Required = Required.Always)]
-        public string CoverProviderUrl { get; set; }
-    }
+    
 }

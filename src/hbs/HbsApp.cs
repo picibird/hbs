@@ -107,8 +107,7 @@ namespace picibird.hbs
         protected virtual void ApplySettings()
         {
             ApplyGeneralSettings();
-            ApplyPazpar2Settings();
-            ApplyCoverSettings();
+            Host.TouchVisualizer.IsVisualizerEnabled = true;
         }
 
         protected virtual void ApplyGeneralSettings()
@@ -127,21 +126,8 @@ namespace picibird.hbs
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        protected virtual void ApplyPazpar2Settings()
-        {
-            var settings = Pici.Settings.Get<LduSettings>();
-            picibird.hbs.ldu.Pazpar2Settings.PAZPAR2_URL = settings.Pazpar2Url;
-            picibird.hbs.ldu.Pazpar2Settings.MAX_RECORDS = settings.MaxRecords;
-            picibird.hbs.ldu.Pazpar2Settings.LduSourceUsage = settings.LduSourceUsage;
-        }
-
-        private void ApplyCoverSettings()
-        {
-            var settings = Pici.Settings.Get<CoverSettings>();
-            picibird.hbs.ldu.Pazpar2Settings.COVER_PROVIDER_URL = settings.CoverProviderUrl;
-            Host.TouchVisualizer.IsVisualizerEnabled = true;
-        }
+        
+        
 
         #endregion Settings
 

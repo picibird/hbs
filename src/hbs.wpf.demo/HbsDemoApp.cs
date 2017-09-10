@@ -27,25 +27,7 @@ namespace picibird.hbs.wpf.demo
 {
     public class HbsDemoApp : HbsApp
     {
-        private string _lduUrl = "http://os-ldu.bsz-bw.de/pazpar2/search.pz2";
-        private string _coverProviderUrl = "http://hbs-kn.ldu.bsz-bw.de/coverdata.php";
-
-        protected override void ApplySettings()
-        {
-            ValidateDemoSettings();
-            base.ApplySettings();
-        }
-
-        protected virtual void ValidateDemoSettings()
-        {
-            //set ldu defaults
-            var pazpar2 = Pici.Settings.Get<LduSettings>();
-            if (string.IsNullOrEmpty(pazpar2.Pazpar2Url))
-                pazpar2.Pazpar2Url = _lduUrl;
-            //set cover provider and histomat defaults
-            var cover = Pici.Settings.Get<CoverSettings>();
-            if (string.IsNullOrEmpty(cover.CoverProviderUrl))
-                cover.CoverProviderUrl = _coverProviderUrl;
-        }
+        
+        
     }
 }

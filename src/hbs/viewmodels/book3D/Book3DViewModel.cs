@@ -92,13 +92,10 @@ namespace picibird.hbs.viewmodels.book3D
                 FrontCover.Model = null;
                 Spine.Model = null;
                 BackCover.Model = null;
-                if (Pici.Settings.Get<CoverSettings>().IsLoadCoverEnabled == BoolEnum.Yes)
-                {
-                    OnHitCoverImageChanged(hit, null);
-                    hit.CoverImageChanged -= OnHitCoverImageChanged;
-                    hit.CoverImageUrl = null;
-                    //hit.CoverImageUrl = null;
-                }
+                OnHitCoverImageChanged(hit, null);
+                hit.CoverImageChanged -= OnHitCoverImageChanged;
+                hit.CoverImageUrl = null;
+                //hit.CoverImageUrl = null;
             }
             if (newModel != null)
             {
@@ -108,12 +105,9 @@ namespace picibird.hbs.viewmodels.book3D
                 Spine.Model = newModel;
                 BackCover.Model = newModel;
                 Visibility = true;
-                if (Pici.Settings.Get<CoverSettings>().IsLoadCoverEnabled == BoolEnum.Yes)
-                {
-                    OnHitCoverImageChanged(hit, hit.CoverImage);
-                    hit.CoverImageChanged += OnHitCoverImageChanged;
-                    hit.CoverImageUrl = hit.CoverUrl_L;
-                }
+                OnHitCoverImageChanged(hit, hit.CoverImage);
+                hit.CoverImageChanged += OnHitCoverImageChanged;
+                hit.CoverImageUrl = hit.CoverUrl_L;
             }
             else
             {
@@ -136,7 +130,7 @@ namespace picibird.hbs.viewmodels.book3D
             else
             {
                 var seconds = 0.5;
-                activeOpacityAnimation = ArtefactAnimator.AddEase(this, new[] {"Opacity"}, new object[] {1}, seconds);
+                activeOpacityAnimation = ArtefactAnimator.AddEase(this, new[] { "Opacity" }, new object[] { 1 }, seconds);
                 activeOpacityAnimation.Complete += (easeObj, percent) => { activeOpacityAnimation = null; };
             }
         }
@@ -209,8 +203,8 @@ namespace picibird.hbs.viewmodels.book3D
         {
             var min = 0.8d;
             var max = 1.2d;
-            var rx = (double) Interpolation.Double.Interpolate(min, max, R.NextDouble());
-            var ry = (double) Interpolation.Double.Interpolate(min, max, R.NextDouble());
+            var rx = (double)Interpolation.Double.Interpolate(min, max, R.NextDouble());
+            var ry = (double)Interpolation.Double.Interpolate(min, max, R.NextDouble());
 
             //Pici.Log.info(typeof(Book3DViewModel), String.Format("rx = {0}, ry={1}", rx, ry));
 
@@ -241,13 +235,13 @@ namespace picibird.hbs.viewmodels.book3D
             BackCover.Height = coverHeight;
 
             TopFrontCoverPages.Width = coverWidth;
-            TopFrontCoverPages.Height = spineWidth*0.5;
+            TopFrontCoverPages.Height = spineWidth * 0.5;
 
             TopSpinePages.Width = spineWidth;
-            TopSpinePages.Height = spineWidth*0.5;
+            TopSpinePages.Height = spineWidth * 0.5;
 
             TopBackCoverPages.Width = coverWidth;
-            TopBackCoverPages.Height = spineWidth*0.5;
+            TopBackCoverPages.Height = spineWidth * 0.5;
 
             InnerPageRight.Width = coverWidth;
             InnerPageRight.Height = coverHeight;
@@ -281,54 +275,54 @@ namespace picibird.hbs.viewmodels.book3D
             Matrix3D rotMatrixX, rotMatrixY, translationMatrix;
 
             //front cover
-            x = (float) spineWidth;
-            rotY = (float) (OpenedProgress*HalfPi);
+            x = (float)spineWidth;
+            rotY = (float)(OpenedProgress * HalfPi);
             rotMatrixY = Matrix3D.CreateRotationY(rotY);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, 0, 0));
-            FrontCover3D.TransformMatrix3D = rotMatrixY*translationMatrix;
+            FrontCover3D.TransformMatrix3D = rotMatrixY * translationMatrix;
             //spine
             Spine3D.TransformMatrix3D = Matrix3D.Identity;
             //back cover
-            x = (float) -coverWidth;
-            rotY = (float) (-OpenedProgress*HalfPi);
+            x = (float)-coverWidth;
+            rotY = (float)(-OpenedProgress * HalfPi);
             rotQuartY = Quaternion.CreateFromAxisAngle(yAxis, rotY);
-            rotCenter = new Point3D((float) coverWidth, 0, 0);
+            rotCenter = new Point3D((float)coverWidth, 0, 0);
             rotMatrixY = Matrix3DHelper.CreateRotationMatrix(ref rotQuartY, ref rotCenter);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, 0, 0));
-            BackCover3D.TransformMatrix3D = rotMatrixY*translationMatrix;
+            BackCover3D.TransformMatrix3D = rotMatrixY * translationMatrix;
             //top back cover
-            x = (float) -coverWidth;
-            y = (float) coverHeight;
+            x = (float)-coverWidth;
+            y = (float)coverHeight;
             rotX = -HalfPi;
-            rotY = (float) (-OpenedProgress*HalfPi);
-            rotCenter = new Point3D((float) coverWidth, 0, 0);
+            rotY = (float)(-OpenedProgress * HalfPi);
+            rotCenter = new Point3D((float)coverWidth, 0, 0);
             rotQuartY = Quaternion.CreateFromAxisAngle(yAxis, rotY);
             rotMatrixX = Matrix3D.CreateRotationX(rotX);
             rotMatrixY = Matrix3DHelper.CreateRotationMatrix(ref rotQuartY, ref rotCenter);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, y, 0));
-            TopBackCoverPages3D.TransformMatrix3D = rotMatrixX*rotMatrixY*translationMatrix;
+            TopBackCoverPages3D.TransformMatrix3D = rotMatrixX * rotMatrixY * translationMatrix;
             //top spine pages
             x = 0f;
-            y = (float) (coverHeight - 0.1);
+            y = (float)(coverHeight - 0.1);
             rotX = -HalfPi;
             rotMatrixX = Matrix3D.CreateRotationX(rotX);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, y, 0));
-            TopSpinePages3D.TransformMatrix3D = rotMatrixX*translationMatrix;
+            TopSpinePages3D.TransformMatrix3D = rotMatrixX * translationMatrix;
             //top front cover pages
-            x = (float) spineWidth;
-            y = (float) coverHeight;
+            x = (float)spineWidth;
+            y = (float)coverHeight;
             rotX = -HalfPi;
-            rotY = (float) (OpenedProgress*HalfPi);
+            rotY = (float)(OpenedProgress * HalfPi);
             rotMatrixX = Matrix3D.CreateRotationX(rotX);
             rotMatrixY = Matrix3D.CreateRotationY(rotY);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, y, 0));
-            TopFrontCoverPages3D.TransformMatrix3D = rotMatrixX*rotMatrixY*translationMatrix;
+            TopFrontCoverPages3D.TransformMatrix3D = rotMatrixX * rotMatrixY * translationMatrix;
             //inner page right
-            x = (float) (spineWidth*0.5d);
-            rotY = Pi - (float) (OpenedProgress*HalfPi);
+            x = (float)(spineWidth * 0.5d);
+            rotY = Pi - (float)(OpenedProgress * HalfPi);
             rotMatrixY = Matrix3D.CreateRotationY(rotY);
             translationMatrix = Matrix3D.CreateTranslation(new Point3D(x, 0, 0));
-            InnerPageRight3D.TransformMatrix3D = rotMatrixY*translationMatrix;
+            InnerPageRight3D.TransformMatrix3D = rotMatrixY * translationMatrix;
 
             if (TransformsUpdated != null)
                 TransformsUpdated(this);
@@ -336,9 +330,9 @@ namespace picibird.hbs.viewmodels.book3D
 
         public AxisAlignedBox3D GetBounds3D()
         {
-            var cW = (float) CoverWidth;
-            var cH = (float) CoverHeight;
-            var sW = (float) SpineWidth;
+            var cW = (float)CoverWidth;
+            var cH = (float)CoverHeight;
+            var sW = (float)SpineWidth;
             var bookPoints = new List<Point3D>
             {
                 FrontCover3D.TransformMatrix3D.Transform(Point3D.Zero),
@@ -358,9 +352,9 @@ namespace picibird.hbs.viewmodels.book3D
             };
 
             var bounds3D = new AxisAlignedBox3D(bookPoints);
-            var rotY = Matrix3D.CreateFromAxisAngle(yAxis, MathUtility.ToRadians((float) Config.Shelf3D.ShelfRotationY));
-            var rotX = Matrix3D.CreateFromAxisAngle(xAxis, MathUtility.ToRadians((float) Config.Shelf3D.ShelfRotationX));
-            var boundsTransform = rotY*rotX;
+            var rotY = Matrix3D.CreateFromAxisAngle(yAxis, MathUtility.ToRadians((float)Config.Shelf3D.ShelfRotationY));
+            var rotX = Matrix3D.CreateFromAxisAngle(xAxis, MathUtility.ToRadians((float)Config.Shelf3D.ShelfRotationX));
+            var boundsTransform = rotY * rotX;
             return bounds3D.CreateTransformedBoundingVolume(boundsTransform);
         }
 
@@ -384,7 +378,7 @@ namespace picibird.hbs.viewmodels.book3D
                 var scale = MathHelper.ScaleSize(new Size(coverWidth, coverHeight), Config.Shelf3D.DefaultCoverWidth,
                     Config.Shelf3D.DefaultCoverHeight);
 
-                UpdateBookSize(coverWidth*scale, coverHeight*scale);
+                UpdateBookSize(coverWidth * scale, coverHeight * scale);
             }
             else
             {

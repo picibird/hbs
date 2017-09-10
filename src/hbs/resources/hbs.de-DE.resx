@@ -234,4 +234,10 @@
   <data name="delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="en" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
 </root>

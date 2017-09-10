@@ -240,4 +240,10 @@
   <data name="app_title" xml:space="preserve">
     <value>Hybrid Bookshelf</value>
   </data>
+  <data name="de" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="en" xml:space="preserve">
+    <value>English</value>
+  </data>
 </root>

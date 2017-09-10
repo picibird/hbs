@@ -134,6 +134,15 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to German.
+        /// </summary>
+        internal static string de {
+            get {
+                return ResourceManager.GetString("de", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to delete.
         /// </summary>
         internal static string delete {
@@ -184,6 +193,15 @@ namespace picibird.hbs.resources {
         internal static string edition {
             get {
                 return ResourceManager.GetString("edition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string en {
+            get {
+                return ResourceManager.GetString("en", resourceCulture);
             }
         }
         

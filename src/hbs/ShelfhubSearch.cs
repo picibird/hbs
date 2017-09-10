@@ -67,22 +67,31 @@ namespace picibird.hbs
 
         private async Task<ItemList<Hit>> LoadPageHitsAsync(int index)
         {
-            
-            await QueryLock.WaitAsync(QueryLockToken.Token);
-            var shelfhub = createShelfhubClient();
-            var queryParams = new QueryParams()
+            QueryResponse response = null;
+            try
             {
-                Query = QueryParams.Query,
-                Offset = index * 17,
-                Filters = activeFilters?.ToObservableCollection(),
-                FiltersEnabled = false,
-                Limit = 17,
-                Shelfhub = QueryParams.Shelfhub,
-                Locale = Pici.Resources.CultureInfo.Name
-            };
-            QueryResponse response = await shelfhub.QueryAsync(queryParams);
-            QueryLock.Release();
-
+                await QueryLock.WaitAsync(QueryLockToken.Token);
+                var shelfhub = createShelfhubClient();
+                var queryParams = new QueryParams()
+                {
+                    Query = QueryParams.Query,
+                    Offset = index * 17,
+                    Filters = activeFilters?.ToObservableCollection(),
+                    FiltersEnabled = false,
+                    Limit = 17,
+                    Shelfhub = QueryParams.Shelfhub,
+                    Locale = Pici.Resources.CultureInfo.Name
+                };
+                response = await shelfhub.QueryAsync(queryParams);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                QueryLock.Release();
+            }
             var items = response.Items;
             var hits = items.ToHits(syncContext);
             //request covers
@@ -95,16 +104,19 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
 
-        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_BASEL };
+        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
 
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
-            QueryLockToken.Cancel(true);
-            QueryLockToken = new CancellationTokenSource();
+            
             try
             {
-                BeforeShelfhubSearch(searchText, reason);
+                QueryLockToken.Cancel();
+                QueryLockToken = new CancellationTokenSource();
                 PAGE_HITS_CACHE.Clear();
+
+                BeforeShelfhubSearch(searchText, reason);
+
                 var shelfhub = createShelfhubClient();
                 QueryParams = new QueryParams()
                 {
@@ -119,6 +131,7 @@ namespace picibird.hbs
 
                 QueryResponse queryResult = null;
                 queryResult = await shelfhub.QueryAsync(QueryParams);
+
                 await AfterShelfhubSearch(queryResult, reason);
             }
             catch (Exception ex)

@@ -27,11 +27,6 @@ using picibits.core.util;
 
 namespace picibird.hbs
 {
-    public enum ResetAction
-    {
-        StartupSearch,
-        BibshelfList
-    }
 
     [JsonObject(MemberSerialization.OptIn, Title = "Hybrid Bookshelf Settings")]
     public class HbsSettings : SettingsModel

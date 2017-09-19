@@ -240,4 +240,7 @@
   <data name="en" xml:space="preserve">
     <value>Englisch</value>
   </data>
+  <data name="reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
 </root>

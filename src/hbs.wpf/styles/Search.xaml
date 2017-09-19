@@ -121,28 +121,18 @@
         </Setter>
     </Style>
 
-    <Style x:Key="BibShelfListButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+    <Style x:Key="ResetButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
         <Setter Property="IsEnabled" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border x:Name="Border" CornerRadius="{StaticResource CornerRadiusDefault}" Margin="0,0,20,0">
-                        <Label x:Name="Label" Content="{Binding Title}" Margin="10,0,10,0"
-                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoLight}"
-                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <Border x:Name="Border" CornerRadius="{StaticResource CornerRadiusDefault}" Margin="0,0,20,0"
+                            Background="{StaticResource HBS_BLUE_LIGHT_BRUSH}">
+                        <Label x:Name="Label" Content="{Binding Resources[reset]}" Margin="10,0,10,0"
+                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoMedium}"
+                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                               Foreground="{StaticResource HBS_BLUE_BRUSH}"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                            <Setter TargetName="Border" Property="Background"
-                                    Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
-                            <Setter TargetName="Label" Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource HBS_BLUE_BRUSH}" />
-                            <Setter TargetName="Label" Property="Foreground"
-                                    Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

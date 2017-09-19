@@ -126,7 +126,7 @@
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding LanguageButtonViewModel}" Margin="0,0,10,0"/>
-                                <views:View DockPanel.Dock="Right" DataContext="{Binding BibShelfListButton}"/>
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding ResetButton}"/>
                             </DockPanel>
 
                             <!-- shelf -->

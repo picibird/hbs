@@ -9,6 +9,10 @@
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Icons.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+        <ResourceDictionary>
+            <DropShadowEffect x:Key="DropshadowEffect" BlurRadius="40" ShadowDepth="13" Direction="270" Color="Black"/>
+        </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -82,9 +86,6 @@
                                 <ColumnDefinition Width="{Binding Spine.Width}" />
                                 <ColumnDefinition Width="{Binding FrontCover.Width}" />
                             </Grid.ColumnDefinitions>
-                            <Grid.Resources>
-                                <DropShadowEffect x:Key="DropshadowEffect" BlurRadius="40" ShadowDepth="13" Direction="270" Color="Black"/>
-                            </Grid.Resources>
                             <!-- drop shadow -->
                             <Border Grid.ColumnSpan="3" IsHitTestVisible="False" Effect="{StaticResource DropshadowEffect}" Background="Black"/>
                             <!-- back cover -->
@@ -116,9 +117,9 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Grid>
-                        <views:View HorizontalAlignment="Left" DataContext="{Binding LeftLayer}" Visibility="Hidden" />
+                        <views:View HorizontalAlignment="Left" DataContext="{Binding LeftLayer}"/>
                         <views:View VerticalAlignment="Top" DataContext="{Binding TopLayer}" Visibility="Hidden" />
-                        <views:View HorizontalAlignment="Right" DataContext="{Binding RightLayer}" Visibility="Hidden" />
+                        <views:View HorizontalAlignment="Right" DataContext="{Binding RightLayer}" />
                         <views:View VerticalAlignment="Bottom" DataContext="{Binding BottomLayer}" Visibility="Hidden" />
                         <!-- book opened-->
                         <Grid x:Name="root" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -134,10 +135,28 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid>
-                        <Border BorderBrush="Red" BorderThickness="1" IsHitTestVisible="False">
-                            <Label Content="Left" />
-                        </Border>
+                    <Grid ClipToBounds="False" Margin="50,0,0,0">
+                        <Ellipse Width="180" Height="90" Fill="Transparent" Margin="16,0,0,0"/>
+                        <Ellipse Width="90" Height="90" Fill="Black" Margin="8,0,0,0" Effect="{StaticResource DropshadowEffect}" IsHitTestVisible="False"/>
+                        <Ellipse Width="90" Height="90" Fill="{Binding CoverColorScheme.Primary}" Margin="8,0,0,0"/>
+                        <Path Width="50" Height="50" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" 
+                              Fill="{Binding CoverColorScheme.Secondary}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RightLayerStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid ClipToBounds="False" Margin="0,0,50,0">
+                        <Ellipse Width="180" Height="90" Fill="Transparent" Margin="0,0,16,0"/>
+                        <Ellipse Width="90" Height="90" Fill="Black" Margin="0,0,8,0" Effect="{StaticResource DropshadowEffect}" IsHitTestVisible="False"/>
+                        <Ellipse Width="90" Height="90" Fill="{Binding CoverColorScheme.Primary}" Margin="0,0,8,0"/>
+                        <Path Width="50" Height="50" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" 
+                              Fill="{Binding CoverColorScheme.Secondary}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -151,20 +170,6 @@
                     <Grid>
                         <Border BorderBrush="Red" BorderThickness="1" IsHitTestVisible="False">
                             <Label Content="Top" />
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="RightLayerStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewStyle}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Border BorderBrush="Red" BorderThickness="1" IsHitTestVisible="False">
-                            <Label Content="Right" />
                         </Border>
                     </Grid>
                 </ControlTemplate>

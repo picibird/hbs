@@ -27,19 +27,19 @@ namespace picibird.hbs.config
         public BookConf()
         {
             ShelfRotationY = -70;
-            ShelfRotationX = 20;
+            ShelfRotationX = 18;
             ShelfAdditionalScale = 0.8;
 
-            DefaultCoverWidth = 627;
-            DefaultCoverHeight = 743;
-            DefaultSpineWidth = 150;
+            DefaultCoverWidth = 660;
+            DefaultCoverHeight = 790;
+            DefaultSpineWidth = 165;
 
             ShelfMarginLeft = 30;
             ShelfMarginTop = 0;
             ShelfMarginRight = 30;
             ShelfMarginBottom = 0;
 
-            ShelfBoardHeight = 12;
+            ShelfBoardHeight = 12.0d;
 
             var minScale = 0.8;
             var maxScale = 1/minScale;

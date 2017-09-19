@@ -65,8 +65,8 @@ namespace picibird.hbs.viewmodels.book
                 Events.OnIdleOnce(
                     () =>
                     {
-                        DropShadowAnimation = ArtefactAnimator.AddEase(this, new[] {"DropShadowOpacity"},
-                            new object[] {1.0}, 0.25d);
+                        DropShadowAnimation = ArtefactAnimator.AddEase(this, new[] { "DropShadowOpacity" },
+                            new object[] { 1.0 }, 0.25d);
                     });
             }
         }
@@ -122,6 +122,9 @@ namespace picibird.hbs.viewmodels.book
             }
         }
 
+        public delegate void BookChangedHandler(Book oldBook, Book newBook);
+        public event BookChangedHandler BookChanged;
+
         protected virtual void OnSelectedBook3DChanged(Book oldBook, Book newBook)
         {
             RaisePropertyChanged("Book", oldBook, newBook);
@@ -137,6 +140,7 @@ namespace picibird.hbs.viewmodels.book
                 UpdateModels(newBook);
                 UpdatePositionAndSize(newBook);
             }
+            BookChanged?.Invoke(oldBook, newBook);
         }
 
         #endregion Book

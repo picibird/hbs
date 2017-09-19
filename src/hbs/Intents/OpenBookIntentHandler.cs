@@ -17,10 +17,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using picibird.hbs.ldu;
 using picibird.hbs.transition;
+using picibird.hbs.viewmodels;
 using picibird.hbs.viewmodels.book3D;
+using picibird.hbs.viewmodels.shelf;
+using picibits.app.animation;
 using picibits.app.transition;
+using picibits.core.helper;
 using picibits.core.intent;
+using System.Linq;
 
 namespace picibird.hbs.Intents
 {
@@ -35,10 +41,47 @@ namespace picibird.hbs.Intents
         {
             if (HBS.ViewModel.Opened.BookVM.Book == null && !HBS.IsAnimating)
             {
+                var hbsVM = (HBS.ViewModel as HBSViewModel);
+                var bookshelfVM = hbsVM.ShelfViewModel.GetSelectedBookshelf();
                 var Book3D = intent.GetExtra<Book3DViewModel>("book3D");
-                var book = HBS.CreateBook(Book3D);
-                Transition.Animate(new OpenBookTransition(Book3D, book), 1, HBS.AnimationSeconds, HBS.AnimationEaseInOut);
+                var Book3dHit = Book3D.Model as Hit;
+                var isBookFromSelectedShelf = bookshelfVM.Page.Hits.Any((hit) => hit.id == Book3dHit.id);
+                if (isBookFromSelectedShelf)
+                {
+                    var book = HBS.CreateBook(Book3D);
+                    Transition.Animate(new OpenBookTransition(Book3D, book), 1, HBS.AnimationSeconds, HBS.AnimationEaseInOut);
+                }
+                else
+                {
+                    int nextIndex = bookshelfVM.Page.Index + 1;
+                    if (nextIndex < HBS.Search.Callback.MaxPageIndex)
+                    {
+                        var nextShelfVM = hbsVM.ShelfViewModel.Items.ElementAt(nextIndex % 4) as BookshelfViewModel;
+                        var isBookFromNextShelf = nextShelfVM.Page.Hits.Any((hit) => hit.id == Book3dHit.id);
+                        if (isBookFromNextShelf)
+                        {
+                            ShelfSwipeTransition.TogglePerformance(true);
+                            hbsVM.ShelfViewModel.AnimateSelectedIndexTo(nextIndex, 0.7, HBS.AnimationEaseInOut)
+                                .Complete += (obj, percent) =>
+                                {
+                                    Events.OnIdleOnce(() =>
+                                    {
+                                        ShelfSwipeTransition.TogglePerformance(false);
+                                        var book = HBS.CreateBook(Book3D);
+                                        Transition.Animate(new OpenBookTransition(Book3D, book), 1, HBS.AnimationSeconds, HBS.AnimationEaseInOut);
+                                    });
+                                }; ;
+                        }
+
+                    }
+
+                }
             }
+        }
+
+        private void OpenBookIntentHandler_Complete(EaseObject easeObject, double percent)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

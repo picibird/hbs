@@ -107,7 +107,8 @@
     <clr:Double x:Key="FilterChooserSmallFontSize">13</clr:Double>
 
     <!-- COVER -->
-    <Thickness x:Key="CoverMargin">20</Thickness>
+    <Thickness x:Key="CoverMargin">25</Thickness>
+    <Thickness x:Key="SpineMargin">10</Thickness>
 
     <GridLength x:Key="BackCoverColumnWidth">160</GridLength>
     <Thickness x:Key="BackCoverBottomMargin">0,0,0,4</Thickness>

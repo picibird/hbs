@@ -24,6 +24,7 @@ using picibird.hbs.viewmodels.book3D;
 using picibird.hbs.viewmodels.shelf;
 using picibits.app.transition;
 using picibits.core;
+using picibits.core.util;
 
 namespace picibird.hbs.behaviours
 {
@@ -35,6 +36,9 @@ namespace picibird.hbs.behaviours
 
         public OpenBookSwipeTransition BookSwipeTransition;
 
+        public event SimpleEventHandler<OpenBookSwipeTransition> Starting;
+        public event SimpleEventHandler<bool> Finished;
+
         public override void OnSwipeStarting(double deltaX, double cummulatedX)
         {
             Bookshelf = HBS.ViewModel.ShelfViewModel.GetSelectedBookshelf();
@@ -43,11 +47,13 @@ namespace picibird.hbs.behaviours
             var direction = deltaX > 0 ? Direction.Left : Direction.Right;
             BookSwipeTransition = new OpenBookSwipeTransition(Bookshelf, Book3D, direction);
             BookSwipeTransition.OnTransitionStarting();
+            if (Starting != null)
+                Starting(BookSwipeTransition);
         }
 
         public override void OnSwipeDelta(double deltaX, double cummulatedX)
         {
-            var progress = cummulatedX/Attached.ActualSize.Width;
+            var progress = cummulatedX / Attached.ActualSize.Width;
             BookSwipeTransition.Direction = progress > 0 ? Direction.Left : Direction.Right;
             BookSwipeTransition.Progress = progress;
 
@@ -57,6 +63,11 @@ namespace picibird.hbs.behaviours
         }
 
         public override void OnSwipeCompleted(double deltaX, double cummulatedX)
+        {
+            OnSwipeCompleted(deltaX, cummulatedX, null);
+        }
+
+        public void OnSwipeCompleted(double deltaX, double cummulatedX, Action completed)
         {
             Pici.Log.info(typeof(OpenBookSwipeBehaviour), "Swipe Completed");
 
@@ -84,8 +95,10 @@ namespace picibird.hbs.behaviours
                     completeProgress = 0;
             }
 
-
-            var ani = Transition.Animate(BookSwipeTransition, completeProgress, HBS.AnimationSeconds*0.75,
+            var seconds = HBS.AnimationSeconds * 0.75d;
+            if (Math.Abs(deltaX) == 5 && Math.Abs(cummulatedX) == 55)
+                seconds = 1;
+            var ani = Transition.Animate(BookSwipeTransition, completeProgress, seconds,
                 HBS.AnimationEaseOut);
             ani.Complete += (s, e) =>
             {
@@ -97,6 +110,7 @@ namespace picibird.hbs.behaviours
                 {
                     HBS.ViewModel.Opened.BookVM.DropShadowOpacity = 0;
                 }
+                completed?.Invoke();
             };
         }
 

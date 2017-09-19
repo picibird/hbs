@@ -171,7 +171,7 @@
                             </DockPanel.Background>
 
                             <StackPanel DockPanel.Dock="Top" Orientation="Vertical"
-                                        Margin="{StaticResource CoverMargin}">
+                                        Margin="{StaticResource SpineMargin}">
                                 <!-- medium icon & name-->
                                 <TextBlock Style="{StaticResource FontIconTextblockStyleExtrem}"
                                            HorizontalAlignment="Center"

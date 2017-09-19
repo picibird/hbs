@@ -46,7 +46,7 @@ namespace picibird.hbs.transition
             TogglePerformance(true);
         }
 
-        private void TogglePerformance(bool isAnimating)
+        public static void TogglePerformance(bool isAnimating)
         {
             foreach (var viewModel in HBS.ViewModel.ShelfViewModel.Items)
             {

@@ -155,6 +155,7 @@
 
     <Style x:Key="FilterTitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource FilterTextBoxStyle}">
         <Setter Property="FontSize" Value="{StaticResource FilterTitleFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
     </Style>
 
 </ResourceDictionary>

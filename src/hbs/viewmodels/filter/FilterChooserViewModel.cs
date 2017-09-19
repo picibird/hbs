@@ -36,16 +36,56 @@ namespace picibird.hbs.viewmodels.filter
 
             TapBehaviour.Tap += OnTap;
             VisualState = FilterChooserStates.CLOSED;
-
-
-            HBS.Search.SearchStarting += OnSearchStarting;
+            
             if (HBS.Search.FilterList != null)
             {
                 HBS.Search.FilterList.ItemAdded += OnSearchFilterListItemAdded;
                 HBS.Search.FilterList.ItemRemoved += OnSearchFilterListItemRemoved;
+                HBS.Search.FilterList.RemovedAll += OnFilterListRemovedAll;
             }
+            HBS.Search.PropertyChanged += OnFilterListChanged;
             UpdateChoosers();
         }
+
+        public override void DisposeManaged()
+        {
+            foreach (var chooser in Choosers)
+            {
+                chooser.Dispose();
+            }
+            if (HBS.Search.FilterList != null)
+            {
+                HBS.Search.FilterList.ItemAdded -= OnSearchFilterListItemAdded;
+                HBS.Search.FilterList.ItemRemoved -= OnSearchFilterListItemRemoved;
+                HBS.Search.FilterList.RemovedAll -= OnFilterListRemovedAll;
+            }
+            HBS.Search.PropertyChanged -= OnFilterListChanged;
+            base.DisposeManaged();
+        }
+
+        private void OnFilterListChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "FilterList")
+            {
+                var ev = e as PropertyChangedEventArgs;
+                var oldFilterList = ev.Old as FilterList<Facet>;
+                if (oldFilterList != null)
+                {
+                    oldFilterList.ItemAdded -= OnSearchFilterListItemAdded;
+                    oldFilterList.ItemRemoved -= OnSearchFilterListItemRemoved;
+                    oldFilterList.RemovedAll -= OnFilterListRemovedAll;
+                }
+                var newFilterList = ev.New as FilterList<Facet>;
+                if (newFilterList != null)
+                {
+                    newFilterList.ItemAdded += OnSearchFilterListItemAdded;
+                    newFilterList.ItemRemoved += OnSearchFilterListItemRemoved;
+                    newFilterList.RemovedAll += OnFilterListRemovedAll;  
+                }
+            }
+        }
+
+        
 
         public void UpdateChoosers()
         {
@@ -75,12 +115,6 @@ namespace picibird.hbs.viewmodels.filter
             return Choosers.FirstOrDefault(c => c.CategoryName == category);
         }
 
-        private void OnSearchStarting(object sender, SearchStartingEventArgs e)
-        {
-            e.Filters.ItemAdded += OnSearchFilterListItemAdded;
-            e.Filters.ItemRemoved += OnSearchFilterListItemRemoved;
-        }
-
         private void OnSearchFilterListItemAdded(object sender, Facet category)
         {
             UpdateChooser(category);
@@ -88,7 +122,12 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnSearchFilterListItemRemoved(object sender, Facet category)
         {
+            category.Values = null;
             UpdateChooser(category);
+        }
+
+        private void OnFilterListRemovedAll(PiciObservableCollection<Facet> sender)
+        {
         }
 
         private void OnChooserTap(object sender, EventArgs e)
@@ -126,6 +165,8 @@ namespace picibird.hbs.viewmodels.filter
             VisualState = FilterChooserStates.OPENED;
         }
 
+        private string CHOOSER_VIEW_STYLE = "ChooserButtonViewStyle";
+
         #region Department
 
         private ChooserButtonViewModel mDepartmentChooser;
@@ -147,7 +188,7 @@ namespace picibird.hbs.viewmodels.filter
                     }
                     var name  = Pici.Resources.Find(filterCat);
                     mDepartmentChooser = new ChooserButtonViewModel(filterCat,
-                        new ViewStyle("ChooserButtonWithCountViewStyle"));
+                        new ViewStyle(CHOOSER_VIEW_STYLE));
                     mDepartmentChooser.Name = name;
                     mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
                 }
@@ -169,7 +210,7 @@ namespace picibird.hbs.viewmodels.filter
                 if (mMediaChooser == null)
                 {
                     mMediaChooser = new ChooserButtonViewModel("format",
-                        new ViewStyle("ChooserButtonWithCountViewStyle"));
+                        new ViewStyle(CHOOSER_VIEW_STYLE));
                     mMediaChooser.TapBehaviour.Tap += OnChooserTap;
                 }
                 return mMediaChooser;
@@ -189,7 +230,7 @@ namespace picibird.hbs.viewmodels.filter
                 if (mLanguageChooser == null)
                 {
                     mLanguageChooser = new ChooserButtonViewModel("language",
-                        new ViewStyle("ChooserButtonWithCountViewStyle"));
+                        new ViewStyle(CHOOSER_VIEW_STYLE));
                     mLanguageChooser.TapBehaviour.Tap += OnChooserTap;
                 }
 
@@ -210,7 +251,7 @@ namespace picibird.hbs.viewmodels.filter
                 if (mDateChooser == null)
                 {
                     mDateChooser = new ChooserButtonViewModel("publishDate",
-                        new ViewStyle("ChooserButtonWithCountViewStyle"));
+                        new ViewStyle(CHOOSER_VIEW_STYLE));
                     mDateChooser.TapBehaviour.Tap += OnChooserTap;
                 }
                 return mDateChooser;

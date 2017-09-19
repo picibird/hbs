@@ -371,21 +371,7 @@
                                                   Style="{StaticResource LocationStyle}" />
                                 </StackPanel>
                                 
-                                <!-- ISBN  -->
                                 
-                                <Grid Style="{StaticResource BackCoverDataGridStyle}" 
-                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Resources[isbn]}"
-                                             Style="{StaticResource BackCoverTextBoxStyle}" />
-                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
-                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
-                                </Grid>
-                                
-                                <Rectangle Height="10"/>
                                 
                                 <!-- availability  -->
                                 <views:ItemsView DataContext="{Binding Availabilities}" 
@@ -401,11 +387,26 @@
                                 </StackPanel>
 
                                 <!-- Other Links -->
-                                <StackPanel Orientation="Vertical" Margin="0,20,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
                                 
+                                <!-- ISBN  -->
+                                
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}" Margin="0,10,0,0" 
+                                      Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[isbn]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.ISBNs, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
+                                
+                                <Rectangle Height="10"/>
                                 
                                 <!-- multivolume works -->
                                 <StackPanel Orientation="Vertical" Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">

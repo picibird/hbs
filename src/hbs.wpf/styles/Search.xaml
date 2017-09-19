@@ -94,7 +94,7 @@
                             Background="{StaticResource HBS_BLUE_BRUSH}" Margin="-10,0,0,0">
                             <Label Content="{Binding Resources[search]}" Margin="10,0,0,0"
                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
-                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoLight}"
+                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoRegular}"
                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                         </Border>
                     </Button>

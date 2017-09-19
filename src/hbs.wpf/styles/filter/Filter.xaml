@@ -75,6 +75,7 @@
            BasedOn="{StaticResource FilterTextBoxStyle}">
         <Setter Property="FontSize" Value="{StaticResource FilterChooserFontSize}" />
     </Style>
+    
     <Style x:Key="FilterChooserSmallTextBoxStyle" TargetType="{x:Type TextBox}"
            BasedOn="{StaticResource FilterTextBoxStyle}">
         <Setter Property="FontSize" Value="{StaticResource FilterChooserSmallFontSize}" />
@@ -101,8 +102,8 @@
                 <ControlTemplate>
                     <UserControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <StackPanel Orientation="Horizontal" Background="Transparent">
-                            <TextBox Text="{Binding Name}" Style="{StaticResource FilterChooserTextBoxStyle}" />
-                            <TextBox Text="{Binding Frequency}" Style="{StaticResource FilterChooserTextBoxStyle}" />
+                            <TextBox Text="{Binding Name}" Style="{StaticResource FilterChooserTextBoxStyle}"/>
+                            <TextBox Text="{Binding Frequency}" Style="{StaticResource FilterChooserTextBoxStyle}"/>
                         </StackPanel>
                     </UserControl>
                 </ControlTemplate>

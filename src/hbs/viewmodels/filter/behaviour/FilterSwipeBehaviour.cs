@@ -29,18 +29,13 @@ using picibits.core.mvvm;
 using picibits.core.pointer;
 using Interpolation = picibits.app.animation.interpolation.Interpolation;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
+using picibird.hbs.behaviours;
+using picibits.app.transition;
 
 namespace picibird.hbs.viewmodels.filter.behaviour
 {
-    public class FilterSwipeBehaviour : Behaviour<ViewModel>
+    public class FilterSwipeBehaviour : SwipeBehaviour
     {
-        private double cummulatedX;
-        private double cummulatedY;
-
-        private readonly List<double> DeltaX = new List<double>();
-
-        private bool isDown;
-        private Point lastPoint;
 
         public bool IsEnabled { get; private set; }
 
@@ -53,18 +48,49 @@ namespace picibird.hbs.viewmodels.filter.behaviour
         {
             var fvcm = attached as FilterContainerViewModel;
             fvcm.Chooser.PropertyChanged += OnChooserPropertyChanged;
-            //fvcm.PropertyChanged += OnAttachedPropertyChanged;
+            base.OnAttached(attached);
         }
 
         public override void OnDettached(ViewModel dettached)
         {
             var fvcm = dettached as FilterContainerViewModel;
             fvcm.Chooser.PropertyChanged -= OnChooserPropertyChanged;
-            //fvcm.PropertyChanged -= OnAttachedPropertyChanged;
+            base.OnDettached(dettached);
         }
 
-        private void OnAttachedPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override void OnSwipeStarting(double deltaX, double cummulatedX)
         {
+            OnSwipeXDelta(deltaX);
+            OnSwipeCummulatedXDelta(cummulatedX);
+        }
+
+        public override void OnSwipeDelta(double deltaX, double cummulatedX)
+        {
+            OnSwipeXDelta(deltaX);
+            OnSwipeCummulatedXDelta(cummulatedX);
+        }
+
+        public override void OnSwipeCompleted(double deltaX, double cummulatedX)
+        {
+            var dirSign = Direction == Direction.Right ? 1 : Direction == Direction.Left ? -1 : 0;
+            var cummSign = Math.Sign(cummulatedX);
+            if (dirSign == cummSign && Math.Abs(cummulatedX) > 50)
+            {
+                var cummulatedDirection = Math.Sign(cummulatedX);
+                var m = GetTransform(cummulatedDirection);
+                var ani = FinishSwipeWithAnimation(m, 0);
+                ani.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
+            }
+            else
+            {
+                ResetWithAnimation();
+            }
+
+        }
+
+        public override void OnSwipeAbort()
+        {
+            ResetWithAnimation();
         }
 
         public void OnChooserPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -74,7 +100,6 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 if (!IsEnabled)
                 {
                     IsEnabled = true;
-                    FVCM.Pointing.Event += OnPointingEvent;
                 }
             }
             else
@@ -82,74 +107,72 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 if (IsEnabled)
                 {
                     IsEnabled = false;
-                    FVCM.Pointing.Event -= OnPointingEvent;
                 }
             }
         }
 
-        private void OnPointingEvent(object sender, PointerEventArgs e)
-        {
-            if (!e.IsPrimary)
-                return;
+        //private void OnPointingEvent(object sender, PointerEventArgs e)
+        //{
+        //    if (!e.IsPrimary)
+        //        return;
 
-            if (e.Type == PointerEventType.DOWN)
-            {
-                cummulatedX = 0;
-                cummulatedY = 0;
-                var captured = e.Pointer.Capture(Attached.View);
-                lastPoint = e.Pointer.GetPosition(Attached.View);
-                isDown = true;
-                DeltaX.Clear();
-                DeltaX.Add(0);
-            }
-            if (e.Type == PointerEventType.MOVE && isDown)
-            {
-                var position = e.Pointer.GetPosition(Attached.View);
-                var deltaX = position.X - lastPoint.X;
-                var deltaY = position.Y - lastPoint.Y;
-                DeltaX.Insert(0, deltaX);
-                cummulatedX += deltaX;
-                cummulatedY += deltaY;
-                lastPoint = position;
-                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5 &&
-                    Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
-                {
-                    OnSwipeXDelta(deltaX);
-                    OnSwipeCummulatedXDelta(cummulatedX);
-                }
-            }
-            if (e.Type == PointerEventType.UP && isDown)
-            {
-                if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5)
-                {
-                    var lastDeltaX = DeltaX.FirstOrDefault(dX => dX != 0);
-                    var lastDeltaDirection = Math.Sign(lastDeltaX);
-                    var cummulatedDirection = Math.Sign(cummulatedX);
-                    var swipeOut = lastDeltaDirection == cummulatedDirection;
-                    if (swipeOut && Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
-                    {
-                        var m = GetTransform(cummulatedDirection);
-                        var ani = FinishSwipeWithAnimation(m, 0);
-                        ani.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
-                    }
-                    else
-                        ResetWithAnimation();
-                }
-                isDown = false;
-                var captureReleased = e.Pointer.ReleaseCapture(Attached.View);
-            }
-            if (e.Type != PointerEventType.DOWN && e.Type != PointerEventType.UP && e.Type != PointerEventType.MOVE)
-            {
-                if (isDown)
-                {
-                    ResetWithAnimation();
-                }
-            }
-        }
+        //    if (e.Type == PointerEventType.DOWN)
+        //    {
+        //        cummulatedX = 0;
+        //        cummulatedY = 0;
+        //        var captured = e.Pointer.Capture(Attached.View);
+        //        lastPoint = e.Pointer.GetPosition(Attached.View);
+        //        isDown = true;
+        //        DeltaX.Clear();
+        //        DeltaX.Add(0);
+        //    }
+        //    if (e.Type == PointerEventType.MOVE && isDown)
+        //    {
+        //        var position = e.Pointer.GetPosition(Attached.View);
+        //        var deltaX = position.X - lastPoint.X;
+        //        var deltaY = position.Y - lastPoint.Y;
+        //        DeltaX.Insert(0, deltaX);
+        //        cummulatedX += deltaX;
+        //        cummulatedY += deltaY;
+        //        lastPoint = position;
+        //        if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5 &&
+        //            Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
+        //        {
+        //            OnSwipeXDelta(deltaX);
+        //            OnSwipeCummulatedXDelta(cummulatedX);
+        //        }
+        //    }
+        //    if (e.Type == PointerEventType.UP && isDown)
+        //    {
+        //        if (Math.Abs(cummulatedX) > Config.Pointer.TapMoveThreshold * 1.5)
+        //        {
+        //            var lastDeltaX = DeltaX.FirstOrDefault(dX => dX != 0);
+        //            var lastDeltaDirection = Math.Sign(lastDeltaX);
+        //            var cummulatedDirection = Math.Sign(cummulatedX);
+        //            var swipeOut = lastDeltaDirection == cummulatedDirection;
+        //            if (swipeOut && Math.Abs(cummulatedY) < Config.Pointer.TapMoveThreshold * 1.5)
+        //            {
+        //                var m = GetTransform(cummulatedDirection);
+        //                var ani = FinishSwipeWithAnimation(m, 0);
+        //                ani.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
+        //            }
+        //            else
+        //                ResetWithAnimation();
+        //        }
+        //        isDown = false;
+        //        var captureReleased = e.Pointer.ReleaseCapture(Attached.View);
+        //    }
+        //    if (e.Type != PointerEventType.DOWN && e.Type != PointerEventType.UP && e.Type != PointerEventType.MOVE)
+        //    {
+        //        if (isDown)
+        //        {
+        //            ResetWithAnimation();
+        //        }
+        //    }
+        //}
 
         private void ResetWithAnimation()
         {
-            isDown = false;
             var m = GetTransform(0);
             FinishSwipeWithAnimation(m, 1, false);
         }
@@ -220,5 +243,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 return FVCM.Chooser;
             return FVCM.Filter;
         }
+
+
     }
 }

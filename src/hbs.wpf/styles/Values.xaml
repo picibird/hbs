@@ -93,8 +93,8 @@
 
     <!-- Filter -->
 
-    <clr:Double x:Key="FilterFontSize">20</clr:Double>
-    <clr:Double x:Key="FilterTitleFontSize">24</clr:Double>
+    <clr:Double x:Key="FilterFontSize">22</clr:Double>
+    <clr:Double x:Key="FilterTitleFontSize">25</clr:Double>
 
     <clr:Double x:Key="FilterCardWidth">430</clr:Double>
     <GridLength x:Key="FilterCardGridWidth">430</GridLength>
@@ -115,7 +115,7 @@
     <Thickness x:Key="SpineBorderThickness">10</Thickness>
 
     <!-- availability -->
-    <Thickness x:Key="AvailabilityTextBoxPadding">8,12,8,12</Thickness>
+    <Thickness x:Key="AvailabilityTextBoxPadding">8,8,8,8</Thickness>
     <clr:Double x:Key="AvailabilityMaxWidth">300</clr:Double>
     <clr:Double x:Key="AvailabilityMinWidth">160</clr:Double>
 

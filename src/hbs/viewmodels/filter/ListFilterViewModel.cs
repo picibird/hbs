@@ -66,9 +66,9 @@ namespace picibird.hbs.viewmodels.filter
                 foreach (var f in ordFilter)
                 {
                     sb.Append(f.Name);
-                    sb.Append(", ");
+                    sb.Append("\n");
                 }
-                sb.Remove(sb.Length - 2, 2);
+                sb.Remove(sb.Length - 1, 1);
                 AppliedInfoString = sb.ToString();
             }
             else

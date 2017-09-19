@@ -50,6 +50,12 @@ namespace picibird.hbs.viewmodels.filter
             CreateChooserLoadedTransition(Chooser);
         }
 
+        public override void DisposeManaged()
+        {
+            Chooser.Dispose();
+            base.DisposeManaged();
+        }
+
         #region Chooser
 
         public FilterChooserViewModel Chooser { get; }

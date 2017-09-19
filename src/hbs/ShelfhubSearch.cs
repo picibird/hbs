@@ -12,6 +12,7 @@ using picibird.hbs.ldu.pages;
 using picibits.core.helper;
 using picibits.core.util;
 using Filter = picibird.shelfhub.Filter;
+using Nito.AsyncEx;
 
 namespace picibird.hbs
 {
@@ -23,6 +24,7 @@ namespace picibird.hbs
         private SynchronizationContext syncContext { get; set; }
 
         private readonly ConcurrentCache<int, ItemList<Hit>> PAGE_HITS_CACHE;
+        private readonly ConcurrentCache<CoverId[], List<Cover>> COVER_CACHE;
 
         public QueryParams QueryParams { get; protected set; }
 
@@ -35,6 +37,8 @@ namespace picibird.hbs
             syncContext = SynchronizationContext.Current;
             ShelfhubHelper.Search = this;
             PAGE_HITS_CACHE = new ConcurrentCache<int, ItemList<Hit>>(async key => await LoadPageHitsAsync(key));
+            COVER_CACHE = new ConcurrentCache<CoverId[], List<Cover>>(async key => await RequestCoversCached(key), new CoverIdComparer());
+
         }
 
 
@@ -84,7 +88,7 @@ namespace picibird.hbs
                 };
                 response = await shelfhub.QueryAsync(queryParams);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -108,7 +112,7 @@ namespace picibird.hbs
 
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
-            
+
             try
             {
                 QueryLockToken.Cancel();
@@ -149,6 +153,8 @@ namespace picibird.hbs
             Callback = new SearchCallback<SearchStatus>(cts.Token);
             Callback.ResultCountChanged += OnSearchCallbackResultCountChanged;
             Callback.StatusChanged += OnSearchStatusChanged;
+
+            if (FilterList != null) FilterList.RemoveAll();
             FilterList = Callback.FilterList;
 
             SearchText = text;
@@ -220,14 +226,9 @@ namespace picibird.hbs
                                            ItemId = i[0],
                                            IdType = CoverIdIdType.ISBN
                                        };
-                        var coverParams = new CoverParams()
-                        {
-                            Ids = new ObservableCollection<CoverId>(coverIds),
-                            PageItemCount = 34
-                        };
-                        var shelfhub = createShelfhubClient();
-                        var coverResponse = await shelfhub.GetCoversAsync(coverParams);
-                        var covers = coverResponse.Covers;
+
+                        var covers = await COVER_CACHE.GetAsync(coverIds.ToArray());
+
                         foreach (Cover c in covers)
                         {
                             var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
@@ -238,13 +239,35 @@ namespace picibird.hbs
                             }
                         }
                     }
-
+                    ValidateCoverCacheSize();
                 }
                 catch (Exception ex)
                 {
                     Pici.Log.info(typeof(Search), ex.Message);
                 }
             });
+        }
+
+        public void ValidateCoverCacheSize()
+        {
+            bool ok = true;
+            while (ok && COVER_CACHE.Count > 1000)
+            {
+                AsyncLazy<List<Cover>> removed;
+                ok = COVER_CACHE.ConcurrentDictionary.TryRemove(COVER_CACHE.ConcurrentDictionary.Keys.First(), out removed);
+            }
+        }
+
+        public async Task<List<Cover>> RequestCoversCached(CoverId[] coverIds)
+        {
+            var coverParams = new CoverParams()
+            {
+                Ids = new ObservableCollection<CoverId>(coverIds),
+                PageItemCount = 34
+            };
+            var shelfhub = createShelfhubClient();
+            var coverResponse = await shelfhub.GetCoversAsync(coverParams);
+            return coverResponse.Covers.ToList();
         }
 
         public static picibird.shelfhub.Shelfhub createShelfhubClient()
@@ -260,5 +283,25 @@ namespace picibird.hbs
             return shelfhub;
         }
 
+    }
+
+
+    public class CoverIdComparer : IEqualityComparer<CoverId[]>
+    {
+        public bool Equals(CoverId[] c1, CoverId[] c2)
+        {
+            if (c1 == null || c2 == null)
+                return false;
+            var c1Str = string.Join("", c1.Select((c) => c.Id).ToArray<string>());
+            var c2Str = string.Join("", c2.Select((c) => c.Id).ToArray<string>());
+            if (c1Str.Equals(c2Str))
+                return true;
+            return false;
+        }
+
+        public int GetHashCode(CoverId[] cIds)
+        {
+            return string.Join("", cIds.Select((c) => c.Id).ToArray<string>()).GetHashCode();
+        }
     }
 }

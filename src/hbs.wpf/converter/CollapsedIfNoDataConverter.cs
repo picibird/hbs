@@ -34,6 +34,25 @@ namespace picibird.hbs.wpf.converter
         {
             if (value == null)
                 return Visibility.Collapsed;
+            
+            if (value is int)
+            {
+                var intValue = (int)value;
+                if (intValue <= 0)
+                    return Visibility.Collapsed;
+            }
+            if (value is float)
+            {
+                var floatValue = (float)value;
+                if (floatValue <= 0.0f)
+                    return Visibility.Collapsed;
+            }
+            if (value is double)
+            {
+                var doubleValue = (double)value;
+                if (doubleValue <= 0.0d)
+                    return Visibility.Collapsed;
+            }
             if (value is string)
             {
                 if (string.IsNullOrEmpty(value as string))
@@ -41,7 +60,7 @@ namespace picibird.hbs.wpf.converter
             }
             if (value is bool)
             {
-                var boolValue = (bool) value;
+                var boolValue = (bool)value;
                 if (!boolValue)
                     return Visibility.Collapsed;
             }

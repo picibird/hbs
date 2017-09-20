@@ -156,6 +156,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="4" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
     </Style>
 
     <Style x:Key="FilterTitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource FilterTextBoxStyle}">

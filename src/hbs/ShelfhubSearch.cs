@@ -276,7 +276,7 @@ namespace picibird.hbs
             if (SHELFHUB_SERVER_URI_OVERRIDE != null)
                 shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
 #if DEBUG
-            //shelfhub.BaseUrl = @"http://localhost:8080/api";
+            shelfhub.BaseUrl = @"http://localhost:8080/api";
             //shelfhub.BaseUrl = @"http://dev.shelfhub.io/api";
 #endif
 

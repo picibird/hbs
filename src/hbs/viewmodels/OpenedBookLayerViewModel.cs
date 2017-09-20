@@ -22,12 +22,14 @@ using picibird.hbs.ldu;
 using picibird.hbs.viewmodels.book;
 using picibits.app.animation;
 using picibits.app.behaviour;
+using picibits.app.transition;
 using picibits.bib;
 using picibits.core;
 using picibits.core.helper;
 using picibits.core.models;
 using picibits.core.mvvm;
 using System;
+using System.Linq;
 
 namespace picibird.hbs.viewmodels
 {
@@ -55,8 +57,33 @@ namespace picibird.hbs.viewmodels
             var hit = newBook?.Hit;
             LeftLayer.Hit = hit;
             RightLayer.Hit = hit;
-            RightLayer.IsEnabled = hit != null;
-            LeftLayer.IsEnabled = hit != null;
+            //leftLayer
+            if (newBook != null)
+            {
+                var hbsVM = (HBS.ViewModel as HBSViewModel);
+                var bookshelfVM = hbsVM.ShelfViewModel.GetSelectedBookshelf();
+                if (bookshelfVM.Page.Index == 0 && bookshelfVM.Page.Hits[0].id == newBook.Hit.id)
+                    LeftLayer.IsEnabled = false;
+                else
+                    LeftLayer.IsEnabled = true;
+            }
+            else
+                LeftLayer.IsEnabled = false;
+            
+            //rightLayer
+            if (newBook != null)
+            {
+                var hbsVM = (HBS.ViewModel as HBSViewModel);
+                var bookshelfVM = hbsVM.ShelfViewModel.GetSelectedBookshelf();
+                if (bookshelfVM.Page.Index == HBS.Search.Callback.MaxPageIndex && 
+                    bookshelfVM.Page.Hits.Last().id == newBook.Hit.id)
+                    RightLayer.IsEnabled = false;
+                else
+                    RightLayer.IsEnabled = true;
+            }
+            else
+                RightLayer.IsEnabled = false;
+
         }
 
         private void OnBookSwipeBehaviourStarting(transition.OpenBookSwipeTransition transition)
@@ -68,8 +95,19 @@ namespace picibird.hbs.viewmodels
         {
             if (e == 0 || Math.Abs(e) == 1)
             {
-                RightLayer.IsEnabled = true;
-                LeftLayer.IsEnabled = true;
+                var hbsVM = (HBS.ViewModel as HBSViewModel);
+                var bookshelfVM = hbsVM.ShelfViewModel.GetSelectedBookshelf();
+                //left
+                if (bookshelfVM.Page.Index == 0 && bookshelfVM.Page.Hits[0].id == BookVM.Book.Hit.id)
+                    LeftLayer.IsEnabled = false;
+                else
+                    LeftLayer.IsEnabled = true;
+                //right
+                if (bookshelfVM.Page.Index == HBS.Search.Callback.MaxPageIndex &&
+                    bookshelfVM.Page.Hits.Last().id == BookVM.Book.Hit.id)
+                    RightLayer.IsEnabled = false;
+                else
+                    RightLayer.IsEnabled = true;
             }
             else
             {
@@ -100,6 +138,7 @@ namespace picibird.hbs.viewmodels
         private void OnLeftTap(object sender, System.EventArgs e)
         {
             HBS.ViewModel.IsHitTestVisible = false;
+            SwipeBehaviour.Direction = Direction.Center;
             BookSwipeBehaviour.OnSwipeStarting(5, 55);
             BookSwipeBehaviour.OnSwipeDelta(5, 55);
             BookSwipeBehaviour.OnSwipeCompleted(5, 55, () =>
@@ -111,6 +150,7 @@ namespace picibird.hbs.viewmodels
         private void OnRightTap(object sender, System.EventArgs e)
         {
             HBS.ViewModel.IsHitTestVisible = false;
+            SwipeBehaviour.Direction = Direction.Center;
             BookSwipeBehaviour.OnSwipeStarting(-5, -55);
             BookSwipeBehaviour.OnSwipeDelta(-5, -55);
             BookSwipeBehaviour.OnSwipeCompleted(-5, -55, () =>
@@ -277,6 +317,8 @@ namespace picibird.hbs.viewmodels
             }
         }
 
+        private EaseObject mLastAnimation;
+
         public override void RaisePropertyChanged(string name, object oldValue = null, object newValue = null)
         {
             base.RaisePropertyChanged(name, oldValue, newValue);
@@ -288,8 +330,8 @@ namespace picibird.hbs.viewmodels
                     {
                         var ease = AnimationTransitions.CubicEaseIn;
                         IsHitTestVisible = true;
-                        ArtefactAnimator.AddEase(this, "Opacity", 1.0d, 0.3, ease, 0.2)
-                        .Complete += (obj, percent) =>
+                        mLastAnimation = ArtefactAnimator.AddEase(this, "Opacity", 1.0d, 0.5, ease);
+                        mLastAnimation.Complete += (obj, percent) =>
                         {
                         };
                     });
@@ -297,7 +339,10 @@ namespace picibird.hbs.viewmodels
                 else
                 {
                     IsHitTestVisible = false;
-                    ArtefactAnimator.AddEase(this, "Opacity", 0.0d, 0.3);
+                    mLastAnimation = ArtefactAnimator.AddEase(this, "Opacity", 0.0d, 0.3);
+                    mLastAnimation.Complete += (obj, percent) =>
+                    {
+                    };
                 }
             }
         }

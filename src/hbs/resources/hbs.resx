@@ -249,4 +249,13 @@
   <data name="reset" xml:space="preserve">
     <value>Reset</value>
   </data>
+  <data name="DDC" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="format" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="publishDate" xml:space="preserve">
+    <value>Year</value>
+  </data>
 </root>

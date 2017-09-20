@@ -134,6 +134,15 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        internal static string DDC {
+            get {
+                return ResourceManager.GetString("DDC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
         internal static string de {
@@ -202,6 +211,15 @@ namespace picibird.hbs.resources {
         internal static string en {
             get {
                 return ResourceManager.GetString("en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format.
+        /// </summary>
+        internal static string format {
+            get {
+                return ResourceManager.GetString("format", resourceCulture);
             }
         }
         
@@ -346,6 +364,15 @@ namespace picibird.hbs.resources {
         internal static string publication_place {
             get {
                 return ResourceManager.GetString("publication_place", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        internal static string publishDate {
+            get {
+                return ResourceManager.GetString("publishDate", resourceCulture);
             }
         }
         

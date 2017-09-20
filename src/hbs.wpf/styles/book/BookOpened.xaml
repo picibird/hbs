@@ -137,7 +137,6 @@
                 <ControlTemplate>
                     <Grid ClipToBounds="False" Margin="50,0,0,0">
                         <Ellipse Width="180" Height="90" Fill="Transparent" Margin="16,0,0,0"/>
-                        <Ellipse Width="90" Height="90" Fill="Black" Margin="8,0,0,0" Effect="{StaticResource DropshadowEffect}" IsHitTestVisible="False"/>
                         <Ellipse Width="90" Height="90" Fill="{Binding CoverColorScheme.Primary}" Margin="8,0,0,0"/>
                         <Path Width="50" Height="50" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" 
                               Fill="{Binding CoverColorScheme.Secondary}"/>
@@ -153,7 +152,6 @@
                 <ControlTemplate>
                     <Grid ClipToBounds="False" Margin="0,0,50,0">
                         <Ellipse Width="180" Height="90" Fill="Transparent" Margin="0,0,16,0"/>
-                        <Ellipse Width="90" Height="90" Fill="Black" Margin="0,0,8,0" Effect="{StaticResource DropshadowEffect}" IsHitTestVisible="False"/>
                         <Ellipse Width="90" Height="90" Fill="{Binding CoverColorScheme.Primary}" Margin="0,0,8,0"/>
                         <Path Width="50" Height="50" Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" 
                               Fill="{Binding CoverColorScheme.Secondary}"/>

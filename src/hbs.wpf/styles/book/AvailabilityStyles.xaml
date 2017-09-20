@@ -31,6 +31,8 @@
         <Setter Property="FontSize" Value="{StaticResource BackCoverFontSize}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="{StaticResource AvailabilityTextBoxPadding}" />
+        <Setter Property="TextBlock.LineHeight" Value="28" />
+        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
     </Style>
 
     <Style x:Key="AvailabilityFatTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource AvailabilityTextBoxStyle}">

@@ -243,4 +243,13 @@
   <data name="reset" xml:space="preserve">
     <value>Zurücksetzen</value>
   </data>
+  <data name="DDC" xml:space="preserve">
+    <value>Fachbereich</value>
+  </data>
+  <data name="format" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="publishDate" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
 </root>

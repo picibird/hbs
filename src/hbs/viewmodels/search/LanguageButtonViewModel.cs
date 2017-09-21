@@ -4,6 +4,8 @@ using picibits.core.helper;
 using picibits.core;
 using System.Globalization;
 using System.Collections.Generic;
+using picibits.core.mvvm;
+using picibits.app.animation;
 
 namespace picibird.hbs.viewmodels.search
 {
@@ -35,11 +37,22 @@ namespace picibird.hbs.viewmodels.search
         {
             AvailableLanguages.Add(new CultureInfo("de-DE"));
             AvailableLanguages.Add(new CultureInfo("en-US"));
+            IsEnabled = false;
+            Opacity = 0.0d;
             if (Pici.Resources.CultureInfo.Name == "en-US")
                 AvailableLanguages.Reverse();
             Clicked += OnClicked;
             Pici.Resources.CultureChanged += OnCultureChanged;
             OnCultureChanged(null, null);
+        }
+
+        public override void RaisePropertyChanged(string name, object oldValue = null, object newValue = null)
+        {
+            base.RaisePropertyChanged(name, oldValue, newValue);
+            if(name == nameof(ViewModel.IsEnabled))
+            {
+                ArtefactAnimator.AddEase(this, new[] { "Opacity" }, new object[] { IsEnabled ? 1 : 0 }, 1);
+            }
         }
 
         private void OnClicked(object sender, EventArgs e)

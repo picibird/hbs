@@ -27,10 +27,29 @@ namespace picibird.hbs
         private readonly ConcurrentCache<CoverId[], List<Cover>> COVER_CACHE;
 
         public QueryParams QueryParams { get; protected set; }
-
         private SemaphoreSlim QueryLock = new SemaphoreSlim(1);
         private CancellationTokenSource QueryLockToken = new CancellationTokenSource();
 
+        /*
+         * PROFILES
+         */
+
+        public const string PROFILE_SWISSBIB_BASEL = "swissbib.basel";
+        public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
+        public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
+
+        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_BASEL};
+
+        public static picibird.shelfhub.Shelfhub createShelfhubClient()
+        {
+            var shelfhub = new picibird.shelfhub.Shelfhub();
+            if (SHELFHUB_SERVER_URI_OVERRIDE != null)
+                shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
+#if DEBUG
+            shelfhub.BaseUrl = @"http://localhost:8080/api";
+#endif
+            return shelfhub;
+        }
 
         public ShelfhubSearch()
         {
@@ -102,13 +121,6 @@ namespace picibird.hbs
             RequestCovers(items, hits);
             return hits;
         }
-
-
-        public const string PROFILE_SWISSBIB_BASEL = "swissbib.basel";
-        public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
-        public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
-
-        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
 
         public override async Task Start(string searchText, SearchStartingReason reason = SearchStartingReason.NewSearch)
         {
@@ -270,18 +282,7 @@ namespace picibird.hbs
             return coverResponse.Covers.ToList();
         }
 
-        public static picibird.shelfhub.Shelfhub createShelfhubClient()
-        {
-            var shelfhub = new picibird.shelfhub.Shelfhub();
-            if (SHELFHUB_SERVER_URI_OVERRIDE != null)
-                shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
-#if DEBUG
-            shelfhub.BaseUrl = @"http://localhost:8080/api";
-            //shelfhub.BaseUrl = @"http://dev.shelfhub.io/api";
-#endif
-
-            return shelfhub;
-        }
+        
 
     }
 

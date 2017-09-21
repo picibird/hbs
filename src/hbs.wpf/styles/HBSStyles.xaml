@@ -13,6 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/filter/Filter.xaml" />
@@ -125,7 +126,8 @@
                             <DockPanel Grid.ColumnSpan="3" LastChildFill="False" Margin="10">
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" />
-                                <views:View DockPanel.Dock="Right" DataContext="{Binding LanguageButtonViewModel}" Margin="0,0,10,0"/>
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding LanguageButtonViewModel}" Margin="0,0,10,0"
+                                            Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding ResetButton}"/>
                             </DockPanel>
 

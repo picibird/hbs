@@ -58,15 +58,24 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             base.OnDettached(dettached);
         }
 
+
+        protected override void OnPointingEvent(object sender, PointerEventArgs e)
+        {
+            if (e.Pointer.IsDown && HBS.IsAnimating)
+            {
+                Reset();
+                return;
+            }
+            base.OnPointingEvent(sender, e);
+        }
+
         public override void OnSwipeStarting(double deltaX, double cummulatedX)
         {
-            OnSwipeXDelta(deltaX);
             OnSwipeCummulatedXDelta(cummulatedX);
         }
 
         public override void OnSwipeDelta(double deltaX, double cummulatedX)
         {
-            OnSwipeXDelta(deltaX);
             OnSwipeCummulatedXDelta(cummulatedX);
         }
 
@@ -187,6 +196,7 @@ namespace picibird.hbs.viewmodels.filter.behaviour
         {
             var vm = GetTransformed();
             var startOpacity = vm.Opacity;
+            HBS.IsAnimating = true;
             var ease = AnimationTransitions.CircEaseOut;
             var easeObject = ArtefactAnimator.AddEase(vm, new[] { "TransformMatrix" }, new object[] { m }, 0.5, ease);
             easeObject.Update +=
@@ -195,18 +205,13 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                     vm.Opacity = (double)Interpolation.Double.Interpolate(startOpacity, opacity, progress);
                 };
             if (discardOnFinish)
-                easeObject.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
+                easeObject.Complete += (a, p) => {
+                    FVCM.VisualState = FilterContainerVisualStates.DISCARDED;
+                    HBS.IsAnimating = false;
+                };
             return easeObject;
         }
-
-        private void OnSwipeXDelta(double deltaX)
-        {
-            OnSwipeXDeltaRelavtive(deltaX / Attached.ActualSize.Width);
-        }
-
-        private void OnSwipeXDeltaRelavtive(double deltaXRel)
-        {
-        }
+        
 
         private void OnSwipeCummulatedXDelta(double cummulatedDeltaX)
         {

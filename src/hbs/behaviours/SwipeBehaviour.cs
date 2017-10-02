@@ -56,7 +56,7 @@ namespace picibird.hbs.behaviours
             dettached.Pointing.Event -= OnPointingEvent;
         }
 
-        private void OnPointingEvent(object sender, PointerEventArgs e)
+        protected virtual void OnPointingEvent(object sender, PointerEventArgs e)
         {
             if (!e.IsPrimary)
                 return;

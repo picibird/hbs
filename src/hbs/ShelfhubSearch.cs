@@ -38,7 +38,13 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
 
-        public static readonly ShelfhubParams PROFILE_ACTIVE = new ShelfhubParams() { Service = PROFILE_SWISSBIB_BASEL};
+        public static ShelfhubParams PROFILE_ACTIVE
+        {
+            get
+            {
+                return new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+            }
+        }
 
         public static picibird.shelfhub.Shelfhub createShelfhubClient()
         {
@@ -46,7 +52,7 @@ namespace picibird.hbs
             if (SHELFHUB_SERVER_URI_OVERRIDE != null)
                 shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
 #if DEBUG
-            //shelfhub.BaseUrl = @"http://localhost:8080/api";
+            shelfhub.BaseUrl = @"http://localhost:8080/api";
 #endif
             return shelfhub;
         }
@@ -102,7 +108,7 @@ namespace picibird.hbs
                     Filters = activeFilters?.ToObservableCollection(),
                     FiltersEnabled = false,
                     Limit = 17,
-                    Shelfhub = QueryParams.Shelfhub,
+                    Shelfhub = PROFILE_ACTIVE,
                     Locale = Pici.Resources.CultureInfo.Name
                 };
                 response = await shelfhub.QueryAsync(queryParams);
@@ -144,6 +150,14 @@ namespace picibird.hbs
                     Shelfhub = PROFILE_ACTIVE,
                     Locale = Pici.Resources.CultureInfo.Name
                 };
+#if !DEBUG
+                GeneralSettings generalSettings = Pici.Settings.Get<GeneralSettings>();
+                bool isProduction = !shelfhub.BaseUrl.Contains("dev") && !shelfhub.BaseUrl.Contains("localhost");
+                if (searchText != generalSettings.StartupSearch && isProduction)
+                {
+                    QueryParams.Shelfhub.Tracking = true;
+                }
+#endif
 
                 QueryResponse queryResult = null;
                 queryResult = await shelfhub.QueryAsync(QueryParams);
@@ -239,7 +253,7 @@ namespace picibird.hbs
                                            IdType = CoverIdIdType.ISBN
                                        };
 
-                        var covers = await COVER_CACHE.GetAsync(coverIds.ToArray());
+                        var covers = await RequestCoversCached(coverIds.ToArray());
 
                         foreach (Cover c in covers)
                         {
@@ -282,7 +296,7 @@ namespace picibird.hbs
             return coverResponse.Covers.ToList();
         }
 
-        
+
 
     }
 

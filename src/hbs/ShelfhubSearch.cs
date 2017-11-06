@@ -20,6 +20,7 @@ namespace picibird.hbs
     {
 
         public static string SHELFHUB_SERVER_URI_OVERRIDE;
+        public static string SHELFHUB_PROFILE_OVERRIDE;
 
         private SynchronizationContext syncContext { get; set; }
 
@@ -42,7 +43,10 @@ namespace picibird.hbs
         {
             get
             {
-                return new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+                if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
+                    p.Service = SHELFHUB_PROFILE_OVERRIDE;
+                return p;
             }
         }
 

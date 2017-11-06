@@ -67,16 +67,16 @@ namespace picibird.hbs.viewmodels.search
 
         private void OnCultureChanged(System.Globalization.CultureInfo sender, System.Globalization.CultureInfo param)
         {
-            var languageTitle = Pici.Resources.CultureInfo.Name.Substring(0, 2);
+            var languageTitle = Pici.Resources.CultureInfo.Name;
             while (!AvailableLanguages[0].Name.StartsWith(languageTitle))
             {
                 var buf = AvailableLanguages[0];
                 AvailableLanguages.RemoveAt(0);
                 AvailableLanguages.Add(buf);
             }
-            languageTitle = Pici.Resources.Find(languageTitle);
-            Text = languageTitle;
-
+            Text = Pici.Resources.Find(languageTitle);
+            if (Text == languageTitle)
+                Text = Pici.Resources.Find(languageTitle.Substring(0, 2));
         }
     }
 }

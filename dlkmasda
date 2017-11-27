@@ -1,0 +1,211 @@
+[1mdiff --git a/src/hbs.ldu/project.json b/src/hbs.ldu/project.json[m
+[1mindex 9a231c6..fc20be4 100644[m
+[1m--- a/src/hbs.ldu/project.json[m
+[1m+++ b/src/hbs.ldu/project.json[m
+[36m@@ -2,9 +2,9 @@[m
+   "supports": {},[m
+   "dependencies": {[m
+     "Flurl.Http": "0.10.1",[m
+[31m-    "Newtonsoft.Json": "9.0.1",[m
+[32m+[m[32m    "Newtonsoft.Json": "10.0.3",[m
+     "Nito.AsyncEx": "3.0.1",[m
+[31m-    "picibits": "0.1.52"[m
+[32m+[m[32m    "picibits": "0.1.61"[m
+   },[m
+   "frameworks": {[m
+     ".NETPortable,Version=v4.5,Profile=Profile7": {}[m
+[1mdiff --git a/src/hbs.wpf.demo/app.config b/src/hbs.wpf.demo/app.config[m
+[1mindex 097b12a..af662b5 100644[m
+[1m--- a/src/hbs.wpf.demo/app.config[m
+[1m+++ b/src/hbs.wpf.demo/app.config[m
+[36m@@ -4,12 +4,16 @@[m
+     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">[m
+       <dependentAssembly>[m
+         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />[m
+[31m-        <bindingRedirect oldVersion="0.0.0.0-9.0.0.0" newVersion="9.0.0.0" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />[m
+       </dependentAssembly>[m
+       <dependentAssembly>[m
+         <assemblyIdentity name="Serilog" publicKeyToken="24c2f752a8e58a10" culture="neutral" />[m
+         <bindingRedirect oldVersion="0.0.0.0-1.5.0.0" newVersion="1.5.0.0" />[m
+       </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Windows.Interactivity" publicKeyToken="31bf3856ad364e35" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.5.0.0" newVersion="4.5.0.0" />[m
+[32m+[m[32m      </dependentAssembly>[m
+     </assemblyBinding>[m
+   </runtime>[m
+ <startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7" /></startup></configuration>[m
+[1mdiff --git a/src/hbs.wpf.demo/hbs.wpf.demo.csproj b/src/hbs.wpf.demo/hbs.wpf.demo.csproj[m
+[1mindex 4ab7f68..bdf54e4 100644[m
+[1m--- a/src/hbs.wpf.demo/hbs.wpf.demo.csproj[m
+[1m+++ b/src/hbs.wpf.demo/hbs.wpf.demo.csproj[m
+[36m@@ -108,10 +108,8 @@[m
+     </Reference>[m
+     <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />[m
+     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />[m
+[31m-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">[m
+[31m-      <SpecificVersion>False</SpecificVersion>[m
+[31m-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>[m
+[31m-      <Private>True</Private>[m
+[32m+[m[32m    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\..\..\hbs.product\src\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>[m
+     </Reference>[m
+     <Reference Include="Newtonsoft.Json.Schema">[m
+       <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.4\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>[m
+[36m@@ -129,17 +127,17 @@[m
+       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>[m
+       <Private>True</Private>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.app, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.0.1.52\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.core, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.0.1.52\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.wpf.app, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.wpf.0.1.52\lib\dotnet\picibits.wpf.app.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.wpf.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.app.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.wpf.core, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.wpf.0.1.52\lib\dotnet\picibits.wpf.core.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.wpf.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.core.dll</HintPath>[m
+     </Reference>[m
+     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">[m
+       <SpecificVersion>False</SpecificVersion>[m
+[1mdiff --git a/src/hbs.wpf.demo/packages.config b/src/hbs.wpf.demo/packages.config[m
+[1mindex 2a15aab..d230c25 100644[m
+[1m--- a/src/hbs.wpf.demo/packages.config[m
+[1m+++ b/src/hbs.wpf.demo/packages.config[m
+[36m@@ -5,11 +5,11 @@[m
+   <package id="Flurl.Http" version="0.10.1" targetFramework="net462" />[m
+   <package id="MahApps.Metro" version="1.2.4.0" targetFramework="net461" />[m
+   <package id="ModernUI.WPF" version="1.0.9" targetFramework="net462" />[m
+[31m-  <package id="Newtonsoft.Json" version="9.0.1" targetFramework="net462" />[m
+[32m+[m[32m  <package id="Newtonsoft.Json" version="10.0.3" targetFramework="net47" />[m
+   <package id="Newtonsoft.Json.Schema" version="2.0.4" targetFramework="net462" />[m
+   <package id="Nito.AsyncEx" version="3.0.1" targetFramework="net461" />[m
+[31m-  <package id="picibits" version="0.1.52" targetFramework="net47" />[m
+[31m-  <package id="picibits.wpf" version="0.1.52" targetFramework="net47" />[m
+[32m+[m[32m  <package id="picibits" version="0.1.61" targetFramework="net47" />[m
+[32m+[m[32m  <package id="picibits.wpf" version="0.1.61" targetFramework="net47" />[m
+   <package id="Serilog" version="1.5.14" targetFramework="net461" />[m
+   <package id="Serilog.Sinks.Seq" version="1.5.27" targetFramework="net461" />[m
+   <package id="SimpleInjector" version="3.2.0" targetFramework="net462" />[m
+[1mdiff --git a/src/hbs.wpf/app.config b/src/hbs.wpf/app.config[m
+[1mindex 8011fd9..4223a8f 100644[m
+[1m--- a/src/hbs.wpf/app.config[m
+[1m+++ b/src/hbs.wpf/app.config[m
+[36m@@ -4,7 +4,11 @@[m
+     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">[m
+       <dependentAssembly>[m
+         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />[m
+[31m-        <bindingRedirect oldVersion="0.0.0.0-9.0.0.0" newVersion="9.0.0.0" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />[m
+[32m+[m[32m      </dependentAssembly>[m
+[32m+[m[32m      <dependentAssembly>[m
+[32m+[m[32m        <assemblyIdentity name="System.Windows.Interactivity" publicKeyToken="31bf3856ad364e35" culture="neutral" />[m
+[32m+[m[32m        <bindingRedirect oldVersion="0.0.0.0-4.5.0.0" newVersion="4.5.0.0" />[m
+       </dependentAssembly>[m
+     </assemblyBinding>[m
+   </runtime>[m
+[1mdiff --git a/src/hbs.wpf/hbs.wpf.csproj b/src/hbs.wpf/hbs.wpf.csproj[m
+[1mindex c60d7e5..6aa7871 100644[m
+[1m--- a/src/hbs.wpf/hbs.wpf.csproj[m
+[1m+++ b/src/hbs.wpf/hbs.wpf.csproj[m
+[36m@@ -151,10 +151,8 @@[m
+     </Reference>[m
+     <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />[m
+     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />[m
+[31m-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">[m
+[31m-      <SpecificVersion>False</SpecificVersion>[m
+[31m-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>[m
+[31m-      <Private>True</Private>[m
+[32m+[m[32m    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\..\..\hbs.product\src\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>[m
+     </Reference>[m
+     <Reference Include="Newtonsoft.Json.Schema">[m
+       <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.4\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>[m
+[36m@@ -175,17 +173,17 @@[m
+       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>[m
+       <Private>True</Private>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.app, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.0.1.52\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.core, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.0.1.52\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.wpf.app, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.wpf.0.1.52\lib\dotnet\picibits.wpf.app.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.wpf.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.app.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="picibits.wpf.core, Version=0.1.52.0, Culture=neutral, processorArchitecture=MSIL">[m
+[31m-      <HintPath>..\packages\picibits.wpf.0.1.52\lib\dotnet\picibits.wpf.core.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="picibits.wpf.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">[m
+[32m+[m[32m      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.core.dll</HintPath>[m
+     </Reference>[m
+     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">[m
+       <SpecificVersion>False</SpecificVersion>[m
+[1mdiff --git a/src/hbs.wpf/packages.config b/src/hbs.wpf/packages.config[m
+[1mindex aa53f93..a40422c 100644[m
+[1m--- a/src/hbs.wpf/packages.config[m
+[1m+++ b/src/hbs.wpf/packages.config[m
+[36m@@ -5,11 +5,11 @@[m
+   <package id="Flurl.Http" version="0.10.1" targetFramework="net462" />[m
+   <package id="MahApps.Metro" version="1.2.4.0" targetFramework="net461" />[m
+   <package id="ModernUI.WPF" version="1.0.9" targetFramework="net462" />[m
+[31m-  <package id="Newtonsoft.Json" version="9.0.1" targetFramework="net462" />[m
+[32m+[m[32m  <package id="Newtonsoft.Json" version="10.0.3" targetFramework="net47" />[m
+   <package id="Newtonsoft.Json.Schema" version="2.0.4" targetFramework="net462" />[m
+   <package id="Nito.AsyncEx" version="3.0.1" targetFramework="net45" />[m
+[31m-  <package id="picibits" version="0.1.52" targetFramework="net47" />[m
+[31m-  <package id="picibits.wpf" version="0.1.52" targetFramework="net47" />[m
+[32m+[m[32m  <package id="picibits" version="0.1.61" targetFramework="net47" />[m
+[32m+[m[32m  <package id="picibits.wpf" version="0.1.61" targetFramework="net47" />[m
+   <package id="Serilog" version="1.5.14" targetFramework="net461" />[m
+   <package id="Serilog.Sinks.Seq" version="1.5.27" targetFramework="net461" />[m
+   <package id="System.Linq" version="4.0.0" targetFramework="net462" />[m
+[1mdiff --git a/src/hbs/project.json b/src/hbs/project.json[m
+[1mindex 97422d7..6f94c2a 100644[m
+[1m--- a/src/hbs/project.json[m
+[1m+++ b/src/hbs/project.json[m
+[36m@@ -2,9 +2,9 @@[m
+   "supports": {},[m
+   "dependencies": {[m
+     "Flurl.Http": "0.10.1",[m
+[31m-    "Newtonsoft.Json": "9.0.1",[m
+[32m+[m[32m    "Newtonsoft.Json": "10.0.3",[m
+     "Nito.AsyncEx": "3.0.1",[m
+[31m-    "picibits": "0.1.52",[m
+[32m+[m[32m    "picibits": "0.1.61",[m
+     "SimpleInjector": "3.2.0",[m
+     "System.Reactive": "3.0.0"[m
+   },[m
+[1mdiff --git a/src/picibits.bib/project.json b/src/picibits.bib/project.json[m
+[1mindex 9a231c6..fc20be4 100644[m
+[1m--- a/src/picibits.bib/project.json[m
+[1m+++ b/src/picibits.bib/project.json[m
+[36m@@ -2,9 +2,9 @@[m
+   "supports": {},[m
+   "dependencies": {[m
+     "Flurl.Http": "0.10.1",[m
+[31m-    "Newtonsoft.Json": "9.0.1",[m
+[32m+[m[32m    "Newtonsoft.Json": "10.0.3",[m
+     "Nito.AsyncEx": "3.0.1",[m
+[31m-    "picibits": "0.1.52"[m
+[32m+[m[32m    "picibits": "0.1.61"[m
+   },[m
+   "frameworks": {[m
+     ".NETPortable,Version=v4.5,Profile=Profile7": {}[m

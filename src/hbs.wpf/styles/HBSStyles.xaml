@@ -124,8 +124,10 @@
 
                             <!-- search bar -->
                             <DockPanel Grid.ColumnSpan="3" LastChildFill="False" Margin="10">
-                                <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" />
-                                <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" />
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" 
+                                            Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" 
+                                            Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding LanguageButtonViewModel}" Margin="0,0,10,0"
                                             Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding ResetButton}"/>
@@ -147,14 +149,16 @@
 
                             <!-- filters -->
                             <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="2" Margin="10">
-                                <views:ItemsView DataContext="{Binding Filters}" />
+                                <views:ItemsView DataContext="{Binding Filters}" 
+                                                 Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                             </Grid>
 
                             <!-- search info -->
                             <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" LastChildFill="False"
                                        Margin="10,0,10,0">
-                                <TextBox DockPanel.Dock="Right" Style="{StaticResource SearchInfotextBoxStyle}"
-                                         Text="{Binding SearchInfo}" />
+                                <TextBox DockPanel.Dock="Right" Style="{StaticResource SearchInfotextBoxStyle}" Text="{Binding SearchInfo}" 
+                                         Visibility="{Binding IsSearchEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
+                                <!-- app subtitle -->
                                 <TextBox DockPanel.Dock="Left" Style="{StaticResource SearchInfotextBoxStyle}"
                                          Text="{Binding Resources[app_subtitle]}" 
                                          Margin="8,-15,0,0"/>

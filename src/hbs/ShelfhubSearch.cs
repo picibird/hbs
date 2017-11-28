@@ -37,6 +37,7 @@ namespace picibird.hbs
 
         public const string PROFILE_SWISSBIB_BASEL = "swissbib.basel";
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
+        public const string PROFILE_SWISSBIB_ZUERICH_NEW = "swissbib.zuerich.new";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
 
         public static ShelfhubParams PROFILE_ACTIVE

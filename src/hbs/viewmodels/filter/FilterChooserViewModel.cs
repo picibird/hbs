@@ -178,7 +178,8 @@ namespace picibird.hbs.viewmodels.filter
                 if (mDepartmentChooser == null)
                 {
                     var filterCat = "navSub_orange";
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH)
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH ||
+                        ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH_NEW)
                     {
                         filterCat = "classif_ddc";
                     }

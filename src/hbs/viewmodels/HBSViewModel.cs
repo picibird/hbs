@@ -36,6 +36,37 @@ namespace picibird.hbs.viewmodels
 {
     public class HBSViewModel : ViewModel
     {
+        private bool mIsSearchEnabled = true;
+        public bool IsSearchEnabled
+        {
+            get
+            {
+                return mIsSearchEnabled;
+            }
+            set
+            {
+                var old = mIsSearchEnabled;
+                mIsSearchEnabled = value;
+                SearchBoxTextViewModel.IsEnabled = value;
+                SearchButtonViewModel.IsEnabled = value;
+                RaisePropertyChanged(nameof(IsSearchEnabled), old, value);
+            }
+        }
+
+        private bool mIsFilteringEnabled = true;
+        public bool IsFilteringEnabled
+        {
+            get
+            {
+                return mIsFilteringEnabled;
+            }
+            set
+            {
+                mIsFilteringEnabled = value;
+                Filters.IsEnabled = value;
+            }
+        }
+
         public HBSViewModel()
             : base("HBSRoot")
         {

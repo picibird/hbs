@@ -148,11 +148,9 @@
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\MicrosoftExpressionInteractions.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Schema">
       <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.4\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
@@ -173,17 +171,17 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.58.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.58\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
+    <Reference Include="picibits.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.58.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.58\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
+    <Reference Include="picibits.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.0.1.61\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.58.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.58\lib\dotnet\picibits.wpf.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.58.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.58\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core, Version=0.1.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\picibits.wpf.0.1.61\lib\dotnet\picibits.wpf.core.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

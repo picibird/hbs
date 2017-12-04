@@ -181,7 +181,7 @@ namespace picibird.hbs.viewmodels.filter
                     if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH ||
                         ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH_NEW)
                     {
-                        filterCat = "classif_ddc";
+                        filterCat = "classif_ddc_3";
                     }
                     if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_STGALLEN)
                     {

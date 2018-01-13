@@ -24,6 +24,8 @@ using picibird.hbs.viewmodels.buttons;
 using picibird.hbs.viewmodels.filter;
 using picibird.hbs.viewmodels.search;
 using picibird.hbs.viewmodels.shelf;
+using picibird.hbs.viewmodels.osk;
+
 using picibits.core;
 using picibits.core.export.services;
 using picibits.core.helper;
@@ -192,6 +194,25 @@ namespace picibird.hbs.viewmodels
         }
 
         #endregion SearchButtonViewModel
+
+        #region OskButtonVM
+
+        private OskButtonVM mOskButtonVM;
+
+        public OskButtonVM OskButtonVM
+        {
+            get
+            {
+                if (mOskButtonVM == null)
+                {
+                    mOskButtonVM = new OskButtonVM();
+                    mOskButtonVM.Style = new ViewStyle("OskButtonStyle");
+                }
+                return mOskButtonVM;
+            }
+        }
+
+        #endregion OskButtonVM
 
         #region BlackBlendingViewModel
 

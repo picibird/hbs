@@ -28,6 +28,8 @@ using picibits.core.export.views;
 using picibits.core.export.services;
 using picibits.app.services;
 using picibird.hbs.wpf.qrcode;
+using picibird.hbs.viewmodels.osk;
+using picibird.hbs.wpf.services;
 
 // VIEWS
 
@@ -37,3 +39,4 @@ using picibird.hbs.wpf.qrcode;
 
 [assembly: ServiceExport(typeof(IQRCodes), typeof(QRCodes))]
 [assembly: ServiceExport(typeof(IWindows), typeof(HbsWindows))]
+[assembly: ServiceExport(typeof(IOsk), typeof(Osk))]

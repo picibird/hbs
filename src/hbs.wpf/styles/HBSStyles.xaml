@@ -123,6 +123,7 @@
 
                             <!-- search bar -->
                             <DockPanel Grid.ColumnSpan="3" LastChildFill="False" Margin="10">
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding OskButtonVM}" Margin="5,0,0,0"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding BibShelfListButton}" />

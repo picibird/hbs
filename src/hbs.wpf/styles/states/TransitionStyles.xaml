@@ -19,7 +19,7 @@
                                             <CubicEase EasingMode="EaseInOut" />
                                         </VisualTransition.GeneratedEasingFunction>
                                         <ei:ExtendedVisualStateManager.TransitionEffect>
-                                            <ee:FadeTransitionEffect />
+                                            <ee:FadeTransitionEffect/>
                                         </ei:ExtendedVisualStateManager.TransitionEffect>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>

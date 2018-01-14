@@ -3,7 +3,8 @@
                     xmlns:controls="clr-namespace:picibird.hbs.wpf.controls"
                     xmlns:helper="clr-namespace:picibird.hbs.wpf.helper"
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                    xmlns:helper1="clr-namespace:picibird.wpf.core.helper;assembly=picibits.wpf.core">
+                    xmlns:helper1="clr-namespace:picibird.wpf.core.helper;assembly=picibits.wpf.core"
+                    xmlns:fa="http://schemas.fontawesome.io/icons/">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
@@ -12,6 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- http://msdn.microsoft.com/de-de/library/ms752068(v=vs.110).aspx -->
@@ -67,6 +69,12 @@
                         <controls:SearchTextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource HBSTextBoxStyle}" InputScope="Default">
                             <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewTouchDown">
+                                    <helper1:EventToCommand Command="{Binding TouchDownCommand, Mode=OneWay}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewMouseDown">
+                                    <helper1:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"/>
+                                </i:EventTrigger>
                                 <i:EventTrigger EventName="GotFocus">
                                     <helper1:EventToCommand Command="{Binding GotFocusCommand, Mode=OneWay}"/>
                                 </i:EventTrigger>
@@ -114,6 +122,24 @@
                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
                                FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoLight}"
                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        </Border>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OskButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+        <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource CollapsedNoDataConverter}}"/>
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}" Focusable="False">
+                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
+                            Background="{StaticResource HBS_BLUE_BRUSH}" Margin="4,0,0,0" >
+                            <fa:FontAwesome Icon="KeyboardOutline" Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
+                               FontSize="44"/>
                         </Border>
                     </Button>
                 </ControlTemplate>

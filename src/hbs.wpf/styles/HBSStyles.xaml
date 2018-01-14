@@ -124,6 +124,8 @@
 
                             <!-- search bar -->
                             <DockPanel Grid.ColumnSpan="3" LastChildFill="False" Margin="10">
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding OskButtonVM}" Margin="5,0,0,0"
+                                            Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchButtonViewModel}" 
                                             Visibility="{Binding IsEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding SearchBoxTextViewModel}" 

@@ -19,6 +19,8 @@
 
 using System;
 using System.Windows.Input;
+using picibird.hbs.viewmodels.osk;
+using picibits.core;
 using picibits.core.helper;
 using picibits.core.mvvm;
 using picibits.core.util;
@@ -85,16 +87,42 @@ namespace picibird.hbs.viewmodels.search
         #endregion EmptyText
 
         public EnterSearchCommand EnterSearchCommand { get; private set; }
+        public DelegateCommand TouchDownCommand { get; private set; }
+        public DelegateCommand MouseDownCommand { get; private set; }
         public DelegateCommand GotFocusCommand { get; private set; }
         public DelegateCommand LostFocusCommand { get; private set; }
 
+        private IOsk mOsk;
+        private bool mIsTouch;
+
         public SearchTextViewModel()
         {
+            mOsk = Pici.Services.Get<IOsk>();
             Style = new ViewStyle("SearchBoxTextStyle");
             EnterSearchCommand = new EnterSearchCommand();
+            TouchDownCommand = new DelegateCommand((p) =>
+            {
+                mIsTouch = true;
+                mOsk.open();
+            });
+            MouseDownCommand = new DelegateCommand((p) =>
+            {
+                if (!mIsTouch)
+                {
+                    mOsk.open();
+                }
+                mIsTouch = false;
+            });
             GotFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = true; });
             LostFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = false; });
             Pici.Resources.CultureChanged += (s, p) => Events.OnIdleOnce(() => OnSearchTextChanged(SearchText, SearchText));
+            EnterSearchCommand.OnEnter += OnEnter;
+
+        }
+
+        private void OnEnter(EnterSearchCommand sender)
+        {
+            mOsk.close();
         }
     }
 
@@ -113,9 +141,9 @@ namespace picibird.hbs.viewmodels.search
 
         public void Execute(object parameter)
         {
-            if (CanExecuteProp && OnEnter != null)
+            if (CanExecuteProp)
             {
-                OnEnter(this);
+                OnEnter?.Invoke(this);
             }
         }
     }

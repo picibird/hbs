@@ -178,12 +178,11 @@ namespace picibird.hbs.viewmodels.filter
                 if (mDepartmentChooser == null)
                 {
                     var filterCat = "navSub_orange";
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH ||
-                        ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_ZUERICH_NEW)
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.zuerich"))
                     {
                         filterCat = "classif_ddc_3";
                     }
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service == ShelfhubSearch.PROFILE_SWISSBIB_STGALLEN)
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.stgallen"))
                     {
                         filterCat = "classif_rvk";
                     }

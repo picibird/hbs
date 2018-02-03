@@ -182,7 +182,8 @@ namespace picibird.hbs.viewmodels.filter
                     {
                         filterCat = "classif_ddc_3";
                     }
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.stgallen"))
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.stgallen") ||
+                        ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.phzh"))
                     {
                         filterCat = "classif_rvk";
                     }

@@ -162,7 +162,7 @@ namespace picibird.hbs.viewmodels.shelf
 
         private bool GetIsOnlineAvailable(Hit hit)
         {
-            if (hit.mediumCode.Equals("BK020053"))
+            if (hit?.mediumCode?.Equals("BK020053") ?? false)
                 return true;
             return hit.medium == null ? false : hit.medium.Equals("ebook");
         }

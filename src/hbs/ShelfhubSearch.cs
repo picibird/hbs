@@ -39,12 +39,14 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
         public const string PROFILE_SWISSBIB_ZUERICH_NEW = "swissbib.zuerich.new";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
+        public const string PROFILE_SWISSBIB_PHZH = "swissbib.phzh";
+        public const string PROFILE_OCLC_PEPPERDINE = "oclc.pepperdine";
 
         public static ShelfhubParams PROFILE_ACTIVE
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_OCLC_PEPPERDINE };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -57,7 +59,7 @@ namespace picibird.hbs
             if (SHELFHUB_SERVER_URI_OVERRIDE != null)
                 shelfhub.BaseUrl = SHELFHUB_SERVER_URI_OVERRIDE;
 #if DEBUG
-            shelfhub.BaseUrl = @"http://localhost:8080/api";
+            //shelfhub.BaseUrl = @"http://localhost:8080/api";
 #endif
             return shelfhub;
         }
@@ -216,13 +218,15 @@ namespace picibird.hbs
             //request covers
             RequestCovers(items, hits);
             //apply facets
-            foreach (var facet in facets)
+            if(facets != null)
             {
-                foreach (var fv in facet.Values)
-                    fv.Name = Pici.Resources.Find(fv.Name);
-                FilterList.Add(facet);
+                foreach (var facet in facets)
+                {
+                    foreach (var fv in facet.Values)
+                        fv.Name = Pici.Resources.Find(fv.Name);
+                    FilterList.Add(facet);
+                }
             }
-
             //finalize session
             Session.Status = new SearchStatus()
             {

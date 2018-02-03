@@ -61,7 +61,7 @@ namespace picibird.hbs
     {
 
         [JsonProperty("Startup Search", Required = Required.Always)]
-        public string StartupSearch { get; set; } = "User Experience";
+        public string StartupSearch { get; set; } = "";
 
         [JsonProperty("Language")]
         public LanguageEnum Language { get; set; } = LanguageEnum.German;

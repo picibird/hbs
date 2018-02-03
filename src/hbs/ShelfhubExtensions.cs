@@ -30,89 +30,102 @@ namespace picibird.hbs
 
         public static Hit ToHit(this ShelfhubItem item)
         {
-
-            Hit hit = new Hit()
+            try
             {
-                id = item.Id,
-                recid = item.Id,
-                medium = item.Medium.Title,
-                mediumCode = item.Medium.Code,
-                title = item.Title,
-                title_remainder = item.Subtitle,
-                series_title = new string[] { item.SeriesTitle }.ToList(),
-                author = item.Authors?.ToList(),
-                language = new string[] { item.Language }.ToList(),
-                Department = item.Department,
-                publicationPlaces = item.Publisher,
-                date = item.PublicationDate,
-                pages_number = item.NumberOfPages,
-                shelfhubItem = item
-            };
-
-            if (item.Actions != null)
-            {
-                foreach (ShelfhubAction action in item.Actions)
+                Hit hit = new Hit()
                 {
-                    var queryParams = QueryParams.FromJson(action.Params.ToString());
-                    var client = ShelfhubSearch.createShelfhubClient();
-                    client.QueryAsync(queryParams).ContinueWith((t) =>
+                    id = item.Id,
+                    recid = item.Id,
+                    medium = item.Medium?.Title,
+                    mediumCode = item.Medium?.Code,
+                    title = item.Title,
+                    title_remainder = item.Subtitle,
+                    series_title = new string[] { item.SeriesTitle }.ToList(),
+                    author = item.Authors?.ToList(),
+                    language = new string[] { item.Language }.ToList(),
+                    Department = item.Department,
+                    publicationPlaces = item.Publisher,
+                    date = item.PublicationDate,
+                    pages_number = item.NumberOfPages,
+                    shelfhubItem = item,
+                    description = new string[] { item.Abstract }.ToList()
+                };
+                if (!String.IsNullOrEmpty(item.Department))
+                {
+                    item.Department = String.Join("\n", item.Department.Replace(", ", ";").Split(';'));
+                }
+
+                if (item.Actions != null)
+                {
+                    foreach (ShelfhubAction action in item.Actions)
                     {
-                        if (t.Status == TaskStatus.RanToCompletion)
+                        var queryParams = QueryParams.FromJson(action.Params.ToString());
+                        var client = ShelfhubSearch.createShelfhubClient();
+                        client.QueryAsync(queryParams).ContinueWith((t) =>
                         {
-                            QueryResponse response = t.Result;
-                            hit.MultiVolumeLinks = new PiciObservableCollection<Link>();
-                            foreach (ShelfhubItem subitem in response.Items)
+                            if (t.Status == TaskStatus.RanToCompletion)
                             {
-                                var url = "https://baselbern.swissbib.ch/Record/" + subitem.Id + "/HierarchyTree?recordID=" + subitem.Id;
-                                hit.MultiVolumeLinks.Add(new Link("Band", url, subitem.Title, "", hit));
+                                QueryResponse response = t.Result;
+                                hit.MultiVolumeLinks = new PiciObservableCollection<Link>();
+                                foreach (ShelfhubItem subitem in response.Items)
+                                {
+                                    var url = "https://baselbern.swissbib.ch/Record/" + subitem.Id + "/HierarchyTree?recordID=" + subitem.Id;
+                                    hit.MultiVolumeLinks.Add(new Link("Band", url, subitem.Title, "", hit));
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
 
-            //prepare extras
-            if (item.Extras == null) item.Extras = new ObservableCollection<KeyValues>();
-            //set ISBNS
-            if (item.Isbn != null)
-                hit.ISBNs = String.Join("\n", item.Isbn);
-            else
-            {
-                hit.ISBNs = String.Empty;
-            }
-
-            //add links
-            if (item.Links != null && item.Links.Count > 0)
-            {
-                hit.Links = new PiciObservableCollection<Link>();
-                foreach (var link in item.Links)
+                //prepare extras
+                if (item.Extras == null) item.Extras = new ObservableCollection<KeyValues>();
+                //set ISBNS
+                if (item.Isbn != null)
+                    hit.ISBNs = String.Join("\n", item.Isbn);
+                else
                 {
-                    var title = Pici.Resources.Find(link.Title);
-                    hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit));
+                    hit.ISBNs = String.Empty;
                 }
+
+                //add links
+                if (item.Links != null && item.Links.Count > 0)
+                {
+                    hit.Links = new PiciObservableCollection<Link>();
+                    foreach (var link in item.Links)
+                    {
+                        var title = Pici.Resources.Find(link.Title);
+                        hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit));
+                    }
+                }
+                //add availability links
+                if (item.Locations != null)
+                {
+                    //var avExtra = item.Extras.FirstOrDefault(kv => kv.Key == "availabilities");
+                    //if (avExtra != null)
+                    //{
+                    //    if (hit.Links == null) hit.Links = new PiciObservableCollection<Link>();
+                    //    foreach (var value in avExtra.Values)
+                    //    {
+                    //        hit.Links.Add(new Link("", value, "Verfügbarkeit", "", hit));
+                    //    }
+                    //    item.Extras.Remove(avExtra);
+                    //}
+                }
+
+                //set qrcode link
+                hit.WebshelfUris = new List<Url>();
+                if(item.Links != null && item.Links.Count > 0)
+                {
+                    var qrCodeLink = item.Links.First((l) => l.Type == LinkType.Main);
+                    var qrCodeUrl = new Url(qrCodeLink.Url);
+                    hit.WebshelfUris.Add(qrCodeUrl);
+                }
+                return hit;
             }
-            //add availability links
-            if (item.Locations != null)
+            catch (Exception ex)
             {
-                //var avExtra = item.Extras.FirstOrDefault(kv => kv.Key == "availabilities");
-                //if (avExtra != null)
-                //{
-                //    if (hit.Links == null) hit.Links = new PiciObservableCollection<Link>();
-                //    foreach (var value in avExtra.Values)
-                //    {
-                //        hit.Links.Add(new Link("", value, "Verfügbarkeit", "", hit));
-                //    }
-                //    item.Extras.Remove(avExtra);
-                //}
+                throw ex;
             }
-
-            //set qrcode link
-            hit.WebshelfUris = new List<Url>();
-            var qrCodeLink = item.Links.First((l) => l.Type == LinkType.Main);
-            var qrCodeUrl = new Url(qrCodeLink.Url);
-            hit.WebshelfUris.Add(qrCodeUrl);
-
-            return hit;
         }
 
         public static ItemList<Hit> ToHits(this IList<ShelfhubItem> items, SynchronizationContext syncContext = null)

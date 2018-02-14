@@ -117,7 +117,7 @@
 
     <!-- availability -->
     <Thickness x:Key="AvailabilityTextBoxPadding">8,8,8,8</Thickness>
-    <clr:Double x:Key="AvailabilityMaxWidth">300</clr:Double>
+    <clr:Double x:Key="AvailabilityMaxWidth">360</clr:Double>
     <clr:Double x:Key="AvailabilityMinWidth">160</clr:Double>
 
     <!-- info shield -->

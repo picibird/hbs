@@ -72,6 +72,9 @@
                         <TextBlock Style="{StaticResource FontIconTextblockStyle}" VerticalAlignment="Center"
                                    Text="{Binding Medium, Converter={StaticResource MediumToFontIconConverter}}"/>
 
+                        <!--<Label Content="{Binding Medium}" Style="{StaticResource ShelfLabelLabelStyle}" Margin="0,0"
+                               FontFamily="{StaticResource RobotoBold}" VerticalAlignment="Center" />-->
+                        
                         <Label Style="{StaticResource ShelfLabelLabelStyle}" VerticalAlignment="Center" Content="{Binding Resources[online]}" Margin="5,0,0,0"
                                    Visibility="{Binding IsOnlineAvailable, Converter={StaticResource CollapsedNoDataConverter}}" />
 

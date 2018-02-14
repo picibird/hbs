@@ -41,12 +41,13 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
         public const string PROFILE_SWISSBIB_PHZH = "swissbib.phzh";
         public const string PROFILE_OCLC_PEPPERDINE = "oclc.pepperdine";
+        public const string PROFILE_GVI_AALEN = "gvi.aalen";
 
         public static ShelfhubParams PROFILE_ACTIVE
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_OCLC_PEPPERDINE };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -251,18 +252,22 @@ namespace picibird.hbs
                     //cover
                     var items = from m in shelfhubItems
                                 where m.Isbn != null && m.Isbn.Count > 0
-                                select new string[] { m.Id, m.Isbn[0] };
-                    if (items.Any())
+                                select m;
+                    var itemsArray = items.ToArray();
+
+
+                    if (itemsArray.Any())
                     {
-                        var coverIds = from i in items
+                        var coverIds = from i in itemsArray
                                        select new CoverId()
                                        {
-                                           Id = i[1],
-                                           ItemId = i[0],
+                                           Id = i.Isbn[0],
+                                           ItemId = i.Id,
+                                           RelatedIds = i.Isbn.Skip(1).Concat(i.IsbnRelated ?? new ObservableCollection<string>()).ToObservableCollection(),
                                            IdType = CoverIdIdType.ISBN
                                        };
-
-                        var covers = await RequestCoversCached(coverIds.ToArray());
+                        var coverIdsArray = coverIds.ToArray();
+                        var covers = await RequestCoversCached(coverIdsArray);
 
                         foreach (Cover c in covers)
                         {

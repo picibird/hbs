@@ -184,12 +184,29 @@ namespace picibird.hbs.viewmodels
             get
             {
                 if (mTitleButton == null)
-                    mTitleButton = new TitleButtonVM();
+                    mTitleButton = new TitleButtonVM(32d);
                 return mTitleButton;
             }
         }
 
         #endregion TitleButton
+
+
+        #region SubTitleButton
+
+        private TitleButtonVM mSubTitleButton;
+
+        public TitleButtonVM SubTitleButton
+        {
+            get
+            {
+                if (mSubTitleButton == null)
+                    mSubTitleButton = new TitleButtonVM(24d);
+                return mSubTitleButton;
+            }
+        }
+
+        #endregion SubTitleButton
 
         #region SearchBoxTextViewModel
 

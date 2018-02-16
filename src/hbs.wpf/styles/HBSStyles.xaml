@@ -53,9 +53,9 @@
 
     <Style x:Key="TitleLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="Content" Value="{Binding Resources[app_title]}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
-        <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
+        <Setter Property="FontSize" Value="{Binding FontSize}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
@@ -83,7 +83,7 @@
 
     <Style x:Key="SearchInfotextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
         <Setter Property="FontFamily" Value="{StaticResource RobotoThin}" />
-        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontSize" Value="{Binding FontSize, FallbackValue=22}" />
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
     </Style>
 
@@ -164,19 +164,21 @@
                                 <TextBox DockPanel.Dock="Right" Style="{StaticResource SearchInfotextBoxStyle}" Text="{Binding SearchInfo}" 
                                          Visibility="{Binding IsSearchEnabled, Converter={StaticResource CollapsedNoDataConverter}}"/>
                                 <!-- app subtitle -->
-                                <TextBox DockPanel.Dock="Left" Style="{StaticResource SearchInfotextBoxStyle}"
-                                         Text="{Binding Resources[app_subtitle]}" 
-                                         Margin="8,-15,0,0"/>
+                                <Canvas DockPanel.Dock="Left">
+                                    <TextBox  Style="{StaticResource SearchInfotextBoxStyle}"
+                                         Text="{Binding Resources[app_subtitle]}" DataContext="{Binding SubTitleButton}"
+                                         Margin="8,-10,0,0"/>
+                                </Canvas>
                             </DockPanel>
 
                             <!-- black blending -->
                             <views:View Grid.ColumnSpan="3" Grid.RowSpan="5" DataContext="{Binding BlackBlendingViewModel}" />
 
                             <!-- Title -->
-                            <DockPanel Grid.ColumnSpan="2" LastChildFill="False" Margin="10">
-                                <views:View DockPanel.Dock="Left" DataContext="{Binding TitleButton}" 
+                            <Canvas Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Left">
+                                <views:View DataContext="{Binding TitleButton}" 
                                             Margin="5,0,0,0"/>
-                            </DockPanel>
+                            </Canvas>
 
                             <!-- shelf selected -->
                             <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="10">

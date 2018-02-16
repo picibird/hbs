@@ -33,6 +33,8 @@ namespace picibird.hbs.viewmodels.filter
 {
     public class FilterContainerViewModel : ViewModel
     {
+        public static bool FilterChooserMenuAlwaysOpened = false;
+
         public delegate void FiltersAppliedHandler(
             FilterContainerViewModel filterContainer, PiciObservableCollection<FacetValue> filter);
 
@@ -70,8 +72,19 @@ namespace picibird.hbs.viewmodels.filter
             if (newViewIsLoaded)
             {
                 var loadedAni = ChooserLoadedTransition.AnimateProgressTo(1);
+                if (FilterChooserMenuAlwaysOpened)
+                {
+                    loadedAni.Update += (EaseObject easeObject, double percent) =>
+                    {
+                        if (percent > 0)
+                        {
+                            Chooser.VisualState = FilterChooserStates.OPENED;
+                        }
+                    };
+                }
             }
         }
+
 
         public override void RaisePropertyChanged(string name, object oldValue = null, object newValue = null)
         {
@@ -94,7 +107,7 @@ namespace picibird.hbs.viewmodels.filter
             }
             if (e.PropertyName.Equals("VisualState"))
             {
-                OnFilterVisualStateChanged((string) args.Old, (string) args.New);
+                OnFilterVisualStateChanged((string)args.Old, (string)args.New);
             }
         }
 
@@ -107,7 +120,7 @@ namespace picibird.hbs.viewmodels.filter
             }
             if (e.PropertyName.Equals("VisualState"))
             {
-                OnChooserVisualStateChanged((string) args.Old, (string) args.New);
+                OnChooserVisualStateChanged((string)args.Old, (string)args.New);
             }
         }
 

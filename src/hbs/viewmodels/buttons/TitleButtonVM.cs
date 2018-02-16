@@ -29,8 +29,24 @@ namespace picibird.hbs.viewmodels.buttons
     public class TitleButtonVM : ButtonViewModel
     {
 
-        public TitleButtonVM()
+        private double mFontsize;
+        public double FontSize
         {
+            get
+            {
+                return mFontsize;
+            }
+            set
+            {
+                var old = mFontsize;
+                mFontsize = value;
+                RaisePropertyChanged(nameof(FontSize), old, value);
+            }
+        }
+
+        public TitleButtonVM(double fontSize)
+        {
+            mFontsize = fontSize;
             Style = new ViewStyle("TitleButtonStyle");
             TapBehaviour.Tap += OnTap;
         }

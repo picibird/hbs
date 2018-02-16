@@ -147,6 +147,9 @@
                                 <Rectangle Width="10" DockPanel.Dock="Right" />
                                 <views:View DockPanel.Dock="Right" DataContext="{Binding FullscreenButton}"
                                       Visibility="{Binding Visibility, Converter={StaticResource VisibilityConverter}, ConverterParameter=collapsed}" />
+                                <Rectangle Width="10" DockPanel.Dock="Right" />
+                                <views:View DockPanel.Dock="Right" DataContext="{Binding InfoButton}"
+                                      Visibility="{Binding Visibility, Converter={StaticResource VisibilityConverter}, ConverterParameter=collapsed}" />
                             </DockPanel>
 
                             <!-- filters -->

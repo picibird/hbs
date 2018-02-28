@@ -39,6 +39,8 @@ namespace picibird.hbs.wpf.converter
                 if (medium == "BK020053") return "k";
                 if (medium.StartsWith("BK020")) return "k";
 
+                medium = medium.ToLower();
+
                 switch (medium)
                 {
                     case "book":
@@ -54,6 +56,8 @@ namespace picibird.hbs.wpf.converter
                     case "ebook":
                         return "k";
                     case "diss":
+                        return "J";
+                    case "thesis":
                         return "J";
                     case "journal":
                         return "L";
@@ -71,20 +75,9 @@ namespace picibird.hbs.wpf.converter
                         return "S";
                 }
                 ;
-                //'book': 'Buch',
-                //  'bookreview': 'Buchbesprechung',
-                //  'bookchapter': 'Buchkapitel',
-                //  'proceeding': 'Konferenzbericht',
-                //  'datamed': 'Datenträger',
-                //  'ebook': 'eBook',
-                //  'diss': 'Hochschulschrift',
-                //  'journal': 'Zeitschrift',
-                //  'ejournal': 'eJournal',
-                //  'article': 'Artikel',
-                //  'video': 'Film',
-                //  'audio': 'Tonträger',
-                //  'map': 'Karten/Bildmaterial',
-                //  'other': 'Sonstiges',
+                /**
+    "Newspaper": MediumType.Newspaper
+    */
             }
             return "S";
         }

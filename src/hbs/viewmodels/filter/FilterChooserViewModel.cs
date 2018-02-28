@@ -187,6 +187,11 @@ namespace picibird.hbs.viewmodels.filter
                     {
                         filterCat = "classif_rvk";
                     }
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+                    {
+                        filterCat = "subject_topic_facet";
+                    }
+
                     var name  = Pici.Resources.Find(filterCat);
                     mDepartmentChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle(CHOOSER_VIEW_STYLE));
@@ -210,8 +215,16 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mMediaChooser == null)
                 {
-                    mMediaChooser = new ChooserButtonViewModel("format",
+                    var filterCat = "format";
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+                    {
+                        filterCat = "material_content_type";
+                    }
+                    mMediaChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle(CHOOSER_VIEW_STYLE));
+
+
+
                     mMediaChooser.TapBehaviour.Tap += OnChooserTap;
                 }
                 return mMediaChooser;
@@ -251,7 +264,12 @@ namespace picibird.hbs.viewmodels.filter
             {
                 if (mDateChooser == null)
                 {
-                    mDateChooser = new ChooserButtonViewModel("publishDate",
+                    var filterCat = "publishDate";
+                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+                    {
+                        filterCat = "publish_date";
+                    }
+                    mDateChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle(CHOOSER_VIEW_STYLE));
                     mDateChooser.TapBehaviour.Tap += OnChooserTap;
                 }

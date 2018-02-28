@@ -252,4 +252,10 @@
   <data name="publishDate" xml:space="preserve">
     <value>Jahr</value>
   </data>
+  <data name="app_subtitle" xml:space="preserve">
+    <value>Stöbern Sie in unserem Buchbestand - print und online</value>
+  </data>
+  <data name="app_title" xml:space="preserve">
+    <value>Hybrid Bookshelf</value>
+  </data>
 </root>

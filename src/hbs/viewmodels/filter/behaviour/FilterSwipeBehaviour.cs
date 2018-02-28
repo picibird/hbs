@@ -180,6 +180,11 @@ namespace picibird.hbs.viewmodels.filter.behaviour
         //    }
         //}
 
+        public override void Reset(PointerEventArgs e = null)
+        {
+            base.Reset(e);
+        }
+
         private void ResetWithAnimation()
         {
             var m = GetTransform(0);
@@ -204,14 +209,20 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 {
                     vm.Opacity = (double)Interpolation.Double.Interpolate(startOpacity, opacity, progress);
                 };
-            if (discardOnFinish)
-                easeObject.Complete += (a, p) => {
+            easeObject.Stopped += (a, p) =>
+            {
+                HBS.IsAnimating = false;
+            };
+            easeObject.Complete += (a, p) =>
+            {
+                HBS.IsAnimating = false;
+                if (discardOnFinish)
+                {
                     FVCM.VisualState = FilterContainerVisualStates.DISCARDED;
-                    HBS.IsAnimating = false;
-                };
+                }
+            };
             return easeObject;
         }
-        
 
         private void OnSwipeCummulatedXDelta(double cummulatedDeltaX)
         {

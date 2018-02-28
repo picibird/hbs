@@ -125,7 +125,7 @@ namespace picibird.hbs.behaviours
             }
         }
 
-        public void Reset(PointerEventArgs e = null)
+        public virtual void Reset(PointerEventArgs e = null)
         {
             isDown = false;
             isSwiping = false;

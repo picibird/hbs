@@ -42,12 +42,13 @@ namespace picibird.hbs
         public const string PROFILE_SWISSBIB_PHZH = "swissbib.phzh";
         public const string PROFILE_OCLC_PEPPERDINE = "oclc.pepperdine";
         public const string PROFILE_GVI_AALEN = "gvi.aalen";
+        public const string PROFILE_GVI_KONSTANZ = "gvi.konstanz";
 
         public static ShelfhubParams PROFILE_ACTIVE
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -219,7 +220,7 @@ namespace picibird.hbs
             //request covers
             RequestCovers(items, hits);
             //apply facets
-            if(facets != null)
+            if (facets != null)
             {
                 foreach (var facet in facets)
                 {
@@ -308,6 +309,43 @@ namespace picibird.hbs
             var shelfhub = createShelfhubClient();
             var coverResponse = await shelfhub.GetCoversAsync(coverParams);
             return coverResponse.Covers.ToList();
+        }
+
+        public static void TrackTap(string action, string name = null)
+        {
+            Track("tap", action, name);
+        }
+
+        public static void TrackOpen(string action, string name = null)
+        {
+            Track("open", action, name);
+        }
+
+        public static void TrackSwipe(string action, string name = null)
+        {
+            Track("swipe", action, name);
+        }
+
+        public static void Track(string category, string action, string name = null)
+        {
+            var shelfhub = ShelfhubSearch.createShelfhubClient();
+            shelfhub.TrackAsync(new picibird.shelfhub.TrackingParams()
+            {
+                Category = category,
+                ActionType = action,
+                ActionName = name,
+                Shelfhub = ShelfhubSearch.PROFILE_ACTIVE
+            }).ContinueWith((task) =>
+            {
+                if (task.Status == TaskStatus.RanToCompletion)
+                {
+                    Pici.Log.info(typeof(ShelfhubSearch), "tracking info", task.Result.Success);
+                }
+                else
+                {
+                    Pici.Log.warn(typeof(ShelfhubSearch), "tracking failed");
+                }
+            });
         }
 
 

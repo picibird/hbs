@@ -36,7 +36,7 @@ namespace picibird.hbs.viewmodels.filter
 
             TapBehaviour.Tap += OnTap;
             VisualState = FilterChooserStates.CLOSED;
-            
+
             if (HBS.Search.FilterList != null)
             {
                 HBS.Search.FilterList.ItemAdded += OnSearchFilterListItemAdded;
@@ -65,7 +65,7 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnFilterListChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "FilterList")
+            if (e.PropertyName == "FilterList")
             {
                 var ev = e as PropertyChangedEventArgs;
                 var oldFilterList = ev.Old as FilterList<Facet>;
@@ -80,12 +80,12 @@ namespace picibird.hbs.viewmodels.filter
                 {
                     newFilterList.ItemAdded += OnSearchFilterListItemAdded;
                     newFilterList.ItemRemoved += OnSearchFilterListItemRemoved;
-                    newFilterList.RemovedAll += OnFilterListRemovedAll;  
+                    newFilterList.RemovedAll += OnFilterListRemovedAll;
                 }
             }
         }
 
-        
+
 
         public void UpdateChoosers()
         {
@@ -189,10 +189,17 @@ namespace picibird.hbs.viewmodels.filter
                     }
                     if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
                     {
-                        filterCat = "subject_topic_facet";
+                        if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi.konstanz"))
+                        {
+                            filterCat = "rvk";
+                        }
+                        else
+                        {
+                            filterCat = "subject_topic_facet";
+                        }
                     }
 
-                    var name  = Pici.Resources.Find(filterCat);
+                    var name = Pici.Resources.Find(filterCat);
                     mDepartmentChooser = new ChooserButtonViewModel(filterCat,
                         new ViewStyle(CHOOSER_VIEW_STYLE));
                     mDepartmentChooser.Name = name;

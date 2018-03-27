@@ -36,6 +36,7 @@ namespace picibird.hbs
          */
 
         public const string PROFILE_SWISSBIB_BASEL = "swissbib.basel";
+        public const string PROFILE_SWISSBIB_BASEL_NEW = "swissbib.basel.new";
         public const string PROFILE_SWISSBIB_ZUERICH = "swissbib.zuerich";
         public const string PROFILE_SWISSBIB_ZUERICH_NEW = "swissbib.zuerich.new";
         public const string PROFILE_SWISSBIB_STGALLEN = "swissbib.stgallen";
@@ -43,12 +44,13 @@ namespace picibird.hbs
         public const string PROFILE_OCLC_PEPPERDINE = "oclc.pepperdine";
         public const string PROFILE_GVI_AALEN = "gvi.aalen";
         public const string PROFILE_GVI_KONSTANZ = "gvi.konstanz";
+        public const string PROFILE_GVI_ULM = "gvi.ulm";
 
         public static ShelfhubParams PROFILE_ACTIVE
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;

@@ -30,6 +30,15 @@
         <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
     </Style>
 
+    <Style x:Key="TextBlockBaseStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoSlab}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+    </Style>
+
     <Style x:Key="VerticalScrollViewerStyle" TargetType="{x:Type ScrollViewer}"
            BasedOn="{StaticResource TouchScrollViewer}">
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
@@ -157,6 +166,16 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="4" />
         <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <Style x:Key="FilterTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+        <Setter Property="FontSize" Value="{StaticResource FilterFontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextTrimming" Value="WordEllipsis" />
     </Style>
 
     <Style x:Key="FilterTitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource FilterTextBoxStyle}">

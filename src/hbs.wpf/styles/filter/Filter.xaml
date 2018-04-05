@@ -255,8 +255,9 @@
                             <!-- selected filters string -->
                             <ContentControl x:Name="SeletedFiltersCollapsable"
                                             Style="{StaticResource CollapsedTransitionStyle}">
-                                <TextBox Text="{Binding AppliedInfoString, Mode=OneWay}"
-                                         Style="{StaticResource FilterTextBoxStyle}" />
+                                <TextBlock Text="{Binding AppliedInfoString, Mode=OneWay}"
+                                         Style="{StaticResource FilterTextBlockStyle}" 
+                                         MaxHeight="100" MaxWidth="{Binding ElementName=SeletedFiltersCollapsable, Path=ActualWidth}"/>
                             </ContentControl>
                             <!-- filter -->
                             <ContentControl x:Name="FadingCC" Style="{StaticResource CollapsedTransitionStyle}">

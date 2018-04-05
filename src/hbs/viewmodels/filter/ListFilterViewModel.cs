@@ -62,14 +62,27 @@ namespace picibird.hbs.viewmodels.filter
             {
                 var sb = new StringBuilder();
                 var ordFilter = filter.OrderBy(
-                    ordF => FilterSelectionViewModel.ItemIndexOf(ordF));
-                foreach (var f in ordFilter)
+                    ordF => FilterSelectionViewModel.ItemIndexOf(ordF)).ToArray();
+                if (ordFilter.Length == 0)
                 {
-                    sb.Append(f.Name);
-                    sb.Append("\n");
+                    AppliedInfoString = "";
                 }
-                sb.Remove(sb.Length - 1, 1);
-                AppliedInfoString = sb.ToString();
+                else if (ordFilter.Length == 1)
+                {
+                    AppliedInfoString = ordFilter[0].Name;
+                }
+                else
+                {
+                    for (int i = 0; i <= ordFilter.Length - 2; i++)
+                    {
+                        sb.Append(ordFilter[i].Name);
+                        sb.Append(", ");
+                    }
+                    sb.Remove(sb.Length - 2, 2);
+                    sb.Append(" und ");
+                    sb.Append(ordFilter[ordFilter.Length - 1].Name);
+                    AppliedInfoString = sb.ToString();
+                }
             }
             else
             {

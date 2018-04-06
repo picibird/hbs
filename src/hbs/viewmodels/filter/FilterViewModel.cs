@@ -44,7 +44,6 @@ namespace picibird.hbs.viewmodels.filter
                     OnCategoryFilterAdded(filter);
             }
             TapBehaviour.Tap += OnTap;
-            ApplyButtonViewModel.TapBehaviour.Tap += OnApplyTap;
         }
 
 
@@ -71,8 +70,11 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnApplyTap(object sender, EventArgs e)
         {
-            if (VisualState == FilterVisualStates.EDIT)
-                VisualState = FilterVisualStates.NORMAL;
+            if(SelectedFilter.Count > 0)
+            {
+                if (VisualState == FilterVisualStates.EDIT)
+                    VisualState = FilterVisualStates.NORMAL;
+            }
         }
 
         protected override void OnVisualStateChanged(string oldVisualState, string newVisualState)

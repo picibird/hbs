@@ -25,6 +25,7 @@ using picibits.app.mvvm;
 using picibits.core.collection;
 using picibits.core.mvvm;
 using picibits.core;
+using System.Collections.Generic;
 
 namespace picibird.hbs.viewmodels.filter
 {
@@ -89,12 +90,15 @@ namespace picibird.hbs.viewmodels.filter
 
         public void UpdateChoosers()
         {
-            var fl = HBS.Search.FilterList;
-            if (fl != null)
-                UpdateChoosers(fl);
+            var available = HBS.Search.AvailableFilter;
+            if (available != null)
+                UpdateChoosers(available);
+            var active = HBS.Search.FilterList;
+            if (active != null)
+                UpdateChoosers(active.ToList());
         }
 
-        public void UpdateChoosers(FilterList<Facet> categories)
+        public void UpdateChoosers(List<Facet> categories)
         {
             foreach (var category in categories)
             {
@@ -104,15 +108,24 @@ namespace picibird.hbs.viewmodels.filter
 
         public void UpdateChooser(Facet category, bool forceDisable = false)
         {
-            foreach (var chooser in Choosers)
+            var chooserButton = GetChooser(category);
+            if (chooserButton == null)
             {
-                chooser.OnFilterChanged(category);
+                chooserButton = new ChooserButtonViewModel(category.Key, new ViewStyle(CHOOSER_VIEW_STYLE));
+                chooserButton.Name = category.Name;
+                chooserButton.OnFilterChanged(category);
+                chooserButton.TapBehaviour.Tap += OnChooserTap;
+                Choosers.Add(chooserButton);
+            }
+            else
+            {
+                chooserButton.OnFilterChanged(category);
             }
         }
 
-        public ChooserButtonViewModel GetChooser(string category)
+        public ChooserButtonViewModel GetChooser(Facet category)
         {
-            return Choosers.FirstOrDefault(c => c.CategoryName == category);
+            return Choosers.FirstOrDefault(c => c.CategoryKey == category.Key);
         }
 
         private void OnSearchFilterListItemAdded(object sender, Facet category)
@@ -135,7 +148,7 @@ namespace picibird.hbs.viewmodels.filter
             var chooser = sender as ChooserButtonViewModel;
             if (chooser.Frequency > 0)
             {
-                SelectedFilterCategory = chooser.CategoryName;
+                SelectedFilterCategory = chooser.CategoryKey;
                 VisualState = FilterChooserStates.CHOSEN;
             }
         }
@@ -167,166 +180,6 @@ namespace picibird.hbs.viewmodels.filter
 
         private string CHOOSER_VIEW_STYLE = "ChooserButtonViewStyle";
 
-        #region Department
-
-        private ChooserButtonViewModel mDepartmentChooser;
-
-        public ChooserButtonViewModel DepartmentChooser
-        {
-            get
-            {
-                if (mDepartmentChooser == null)
-                {
-                    var filterCat = "navSub_orange";
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.zuerich"))
-                    {
-                        filterCat = "classif_ddc_3";
-                    }
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.stgallen") ||
-                        ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.phzh"))
-                    {
-                        filterCat = "classif_rvk";
-                    }
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
-                    {
-                        if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi.konstanz"))
-                        {
-                            filterCat = "rvk";
-                        }
-                        else
-                        {
-                            filterCat = "subject_topic_facet";
-                        }
-                    }
-
-                    var name = Pici.Resources.Find(filterCat);
-                    mDepartmentChooser = new ChooserButtonViewModel(filterCat,
-                        new ViewStyle(CHOOSER_VIEW_STYLE));
-                    mDepartmentChooser.Name = name;
-                    mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-
-                return mDepartmentChooser;
-            }
-        }
-
-        #endregion Department
-
-        #region MediaChooser
-
-        private ChooserButtonViewModel mMediaChooser;
-
-        public ChooserButtonViewModel MediaChooser
-        {
-            get
-            {
-                if (mMediaChooser == null)
-                {
-                    var filterCat = "format";
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
-                    {
-                        filterCat = "material_content_type";
-                    }
-                    mMediaChooser = new ChooserButtonViewModel(filterCat,
-                        new ViewStyle(CHOOSER_VIEW_STYLE));
-
-
-
-                    mMediaChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-                return mMediaChooser;
-            }
-        }
-
-        #endregion MediaChooser
-
-        #region LanguageChooser
-
-        private ChooserButtonViewModel mLanguageChooser;
-
-        public ChooserButtonViewModel LanguageChooser
-        {
-            get
-            {
-                if (mLanguageChooser == null)
-                {
-                    mLanguageChooser = new ChooserButtonViewModel("language",
-                        new ViewStyle(CHOOSER_VIEW_STYLE));
-                    mLanguageChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-
-                return mLanguageChooser;
-            }
-        }
-
-        #endregion LanguageChooser
-
-        #region DateChooser
-
-        private ChooserButtonViewModel mDateChooser;
-
-        public ChooserButtonViewModel DateChooser
-        {
-            get
-            {
-                if (mDateChooser == null)
-                {
-                    var filterCat = "publishDate";
-                    if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
-                    {
-                        filterCat = "publish_date";
-                    }
-                    mDateChooser = new ChooserButtonViewModel(filterCat,
-                        new ViewStyle(CHOOSER_VIEW_STYLE));
-                    mDateChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-                return mDateChooser;
-            }
-        }
-
-        #endregion DateChooser
-
-        #region OnlyAvailableChooser
-
-        private ChooserButtonViewModel mOnlyAvailableChooser;
-
-        public ChooserButtonViewModel OnlyAvailableChooser
-        {
-            get
-            {
-                if (mOnlyAvailableChooser == null)
-                {
-                    mOnlyAvailableChooser = new ChooserButtonViewModel("available",
-                        new ViewStyle("ChooserButtonViewStyle"));
-                    mOnlyAvailableChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-
-                return mOnlyAvailableChooser;
-            }
-        }
-
-        #endregion OnlyAvailableChooser
-
-        #region OnlyDigitalChooser
-
-        private ChooserButtonViewModel mOnlyDigitalChooser;
-
-        public ChooserButtonViewModel OnlyDigitalChooser
-        {
-            get
-            {
-                if (mOnlyDigitalChooser == null)
-                {
-                    mOnlyDigitalChooser = new DigitalChooserButtonVM(new ViewStyle("ChooserButtonViewStyle"));
-                    mOnlyDigitalChooser.TapBehaviour.Tap += OnChooserTap;
-                }
-
-                return mOnlyDigitalChooser;
-            }
-        }
-
-        #endregion OnlyDigitalChooser
-
         #region Choosers
 
         private PiciObservableCollection<ChooserButtonViewModel> mChoosers;
@@ -338,12 +191,6 @@ namespace picibird.hbs.viewmodels.filter
                 if (mChoosers == null)
                 {
                     mChoosers = new PiciObservableCollection<ChooserButtonViewModel>();
-                    mChoosers.Add(DepartmentChooser);
-                    mChoosers.Add(MediaChooser);
-                    mChoosers.Add(LanguageChooser);
-                    mChoosers.Add(OnlyAvailableChooser);
-                    mChoosers.Add(OnlyDigitalChooser);
-                    mChoosers.Add(DateChooser);
                 }
                 return mChoosers;
             }
@@ -370,6 +217,170 @@ namespace picibird.hbs.viewmodels.filter
         }
 
         #endregion SelectedFilterCategory
+
+
+        //#region Department
+
+        //private ChooserButtonViewModel mDepartmentChooser;
+
+        //public ChooserButtonViewModel DepartmentChooser
+        //{
+        //    get
+        //    {
+        //        if (mDepartmentChooser == null)
+        //        {
+        //            var filterCat = "navSub_orange";
+        //            if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.zuerich"))
+        //            {
+        //                filterCat = "classif_ddc_3";
+        //            }
+        //            if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.stgallen") ||
+        //                ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("swissbib.phzh"))
+        //            {
+        //                filterCat = "classif_rvk";
+        //            }
+        //            if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+        //            {
+        //                if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi.konstanz"))
+        //                {
+        //                    filterCat = "rvk";
+        //                }
+        //                else
+        //                {
+        //                    filterCat = "subject_topic_facet";
+        //                }
+        //            }
+
+        //            var name = Pici.Resources.Find(filterCat);
+        //            mDepartmentChooser = new ChooserButtonViewModel(filterCat,
+        //                new ViewStyle(CHOOSER_VIEW_STYLE));
+        //            mDepartmentChooser.Name = name;
+        //            mDepartmentChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+
+        //        return mDepartmentChooser;
+        //    }
+        //}
+
+        //#endregion Department
+
+        //#region MediaChooser
+
+        //private ChooserButtonViewModel mMediaChooser;
+
+        //public ChooserButtonViewModel MediaChooser
+        //{
+        //    get
+        //    {
+        //        if (mMediaChooser == null)
+        //        {
+        //            var filterCat = "format";
+        //            if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+        //            {
+        //                filterCat = "material_content_type";
+        //            }
+        //            mMediaChooser = new ChooserButtonViewModel(filterCat,
+        //                new ViewStyle(CHOOSER_VIEW_STYLE));
+
+
+
+        //            mMediaChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+        //        return mMediaChooser;
+        //    }
+        //}
+
+        //#endregion MediaChooser
+
+        //#region LanguageChooser
+
+        //private ChooserButtonViewModel mLanguageChooser;
+
+        //public ChooserButtonViewModel LanguageChooser
+        //{
+        //    get
+        //    {
+        //        if (mLanguageChooser == null)
+        //        {
+        //            mLanguageChooser = new ChooserButtonViewModel("language",
+        //                new ViewStyle(CHOOSER_VIEW_STYLE));
+        //            mLanguageChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+
+        //        return mLanguageChooser;
+        //    }
+        //}
+
+        //#endregion LanguageChooser
+
+        //#region DateChooser
+
+        //private ChooserButtonViewModel mDateChooser;
+
+        //public ChooserButtonViewModel DateChooser
+        //{
+        //    get
+        //    {
+        //        if (mDateChooser == null)
+        //        {
+        //            var filterCat = "publishDate";
+        //            if (ShelfhubSearch.PROFILE_ACTIVE.Service.Contains("gvi"))
+        //            {
+        //                filterCat = "publish_date";
+        //            }
+        //            mDateChooser = new ChooserButtonViewModel(filterCat,
+        //                new ViewStyle(CHOOSER_VIEW_STYLE));
+        //            mDateChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+        //        return mDateChooser;
+        //    }
+        //}
+
+        //#endregion DateChooser
+
+        //#region OnlyAvailableChooser
+
+        //private ChooserButtonViewModel mOnlyAvailableChooser;
+
+        //public ChooserButtonViewModel OnlyAvailableChooser
+        //{
+        //    get
+        //    {
+        //        if (mOnlyAvailableChooser == null)
+        //        {
+        //            mOnlyAvailableChooser = new ChooserButtonViewModel("available",
+        //                new ViewStyle("ChooserButtonViewStyle"));
+        //            mOnlyAvailableChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+
+        //        return mOnlyAvailableChooser;
+        //    }
+        //}
+
+        //#endregion OnlyAvailableChooser
+
+        //#region OnlyDigitalChooser
+
+        //private ChooserButtonViewModel mOnlyDigitalChooser;
+
+        //public ChooserButtonViewModel OnlyDigitalChooser
+        //{
+        //    get
+        //    {
+        //        if (mOnlyDigitalChooser == null)
+        //        {
+        //            mOnlyDigitalChooser = new DigitalChooserButtonVM(new ViewStyle("ChooserButtonViewStyle"));
+        //            mOnlyDigitalChooser.TapBehaviour.Tap += OnChooserTap;
+        //        }
+
+        //        return mOnlyDigitalChooser;
+        //    }
+        //}
+
+        //#endregion OnlyDigitalChooser
+
+        
+
     }
 
 

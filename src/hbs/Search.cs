@@ -214,16 +214,41 @@ namespace picibird.hbs
             RaisePropertyChanged("FilterList", oldFilterList, newFilterList);
             if (oldFilterList != null)
             {
-                oldFilterList.ListUpdated -= OnSearchFilterListListUpdated;
+                oldFilterList.ItemAdded -= OnSearchFilterListListUpdated;
             }
             if (newFilterList != null)
             {
-                newFilterList.ListUpdated += OnSearchFilterListListUpdated;
+                newFilterList.ItemAdded += OnSearchFilterListListUpdated;
             }
         }
 
-        protected void OnSearchFilterListListUpdated(object sender)
+        public List<Facet> AvailableFilter = new List<Facet>();
+        private FacetEqualityComparer facetEqualityComparer = new FacetEqualityComparer();
+
+        protected void OnSearchFilterListListUpdated(object sender, Facet facet)
         {
+            if (!AvailableFilter.Any(f => f.Key == facet.Key))
+            {
+                AvailableFilter.Add(new Facet()
+                {
+                    Key = facet.Key,
+                    Name = facet.Name,
+                    Values = null
+                });
+            }
+        }
+
+        class FacetEqualityComparer : IEqualityComparer<Facet>
+        {
+            public bool Equals(Facet f1, Facet f2)
+            {
+                return f1.Key == f2.Key;
+            }
+
+            public int GetHashCode(Facet f)
+            {
+                return f.Key.GetHashCode();
+            }
         }
 
         #endregion FilterList

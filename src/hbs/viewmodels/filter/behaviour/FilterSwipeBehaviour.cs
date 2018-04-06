@@ -203,6 +203,8 @@ namespace picibird.hbs.viewmodels.filter.behaviour
             var startOpacity = vm.Opacity;
             HBS.IsAnimating = true;
             var ease = AnimationTransitions.CircEaseOut;
+            if (vm.TransformMatrix == null)
+                vm.TransformMatrix = MxM.Identity;
             var easeObject = ArtefactAnimator.AddEase(vm, new[] { "TransformMatrix" }, new object[] { m }, 0.5, ease);
             easeObject.Update +=
                 (s, progress) =>

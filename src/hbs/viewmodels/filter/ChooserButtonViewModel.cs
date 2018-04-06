@@ -30,27 +30,26 @@ namespace picibird.hbs.viewmodels.filter
 
         public ChooserButtonViewModel(string filterCategory, ViewStyle style)
         {
-            CategoryName = filterCategory;
+            CategoryKey = filterCategory;
             Name = Pici.Resources.Find(filterCategory);
-            Init(style);
+            Style = style;
+            IsEnabled = false;
         }
 
         public virtual void OnFilterChanged(Facet filterCategory)
         {
-            if (filterCategory.Key == CategoryName)
+            if (filterCategory.Key == CategoryKey)
             {
                 Name = Pici.Resources.Find(filterCategory.Key);
                 if (filterCategory.Values != null)
+                {
                     Frequency = filterCategory.Values.Count;
+                }
                 else
+                {
                     Frequency = 0;
+                }
             }
-        }
-
-        private void Init(ViewStyle style)
-        {
-            IsEnabled = false;
-            Style = style;
         }
 
         protected virtual void OnFrequencyChanged(int frequency)
@@ -71,7 +70,7 @@ namespace picibird.hbs.viewmodels.filter
 
         private string mCategoryName;
 
-        public string CategoryName
+        public string CategoryKey
         {
             get { return mCategoryName; }
             set

@@ -43,7 +43,7 @@ namespace picibird.hbs.viewmodels.filter
             Style = new ViewStyle("FilterContainerViewStyle");
             Chooser = new FilterChooserViewModel();
             Chooser.PropertyChanged += OnChooserPropertyChanged;
-
+            Chooser.Choosers.ItemAdded += OnChoosersItemAdded;
             Pointing.IsEnabled = true;
 
             SwipeBehaviour = new FilterSwipeBehaviour();
@@ -71,6 +71,22 @@ namespace picibird.hbs.viewmodels.filter
             base.OnViewIsLoadedChanged(oldViewIsLoaded, newViewIsLoaded);
             if (newViewIsLoaded)
             {
+                FilterEdgeActivateTransition();
+            }
+        }
+
+        bool filterEdgeActivated;
+
+        private void OnChoosersItemAdded(object sender, ChooserButtonViewModel item)
+        {
+            FilterEdgeActivateTransition();
+        }
+
+        private void FilterEdgeActivateTransition()
+        {
+            if (Chooser.Choosers.Count > 0 && !filterEdgeActivated)
+            {
+                filterEdgeActivated = true;
                 var loadedAni = ChooserLoadedTransition.AnimateProgressTo(1);
                 if (FilterChooserMenuAlwaysOpened)
                 {
@@ -83,8 +99,8 @@ namespace picibird.hbs.viewmodels.filter
                     };
                 }
             }
-        }
 
+        }
 
         public override void RaisePropertyChanged(string name, object oldValue = null, object newValue = null)
         {

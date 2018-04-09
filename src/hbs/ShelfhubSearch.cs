@@ -56,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_PHZH };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -114,11 +114,12 @@ namespace picibird.hbs
         private async Task<ItemList<Hit>> LoadPageHitsAsync(int index)
         {
             QueryResponse response = null;
+            QueryParams queryParams = null;
             try
             {
                 await QueryLock.WaitAsync(QueryLockToken.Token);
                 var shelfhub = createShelfhubClient();
-                var queryParams = new QueryParams()
+                queryParams = new QueryParams()
                 {
                     Query = QueryParams.Query,
                     Offset = index * 17,
@@ -132,6 +133,7 @@ namespace picibird.hbs
             }
             catch (Exception ex)
             {
+                Pici.Log.error(typeof(ShelfhubSearch), "shelfhub request secondary search page failed", ex, queryParams);
                 throw ex;
             }
             finally
@@ -183,6 +185,7 @@ namespace picibird.hbs
             }
             catch (Exception ex)
             {
+                Pici.Log.error(typeof(ShelfhubSearch), "shelfhub search query failed", ex, QueryParams);
                 throw ex;
             }
         }
@@ -256,6 +259,7 @@ namespace picibird.hbs
 
             Events.OnRenderOnce(async () =>
             {
+                CoverId[] coverIdsArray = null;
                 try
                 {
                     //cover
@@ -275,7 +279,7 @@ namespace picibird.hbs
                                            RelatedIds = i.Isbn.Skip(1).Concat(i.IsbnRelated ?? new ObservableCollection<string>()).ToObservableCollection(),
                                            IdType = CoverIdIdType.ISBN
                                        };
-                        var coverIdsArray = coverIds.ToArray();
+                        coverIdsArray = coverIds.ToArray();
                         var covers = await RequestCoversCached(coverIdsArray);
 
                         foreach (Cover c in covers)
@@ -292,7 +296,7 @@ namespace picibird.hbs
                 }
                 catch (Exception ex)
                 {
-                    Pici.Log.info(typeof(Search), ex.Message);
+                    Pici.Log.error(typeof(ShelfhubSearch), "shelfhub cover request failed", ex, coverIdsArray);
                 }
             });
         }

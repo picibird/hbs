@@ -82,10 +82,13 @@ namespace picibird.hbs.transition
             if (SwipeBehaviour.Direction == Direction.Right)
                 index = Math.Floor(index);
             index = MathX.Clamp(index, 0, HBS.Search.Callback.MaxPageIndex);
+            bool isSwiping = index != Shelf.SelectedIndex;
             var ease = Shelf.AnimateSelectedIndexTo(index, 0.5, AnimationTransitions.CircEaseOut);
             ease.Complete += (sender, e) =>
             {
                 TogglePerformance(false);
+                if (isSwiping)
+                    ShelfhubSearch.TrackSwipe("shelf", ((int)index + 1).ToString());
             };
         }
     }

@@ -37,6 +37,7 @@ namespace picibird.hbs
                     id = item.Id,
                     recid = item.Id,
                     medium = item.Medium?.Title,
+                    
                     mediumCode = item.Medium?.Type?.ToString() ?? item.Medium?.Code,
                     title = item.Title,
                     title_remainder = item.Subtitle,

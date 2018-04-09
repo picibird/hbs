@@ -73,6 +73,7 @@ namespace picibird.hbs.transition
             HBS.IsAnimating = false;
 
             Pici.Intent.Send(new Intent(Intent.ACTION_WRITE_NFC_URI, null));
+            ShelfhubSearch.TrackClose("book", Book.Hit.id);
         }
     }
 }

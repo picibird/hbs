@@ -88,7 +88,14 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 var cummulatedDirection = Math.Sign(cummulatedX);
                 var m = GetTransform(cummulatedDirection);
                 var ani = FinishSwipeWithAnimation(m, 0);
-                ani.Complete += (a, p) => { FVCM.VisualState = FilterContainerVisualStates.DISCARDED; };
+                ani.Complete += (a, p) => {
+                    FVCM.VisualState = FilterContainerVisualStates.DISCARDED;
+                    if(dirSign != 0 && FVCM.Filter != null)
+                    {
+                        ShelfhubSearch.TrackClose("filter", FVCM.Filter.Category.Key);
+                    }
+                };
+
             }
             else
             {

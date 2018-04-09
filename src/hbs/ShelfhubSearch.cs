@@ -19,6 +19,12 @@ namespace picibird.hbs
     public class ShelfhubSearch : Search, IShelfhubSearch
     {
 
+#if DEBUG
+        public static bool IS_DEBUG = true;
+#else
+        public static bool IS_DEBUG = false;
+#endif
+        public static bool USES_SHELFHUB_PRODUCTION_SERVER;
         public static string SHELFHUB_SERVER_URI_OVERRIDE;
         public static string SHELFHUB_PROFILE_OVERRIDE;
 
@@ -50,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_ZUERICH };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -316,20 +322,35 @@ namespace picibird.hbs
         public static void TrackTap(string action, string name = null)
         {
             Track("tap", action, name);
+            Track("interaction", "tap", action);
         }
 
         public static void TrackOpen(string action, string name = null)
         {
             Track("open", action, name);
+            Track("interaction", "open", action);
+        }
+
+        public static void TrackClose(string action, string name = null)
+        {
+            Track("close", action, name);
+            Track("interaction", "close", action);
         }
 
         public static void TrackSwipe(string action, string name = null)
         {
             Track("swipe", action, name);
+            Track("interaction", "swipe", action);
         }
 
         public static void Track(string category, string action, string name = null)
         {
+
+            if (IS_DEBUG || !USES_SHELFHUB_PRODUCTION_SERVER)
+            {
+                return;
+            }
+
             var shelfhub = ShelfhubSearch.createShelfhubClient();
             shelfhub.TrackAsync(new picibird.shelfhub.TrackingParams()
             {
@@ -349,9 +370,6 @@ namespace picibird.hbs
                 }
             });
         }
-
-
-
     }
 
 

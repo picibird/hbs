@@ -70,10 +70,10 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnApplyTap(object sender, EventArgs e)
         {
-            if(SelectedFilter.Count > 0)
+            if (SelectedFilter.Count > 0 && VisualState == FilterVisualStates.EDIT)
             {
-                if (VisualState == FilterVisualStates.EDIT)
-                    VisualState = FilterVisualStates.NORMAL;
+                VisualState = FilterVisualStates.NORMAL;
+                ShelfhubSearch.TrackOpen("filter", Category.Key);
             }
         }
 

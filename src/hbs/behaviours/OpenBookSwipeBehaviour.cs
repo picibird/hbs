@@ -109,6 +109,7 @@ namespace picibird.hbs.behaviours
                 else
                 {
                     HBS.ViewModel.Opened.BookVM.DropShadowOpacity = 0;
+                    ShelfhubSearch.TrackSwipe("book", BookSwipeTransition.NextBookIndex.ToString());
                 }
                 completed?.Invoke();
             };

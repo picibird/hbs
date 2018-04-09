@@ -232,6 +232,7 @@ namespace picibird.hbs.viewmodels.filter
         private void OnDeleteTap(object sender, EventArgs e)
         {
             SwipeBehaviour.FinishSwipeWithAnimation();
+            ShelfhubSearch.TrackClose("filter", Filter.Category.Key);
         }
 
         #region Filter

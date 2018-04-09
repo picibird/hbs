@@ -74,6 +74,7 @@ namespace picibird.hbs.transition
             HBS.ViewModel.ShelfViewModel.IsBitmapCacheEnabled = false;
 
             Book.WriteNfcUri();
+            ShelfhubSearch.TrackOpen("book", Book.Hit.id);
         }
     }
 }

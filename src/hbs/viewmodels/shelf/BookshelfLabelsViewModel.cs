@@ -22,6 +22,7 @@ using picibird.hbs.config;
 using picibird.hbs.ldu;
 using picibird.hbs.viewmodels.book3D;
 using picibird.hbs.viewmodels.infoShield;
+using picibird.shelfhub;
 using picibits.core.controls;
 using picibits.core.export.instances;
 using picibits.core.helper;
@@ -162,9 +163,22 @@ namespace picibird.hbs.viewmodels.shelf
 
         private bool GetIsOnlineAvailable(Hit hit)
         {
+            if (hit == null)
+                return false;
             if (hit?.mediumCode?.Equals("BK020053") ?? false)
                 return true;
-            return hit.medium == null ? false : hit.medium.Equals("ebook");
+            if (hit.medium == null)
+                return false;
+            if (hit.medium.Equals("ebook"))
+                return true;
+            if (hit.shelfhubItem is ShelfhubItem)
+            {
+                var shelfhubItem = hit.shelfhubItem as ShelfhubItem;
+                if (shelfhubItem.Medium.Online.HasValue
+                        && shelfhubItem.Medium.Online.Value)
+                    return true;
+            }
+            return false;
         }
 
         private Availability GetAvailability(Hit hit)
@@ -182,7 +196,7 @@ namespace picibird.hbs.viewmodels.shelf
                     var loc = hit.GetLocationWithSource(Sources.SWB);
                     if (loc != null)
                     {
-                        availability = new Availability {Available = loc.countAvailable, Existing = loc.countExisting};
+                        availability = new Availability { Available = loc.countAvailable, Existing = loc.countExisting };
                     }
                 }
             }
@@ -225,7 +239,7 @@ namespace picibird.hbs.viewmodels.shelf
 
         private void UpdatePosition(Rect bookBounds)
         {
-            var x = bookBounds.X + 6 + (bookBounds.Width - ActualSize.Width)*0.5;
+            var x = bookBounds.X + 6 + (bookBounds.Width - ActualSize.Width) * 0.5;
             var y = bookBounds.Y + bookBounds.Height + 18 + Config.Shelf3D.ShelfBoardHeight;
             var transform = MxM.Create(x, y);
             TransformMatrix = transform;

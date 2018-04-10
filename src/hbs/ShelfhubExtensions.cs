@@ -117,14 +117,18 @@ namespace picibird.hbs
                 hit.WebshelfUris = new List<Url>();
                 if(item.Links != null && item.Links.Count > 0)
                 {
-                    var qrCodeLink = item.Links.First((l) => l.Type == LinkType.Main);
-                    var qrCodeUrl = new Url(qrCodeLink.Url);
-                    hit.WebshelfUris.Add(qrCodeUrl);
+                    var qrCodeLink = item.Links.FirstOrDefault((l) => l.Type == LinkType.Main);
+                    if(qrCodeLink != null)
+                    {
+                        var qrCodeUrl = new Url(qrCodeLink.Url);
+                        hit.WebshelfUris.Add(qrCodeUrl);
+                    }
                 }
                 return hit;
             }
             catch (Exception ex)
             {
+                Pici.Log.error(typeof(ShelfhubExtensions), "shelfhub parsing ShelfhubItem failed", ex, item);
                 throw ex;
             }
         }

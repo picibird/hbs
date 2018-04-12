@@ -45,10 +45,6 @@ namespace picibird.hbs.viewmodels.filter
             Chooser.PropertyChanged += OnChooserPropertyChanged;
             Chooser.Choosers.ItemAdded += OnChoosersItemAdded;
             Pointing.IsEnabled = true;
-
-            SwipeBehaviour = new FilterSwipeBehaviour();
-            Behaviours.Add(SwipeBehaviour);
-
             CreateChooserLoadedTransition(Chooser);
         }
 
@@ -64,7 +60,7 @@ namespace picibird.hbs.viewmodels.filter
 
         #endregion Chooser
 
-        public FilterSwipeBehaviour SwipeBehaviour { get; }
+        public FilterSwipeBehaviour SwipeBehaviour { get; private set; }
 
         protected override void OnViewIsLoadedChanged(bool oldViewIsLoaded, bool newViewIsLoaded)
         {
@@ -158,6 +154,8 @@ namespace picibird.hbs.viewmodels.filter
 
         private void OnOpenTransitionComplete(EaseObject easeObject, double percent)
         {
+            SwipeBehaviour = new FilterSwipeBehaviour();
+            Behaviours.Add(SwipeBehaviour);
         }
 
         private void OnCloseTransitionComplete(EaseObject easeObject, double percent)

@@ -388,6 +388,7 @@
 
                                 <!-- Other Links -->
                                 <StackPanel Orientation="Vertical" Margin="0,10,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <TextBox Text="{Binding Resources[links]}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
@@ -410,8 +411,7 @@
                                 
                                 <!-- multivolume works -->
                                 <StackPanel Orientation="Vertical" Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">
-                                    <TextBox Text="Bände"
-                                             Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
+                                    <TextBox Text="Bände" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.MultiVolumeLinks}" Style="{StaticResource BookLinksSimpleStyle}" />
                                 </StackPanel>
                                 

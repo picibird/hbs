@@ -305,7 +305,7 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Links.
+        ///   Looks up a localized string similar to Online Access.
         /// </summary>
         internal static string links {
             get {

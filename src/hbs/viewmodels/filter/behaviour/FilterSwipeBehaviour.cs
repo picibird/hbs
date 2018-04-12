@@ -66,6 +66,11 @@ namespace picibird.hbs.viewmodels.filter.behaviour
                 Reset();
                 return;
             }
+            if(GetTransformed() == null)
+            {
+                Reset();
+                return;
+            }
             base.OnPointingEvent(sender, e);
         }
 

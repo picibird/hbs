@@ -33,7 +33,7 @@ namespace picibird.hbs.viewmodels.filter
         public FilterViewModel(Facet category = null)
         {
             Category = category;
-            Category.Name = Pici.Resources.Find(category.Key);
+            Category.Name = Pici.Resources.Find(category.Name);
             SelectedFilter = new PiciObservableCollection<FacetValue>();
             Style = new ViewStyle("FilterViewStyle");
             VisualState = FilterVisualStates.EDIT;

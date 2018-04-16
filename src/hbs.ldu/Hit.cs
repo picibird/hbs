@@ -529,6 +529,22 @@ namespace picibird.hbs.ldu
 
         #endregion publicationPlaces
 
+        #region Callnumber
+
+        private string m_Callnumber;
+        public string Callnumber
+        {
+            set {
+                m_Callnumber = value; }
+            get
+            {
+                return m_Callnumber;
+            }
+        }
+
+
+        #endregion Callnumber
+
         #region ISBNs
 
         private string m_ISBNs;

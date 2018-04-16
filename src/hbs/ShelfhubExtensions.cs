@@ -37,7 +37,7 @@ namespace picibird.hbs
                     id = item.Id,
                     recid = item.Id,
                     medium = item.Medium?.Title,
-                    
+
                     mediumCode = item.Medium?.Type?.ToString() ?? item.Medium?.Code,
                     title = item.Title,
                     title_remainder = item.Subtitle,
@@ -51,6 +51,10 @@ namespace picibird.hbs
                     shelfhubItem = item,
                     description = new string[] { item.Abstract }.ToList()
                 };
+                if (item.Callnumber != null && item.Callnumber.Count > 0)
+                {
+                    hit.Callnumber = String.Join("\n", item.Callnumber);
+                }
                 if (!String.IsNullOrEmpty(item.Department))
                 {
                     item.Department = String.Join("\n", item.Department.Replace(", ", ";").Split(';'));

@@ -258,4 +258,7 @@
   <data name="app_title" xml:space="preserve">
     <value>Hybrid Bookshelf</value>
   </data>
+  <data name="callnumber" xml:space="preserve">
+    <value>Systemnummer</value>
+  </data>
 </root>

@@ -56,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_AALEN };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_OCLC_PEPPERDINE };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;

@@ -125,6 +125,15 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Callnumber.
+        /// </summary>
+        internal static string callnumber {
+            get {
+                return ResourceManager.GetString("callnumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Year.
         /// </summary>
         internal static string date {

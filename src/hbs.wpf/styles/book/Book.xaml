@@ -349,6 +349,19 @@
                                              Style="{StaticResource BackCoverTextBoxFatStyle}" />
                                 </Grid>
                                 
+                                <!-- callnumber  -->
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}"
+                                      Visibility="{Binding Model.Callnumber, Converter={StaticResource CollapsedNoDataConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Resources[callnumber]}"
+                                             Style="{StaticResource BackCoverTextBoxStyle}" />
+                                    <TextBox Grid.Column="2" Text="{Binding Model.Callnumber, Mode=OneWay}"
+                                             Style="{StaticResource BackCoverTextBoxFatStyle}" />
+                                </Grid>
+                                
                                 <!-- number of pages  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}"
                                       Visibility="{Binding Model.pages_number, Converter={StaticResource CollapsedNoDataConverter}}">

@@ -387,20 +387,20 @@
                                 
                                 
                                 <!-- availability  -->
-                                <views:ItemsView DataContext="{Binding Availabilities}" 
+                                <views:ItemsView DataContext="{Binding Availabilities}" Margin="0,15,0,0"
                                            Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
                                 
                                 
                                 <!-- Full Text Links -->
                                 
-                                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Margin="0,15,0,0" Visibility="{Binding Model.LinksFullText, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Rectangle Height="4"/>
                                     <TextBox Text="{Binding Resources[fulltext]}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.LinksFullText}" Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
 
                                 <!-- Other Links -->
-                                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Margin="0,15,0,0" Visibility="{Binding Model.Links, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <TextBox Text="{Binding Resources[links]}" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.Links}"
                                                   Style="{StaticResource BookLinksStyle}" />
@@ -408,7 +408,7 @@
                                 
                                 <!-- ISBN  -->
                                 
-                                <Grid Style="{StaticResource BackCoverDataGridStyle}" Margin="0,10,0,0" 
+                                <Grid Style="{StaticResource BackCoverDataGridStyle}" Margin="0,15,0,0" 
                                       Visibility="{Binding Model.ISBNs, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
@@ -423,7 +423,8 @@
                                 <Rectangle Height="10"/>
                                 
                                 <!-- multivolume works -->
-                                <StackPanel Orientation="Vertical" Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}">
+                                <StackPanel Orientation="Vertical" Visibility="{Binding Model.MultiVolumeLinks, Converter={StaticResource CollapsedNoDataConverter}}"
+                                            Margin="0,15,0,0">
                                     <TextBox Text="Bände" Style="{StaticResource BackCoverTextBoxSuperFatStyle}" />
                                     <ItemsControl ItemsSource="{Binding Model.MultiVolumeLinks}" Style="{StaticResource BookLinksSimpleStyle}" />
                                 </StackPanel>
@@ -431,8 +432,7 @@
                                 
 
                                 <!-- description  -->
-                                <Rectangle Height="8" />
-                                <TextBox Text="{Binding Resources[description]}"
+                                <TextBox Text="{Binding Resources[description]}" Margin="0,15,0,0"
                                          Style="{StaticResource BackCoverTextBoxFatStyle}"
                                          Visibility="{Binding Model.Description, Converter={StaticResource CollapsedNoDataConverter}}" />
                                 <TextBox Grid.Column="2" Text="{Binding Model.Description, Mode=OneWay}"

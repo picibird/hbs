@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>picibird.hbs.wpf</RootNamespace>
     <AssemblyName>hbs.wpf</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -177,17 +177,17 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.63.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.63\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
+    <Reference Include="picibits.app, Version=0.1.64.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.64\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.63.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.63\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
+    <Reference Include="picibits.core, Version=0.1.64.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.64\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.63.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.63\lib\dotnet\picibits.wpf.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app, Version=0.1.64.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.64\lib\dotnet\picibits.wpf.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.63.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.63\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core, Version=0.1.64.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.64\lib\dotnet\picibits.wpf.core.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\hbs.product\src\packages\Serilog.2.6.0\lib\net46\Serilog.dll</HintPath>

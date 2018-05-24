@@ -56,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_BASEL };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;

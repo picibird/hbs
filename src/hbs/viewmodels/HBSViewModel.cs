@@ -92,6 +92,7 @@ namespace picibird.hbs.viewmodels
             BlackBlendingViewModel.TapBehaviour.Tap += OnBlackBlendingTap;
         }
 
+        public PointerType LastPointerDownType { get; private set; }
         public DateTime LastPointerDownTime { get; private set; }
 
         private void OnPointingEvent(object sender, PointerEventArgs e)
@@ -101,6 +102,7 @@ namespace picibird.hbs.viewmodels
                 var dt = DateTime.Now;
                 dt.AddMilliseconds(e.TimeStamp - Environment.TickCount);
                 LastPointerDownTime = dt;
+                LastPointerDownType = e.Pointer.Type;
             }
         }
 

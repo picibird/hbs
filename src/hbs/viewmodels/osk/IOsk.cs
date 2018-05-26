@@ -6,8 +6,8 @@ namespace picibird.hbs.viewmodels.osk
 
         bool IsEnabled { get; set; }
         bool isOpen();
-        void open();
-        void close();
+        void open(bool force = false);
+        void close(bool force = false);
         void toggle();
     }
 }

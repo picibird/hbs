@@ -99,7 +99,7 @@ namespace picibird.hbs
                     foreach (var link in item.Links)
                     {
                         var title = Pici.Resources.Find(link.Title);
-                        hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit));
+                        hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit, link.Note));
                     }
                 }
                 //add availability links

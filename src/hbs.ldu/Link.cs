@@ -38,6 +38,8 @@ namespace picibird.hbs.ldu
 
         public Hit Hit { get; private set; }
 
+        public string Tooltip { get; private set; }
+
         public string UriString
         {
             get { return Uri.AbsoluteUri; }
@@ -59,13 +61,15 @@ namespace picibird.hbs.ldu
 
         #endregion ClickCommand
 
-        public Link(string type, string uri, string title, string subtitle, Hit hit)
+        public Link(string type, string uri, string title, string subtitle, Hit hit, string tooltip = "")
         {
             this.Type = type;
             this.Uri = new Uri(uri);
 
             this.Title = title;
             this.Subtitle = subtitle;
+
+            this.Tooltip = tooltip;
 
             this.Hit = hit;
         }

@@ -10,9 +10,9 @@ namespace picibird.hbs.wpf.services
     {
         public bool IsEnabled { get; set; } = true;
 
-        public void close()
+        public void close(bool force = false)
         {
-            if (IsEnabled && IsOpened())
+            if ((IsEnabled || force) && IsOpened())
                 Close();
         }
 
@@ -21,9 +21,9 @@ namespace picibird.hbs.wpf.services
             return IsOpened();
         }
 
-        public void open()
+        public void open(bool force = false)
         {
-            if (IsEnabled && !IsOpened())
+            if ((IsEnabled || force) && !IsOpened())
                 Show();
         }
 
@@ -98,15 +98,19 @@ namespace picibird.hbs.wpf.services
 
         private static bool IsOpened()
         {
-            return GetIsOpen1709() ?? GetIsOpenLegacy();
+            bool? isOpen1709 = GetIsOpen1709();
+            bool isOpenLegacy = GetIsOpenLegacy();
+            Debug.WriteLine("isOpen1709: " + isOpen1709);
+            Debug.WriteLine("isOpenLegacy: " + isOpenLegacy);
+            return isOpen1709 ?? isOpenLegacy;
         }
 
         private static bool? GetIsOpen1709()
         {
             // if there is a top-level window - the keyboard is closed
-            var wnd = FindWindowEx(IntPtr.Zero, IntPtr.Zero, WindowClass1709, WindowCaption1709);
-            if (wnd != IntPtr.Zero)
-                return false;
+            //var wnd = FindWindowEx(IntPtr.Zero, IntPtr.Zero, WindowClass1709, WindowCaption1709);
+            //if (wnd != IntPtr.Zero)
+            //    return false;
 
             var parent = IntPtr.Zero;
             for (; ; )
@@ -116,7 +120,7 @@ namespace picibird.hbs.wpf.services
                     return null; // no more windows, keyboard state is unknown
 
                 // if it's a child of a WindowParentClass1709 window - the keyboard is open
-                wnd = FindWindowEx(parent, IntPtr.Zero, WindowClass1709, WindowCaption1709);
+                var wnd = FindWindowEx(parent, IntPtr.Zero, WindowClass1709, WindowCaption1709);
                 if (wnd != IntPtr.Zero)
                     return true;
             }

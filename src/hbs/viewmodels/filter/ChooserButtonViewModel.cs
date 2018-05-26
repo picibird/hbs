@@ -40,7 +40,16 @@ namespace picibird.hbs.viewmodels.filter
         {
             if (filterCategory.Key == CategoryKey)
             {
-                Name = Pici.Resources.Find(filterCategory.Key);
+                var locKey = Pici.Resources.Find(filterCategory.Key);
+                if (locKey != filterCategory.Key)
+                {
+                    Name = locKey;
+                }
+                else
+                {
+                    Name = Pici.Resources.Find(Name);
+                }
+                
                 if (filterCategory.Values != null)
                 {
                     Frequency = filterCategory.Values.Count;

@@ -96,7 +96,8 @@ namespace picibird.hbs
                 if (item.Links != null && item.Links.Count > 0)
                 {
                     hit.Links = new PiciObservableCollection<Link>();
-                    foreach (var link in item.Links)
+                    //TODO: for now do not show liberry url on hbs back
+                    foreach (var link in item.Links.Where((l) => !l.Url.Contains("liberry")))
                     {
                         var title = Pici.Resources.Find(link.Title);
                         hit.Links.Add(new Link(link.Type.ToString(), link.Url, title, "", hit, link.Note));

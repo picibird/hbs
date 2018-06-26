@@ -56,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_AALEN };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -259,12 +259,26 @@ namespace picibird.hbs
 
             Events.OnRenderOnce(async () =>
             {
+                //set covers that are already available
+                var coversAlreadyExisting = from m in shelfhubItems
+                                     where m.Cover != null && m.Cover.ImageLarge != null && m.Cover.ImageLarge.Length > 0
+                                     select m.Cover;
+                foreach (Cover c in coversAlreadyExisting)
+                {
+                    var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
+                    if (hit != null)
+                    {
+                        hit.CoverIsbn = c.Id;
+                        hit.CoverImageUrl = c.ImageLarge;
+                    }
+                }
+
                 CoverId[] coverIdsArray = null;
                 try
                 {
                     //cover
                     var items = from m in shelfhubItems
-                                where m.Isbn != null && m.Isbn.Count > 0
+                                where m.Cover == null && m.Isbn != null && m.Isbn.Count > 0
                                 select m;
                     var itemsArray = items.ToArray();
 

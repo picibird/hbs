@@ -261,11 +261,27 @@ namespace picibird.hbs
             {
                 //set covers that are already available
                 var coversAlreadyExisting = from m in shelfhubItems
-                                     where m.Cover != null && m.Cover.ImageLarge != null && m.Cover.ImageLarge.Length > 0
-                                     select m.Cover;
+                                            where m.Cover != null && m.Cover.ImageLarge != null && m.Cover.ImageLarge.Length > 0
+                                            select m.Cover;
                 foreach (Cover c in coversAlreadyExisting)
                 {
-                    var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
+                    var hit = hits.FirstOrDefault((h) =>
+                    {
+                        var shelfhubItem = ((ShelfhubItem)h.shelfhubItem);
+                        if (shelfhubItem.Isbn != null)
+                        {
+                            bool isbnMatches = shelfhubItem.Isbn.Any(isbn => isbn == c.Id);
+                            if (isbnMatches)
+                                return true;
+                        }
+                        if (shelfhubItem.IsbnRelated != null)
+                        {
+                            bool isbnRelated = shelfhubItem.IsbnRelated.Any(isbn => isbn == c.Id);
+                            if (isbnRelated)
+                                return true;
+                        }
+                        return false;
+                    });
                     if (hit != null)
                     {
                         hit.CoverIsbn = c.Id;

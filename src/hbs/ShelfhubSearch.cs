@@ -252,7 +252,26 @@ namespace picibird.hbs
             Callback.MaxPageIndex = (int)maxPageIndex;
         }
 
-
+        private Hit FindHitWithIsbn(IList<Hit> hits, string isbn)
+        {
+            return hits.FirstOrDefault((h) =>
+            {
+                var shelfhubItem = ((ShelfhubItem)h.shelfhubItem);
+                if (shelfhubItem.Isbn != null)
+                {
+                    bool isbnMatches = shelfhubItem.Isbn.Any(i => i == isbn);
+                    if (isbnMatches)
+                        return true;
+                }
+                if (shelfhubItem.IsbnRelated != null)
+                {
+                    bool isbnRelated = shelfhubItem.IsbnRelated.Any(i => i == isbn);
+                    if (isbnRelated)
+                        return true;
+                }
+                return false;
+            });
+        }
 
         public void RequestCovers(IList<ShelfhubItem> shelfhubItems, IList<Hit> hits)
         {
@@ -265,27 +284,30 @@ namespace picibird.hbs
                                             select m.Cover;
                 foreach (Cover c in coversAlreadyExisting)
                 {
-                    var hit = hits.FirstOrDefault((h) =>
-                    {
-                        var shelfhubItem = ((ShelfhubItem)h.shelfhubItem);
-                        if (shelfhubItem.Isbn != null)
-                        {
-                            bool isbnMatches = shelfhubItem.Isbn.Any(isbn => isbn == c.Id);
-                            if (isbnMatches)
-                                return true;
-                        }
-                        if (shelfhubItem.IsbnRelated != null)
-                        {
-                            bool isbnRelated = shelfhubItem.IsbnRelated.Any(isbn => isbn == c.Id);
-                            if (isbnRelated)
-                                return true;
-                        }
-                        return false;
-                    });
+                    var hit = FindHitWithIsbn(hits, c.Id);
                     if (hit != null)
                     {
                         hit.CoverIsbn = c.Id;
                         hit.CoverImageUrl = c.ImageLarge;
+                    }
+                }
+
+                //set colors that are already available
+                var colorsAlreadyExisting = from m in shelfhubItems
+                                            where m.Colors != null
+                                            select m.Colors;
+                foreach (UIColors uicolors in colorsAlreadyExisting)
+                {
+                    var hit = FindHitWithIsbn(hits, uicolors.Id);
+                    if (hit != null)
+                    {
+                        hit.CoverColorScheme = new picibits.bib.HistomatColorScheme()
+                        {
+                            Primary = uicolors.Background,
+                            Secondary = uicolors.Foreground,
+                            Light = uicolors.Light,
+                            Dark = uicolors.Dark
+                        };
                     }
                 }
 
@@ -298,6 +320,7 @@ namespace picibird.hbs
                                 select m;
                     var itemsArray = items.ToArray();
 
+                    List<Cover> covers = null;
 
                     if (itemsArray.Any())
                     {
@@ -310,8 +333,7 @@ namespace picibird.hbs
                                            IdType = CoverIdIdType.ISBN
                                        };
                         coverIdsArray = coverIds.ToArray();
-                        var covers = await RequestCoversCached(coverIdsArray);
-
+                        covers = await RequestCoversCached(coverIdsArray);
                         foreach (Cover c in covers)
                         {
                             var hit = hits.FirstOrDefault((h) => h.id == c.ItemId);
@@ -322,6 +344,36 @@ namespace picibird.hbs
                             }
                         }
                     }
+                    //query colors
+                    var imageUrls = coversAlreadyExisting.Union(covers ?? new List<Cover>(0)).Select(c => new ImageUrl()
+                    {
+                        Id = c.Id,
+                        Url = c.ImageLarge
+                    })
+                    .Where(iurl => iurl.Url != null) // remove all urls that are null
+                    .Where(c => !colorsAlreadyExisting.Any(color => color.Id == c.Id)) //remove all colors that were already received
+                    .ToObservableCollection();
+                    if (imageUrls.Any())
+                    {
+                        var imageColorParams = new ImageColorsParams() { Images = imageUrls };
+                        var shelfhub = createShelfhubClient();
+                        var colorResponse = await shelfhub.ImagecolorsAsync(imageColorParams);
+                        foreach (UIColors uicolors in colorResponse)
+                        {
+                            var hit = FindHitWithIsbn(hits, uicolors.Id);
+                            if (hit != null)
+                            {
+                                hit.CoverColorScheme = new picibits.bib.HistomatColorScheme()
+                                {
+                                    Primary = uicolors.Background,
+                                    Secondary = uicolors.Foreground,
+                                    Light = uicolors.Light,
+                                    Dark = uicolors.Dark
+                                };
+                            }
+                        }
+                    }
+                    //validate cache
                     ValidateCoverCacheSize();
                 }
                 catch (Exception ex)

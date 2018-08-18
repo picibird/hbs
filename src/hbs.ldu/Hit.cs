@@ -417,26 +417,6 @@ namespace picibird.hbs.ldu
 
         #endregion CoverColorScheme
 
-        #region CoverSearchColors
-
-        private HistomatSearchColors mCoverSearchColors = HistomatSearchColors.DEFAULT;
-
-        [XmlIgnore]
-        public HistomatSearchColors CoverSearchColors
-        {
-            get { return mCoverSearchColors; }
-            set
-            {
-                if (mCoverSearchColors != value)
-                {
-                    HistomatSearchColors old = mCoverSearchColors;
-                    mCoverSearchColors = value;
-                    RaisePropertyChanged("CoverSearchColors", old, value);
-                }
-            }
-        }
-
-        #endregion CoverSearchColors
 
         #region CoverImageUrl
 

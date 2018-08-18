@@ -40,7 +40,7 @@ namespace picibird.hbs.models
                 {
                     var qrCodeSize = (int) Config.Shelf3D.DefaultSpineWidth;
                     var qrCodeImage = qrCodes.Encode(webshelfUri, qrCodeSize, qrCodeSize,
-                        Hit.CoverColorScheme.Secondary, Hit.CoverColorScheme.Primary);
+                        Hit.CoverColorScheme.Light, Hit.CoverColorScheme.Dark);
                     Hit.QRCodeImage = qrCodeImage;
                 }
             }

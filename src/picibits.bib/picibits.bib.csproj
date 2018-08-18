@@ -74,9 +74,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="HistomatColorScheme.cs" />
-    <Compile Include="HistomatSearchColors.cs" />
     <Compile Include="ICoverService.cs" />
-    <Compile Include="IHistomatService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -29,10 +29,15 @@ namespace picibits.bib
         [JsonProperty("secondary")]
         public string Secondary { get; set; }
 
+        public string Light { get; set; }
+        public string Dark { get; set; }
+
         public static HistomatColorScheme DEFAULT = new HistomatColorScheme
         {
             Primary = "#FF2D6178",
-            Secondary = "#FFFBFEFF"
+            Secondary = "#FFFBFEFF",
+            Light = "#FFFBFEFF",
+            Dark = "#FF2D6178"
         };
     }
 }

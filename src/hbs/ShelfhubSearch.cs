@@ -56,7 +56,7 @@ namespace picibird.hbs
         {
             get
             {
-                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_GVI_KONSTANZ };
+                ShelfhubParams p = new ShelfhubParams() { Service = PROFILE_SWISSBIB_STGALLEN };
                 if (!String.IsNullOrEmpty(SHELFHUB_PROFILE_OVERRIDE))
                     p.Service = SHELFHUB_PROFILE_OVERRIDE;
                 return p;
@@ -181,7 +181,7 @@ namespace picibird.hbs
                 QueryResponse queryResult = null;
                 queryResult = await shelfhub.QueryAsync(QueryParams);
 
-                await AfterShelfhubSearch(queryResult, reason);
+                AfterShelfhubSearch(queryResult, reason);
             }
             catch (Exception ex)
             {
@@ -220,7 +220,7 @@ namespace picibird.hbs
             Session.Status = new SearchStatus();
         }
 
-        private async Task AfterShelfhubSearch(QueryResponse response, SearchStartingReason reason)
+        private void AfterShelfhubSearch(QueryResponse response, SearchStartingReason reason)
         {
             //convert shelfhubitems to hits and call Session
             var items = response.Items;
@@ -373,12 +373,16 @@ namespace picibird.hbs
                             }
                         }
                     }
-                    //validate cache
-                    ValidateCoverCacheSize();
+                    
                 }
                 catch (Exception ex)
                 {
                     Pici.Log.error(typeof(ShelfhubSearch), "shelfhub cover request failed", ex, coverIdsArray);
+                }
+                finally
+                {
+                    //validate cache
+                    ValidateCoverCacheSize();
                 }
             });
         }

@@ -181,30 +181,22 @@ namespace picibird.hbs.viewmodels.filter
         {
             Pici.Log.info(typeof(FilterChooserViewModel),
                 string.Format("selected filter category {0}", Chooser.SelectedFilterCategory));
-            var category = HBS.Search.FilterList.FirstOrDefault(fc => fc.Key == categoryName);
-            if (category != null)
+            Facet facet = HBS.Search.FilterList.FirstOrDefault(fc => fc.Key == categoryName);
+            if (facet != null)
             {
-                if (category.Key == "publishDate")
+                if(facet.Type == FacetType.List)
                 {
-                    Filter = new DateFilterVM(category);
-                    //Filter = new ListFilterViewModel(category);
+                    Filter = new ListFilterViewModel(facet);
                 }
-                else if (category.Key == "availability")
+                else if (facet.Type == FacetType.Toggle)
                 {
-                    Filter = new AvailableFilterViewModel(category);
+                    Filter = new ToggleFilterViewModel(facet);
                     FiltersApplied(this, Filter.SelectedFilter);
                 }
                 else
                 {
-                    Filter = new ListFilterViewModel(category);
-                }
-            }
-            else
-            {
-                if (categoryName == "digital")
-                {
-                    Filter = new DigitalFilterVM();
-                    FiltersApplied(this, Filter.SelectedFilter);
+                    //default is LIST (still use as fallback)
+                    Filter = new ListFilterViewModel(facet);
                 }
             }
         }

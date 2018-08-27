@@ -64,7 +64,7 @@ namespace picibird.hbs.viewmodels.filter
         protected virtual void OnFrequencyChanged(int frequency)
         {
             IsEnabled = frequency > 0;
-            if (IsEnabled)
+            if (frequency > 1)
                 Style = new ViewStyle("ChooserButtonWithCountViewStyle");
             else
                 Style = new ViewStyle("ChooserButtonViewStyle");

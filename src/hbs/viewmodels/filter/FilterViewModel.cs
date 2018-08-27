@@ -126,7 +126,7 @@ namespace picibird.hbs.viewmodels.filter
 
         #region AppliedInfoString
 
-        private string mAppliedInfoString = "";
+        private string mAppliedInfoString = " ";
 
         public string AppliedInfoString
         {

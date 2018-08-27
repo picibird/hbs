@@ -17,22 +17,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using picibird.hbs.ldu;
 using picibird.shelfhub;
 using picibits.core;
-using Filter = picibird.hbs.ldu.Filter;
 
 namespace picibird.hbs.viewmodels.filter
 {
-    public class AvailableFilterViewModel : FilterViewModel
+    public class ToggleFilterViewModel : FilterViewModel
     {
-        public AvailableFilterViewModel(Facet category)
+        public ToggleFilterViewModel(Facet category)
             : base(category)
         {
-            FilterName = "";
-            //SelectedFilter.Add(new Filter {Catgegory = FilterCategoryId.available, Id = "0"});
+            SelectedFilter.AddRange(category.Values);
             VisualState = FilterVisualStates.NORMAL;
-            AppliedInfoString = Pici.Resources.Find(category.Key);
+            AppliedInfoString = null;
         }
     }
 }

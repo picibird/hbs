@@ -202,7 +202,7 @@
     <Compile Include="viewmodels\filter\FilterSelectionItemViewModel.cs" />
     <Compile Include="viewmodels\filter\FilterSelectionListViewModel.cs" />
     <Compile Include="viewmodels\filter\FilterViewModel.cs" />
-    <Compile Include="viewmodels\filter\AvailableFilterViewModel.cs" />
+    <Compile Include="viewmodels\filter\ToggleFilterViewModel.cs" />
     <Compile Include="viewmodels\infoShield\InfoShieldVM.cs" />
     <Compile Include="viewmodels\infoShield\ShelfContentInfo.cs" />
     <Compile Include="viewmodels\infoShield\Sorting.cs" />

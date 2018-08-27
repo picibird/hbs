@@ -65,7 +65,7 @@ namespace picibird.hbs.viewmodels.filter
                     ordF => FilterSelectionViewModel.ItemIndexOf(ordF)).ToArray();
                 if (ordFilter.Length == 0)
                 {
-                    AppliedInfoString = "";
+                    AppliedInfoString = " ";
                 }
                 else if (ordFilter.Length == 1)
                 {
@@ -86,7 +86,7 @@ namespace picibird.hbs.viewmodels.filter
             }
             else
             {
-                AppliedInfoString = "";
+                AppliedInfoString = " ";
             }
         }
 

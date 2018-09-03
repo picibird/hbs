@@ -188,6 +188,7 @@
     <Compile Include="viewmodels\book\BackCoverViewModel.cs" />
     <Compile Include="viewmodels\book\OpenedBookViewModel.cs" />
     <Compile Include="viewmodels\book\SpineViewModel.cs" />
+    <Compile Include="viewmodels\buttons\BackButtonVM.cs" />
     <Compile Include="viewmodels\buttons\TitleButtonVM.cs" />
     <Compile Include="viewmodels\FilterDictionary.cs" />
     <Compile Include="viewmodels\filter\behaviour\FilterSwipeBehaviour.cs" />

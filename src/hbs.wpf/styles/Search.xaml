@@ -1,10 +1,11 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:picibird.hbs.wpf.controls"
-                    xmlns:helper="clr-namespace:picibird.hbs.wpf.helper"
-                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                    xmlns:helper1="clr-namespace:picibird.wpf.core.helper;assembly=picibits.wpf.core"
-                    xmlns:fa="http://schemas.fontawesome.io/icons/">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:picibird.hbs.wpf.controls"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:helper="clr-namespace:picibird.hbs.wpf.helper"
+    xmlns:helper1="clr-namespace:picibird.wpf.core.helper;assembly=picibits.wpf.core"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
@@ -16,7 +17,7 @@
         <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- http://msdn.microsoft.com/de-de/library/ms752068(v=vs.110).aspx -->
+    <!--  http://msdn.microsoft.com/de-de/library/ms752068(v=vs.110).aspx  -->
 
     <Style x:Key="HBSLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -44,15 +45,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                    <Border Name="Border" CornerRadius="{StaticResource CornerRadiusDefault}" Padding="2">
+                    <Border
+                        Name="Border"
+                        Padding="2"
+                        CornerRadius="{StaticResource CornerRadiusDefault}">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource HBS_WHITE}" />
                         </Border.Background>
                         <Grid>
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
-                            <Label Content="{Binding EmptyText}" VerticalContentAlignment="Center"
-                                   Foreground="{DynamicResource HBS_BLUE_BRUSH}"
-                                   Opacity="0.5" IsHitTestVisible="False" />
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
+                            <Label
+                                VerticalContentAlignment="Center"
+                                Content="{Binding EmptyText}"
+                                Foreground="{DynamicResource HBS_BLUE_BRUSH}"
+                                IsHitTestVisible="False"
+                                Opacity="0.5" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -60,26 +67,31 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SearchBoxTextStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+    <Style
+        x:Key="SearchBoxTextStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
         <Setter Property="Width" Value="700" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border>
-                        <controls:SearchTextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource HBSTextBoxStyle}" InputScope="Default">
+                        <controls:SearchTextBox
+                            InputScope="Default"
+                            Style="{StaticResource HBSTextBoxStyle}"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewTouchDown">
-                                    <helper1:EventToCommand Command="{Binding TouchDownCommand, Mode=OneWay}"/>
+                                    <helper1:EventToCommand Command="{Binding TouchDownCommand, Mode=OneWay}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="PreviewMouseDown">
-                                    <helper1:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"/>
+                                    <helper1:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="GotFocus">
-                                    <helper1:EventToCommand Command="{Binding GotFocusCommand, Mode=OneWay}"/>
+                                    <helper1:EventToCommand Command="{Binding GotFocusCommand, Mode=OneWay}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="LostFocus">
-                                    <helper1:EventToCommand Command="{Binding LostFocusCommand, Mode=OneWay}"/>
+                                    <helper1:EventToCommand Command="{Binding LostFocusCommand, Mode=OneWay}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <TextBox.InputBindings>
@@ -92,18 +104,27 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SearchButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+    <Style
+        x:Key="SearchButtonStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
         <Setter Property="Width" Value="125" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}">
-                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
-                            Background="{StaticResource HBS_BLUE_BRUSH}" Margin="-10,0,0,0">
-                            <Label Content="{Binding Resources[search]}" Margin="10,0,0,0"
-                               Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
-                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoRegular}"
-                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
+                        <Border
+                            Margin="-10,0,0,0"
+                            Background="{StaticResource HBS_BLUE_BRUSH}"
+                            CornerRadius="{StaticResource CornerRadiusDefault}">
+                            <Label
+                                Margin="10,0,0,0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="{Binding Resources[search]}"
+                                FontFamily="{StaticResource RobotoRegular}"
+                                FontSize="{StaticResource TitleFontSize}"
+                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
                         </Border>
                     </Button>
                 </ControlTemplate>
@@ -111,17 +132,26 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LanguageButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+    <Style
+        x:Key="LanguageButtonStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}">
-                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
-                            Background="{StaticResource HBS_BLUE_BRUSH}" Margin="0,0,0,0">
-                            <Label Content="{Binding Text}" Margin="10,0,10,0"
-                               Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
-                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoLight}"
-                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
+                        <Border
+                            Margin="0,0,0,0"
+                            Background="{StaticResource HBS_BLUE_BRUSH}"
+                            CornerRadius="{StaticResource CornerRadiusDefault}">
+                            <Label
+                                Margin="10,0,10,0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="{Binding Text}"
+                                FontFamily="{StaticResource RobotoLight}"
+                                FontSize="{StaticResource TitleFontSize}"
+                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}" />
                         </Border>
                     </Button>
                 </ControlTemplate>
@@ -129,17 +159,27 @@
         </Setter>
     </Style>
 
-    <Style x:Key="OskButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
-        <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource CollapsedNoDataConverter}}"/>
+    <Style
+        x:Key="OskButtonStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
+        <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource CollapsedNoDataConverter}}" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Button Style="{StaticResource ButtonContentOnlyStyle}" Command="{Binding ClickCommand}" Focusable="False">
-                        <Border CornerRadius="{StaticResource CornerRadiusDefault}"
-                            Background="{StaticResource HBS_BLUE_BRUSH}" Margin="4,0,0,0" >
-                            <fa:FontAwesome Icon="KeyboardOutline" Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
-                               FontSize="44"/>
+                    <Button
+                        Command="{Binding ClickCommand}"
+                        Focusable="False"
+                        Style="{StaticResource ButtonContentOnlyStyle}">
+                        <Border
+                            Margin="4,0,0,0"
+                            Background="{StaticResource HBS_BLUE_BRUSH}"
+                            CornerRadius="{StaticResource CornerRadiusDefault}">
+                            <fa:FontAwesome
+                                FontSize="44"
+                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
+                                Icon="KeyboardOutline" />
                         </Border>
                     </Button>
                 </ControlTemplate>
@@ -147,17 +187,55 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ResetButtonStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource ViewBaseStyle}">
+    <Style
+        x:Key="BackButtonStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
+        <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource CollapsedNoDataConverter}}" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button
+                        Command="{Binding ClickCommand}"
+                        Focusable="False"
+                        Style="{StaticResource ButtonContentOnlyStyle}">
+                        <Border Background="Transparent" CornerRadius="{StaticResource CornerRadiusDefault}">
+                            <fa:FontAwesome
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="44"
+                                Foreground="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
+                                Icon="CaretSquareOutlineLeft" />
+                        </Border>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="ResetButtonStyle"
+        BasedOn="{StaticResource ViewBaseStyle}"
+        TargetType="{x:Type Control}">
         <Setter Property="IsEnabled" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border x:Name="Border" CornerRadius="{StaticResource CornerRadiusDefault}" Margin="0,0,20,0"
-                            Background="{StaticResource HBS_BLUE_LIGHT_BRUSH}">
-                        <Label x:Name="Label" Content="{Binding Resources[reset]}" Margin="10,0,10,0"
-                               FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoMedium}"
-                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                               Foreground="{StaticResource HBS_BLUE_BRUSH}"/>
+                    <Border
+                        x:Name="Border"
+                        Margin="0,0,20,0"
+                        Background="{StaticResource HBS_BLUE_LIGHT_BRUSH}"
+                        CornerRadius="{StaticResource CornerRadiusDefault}">
+                        <Label
+                            x:Name="Label"
+                            Margin="10,0,10,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="{Binding Resources[reset]}"
+                            FontFamily="{StaticResource RobotoMedium}"
+                            FontSize="{StaticResource TitleFontSize}"
+                            Foreground="{StaticResource HBS_BLUE_BRUSH}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

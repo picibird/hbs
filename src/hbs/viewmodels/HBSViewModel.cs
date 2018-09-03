@@ -284,6 +284,25 @@ namespace picibird.hbs.viewmodels
 
         #endregion OskButtonVM
 
+
+        #region OskButtonVM
+
+        private BackButtonVM mBackButtonVM;
+
+        public BackButtonVM BackButtonVM
+        {
+            get
+            {
+                if (mBackButtonVM == null)
+                {
+                    mBackButtonVM = new BackButtonVM();
+                }
+                return mBackButtonVM;
+            }
+        }
+
+        #endregion OskButtonVM
+
         #region BlackBlendingViewModel
 
         private BlackBlendingViewModel mBlackBlendingViewModel;

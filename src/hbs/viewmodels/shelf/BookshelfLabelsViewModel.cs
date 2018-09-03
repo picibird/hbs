@@ -165,7 +165,7 @@ namespace picibird.hbs.viewmodels.shelf
         {
             if (hit == null)
                 return false;
-            if (hit?.mediumCode?.Equals("BK020053") ?? false)
+            if (hit.mediumCode?.Equals("BK020053") ?? false)
                 return true;
             if (hit.medium == null)
                 return false;

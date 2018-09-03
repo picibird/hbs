@@ -230,12 +230,13 @@
                                 DataContext="{Binding BlackBlendingViewModel}" />
 
                             <!--  Title  -->
-                            <Canvas
+                            <DockPanel
                                 Grid.ColumnSpan="2"
-                                Margin="10"
+                                Margin="15,10,10,10"
                                 HorizontalAlignment="Left">
-                                <views:View Margin="5,0,0,0" DataContext="{Binding TitleButton}" />
-                            </Canvas>
+                                <views:View DataContext="{Binding BackButtonVM}" DockPanel.Dock="Left" />
+                                <views:View DataContext="{Binding TitleButton}" DockPanel.Dock="Left" />
+                            </DockPanel>
 
                             <!--  shelf selected  -->
                             <Grid

@@ -213,6 +213,7 @@
     <Compile Include="viewmodels\book3D\Book3DViewModel.cs" />
     <Compile Include="viewmodels\book3D\BookPlane3DViewModel.cs" />
     <Compile Include="viewmodels\book\BookPlaneViewModel.cs" />
+    <Compile Include="viewmodels\ressources\RessourcesVM.cs" />
     <Compile Include="viewmodels\search\LanguageButtonViewModel.cs" />
     <Compile Include="viewmodels\osk\IOsk.cs" />
     <Compile Include="viewmodels\osk\OskButtonVM.cs" />

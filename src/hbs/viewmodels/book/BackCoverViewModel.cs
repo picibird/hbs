@@ -28,6 +28,7 @@ namespace picibird.hbs.viewmodels.book
         {
             base.OnModelChanged(oldModel, newModel);
             Availabilities.Model = newModel;
+            Ressources.Model = newModel;
         }
 
         #region Availabilities
@@ -41,6 +42,23 @@ namespace picibird.hbs.viewmodels.book
                 if (mAvailabilities == null)
                     mAvailabilities = new AvailabilityItemsVM();
                 return mAvailabilities;
+            }
+        }
+
+        #endregion Availabilities
+
+
+        #region Availabilities
+
+        private RessourcesVM mRessources;
+
+        public RessourcesVM Ressources
+        {
+            get
+            {
+                if (mRessources == null)
+                    mRessources = new RessourcesVM();
+                return mRessources;
             }
         }
 

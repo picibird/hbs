@@ -705,6 +705,9 @@ namespace picibird.hbs.ldu
         [XmlIgnore]
         public PiciObservableCollection<Link> MultiVolumeLinks { get; set; }
 
+        [XmlIgnore]
+        public PiciObservableCollection<Link> RessourceLinks { get; set; } = new PiciObservableCollection<Link>();
+
         #endregion Links
 
         public async Task<Record> GetDetailsAsync(SearchSession session)

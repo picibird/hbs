@@ -413,6 +413,15 @@ namespace picibird.hbs.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Online Ressources.
+        /// </summary>
+        internal static string ressourcelinks {
+            get {
+                return ResourceManager.GetString("ressourcelinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string search {

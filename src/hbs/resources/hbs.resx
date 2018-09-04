@@ -261,4 +261,7 @@
   <data name="callnumber" xml:space="preserve">
     <value>Callnumber</value>
   </data>
+  <data name="ressourcelinks" xml:space="preserve">
+    <value>Online Ressources</value>
+  </data>
 </root>

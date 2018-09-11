@@ -23,6 +23,7 @@ using picibird.hbs.models;
 using picibird.hbs.viewmodels;
 using picibird.hbs.viewmodels.book3D;
 using picibits.app.animation;
+using picibits.core.pointer;
 using SimpleInjector;
 
 namespace picibird.hbs
@@ -41,6 +42,9 @@ namespace picibird.hbs
         public static readonly PercentHandler AnimationEaseInOut = AnimationTransitions.QuadEaseInOut;
         public static readonly PercentHandler AnimationEaseIn = AnimationTransitions.QuadEaseIn;
         public static readonly PercentHandler AnimationEaseOut = AnimationTransitions.QuadEaseOut;
+
+        public static bool IsUsingTouchInput => HBS.ViewModel.LastPointerDownType == PointerType.TOUCH;
+        public static bool IsUsingMouseInput => HBS.ViewModel.LastPointerDownType == PointerType.MOUSE;
 
         static HBS()
         {

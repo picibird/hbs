@@ -39,7 +39,7 @@ namespace picibird.hbs
             General = Pici.Settings.Get<GeneralSettings>();
         }
 
-        [JsonProperty(Required = Required.Always)]
+        [JsonProperty(Required = Required.Always, Order = 0)]
         public GeneralSettings General { get; set; }
         
         

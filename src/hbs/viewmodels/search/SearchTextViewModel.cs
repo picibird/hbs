@@ -24,7 +24,6 @@ using picibits.core;
 using picibits.core.helper;
 using picibits.core.mvvm;
 using picibits.core.util;
-using picibits.core;
 
 namespace picibird.hbs.viewmodels.search
 {
@@ -107,10 +106,6 @@ namespace picibird.hbs.viewmodels.search
             });
             MouseDownCommand = new DelegateCommand((p) =>
             {
-                if (!mIsTouch)
-                {
-                    mOsk.open();
-                }
                 mIsTouch = false;
             });
             GotFocusCommand = new DelegateCommand((p) => { EnterSearchCommand.CanExecuteProp = true; });

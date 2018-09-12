@@ -19,6 +19,7 @@
 
 using System.Collections.Generic;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core;
 using picibits.core.extension;
 
@@ -32,7 +33,7 @@ namespace picibird.hbs.viewmodels.infoShield
         public SortOrderFunction(SortOrder enumValue)
         {
             EnumValue = enumValue;
-            StringValue = Pici.Resources.Find("sortorder_" + enumValue);
+            StringValue = Pici.Resources.Find(enumValue.Label);
         }
 
         public string StringValue { get; private set; }
@@ -59,32 +60,12 @@ namespace picibird.hbs.viewmodels.infoShield
                 if (IsAlphabetical())
                 {
                     repr = repr.ToLower();
-                    //remove leading striung sequences that are ignored when sorting
-
-                    repr = repr.TrimStart(new[]
-                    {
-                        " ",
-                        "a ",
-                        "the ",
-                        "der ",
-                        "die ",
-                        "den ",
-                        "des ",
-                        "an ",
-                        "(",
-                        ")",
-                        @"""",
-                        "[",
-                        "]",
-                        "{",
-                        "}"
-                    });
                     repr = repr.Substring(0, 1).ToUpper();
                 }
                 else
                 {
-                    if (EnumValue == SortOrder.relevance)
-                        repr = repr.FormatNumberWithThousandSeperator();
+                    //if (EnumValue == SortOrder.relevance)
+                    //    repr = repr.FormatNumberWithThousandSeperator();
                 }
             }
             return repr;
@@ -92,23 +73,7 @@ namespace picibird.hbs.viewmodels.infoShield
 
         public bool IsAlphabetical()
         {
-            var isAlpha = false;
-            switch (EnumValue)
-            {
-                case SortOrder.relevance:
-                    isAlpha = false;
-                    break;
-                case SortOrder.date:
-                    isAlpha = false;
-                    break;
-                case SortOrder.author:
-                    isAlpha = true;
-                    break;
-                case SortOrder.title:
-                    isAlpha = true;
-                    break;
-            }
-            return isAlpha;
+            return EnumValue.Type == SortFieldType.Alphabetical;
         }
 
         public bool HasProperty(Hit hit)
@@ -122,22 +87,18 @@ namespace picibird.hbs.viewmodels.infoShield
         public object GetProperty(Hit hit)
         {
             object prop = null;
-            switch (EnumValue)
+            switch (EnumValue.Type)
             {
-                case SortOrder.relevance:
-                    prop = hit.relevance;
+                case SortFieldType.Alphabetical:
+                    prop = hit.title;
                     break;
-                case SortOrder.date:
+                case SortFieldType.Score:
+                case SortFieldType.Date:
+                case SortFieldType.Numerical:
                     prop = hit.date;
                     break;
-                case SortOrder.author:
-                    var author = hit.mergeAuthorString;
-                    if (author.ToLower().Equals("zzz"))
-                        author = "";
-                    prop = author;
-                    break;
-                case SortOrder.title:
-                    prop = hit.title;
+                default:
+                    prop = hit.date;
                     break;
             }
             return prop;
@@ -145,10 +106,9 @@ namespace picibird.hbs.viewmodels.infoShield
 
         public override bool Equals(object obj)
         {
-            if (obj is SortOrderFunction)
+            if (obj is SortOrderFunction sof)
             {
-                var other = obj as SortOrderFunction;
-                return EnumValue.Equals(other.EnumValue);
+                return EnumValue.Equals(sof.EnumValue);
             }
             return base.Equals(obj);
         }

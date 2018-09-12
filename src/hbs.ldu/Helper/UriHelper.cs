@@ -137,7 +137,7 @@ namespace picibird.hbs.ldu.Helper
 
         public static string CreateSortStringFromSearchRequest(SearchRequest searchRequest)
         {
-            return String.Format("{0}:{1}", searchRequest.SortOrder.ToPazpar2ParameterString(),
+            return String.Format("{0}:{1}", searchRequest.SortOrder.ToString(),
                 (searchRequest.SortDirection == SortDirection.descending) ? 0 : 1);
         }
 

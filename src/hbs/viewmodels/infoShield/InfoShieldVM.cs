@@ -21,6 +21,7 @@ using System.Linq;
 using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
 using picibird.hbs.viewmodels.shelf;
+using picibird.shelfhub;
 using picibits.core.math;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
@@ -39,10 +40,7 @@ namespace picibird.hbs.viewmodels.infoShield
             UpdateSizeAndPosition();
         }
 
-        public Sorting Sorting
-        {
-            get { return SortingInstance; }
-        }
+        public Sorting Sorting { get; set; } = SortingInstance;
 
         public ShelfDrawViewModel DrawViewModel { get; }
 
@@ -82,11 +80,7 @@ namespace picibird.hbs.viewmodels.infoShield
             Info.To = null;
             if (page.Hits.Count > 0)
             {
-                if (order.EnumValue == SortOrder.relevance)
-                {
-                    Info.Text = HBS.Search.SearchText;
-                }
-                else
+                if (order.EnumValue.Type == SortFieldType.Date)
                 {
                     //get first and last valid value
                     var first = page.Hits.FirstOrDefault(hit => order.HasProperty(hit));
@@ -101,6 +95,10 @@ namespace picibird.hbs.viewmodels.infoShield
                     //set info properties
                     Info.From = firstString;
                     Info.To = lastString;
+                }
+                else
+                {
+                    Info.Text = HBS.Search.SearchText;
                 }
             }
             IsInfoVisible = !string.IsNullOrEmpty(Info.From) || !string.IsNullOrEmpty(Info.To);

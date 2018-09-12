@@ -87,11 +87,23 @@ namespace picibird.hbs
 
         private List<Filter> activeFilters;
 
+        private Sort sort => new Sort()
+        {
+            Key = SearchRequest.SortOrder.Key,
+            Dir = SearchRequest.SortDirection == SortDirection.descending ? SortDir.Desc : SortDir.Asc
+        };
+
         protected override void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnSearchRequestFilterChanged(sender, e);
             activeFilters = (sender as SearchRequest).GetActiveFilter();
             Start(SearchText, SearchStartingReason.FiltersUpdated);
+        }
+
+        protected override void OnSearchRequestSortOrderChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnSearchRequestSortOrderChanged(sender, e);
+            Start(SearchText, SearchStartingReason.SortChanged);
         }
 
         public Page LoadPage(int index)
@@ -125,6 +137,7 @@ namespace picibird.hbs
                     Offset = index * 17,
                     Filters = activeFilters?.ToObservableCollection(),
                     FiltersEnabled = false,
+                    Sort = sort,
                     Limit = 17,
                     Shelfhub = PROFILE_ACTIVE,
                     Locale = Pici.Resources.CultureInfo.Name
@@ -164,6 +177,7 @@ namespace picibird.hbs
                     Query = searchText,
                     Filters = activeFilters?.ToObservableCollection(),
                     FiltersEnabled = false,
+                    Sort = sort,
                     Offset = 0,
                     Limit = 17,
                     Shelfhub = PROFILE_ACTIVE,
@@ -210,6 +224,7 @@ namespace picibird.hbs
                 SearchRequest = new SearchRequest(text);
                 SearchRequest.ItemsPerPage = PageItemsCount;
                 SearchRequest.FilterListChanged += OnSearchRequestFilterChanged;
+                SearchRequest.SortingChanged += OnSearchRequestSortOrderChanged;
             }
 
             Session = new ShelfhubSearchSession();
@@ -250,6 +265,44 @@ namespace picibird.hbs
             double maxPageIndex = Math.Ceiling(response.ItemsFound / 17.0d) - 1.0d;
             maxPageIndex = Math.Max(maxPageIndex, 0);
             Callback.MaxPageIndex = (int)maxPageIndex;
+
+            requestAndInitConfig();
+        }
+
+        private async void requestAndInitConfig()
+        {
+            Profile profile = await getShelfhubProfile();
+            if (profile.Config != null)
+            {
+                Config config = profile.Config;
+                if (config.Search != null)
+                {
+                    SearchConfig searchConfig = config.Search;
+                    viewmodels.infoShield.Sorting.IsSortingEnabled = searchConfig.Sort;
+                    ObservableCollection<SortField> sortFields = searchConfig.SortFields;
+                    if(sortFields != null)
+                    {
+                        foreach (var sf in sortFields)
+                        {
+                            var sof = new viewmodels.infoShield.SortOrderFunction(new SortOrder(sf));
+                            if (!viewmodels.infoShield.Sorting.AllSortOrderFunctions.Contains(sof))
+                            {
+                                viewmodels.infoShield.Sorting.AllSortOrderFunctions.Add(sof);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async Task<Profile> getShelfhubProfile()
+        {
+            var shelfhub = createShelfhubClient();
+            var response = await shelfhub.ProfilesAsync(new StoreParams()
+            {
+                Id = PROFILE_ACTIVE.Service
+            });
+            return response.Docs[0];
         }
 
         private Hit FindHitWithIsbn(IList<Hit> hits, string isbn)

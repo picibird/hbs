@@ -35,7 +35,7 @@ namespace picibird.hbs.ldu
 
         public event PropertyChangedEventHandler SortingChanged;
 
-        public SortOrder SortOrder = SortOrder.relevance;
+        public SortOrder SortOrder = new SortOrder();
         public SortDirection SortDirection = SortDirection.descending;
 
         public int? MaximumRecords { get; set; }
@@ -57,7 +57,7 @@ namespace picibird.hbs.ldu
             }
             if (changed)
             {
-                SortingChanged(this, new PropertyChangedEventArgs("sortorder"));
+                SortingChanged?.Invoke(this, new PropertyChangedEventArgs("sortorder"));
             }
         }
 
@@ -111,11 +111,8 @@ namespace picibird.hbs.ldu
 
         private void notifyFilterListChanged()
         {
-            var handler = FilterListChanged;
-            if (handler != null)
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs("activeFilters"));
-            }
+
+            FilterListChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs("activeFilters"));
         }
 
         public int ItemsPerPage

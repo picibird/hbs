@@ -17,36 +17,38 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using picibird.shelfhub;
+
 namespace picibird.hbs.ldu
 {
-    public enum SortOrder
-    {
-        relevance,
-        position,
-        title,
-        author,
-        date
-    }
 
-    public static class SortOrderExtensions
+    public class SortOrder : SortField
     {
-        public static string ToPazpar2ParameterString(this SortOrder sortOrder)
+
+        public SortOrder(SortField sortField = null): base()
         {
-            switch (sortOrder)
+            if(sortField == null)
             {
-                case SortOrder.relevance:
-                    return "relevance";
-                case SortOrder.position:
-                    return "position";
-                case SortOrder.title:
-                    return "title";
-                case SortOrder.author:
-                    return "merge-author";
-                case SortOrder.date:
-                    return "date";
-                default:
-                    return "relevance";
+                sortField = new SortField();
             }
+            this.Key = sortField.Key;
+            this.Label = sortField.Label;
+            this.Type = sortField.Type;
+            this.PropPath = sortField.PropPath;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is SortOrder sortOrder)
+            {
+                return sortOrder.Key == this.Key;
+            }
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Key.GetHashCode();
         }
     }
 }

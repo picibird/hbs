@@ -17,33 +17,48 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using picibird.hbs.ldu;
+using picibird.shelfhub;
 using picibits.core;
 using picibits.core.mvvm;
+using picibits.core.util;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
 namespace picibird.hbs.viewmodels.infoShield
 {
     public class Sorting : Model
     {
-        public static readonly List<SortOrderFunction> AllSortOrderFunctions = new List<SortOrderFunction>(new[]
+        public static readonly ObservableCollection<SortOrderFunction> AllSortOrderFunctions = new ObservableCollection<SortOrderFunction>(new[]
         {
-            new SortOrderFunction(SortOrder.relevance),
-            new SortOrderFunction(SortOrder.date),
-            new SortOrderFunction(SortOrder.author),
-            new SortOrderFunction(SortOrder.title)
-            //new SortOrderFunction(SortOrder.position)
+            new SortOrderFunction(new SortOrder())
         });
+
+        public static event SimpleEventHandler<bool> IsSortingEnabledChanged;
+        private static Action<bool> OnIsEnabledChanged = (value) =>
+        {
+            mIsSortingEnabled = value;
+            IsSortingEnabledChanged?.Invoke(value);
+        };
+
+        private static bool mIsSortingEnabled;
+        public static bool IsSortingEnabled
+        {
+            get => mIsSortingEnabled;
+            set => OnIsEnabledChanged(value);
+        }
 
         public Sorting()
         {
             HBS.Search.PropertyChanged += OnSearchPropertyChanged;
+            IsSortingEnabledChanged += (value) => IsVisible = value;
         }
 
 
-        public List<SortOrderFunction> SortOrderFunctions
+        public ObservableCollection<SortOrderFunction> SortOrderFunctions
         {
             get { return AllSortOrderFunctions; }
         }
@@ -73,15 +88,15 @@ namespace picibird.hbs.viewmodels.infoShield
             //set prefered direction for specific order function
             //block search updates while setting direction
             blockUpdateSearchSorting = true;
-            switch (newSelectedSortOrderFunction.EnumValue)
+            switch (newSelectedSortOrderFunction.EnumValue.Type)
             {
-                case SortOrder.relevance:
-                case SortOrder.date:
+                case SortFieldType.Score:
+                case SortFieldType.Date:
+                case SortFieldType.Numerical:
                     IsAscendingSelected = false;
                     IsDescendingSelected = true;
                     break;
-                case SortOrder.title:
-                case SortOrder.author:
+                case SortFieldType.Alphabetical:
                     IsAscendingSelected = true;
                     IsDescendingSelected = false;
                     break;
@@ -112,6 +127,26 @@ namespace picibird.hbs.viewmodels.infoShield
         }
 
         #endregion PagesCount
+
+        #region IsEnabled
+
+        private bool mIsVisible = false;
+
+        public bool IsVisible
+        {
+            get { return mIsVisible; }
+            set
+            {
+                if (mIsVisible != value)
+                {
+                    var old = mIsVisible;
+                    mIsVisible = value;
+                    RaisePropertyChanged(nameof(IsVisible), old, value);
+                }
+            }
+        }
+
+        #endregion IsEnabled
 
         #region IsAscendingSelected
 
@@ -231,6 +266,7 @@ namespace picibird.hbs.viewmodels.infoShield
             var searchRequest = HBS.Search.SearchRequest;
             var sortOrder = AllSortOrderFunctions.First(sof => sof.EnumValue.Equals(searchRequest.SortOrder));
             var sortDirection = searchRequest.SortDirection;
+            IsVisible = IsSortingEnabled;
             //order
             SelectedSortOrderFunction = sortOrder;
             //direction

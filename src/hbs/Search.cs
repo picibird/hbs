@@ -144,9 +144,9 @@ namespace picibird.hbs
             Session.Start(hits, SearchRequest, Callback);
         }
 
-        protected void OnSearchRequestSortOrderChanged(object sender, PropertyChangedEventArgs e)
+        protected virtual void OnSearchRequestSortOrderChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnSearchStarting(SearchStartingReason.SortChanged, SearchText, FilterList);
+            //OnSearchStarting(SearchStartingReason.SortChanged, SearchText, FilterList);
         }
 
         protected virtual void OnSearchRequestFilterChanged(object sender, PropertyChangedEventArgs e)

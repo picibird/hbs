@@ -29,6 +29,7 @@ using picibits.core.helper;
 using picibits.core.math;
 using picibits.core.models;
 using picibits.core.mvvm;
+using Config = picibird.hbs.config.Config;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
 
 namespace picibird.hbs.viewmodels.shelf
@@ -149,10 +150,7 @@ namespace picibird.hbs.viewmodels.shelf
             var searchRequest = HBS.Search.SearchRequest;
             var sortOrder = HBS.Search.SearchRequest.SortOrder;
             SortOrderFunction sortOrderFunction = null;
-            if (sortOrder == SortOrder.relevance)
-                sortOrderFunction = SortOrderFunction.GetSingleton(SortOrder.date);
-            else
-                sortOrderFunction = SortOrderFunction.GetSingleton(sortOrder);
+            sortOrderFunction = SortOrderFunction.GetSingleton(sortOrder);
             return sortOrderFunction.GetRepresentative(hit);
         }
 

@@ -110,9 +110,7 @@
     <Compile Include="SearchSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchRequest.cs" />
-    <Compile Include="Helper\UriHelper.cs" />
     <Compile Include="SearchStatus.cs" />
-    <Compile Include="Pazpar2Settings.cs" />
     <Compile Include="LduSources.cs" />
     <Compile Include="SortDirection.cs" />
     <Compile Include="SortOrder.cs" />

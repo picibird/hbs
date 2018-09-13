@@ -28,7 +28,7 @@ namespace picibird.hbs.ldu
 {
     public class SearchRequest : NotifyPropertyChanged
     {
-        private int itemsPerPage = Pazpar2Settings.RESULTS_PER_PAGE;
+        private int itemsPerPage = 17;
 
         private List<shelfhub.Filter> activeFilters = new List<shelfhub.Filter>();
         public event PropertyChangedEventHandler FilterListChanged;

@@ -17,14 +17,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using Flurl;
 using Newtonsoft.Json;
 using picibits.app.bitmap;
 using picibits.bib;
@@ -32,6 +24,13 @@ using picibits.core;
 using picibits.core.collection;
 using picibits.core.json;
 using picibits.core.mvvm;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace picibird.hbs.ldu
 {
@@ -200,45 +199,20 @@ namespace picibird.hbs.ldu
 
         #endregion
 
-        private List<Url> m_WebshelfUris;
+        private List<Uri> m_WebshelfUris;
         [XmlIgnore]
-        public List<Url> WebshelfUris
+        public List<Uri> WebshelfUris
         {
-            get
-            {
-                if (m_WebshelfUris == null)
-                {
-                    m_WebshelfUris = new List<Url>();
-                    foreach (var loc in locations)
-                    {
-                        Url url = new Url(Pazpar2Settings.BIBSHELF_URL)
-                            .AppendPathSegment("m")
-                            .AppendPathSegments(loc.locationId)
-                            .AppendPathSegment(loc.ppn);
-                        m_WebshelfUris.Add(url);
-                    }
-                }
-                return m_WebshelfUris;
-            }
-            set { m_WebshelfUris = value; }
+            get => m_WebshelfUris;
+            set => m_WebshelfUris = value;
         }
 
-        [XmlIgnore]
-        public string CoverUrl_S
-        {
-            get { return GetCoverUrl(CoverSizes.small); }
-        }
-
-        [XmlIgnore]
-        public string CoverUrl_M
-        {
-            get { return GetCoverUrl(CoverSizes.medium); }
-        }
-
+        private string mCoverUrl_L;
         [XmlIgnore]
         public string CoverUrl_L
         {
-            get { return GetCoverUrl(CoverSizes.large); }
+            get => mCoverUrl_L;
+            set => mCoverUrl_L = value;
         }
 
         #region Author String
@@ -514,8 +488,10 @@ namespace picibird.hbs.ldu
         private string m_Callnumber;
         public string Callnumber
         {
-            set {
-                m_Callnumber = value; }
+            set
+            {
+                m_Callnumber = value;
+            }
             get
             {
                 return m_Callnumber;
@@ -710,11 +686,6 @@ namespace picibird.hbs.ldu
 
         #endregion Links
 
-        public async Task<Record> GetDetailsAsync(SearchSession session)
-        {
-            return await session.PP2_Record(recid);
-        }
-
         public Location GetMainLocation()
         {
             //return first if only one
@@ -744,20 +715,6 @@ namespace picibird.hbs.ldu
         }
 
         CancellationTokenSource LoadCoverTokenSource;
-
-
-        public string GetCoverUrl(CoverSizes size)
-        {
-            IEnumerable<string> isbns = GetISBNs();
-            if (isbns.Count() > 0)
-            {
-                Url url = new Url(Pazpar2Settings.COVER_PROVIDER_URL)
-                    .SetQueryParam("isn", isbns.First())
-                    .SetQueryParam("size", size);
-                return url;
-            }
-            return null;
-        }
 
         public string GetPrimaryKey()
         {

@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl.Http;
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
@@ -230,7 +229,7 @@ namespace picibird.hbs.ldu.pages
             }
             catch (Exception ex)
             {
-                if (ex is FlurlHttpException || ex is OperationCanceledException)
+                if (ex is OperationCanceledException)
                 {
                     Pici.Log.debug(typeof(SearchSession), "canceled update loop. " + ex.Message);
                 }
@@ -253,16 +252,10 @@ namespace picibird.hbs.ldu.pages
             try
             {
                 double progress = Session.Status.progress;
-                PazPar2Show pp2Show = await Session.PP2_Show(page.Index, PageOffset, token);
-                if (pp2Show.merged > page.LastMergeCount)
-                {
-                    //Pici.Log.info(typeof(Pages), "updating page index " + page.Index);
-                    page.UpdateList(pp2Show);
-                }
             }
             catch (Exception ex)
             {
-                if (ex is FlurlHttpException || ex is OperationCanceledException)
+                if (ex is OperationCanceledException)
                 {
                     Pici.Log.debug(typeof(SearchSession), "canceled page update. " + ex.Message);
                 }

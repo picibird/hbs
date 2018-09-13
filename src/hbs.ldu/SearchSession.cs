@@ -19,14 +19,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Flurl.Http;
-using picibird.hbs.ldu.Helper;
-using picibird.shelfhub;
 using picibits.core;
 using picibits.core.extension;
 using picibits.core.mvvm;
@@ -125,27 +120,6 @@ namespace picibird.hbs.ldu
 
 
             Pici.Log.debug(typeof(SearchSession), "searching:" + sr.SearchString);
-            ID = await PP2_Init();
-            if (ID > 0)
-            {
-                //run query if successfully initiated session
-                try
-                {
-                    Callback.ThrowIfCancellationRequested();
-                    //start session ping loop
-                    Task pingTask = StartPingLoop();
-                    //run request
-                    await RunQuery(String.Format("searching {0}", sr.SearchString), true, true);
-                }
-                catch (OperationCanceledException)
-                {
-                    throw;
-                }
-                finally
-                {
-                    Pici.Log.info(typeof(SearchSession), "running inital search finished");
-                }
-            }
         }
 
         public virtual void Start(IList<Hit> hits, SearchRequest sr, SearchCallback<SearchStatus> statusCallback)
@@ -168,34 +142,6 @@ namespace picibird.hbs.ldu
             await RunQuery("filter list changed", false, false);
         }
 
-        #region PP2 Init
-
-        protected virtual async Task<int> PP2_Init()
-        {
-            try
-            {
-                // create session
-                Stream stream = await UrlHelper.GetInitUrl().GetStreamAsync();
-                PazPar2Init pInit =
-                    await
-                        Async.DeserializeXml<PazPar2Init>(serializerPazPar2Init, stream,
-                            Pazpar2Settings.LOG_HTTP_RESPONSES);
-                Callback.ThrowIfCancellationRequested();
-                return pInit.Session;
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "pazpar2 init error", ex);
-                throw;
-            }
-        }
-
-        #endregion PP2 Init
-
         #region QUERY
 
         protected virtual async Task RunQuery(string reason, bool throwCancel, bool throwError)
@@ -206,7 +152,7 @@ namespace picibird.hbs.ldu
             }
             catch (Exception ex)
             {
-                if (ex is FlurlHttpException || ex is OperationCanceledException)
+                if (ex is OperationCanceledException)
                 {
                     Pici.Log.debug(typeof(SearchSession), "canceled query: " + reason);
                 }
@@ -261,15 +207,6 @@ namespace picibird.hbs.ldu
                     QueryStarted(sr);
                 //running query
                 Pici.Log.debug(typeof(SearchSession), "running query");
-                await PP2_Query(sr);
-                CancelTokenSource.ThrowIfCancellationRequested();
-                // run 'termlist' loop
-                Task termlistLoopTask = RunTermslistLoopAsync(CancelTokenSource.Token);
-                // run 'stat' loop (show, record)
-                Task progressLoopTask = RunProgressLoopAsync(CancelTokenSource.Token);
-                //wait all
-                Task[] tasks = new Task[] {termlistLoopTask, progressLoopTask};
-                await Task.WhenAll(tasks);
                 CancelTokenSource.ThrowIfCancellationRequested();
                 //prolong status progress updates to get changes after 100%
                 //Task prolongStatusProgress = ProlongStatusProgressAfterFinish(CancelTokenSource.Token);
@@ -296,328 +233,8 @@ namespace picibird.hbs.ldu
             }
         }
 
-        protected virtual async Task PP2_Query(SearchRequest searchRequest)
-        {
-            try
-            {
-                // send query
-                await UrlHelper.GetQueryUrl(ID.ToString(), searchRequest).GetAsync();
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "query request error", ex);
-                throw;
-            }
-        }
-
         #endregion QUERY
 
-        #region PING LOOP
-
-        internal bool IsRunningPingLoop { get; private set; }
-
-        protected virtual async Task StartPingLoop()
-        {
-            //return if ping loop already running
-            if (IsRunningPingLoop)
-            {
-                Pici.Log.warn(typeof(SearchSession), "already running pung loop");
-                return;
-            }
-            try
-            {
-                //start ping loop
-                Pici.Log.info(typeof(SearchSession), "starting ping loop");
-                IsRunningPingLoop = true;
-                //run ping loop
-                while (!Callback.IsCancellationRequested())
-                {
-                    //get qequest ping
-                    HttpResponseMessage m = await UrlHelper.GetPingUrl(ID.ToString()).GetAsync();
-                    //log response
-                    Pici.Log.info(typeof(SearchSession), String.Format("ping status code: {0}", m.StatusCode));
-                    //wait async until next ping
-                    await Task.Delay(Pazpar2Settings.DELAY_PING, Callback.CancellationToken.Value);
-                }
-                //end ping loop
-                IsRunningPingLoop = false;
-            }
-            catch (OperationCanceledException)
-            {
-                //end ping loop on cancelation
-                IsRunningPingLoop = false;
-                throw;
-            }
-            catch (Exception ex)
-            {
-                //some error occured
-                Pici.Log.error(typeof(SearchSession), "ping error", ex);
-                throw;
-            }
-            finally
-            {
-                //log ping loop ending reason
-                string reason = IsRunningPingLoop ? "ERROR" : "CANCELATION";
-                Pici.Log.info(typeof(SearchSession), String.Format("ping loop stopped because of {0}", reason));
-            }
-        }
-
-        #endregion PING LOOP
-
-        protected virtual async Task<SearchStatus> PP2_Stat(CancellationToken cancelToken)
-        {
-            try
-            {
-                cancelToken.ThrowIfCancellationRequested();
-                using (Stream stream = await UrlHelper.GetStatUrl(ID.ToString()).GetStreamAsync())
-                {
-                    SearchStatus newStatus =
-                        await
-                            Async.DeserializeXml<SearchStatus>(serializerPazPar2Stat, stream,
-                                Pazpar2Settings.LOG_HTTP_RESPONSES);
-                    //cancel if requested
-                    cancelToken.ThrowIfCancellationRequested();
-                    return newStatus;
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                if (ex.IsCanceledException())
-                {
-                    //do nothing here
-                }
-                else
-                {
-                    Pici.Log.error(typeof(SearchSession), "stat request error", ex);
-                }
-                throw;
-            }
-        }
-
-        protected virtual async Task ProlongStatusProgressAfterFinish(CancellationToken cancelToken)
-        {
-            int updateDelay = 1000;
-            Func<Task, Task> statusUpdateTask = async (t) =>
-            {
-                SearchStatus newStatus = await PP2_Stat(cancelToken);
-                //let progress grow by 0.01 after 100% was reached once
-                if (Status.progress >= 1.0d && newStatus.progress == 1.0d)
-                {
-                    newStatus.progress = Status.progress + 0.01;
-                    Status = newStatus;
-                }
-            };
-
-            await Task.Delay(updateDelay, cancelToken)
-                .ContinueWith(statusUpdateTask)
-                .ContinueWith(async (t) => await Task.Delay(updateDelay, cancelToken))
-                .ContinueWith(statusUpdateTask)
-                .ContinueWith(async (t) => await Task.Delay(updateDelay, cancelToken))
-                .ContinueWith(statusUpdateTask)
-                .ContinueWith(async (t) => await Task.Delay(updateDelay, cancelToken))
-                .ContinueWith(statusUpdateTask);
-        }
-
-
-        public virtual async Task<PazPar2Show> PP2_Show(int pageIdx, int itemCount, CancellationToken cancelToken)
-        {
-            try
-            {
-                int start = pageIdx*itemCount;
-                PazPar2Show pp2Show = null;
-                if (FakeHits != null)
-                {
-                    int count = itemCount;
-                    pp2Show = new PazPar2Show();
-                    pp2Show.merged = FakeHits.Count;
-                    if (FakeHits.Count < start + count)
-                    {
-                        count = Math.Max(FakeHits.Count - start, 0);
-                    }
-                    if (FakeHits.Count >= (start + count))
-                    {
-                        //pp2Show.Hits = FakeHits.GetRange(start, count);
-                    }
-                    else
-                    {
-                        //pp2Show.Hits = new List<Hit>();
-                    }
-                }
-                else
-                {
-                    string sort = UrlHelper.CreateSortStringFromSearchRequest(Request);
-                    string showUrl = UrlHelper.GetShowUrl(ID.ToString(), start, itemCount, sort);
-                    using (Stream stream = await showUrl.GetStreamAsync())
-                    {
-                        cancelToken.ThrowIfCancellationRequested();
-                        pp2Show =
-                            await
-                                Async.DeserializeXml<PazPar2Show>(serializerPazPar2Show, stream,
-                                    Pazpar2Settings.LOG_HTTP_RESPONSES);
-                        //debug
-                        //Pici.Log.warn(typeof(SearchSession), "SHOW: " + pp2Show.ToString());
-                        //cancel if
-                        cancelToken.ThrowIfCancellationRequested();
-                    }
-                }
-                //update
-                var resultCount = pp2Show.merged;
-                int maxPageIndex = (int) Math.Ceiling(Callback.ResultCount*(1.0d/itemCount)) - 1;
-                maxPageIndex = Math.Max(0, maxPageIndex);
-                Callback.MaxPageIndex = maxPageIndex;
-
-                return pp2Show;
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (FlurlHttpException ex)
-            {
-                if (ex.InnerException != null && ex.InnerException is OperationCanceledException)
-                {
-                    throw ex.InnerException;
-                }
-                else
-                {
-                    Pici.Log.error(typeof(SearchSession), "Error on show request.", ex);
-                    throw;
-                }
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "Error on show request.", ex);
-                throw;
-            }
-        }
-
-        internal async Task<Record> PP2_Record(string recid)
-        {
-            try
-            {
-                string recordUrl = UrlHelper.GetRecordUrl(ID.ToString(), recid);
-                using (Stream stream = await recordUrl.GetStreamAsync())
-                {
-                    return
-                        await Async.DeserializeXml<Record>(serializerRecord, stream, Pazpar2Settings.LOG_HTTP_RESPONSES);
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "Error on Record request. (Detail)", ex);
-                throw;
-            }
-        }
-
-        protected virtual async Task<Pazpar2Termlist> PP2_Termlist()
-        {
-            try
-            {
-                string termListUrl = UrlHelper.GetTermlistUrl(ID.ToString());
-                using (Stream stream = await termListUrl.GetStreamAsync())
-                {
-                    return
-                        await
-                            Async.DeserializeXml<Pazpar2Termlist>(serializerPazPar2Termlist, stream,
-                                Pazpar2Settings.LOG_HTTP_RESPONSES);
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "Error on termlist request.", ex);
-                throw;
-            }
-        }
-
-        protected virtual async Task RunTermslistLoopAsync(CancellationToken cancelToken)
-        {
-            Pazpar2Termlist pp2Termlist = null;
-            //Pici.Log.debug(typeof(SearchSession), "enter termlist loop");
-
-            int refreshAfterFinish = 0;
-
-            while (!cancelToken.IsCancellationRequested && refreshAfterFinish < 3)
-            {
-                if (Status.progress >= 1)
-                {
-                    refreshAfterFinish++;
-                }
-
-                pp2Termlist = await PP2_Termlist();
-                cancelToken.ThrowIfCancellationRequested();
-
-                //setting category for terms
-                foreach (FilterCategory tc in pp2Termlist.filterCategories)
-                {
-                    foreach (Filter f in tc.Filter)
-                    {
-                        f.Catgegory = tc.Id;
-                    }
-                }
-
-                // update termList in callback
-
-
-                Callback.FilterList.RemoveAll();
-
-                // todo update filters 
-
-                //foreach (Facet fcat in pp2Termlist.filterCategories)
-                //{
-                //    Callback.FilterList.Add(fcat);
-                //}
-                //delay with cancellation
-                await Task.Delay(Pazpar2Settings.DELAY_TERMLIST_REQUEST, cancelToken);
-            }
-            //Pici.Log.debug(typeof(SearchSession), "exit termlist loop \r\n");
-        }
-
-
-        protected virtual async Task RunProgressLoopAsync(CancellationToken cancelToken)
-        {
-            //Pici.Log.debug(typeof(SearchSession), "enter progress loop");
-            try
-            {
-                while (!cancelToken.IsCancellationRequested && Status.progress < 1)
-                {
-                    SearchStatus newStatus = await PP2_Stat(cancelToken);
-                    if (Status.progress < newStatus.progress ||
-                        Status.hits < newStatus.hits ||
-                        Status.records < newStatus.records)
-                    {
-                        Status = newStatus;
-                    }
-                    //delay with cancellation
-                    await Task.Delay(Pazpar2Settings.DELAY_STAT_REQUEST, cancelToken);
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Pici.Log.error(typeof(SearchSession), "ping loop error ", ex);
-                throw;
-            }
-            //Pici.Log.debug(typeof(SearchSession), "exit progress loop \r\n");
-        }
 
         public override void DisposeManaged()
         {

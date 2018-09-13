@@ -21,7 +21,6 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl.Http;
 using Nito.AsyncEx;
 using picibits.app.bitmap;
 using picibits.bib;
@@ -55,38 +54,6 @@ namespace picibird.hbs.cover
         public Task<IBitmapImage> LoadCoverAsyncLazyCached(string url)
         {
             return COVER_CACHE.GetAsync(url);
-        }
-
-        public async Task<bool> HasCover(string coverUrl)
-        {
-            if (string.IsNullOrEmpty(coverUrl))
-                return false;
-            try
-            {
-                var message =
-                    await coverUrl.WithTimeout((int)ldu.Pazpar2Settings.WEB_REQUEST_TIMEOUT.TotalSeconds).HeadAsync();
-                var statusCodeInt = (int)message.StatusCode;
-                if (statusCodeInt >= 200 && statusCodeInt <= 399)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (OperationCanceledException)
-            {
-                return false;
-            }
-            catch (FlurlHttpTimeoutException)
-            {
-                Pici.Log.warn(typeof(Covers), "Timeout loading HasCover()");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null && !(ex.InnerException is OperationCanceledException))
-                    Pici.Log.error(typeof(Covers), string.Format("has cover {0} failed", coverUrl), ex);
-                return false;
-            }
         }
 
         public async Task<IBitmapImage> LoadCoverAsync(string url)

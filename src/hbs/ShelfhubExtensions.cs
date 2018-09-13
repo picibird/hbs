@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl;
 using picibird.hbs.ldu;
 using picibird.shelfhub;
 using picibits.core.collection;
@@ -119,13 +117,13 @@ namespace picibird.hbs
                 }
 
                 //set qrcode link
-                hit.WebshelfUris = new List<Url>();
+                hit.WebshelfUris = new List<Uri>();
                 if(item.Links != null && item.Links.Count > 0)
                 {
                     var qrCodeLink = item.Links.FirstOrDefault((l) => l.Type == LinkType.Main);
                     if(qrCodeLink != null)
                     {
-                        var qrCodeUrl = new Url(qrCodeLink.Url);
+                        var qrCodeUrl = new Uri(qrCodeLink.Url);
                         hit.WebshelfUris.Add(qrCodeUrl);
                     }
                 }

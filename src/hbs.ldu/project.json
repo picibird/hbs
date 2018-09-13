@@ -3,7 +3,7 @@
   "dependencies": {
     "Newtonsoft.Json": "11.0.2",
     "Nito.AsyncEx": "3.0.1",
-    "picibits": "0.1.72"
+    "picibits": "0.1.73"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile7": {}

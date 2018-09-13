@@ -101,8 +101,10 @@
                         <StackPanel
                             VerticalAlignment="Bottom"
                             DockPanel.Dock="Bottom"
-                            Orientation="Vertical"
-                            Visibility="{Binding Sorting.IsVisible, Mode=OneWay, Converter={StaticResource CollapsedIfNoDataConverter}, FallbackValue=false}">
+                            IsEnabled="{Binding IsSortingActivated}"
+                            IsHitTestVisible="{Binding IsSortingActivated}"
+                            Opacity="{Binding SortingUiOpacity}"
+                            Orientation="Vertical">
                             <TextBox
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource InfoShieldTextBoxStyle}"

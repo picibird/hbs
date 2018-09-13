@@ -22,6 +22,8 @@ using picibird.hbs.ldu;
 using picibird.hbs.ldu.pages;
 using picibird.hbs.viewmodels.shelf;
 using picibird.shelfhub;
+using picibits.app.animation;
+using picibits.core.helper;
 using picibits.core.math;
 using picibits.core.mvvm;
 using PropertyChangedEventArgs = System.ComponentModel.PropertyChangedEventArgs;
@@ -38,6 +40,7 @@ namespace picibird.hbs.viewmodels.infoShield
             DrawViewModel.PropertyChanged += OnDrawViewModelPropertyChanged;
             Style = new ViewStyle("InfoShieldStyle");
             UpdateSizeAndPosition();
+            Sorting.IsSortingEnabledChanged += (value) => IsSortingActivated = value;
         }
 
         public Sorting Sorting { get; set; } = SortingInstance;
@@ -126,6 +129,55 @@ namespace picibird.hbs.viewmodels.infoShield
         }
 
         #endregion Info
+
+        #region IsSortingActivated
+
+        private bool mIsSortingActivated = false;
+
+        public bool IsSortingActivated
+        {
+            get { return mIsSortingActivated; }
+            set
+            {
+                if (mIsSortingActivated != value)
+                {
+                    var old = mIsSortingActivated;
+                    mIsSortingActivated = value;
+                    RaisePropertyChanged(nameof(IsSortingActivated), old, value);
+                    Events.OnIdleOnce(() =>
+                    {
+                        var ani = ArtefactAnimator.AddEase(this, new[] { "SortingUiOpacity" },
+                            new object[] { mIsSortingActivated ? 1.0d : 0.0d }, 0.3d);
+                        ani.Complete += (s, e) =>
+                        {
+
+                        };
+                    });
+                }
+            }
+        }
+
+        #endregion IsSortingActivated
+
+        #region SortingUiOpacity
+
+        private double mSortingUiOpacity = 0.0;
+
+        public double SortingUiOpacity
+        {
+            get { return mSortingUiOpacity; }
+            set
+            {
+                if (mSortingUiOpacity != value)
+                {
+                    var old = mSortingUiOpacity;
+                    mSortingUiOpacity = value;
+                    RaisePropertyChanged(nameof(SortingUiOpacity), old, value);
+                }
+            }
+        }
+
+        #endregion SortingUiOpacity
 
         #region IsInfoVisible
 

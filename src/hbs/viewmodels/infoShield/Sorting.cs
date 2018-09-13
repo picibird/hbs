@@ -54,7 +54,6 @@ namespace picibird.hbs.viewmodels.infoShield
         public Sorting()
         {
             HBS.Search.PropertyChanged += OnSearchPropertyChanged;
-            IsSortingEnabledChanged += (value) => IsVisible = value;
         }
 
 
@@ -128,25 +127,7 @@ namespace picibird.hbs.viewmodels.infoShield
 
         #endregion PagesCount
 
-        #region IsEnabled
 
-        private bool mIsVisible = false;
-
-        public bool IsVisible
-        {
-            get { return mIsVisible; }
-            set
-            {
-                if (mIsVisible != value)
-                {
-                    var old = mIsVisible;
-                    mIsVisible = value;
-                    RaisePropertyChanged(nameof(IsVisible), old, value);
-                }
-            }
-        }
-
-        #endregion IsEnabled
 
         #region IsAscendingSelected
 
@@ -266,7 +247,6 @@ namespace picibird.hbs.viewmodels.infoShield
             var searchRequest = HBS.Search.SearchRequest;
             var sortOrder = AllSortOrderFunctions.First(sof => sof.EnumValue.Equals(searchRequest.SortOrder));
             var sortDirection = searchRequest.SortDirection;
-            IsVisible = IsSortingEnabled;
             //order
             SelectedSortOrderFunction = sortOrder;
             //direction

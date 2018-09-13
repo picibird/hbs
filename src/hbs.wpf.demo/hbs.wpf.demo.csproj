@@ -77,6 +77,9 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
     <Reference Include="Courier, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Courier.3.0.0\lib\net40\Courier.dll</HintPath>
@@ -94,17 +97,13 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Schema">
-      <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.4\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\Newtonsoft.Json.Schema.3.0.10\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
     </Reference>
     <Reference Include="Nito.AsyncEx">
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
@@ -118,17 +117,17 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="picibits.app, Version=0.1.69.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.69\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
+    <Reference Include="picibits.app, Version=0.1.72.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.72\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.core, Version=0.1.69.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.69\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
+    <Reference Include="picibits.core, Version=0.1.72.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.0.1.72\lib\.NETPortable,Version=v4.5,Profile=Profile7\picibits.core.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.app, Version=0.1.69.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.69\lib\dotnet\picibits.wpf.app.dll</HintPath>
+    <Reference Include="picibits.wpf.app, Version=0.1.72.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.72\lib\dotnet\picibits.wpf.app.dll</HintPath>
     </Reference>
-    <Reference Include="picibits.wpf.core, Version=0.1.69.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.69\lib\dotnet\picibits.wpf.core.dll</HintPath>
+    <Reference Include="picibits.wpf.core, Version=0.1.72.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\hbs.product\src\packages\picibits.wpf.0.1.72\lib\dotnet\picibits.wpf.core.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\hbs.product\src\packages\Serilog.2.6.0\lib\net46\Serilog.dll</HintPath>
@@ -165,33 +164,12 @@
       <HintPath>..\packages\Courier.3.0.0\lib\net40\System.Reactive.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\System.Reactive.Core.3.0.0\lib\net46\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\System.Reactive.Interfaces.3.0.0\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\System.Reactive.Linq.3.0.0\lib\net46\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\System.Reactive.PlatformServices.3.0.0\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Reactive.Windows.Threading.3.0.0\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Reflection.TypeExtensions">
       <HintPath>..\packages\System.Reflection.TypeExtensions.4.0.0\lib\net46\System.Reflection.TypeExtensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\hbs.product\src\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\..\hbs.product\src\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />

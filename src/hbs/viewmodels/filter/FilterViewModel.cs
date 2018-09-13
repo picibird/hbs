@@ -17,13 +17,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using picibird.shelfhub;
 using picibits.app.mvvm;
+using picibits.core;
 using picibits.core.collection;
 using picibits.core.helper;
 using picibits.core.mvvm;
-using picibits.core;
+using System;
 
 namespace picibird.hbs.viewmodels.filter
 {
@@ -89,13 +89,13 @@ namespace picibird.hbs.viewmodels.filter
             if (newVisualState.Equals(FilterVisualStates.Delete))
             {
                 ApplyButtonViewModel.Text = Pici.Resources.Find("delete");
-                Timer.OnceAfter(3000, () =>
+                var onIdleResetTimer = new IntervalTimer(interval: TimeSpan.FromSeconds(7), runOnce: true, tick: () =>
                 {
                     if (VisualState == FilterVisualStates.Delete)
                     {
                         VisualState = FilterVisualStates.NORMAL;
                     }
-                });
+                }).Start();
             }
             if (newVisualState.Equals(FilterVisualStates.EDIT))
             {

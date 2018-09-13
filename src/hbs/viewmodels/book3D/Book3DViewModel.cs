@@ -153,7 +153,7 @@ namespace picibird.hbs.viewmodels.book3D
 
             //Back Cover
             BackCover.Name = "BackCover";
-            BackCover.Style = new ViewStyle("CoverDebugStyle");
+            //BackCover.Style = new ViewStyle("CoverDebugStyle");
             BackCover3D.Content = BackCover;
             Items.Add(BackCover3D);
 
@@ -177,7 +177,7 @@ namespace picibird.hbs.viewmodels.book3D
 
             //inner page right
             InnerPageRight.Name = "InnerPagesRight";
-            InnerPageRight.Style = new ViewStyle("CoverDebugStyle");
+            //InnerPageRight.Style = new ViewStyle("CoverDebugStyle");
             InnerPageRight3D.Content = InnerPageRight;
             Items.Add(InnerPageRight3D);
 

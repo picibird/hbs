@@ -18,6 +18,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using picibird.hbs.ldu;
+using picibits.core.mvvm;
 
 namespace picibird.hbs.viewmodels.book
 {
@@ -28,6 +29,12 @@ namespace picibird.hbs.viewmodels.book
         public FrontCoverViewModel()
         {
             Model = DUMMY_HIT;
+        }
+
+        new Model Model
+        {
+            get => base.Model;
+            set => base.Model = value;
         }
     }
 }

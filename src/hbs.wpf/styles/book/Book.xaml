@@ -57,6 +57,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--  FRONT COVER  -->
 
 
@@ -103,19 +113,17 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--  FRONT COVER  -->
-
-    <SolidColorBrush x:Key="PrimaryColorBrush">
-        <SolidColorBrush.Color>
-            <Binding Path="Model.CoverColorScheme.Primary" />
-        </SolidColorBrush.Color>
-    </SolidColorBrush>
-
-    <SolidColorBrush x:Key="SecondaryColorBrush">
-        <SolidColorBrush.Color>
-            <Binding Path="Model.CoverColorScheme.Secondary" />
-        </SolidColorBrush.Color>
-    </SolidColorBrush>
 
     <Style
         x:Key="CoverTextBoxStyle"
@@ -123,9 +131,13 @@
         TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
+        
+        
+        
+        
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, FallbackValue={StaticResource HBS_BLUE}}" />
+                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay, FallbackValue={StaticResource HBS_BLUE}}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Padding" Value="{StaticResource TextBoxPaddingDefault}" />
@@ -136,6 +148,16 @@
         BasedOn="{StaticResource CoverTextBoxStyle}"
         TargetType="{x:Type TextBox}">
         <Setter Property="FontSize" Value="{StaticResource CoverTitleFontSize}" />
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -200,7 +222,7 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, FallbackValue={StaticResource HBS_BLUE}}" />
+                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay, FallbackValue={StaticResource HBS_BLUE}}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderThickness" Value="{StaticResource CoverMargin}" />
@@ -228,7 +250,7 @@
                                     <TextBox
                                         MinWidth="450"
                                         MaxWidth="{Binding ElementName=root, Path=ActualWidth}"
-                                        Style="{StaticResource ResourceKey=CoverAuthorTextBoxStyle}" />
+                                        Style="{StaticResource CoverAuthorTextBoxStyle}" />
                                 </Viewbox>
                             </Grid>
                         </Border>
@@ -284,6 +306,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--  SPINE  -->
 
     <Style x:Key="SpineWithoutContentStyle" TargetType="{x:Type Control}">
@@ -292,7 +324,7 @@
                 <ControlTemplate>
                     <Border x:Name="BackgroundBorder">
                         <Border.Background>
-                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary}" />
+                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
                         </Border.Background>
                     </Border>
                 </ControlTemplate>
@@ -308,7 +340,7 @@
                 <ControlTemplate>
                     <Border x:Name="BackgroundBorder">
                         <Border.Background>
-                            <SolidColorBrush x:Name="BackgroundBrush" Color="{Binding Model.CoverColorScheme.Primary}" />
+                            <SolidColorBrush x:Name="BackgroundBrush" Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
                         </Border.Background>
                         <DockPanel
                             x:Name="rootBorder"
@@ -355,16 +387,39 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  medium icon & name  -->
                                 <TextBlock
                                     HorizontalAlignment="Center"
-                                    Foreground="{Binding Model.CoverColorScheme.Primary}"
                                     Style="{StaticResource FontIconTextblockStyleExtrem}"
-                                    Text="{Binding Model.mediumCode, Converter={StaticResource MediumToFontIconConverter}}" />
+                                    Text="{Binding Model.mediumCode, Converter={StaticResource MediumToFontIconConverter}}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
                                 <TextBox
                                     Margin="0,5,0,25"
                                     Style="{StaticResource SpineTitleTextBoxStyle}"
                                     Text="{Binding Model.Medium, Mode=OneWay}" />
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -408,6 +463,16 @@
                                     Style="{StaticResource SpineTitleTextBoxStyle}"
                                     Text="{Binding Model.pages_number, Mode=OneWay}"
                                     Visibility="{Binding Model.pages_number, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -507,6 +572,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--  BACK COVER  -->
     
     <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="Purple" />
@@ -536,7 +611,7 @@
                 <ControlTemplate>
                     <Border Padding="{StaticResource CoverMargin}">
                         <Border.Background>
-                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary}" />
+                            <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
                         </Border.Background>
                         <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
                             <StackPanel Orientation="Vertical">
@@ -557,6 +632,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  series title  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.SeriesTitle, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -569,6 +654,16 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.SeriesTitle, Mode=OneWay}" />
                                 </Grid>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -647,6 +742,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  author  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.authorBackCoverString, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -659,6 +764,16 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.authorBackCoverString, Mode=OneWay}" />
                                 </Grid>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -739,6 +854,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  medium format  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.Medium, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -751,6 +876,16 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.Medium, Mode=OneWay}" />
                                 </Grid>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -830,6 +965,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  publication places  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.publicationPlaces, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -875,6 +1020,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  publication name  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.publicationName, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -887,6 +1042,16 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.publicationName, Mode=OneWay}" />
                                 </Grid>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -967,6 +1132,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  callnumber  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.Callnumber, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -979,6 +1154,16 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.Callnumber, Mode=OneWay}" />
                                 </Grid>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1059,11 +1244,31 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  locations  -->
                                 <StackPanel Orientation="Vertical" Visibility="{Binding Model.shelfhubItem.Locations, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <TextBox Style="{StaticResource BackCoverTextBoxSuperFatStyle}" Text="{Binding Resources[locations]}" />
                                     <ItemsControl ItemsSource="{Binding Model.shelfhubItem.Locations}" Style="{StaticResource LocationStyle}" />
                                 </StackPanel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1128,11 +1333,31 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  availability  -->
                                 <views:View
                                     Margin="0,15,0,0"
                                     DataContext="{Binding Ressources}"
                                     Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1212,6 +1437,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  Other Links  -->
                                 <StackPanel
                                     Margin="0,15,0,0"
@@ -1220,6 +1455,16 @@
                                     <TextBox Style="{StaticResource BackCoverTextBoxSuperFatStyle}" Text="{Binding Resources[links]}" />
                                     <ItemsControl ItemsSource="{Binding Model.Links}" Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1306,6 +1551,16 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  multivolume works  -->
                                 <StackPanel
                                     Margin="0,15,0,0"
@@ -1317,6 +1572,16 @@
                                 
                                 
 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1395,7 +1660,27 @@
                                 
                                 
                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <!--  SHELFHUB EXTRAS  -->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 
                                 
@@ -1454,6 +1739,16 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

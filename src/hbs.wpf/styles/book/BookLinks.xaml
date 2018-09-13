@@ -63,8 +63,11 @@
                                 VerticalContentAlignment="Center"
                                 Content="{Binding Title}"
                                 FontFamily="{StaticResource RobotoMedium}"
-                                FontSize="{StaticResource FilterFontSize}"
-                                Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Primary}" />
+                                FontSize="{StaticResource FilterFontSize}">
+                                <Label.Foreground>
+                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Primary, Mode=OneWay, FallbackValue={StaticResource HBS_BLUE}}" />
+                                </Label.Foreground>
+                            </Label>
                         </Border>
                     </Button>
 

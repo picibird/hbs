@@ -1,100 +1,77 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core"
-    xmlns:xx="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core" xmlns:xx="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Icons.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
-        <ResourceDictionary>
-            <DropShadowEffect
-                x:Key="DropshadowEffect"
-                BlurRadius="40"
-                Direction="270"
-                ShadowDepth="13"
-                Color="Black" />
-        </ResourceDictionary>
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Icons.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+    <ResourceDictionary>
+      <DropShadowEffect x:Key="DropshadowEffect"
+                        BlurRadius="40" Direction="270" ShadowDepth="13"
+                        Color="Black" />
+    </ResourceDictionary>
+  </ResourceDictionary.MergedDictionaries>
 
 
-    <Style
-        x:Key="ShadowStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border>
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,0.9">
-                                <GradientStop Offset="0.9" Color="Black" />
-                                <GradientStop Color="Transparent" />
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="ShadowStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border>
+            <Border.BorderBrush>
+              <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,0.9">
+                <GradientStop Offset="0.9" Color="Black" />
+                <GradientStop Color="Transparent" />
+              </LinearGradientBrush>
+            </Border.BorderBrush>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="EmailButtonStyle"
-        BasedOn="{StaticResource ViewBaseStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Width" Value="45" />
-        <Setter Property="Height" Value="46" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Canvas
-                        Width="45"
-                        Height="46"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
+  <Style x:Key="EmailButtonStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Width" Value="45" />
+    <Setter Property="Height" Value="46" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Canvas Width="45" Height="46"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                        <Path
-                            Canvas.Left="0"
-                            Canvas.Top="1"
-                            Width="45"
-                            Height="45"
-                            Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5">
-                            <Path.Fill>
-                                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
-                            </Path.Fill>
-                        </Path>
-                        <Path
-                            Canvas.Left="0"
-                            Canvas.Top="0"
-                            Width="45"
-                            Height="45"
-                            Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5">
-                            <Path.Fill>
-                                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
-                            </Path.Fill>
-                        </Path>
-                        <Path
-                            Canvas.Left="9.13"
-                            Canvas.Top="16.779"
-                            Width="26.74"
-                            Height="15.772"
-                            Data="M0.5,0.807L0.5,15.272 26.24,15.272 26.24,0.807 13.369,7.206z"
-                            Stroke="{Binding Model.CoverColorScheme.Secondary, Mode=OneWay}" />
-                        <Path
-                            Canvas.Left="9.13"
-                            Canvas.Top="12.448"
-                            Width="26.74"
-                            Height="12.038"
-                            Data="M0.5,0.5L0.5,5.083 13.369,11.48 26.24,5.083 26.24,0.5z"
-                            Stroke="{Binding Model.CoverColorScheme.Secondary}" />
+            <Path Canvas.Left="0" Canvas.Top="1"
+                  Width="45" Height="45"
+                  Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5">
+              <Path.Fill>
+                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
+              </Path.Fill>
+            </Path>
+            <Path Canvas.Left="0" Canvas.Top="0"
+                  Width="45" Height="45"
+                  Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5">
+              <Path.Fill>
+                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
+              </Path.Fill>
+            </Path>
+            <Path Canvas.Left="9.13" Canvas.Top="16.779"
+                  Width="26.74" Height="15.772"
+                  Data="M0.5,0.807L0.5,15.272 26.24,15.272 26.24,0.807 13.369,7.206z"
+                  Stroke="{Binding Model.CoverColorScheme.Secondary, Mode=OneWay}" />
+            <Path Canvas.Left="9.13" Canvas.Top="12.448"
+                  Width="26.74" Height="12.038"
+                  Data="M0.5,0.5L0.5,5.083 13.369,11.48 26.24,5.083 26.24,0.5z"
+                  Stroke="{Binding Model.CoverColorScheme.Secondary}" />
 
 
-                        <!--<Path Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5" Height="45" Canvas.Left="0" Canvas.Top="1" Width="45"
+            <!--<Path Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5" Height="45" Canvas.Left="0" Canvas.Top="1" Width="45"
                                   Fill="{StaticResource HBS_BLUE_BRUSH}"/>
                         <Path Data="F1M45,22.5C45,34.926 34.926,45 22.5,45 10.074,45 0,34.926 0,22.5 0,10.074 10.074,0 22.5,0 34.926,0 45,10.074 45,22.5" Height="45" Canvas.Left="0" Canvas.Top="0" Width="45"
                                   Fill="{StaticResource HBS_BLUE_BRUSH}"/>
@@ -104,185 +81,156 @@
                                   Stroke="{StaticResource HBS_BLUE_LIGHT_BRUSH}"/>-->
 
 
-                    </Canvas>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+          </Canvas>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="OpenedBookStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Opacity="{Binding DropShadowOpacity}">
+  <Style x:Key="OpenedBookStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid Opacity="{Binding DropShadowOpacity}">
 
-                        <!--  BOOK  -->
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{Binding BackCover.Width}" />
-                                <ColumnDefinition Width="{Binding Spine.Width}" />
-                                <ColumnDefinition Width="{Binding FrontCover.Width}" />
-                            </Grid.ColumnDefinitions>
-                            <!--  drop shadow  -->
-                            <Border
-                                Grid.ColumnSpan="3"
-                                Background="Black"
-                                Effect="{StaticResource DropshadowEffect}"
-                                IsHitTestVisible="False" />
-                            <!--  back cover  -->
-                            <views:View Grid.Column="0" DataContext="{Binding BackCover}" />
-                            <!--  spine  -->
-                            <views:View Grid.Column="1" DataContext="{Binding Spine}" />
-                            <!--  front cover cover  -->
-                            <views:View Grid.Column="2" DataContext="{Binding FrontCover}" />
-                        </Grid>
+            <!--  BOOK  -->
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding BackCover.Width}" />
+                <ColumnDefinition Width="{Binding Spine.Width}" />
+                <ColumnDefinition Width="{Binding FrontCover.Width}" />
+              </Grid.ColumnDefinitions>
+              <!--  drop shadow  -->
+              <Border Grid.ColumnSpan="3"
+                      Background="Black"
+                      Effect="{StaticResource DropshadowEffect}"
+                      IsHitTestVisible="False" />
+              <!--  back cover  -->
+              <views:View Grid.Column="0" DataContext="{Binding BackCover}" />
+              <!--  spine  -->
+              <views:View Grid.Column="1" DataContext="{Binding Spine}" />
+              <!--  front cover cover  -->
+              <views:View Grid.Column="2" DataContext="{Binding FrontCover}" />
+            </Grid>
 
-                        <Grid Height="100" VerticalAlignment="Bottom">
-                            <Grid.RenderTransform>
-                                <TranslateTransform xx:Freeze="true" Y="90" />
-                            </Grid.RenderTransform>
-                            <Viewbox Width="55" Height="55">
-                                <views:View DataContext="{Binding ButtonVM}" />
-                            </Viewbox>
-                        </Grid>
+            <Grid Height="100" VerticalAlignment="Bottom">
+              <Grid.RenderTransform>
+                <TranslateTransform xx:Freeze="true" Y="90" />
+              </Grid.RenderTransform>
+              <Viewbox Width="55" Height="55">
+                <views:View DataContext="{Binding ButtonVM}" />
+              </Viewbox>
+            </Grid>
 
-                    </Grid>
+          </Grid>
 
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="OpenedBookLayerStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <views:View HorizontalAlignment="Left" DataContext="{Binding LeftLayer}" />
-                        <views:View
-                            VerticalAlignment="Top"
-                            DataContext="{Binding TopLayer}"
-                            Visibility="Hidden" />
-                        <views:View HorizontalAlignment="Right" DataContext="{Binding RightLayer}" />
-                        <views:View
-                            VerticalAlignment="Bottom"
-                            DataContext="{Binding BottomLayer}"
-                            Visibility="Hidden" />
-                        <!--  book opened  -->
-                        <Grid
-                            x:Name="root"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <views:View DataContext="{Binding BookVM}" />
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="OpenedBookLayerStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid>
+            <views:View HorizontalAlignment="Left" DataContext="{Binding LeftLayer}" />
+            <views:View VerticalAlignment="Top"
+                        DataContext="{Binding TopLayer}"
+                        Visibility="Hidden" />
+            <views:View HorizontalAlignment="Right" DataContext="{Binding RightLayer}" />
+            <views:View VerticalAlignment="Bottom"
+                        DataContext="{Binding BottomLayer}"
+                        Visibility="Hidden" />
+            <!--  book opened  -->
+            <Grid x:Name="root"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+              <views:View DataContext="{Binding BookVM}" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="LeftLayerStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Margin="50,0,0,0" ClipToBounds="False">
-                        <Ellipse
-                            Width="180"
-                            Height="90"
-                            Margin="16,0,0,0"
-                            xx:Freeze="true"
-                            Fill="Transparent" />
-                        <Ellipse
-                            Width="90"
-                            Height="90"
-                            Margin="8,0,0,0"
-                            Fill="{Binding CoverColorScheme.Primary}" />
-                        <Path
-                            Width="50"
-                            Height="50"
-                            Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z"
-                            Fill="{Binding CoverColorScheme.Secondary}"
-                            RenderTransformOrigin="0.5,0.5"
-                            Stretch="Uniform" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="LeftLayerStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid Margin="50,0,0,0" ClipToBounds="False">
+            <Ellipse Width="180" Height="90"
+                     Margin="16,0,0,0"
+                     xx:Freeze="true" Fill="Transparent" />
+            <Ellipse Width="90" Height="90"
+                     Margin="8,0,0,0"
+                     Fill="{Binding CoverColorScheme.Primary}" />
+            <Path Width="50" Height="50"
+                  Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z"
+                  Fill="{Binding CoverColorScheme.Secondary}"
+                  RenderTransformOrigin="0.5,0.5" Stretch="Uniform" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="RightLayerStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Margin="0,0,50,0" ClipToBounds="False">
-                        <Ellipse
-                            Width="180"
-                            Height="90"
-                            Margin="0,0,16,0"
-                            Fill="Transparent" />
-                        <Ellipse
-                            Width="90"
-                            Height="90"
-                            Margin="0,0,8,0"
-                            Fill="{Binding CoverColorScheme.Primary}" />
-                        <Path
-                            Width="50"
-                            Height="50"
-                            Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z"
-                            Fill="{Binding CoverColorScheme.Secondary}"
-                            RenderTransformOrigin="0.5,0.5"
-                            Stretch="Uniform" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="RightLayerStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid Margin="0,0,50,0" ClipToBounds="False">
+            <Ellipse Width="180" Height="90"
+                     Margin="0,0,16,0"
+                     Fill="Transparent" />
+            <Ellipse Width="90" Height="90"
+                     Margin="0,0,8,0"
+                     Fill="{Binding CoverColorScheme.Primary}" />
+            <Path Width="50" Height="50"
+                  Data="F1M568.254,-7.43524L568.159,-7.34277 567.977,-7.52246 546.559,-28.9417 525.484,-28.9417 549.787,-4.63446 557.439,3.01532 557.619,3.19629 550.067,10.7549 525.758,35.0583 546.834,35.0583 568.254,13.6429 578.792,3.10254 568.254,-7.43524z"
+                  Fill="{Binding CoverColorScheme.Secondary}"
+                  RenderTransformOrigin="0.5,0.5" Stretch="Uniform" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="TopLayerStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Border
-                            BorderBrush="Red"
-                            BorderThickness="1"
-                            IsHitTestVisible="False">
-                            <Label Content="Top" />
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="TopLayerStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid>
+            <Border BorderBrush="Red" BorderThickness="1" IsHitTestVisible="False">
+              <Label Content="Top" />
+            </Border>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="BottomLayerStyle"
-        BasedOn="{StaticResource ViewStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Label Content="Bottom" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BottomLayerStyle"
+         BasedOn="{StaticResource ViewStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid>
+            <Label Content="Bottom" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 </ResourceDictionary>

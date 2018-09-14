@@ -1,16 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="HbsProgressBarStyle" TargetType="ProgressBar">
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Maximum" Value="1" />
-        <Setter Property="Foreground" Value="{StaticResource ResourceKey=HBS_BLUE_LIGHT_BRUSH}" />
-    </Style>
+  <Style x:Key="HbsProgressBarStyle" TargetType="ProgressBar">
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Maximum" Value="1" />
+    <Setter Property="Foreground" Value="{StaticResource ResourceKey=HBS_BLUE_LIGHT_BRUSH}" />
+  </Style>
 
 </ResourceDictionary>

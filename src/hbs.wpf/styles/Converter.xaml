@@ -1,15 +1,12 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:picibird.hbs.wpf.converter"
-    xmlns:piciconv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:picibird.hbs.wpf.converter" xmlns:piciconv="clr-namespace:picibird.wpf.app.converter;assembly=picibits.wpf.app">
 
-    <converter:StringFormCConverter x:Key="FormCConverter" />
-    <converter:CollapsedIfNoDataConverter x:Key="CollapsedNoDataConverter" />
-    <converter:ResourcesConverter x:Key="ResourcesConverter" />
-    <converter:MediumToFontIconConverter x:Key="MediumToFontIconConverter" />
-    <converter:ListToStringConverter x:Key="ListToStringConverter" />
-    <piciconv:ConverterGroup x:Key="ConverterGroup" />
-    <piciconv:KearningConverter x:Key="KearningConverter" />
+  <converter:StringFormCConverter x:Key="FormCConverter" />
+  <converter:CollapsedIfNoDataConverter x:Key="CollapsedNoDataConverter" />
+  <converter:ResourcesConverter x:Key="ResourcesConverter" />
+  <converter:MediumToFontIconConverter x:Key="MediumToFontIconConverter" />
+  <converter:ListToStringConverter x:Key="ListToStringConverter" />
+  <piciconv:ConverterGroup x:Key="ConverterGroup" />
+  <piciconv:KearningConverter x:Key="KearningConverter" />
 
 </ResourceDictionary>

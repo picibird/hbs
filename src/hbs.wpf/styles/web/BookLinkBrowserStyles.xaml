@@ -1,166 +1,186 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 
 
-    <Thickness x:Key="BrowserBarMargin">0,15</Thickness>
+  <Thickness x:Key="BrowserBarMargin">0,15</Thickness>
 
 
-    <Style x:Key="BookLinkBrowserBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSizeSmall}" />
-        <Setter Property="Foreground" Value="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-        <Setter Property="FontFamily" Value="{DynamicResource RobotoLight}" />
-    </Style>
+  <Style x:Key="BookLinkBrowserBoxStyle"
+         BasedOn="{StaticResource TextBoxBaseStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{DynamicResource DefaultFontSizeSmall}" />
+    <Setter Property="Foreground" Value="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
+    <Setter Property="FontFamily" Value="{DynamicResource RobotoLight}" />
+  </Style>
 
 
-    <Style x:Key="TitleTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BookLinkBrowserBoxStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSizeFat}" />
-    </Style>
-    <Style x:Key="SubtitleTextBoxStyle" TargetType="{x:Type TextBox}"
-           BasedOn="{StaticResource BookLinkBrowserBoxStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
-    </Style>
+  <Style x:Key="TitleTextBoxStyle"
+         BasedOn="{StaticResource BookLinkBrowserBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{DynamicResource DefaultFontSizeFat}" />
+  </Style>
+  <Style x:Key="SubtitleTextBoxStyle"
+         BasedOn="{StaticResource BookLinkBrowserBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+  </Style>
 
-    <Style x:Key="CloseTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BookLinkBrowserBoxStyle}" />
+  <Style x:Key="CloseTextBoxStyle"
+         BasedOn="{StaticResource BookLinkBrowserBoxStyle}"
+         TargetType="{x:Type TextBox}" />
 
-    <Style x:Key="AddressTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BookLinkBrowserBoxStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeBig}" />
-        <Setter Property="FontFamily" Value="{DynamicResource RobotoLight}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextWrapping" Value="NoWrap" />
-    </Style>
+  <Style x:Key="AddressTextBoxStyle"
+         BasedOn="{StaticResource BookLinkBrowserBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeBig}" />
+    <Setter Property="FontFamily" Value="{DynamicResource RobotoLight}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+  </Style>
 
-    <Style x:Key="BookLinkBrowserStyle" TargetType="{x:Type ContentControl}"
-           BasedOn="{StaticResource ContentViewStyle}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.05*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0.05*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.075*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="0.075*" />
-                        </Grid.RowDefinitions>
-                        <!-- background -->
-                        <Rectangle Fill="Black" Opacity="{StaticResource BackgroundOpacity}" Grid.RowSpan="3"
-                                   Grid.ColumnSpan="3" />
+  <Style x:Key="BookLinkBrowserStyle"
+         BasedOn="{StaticResource ContentViewStyle}"
+         TargetType="{x:Type ContentControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="0.05*" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="0.05*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="0.075*" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="0.075*" />
+            </Grid.RowDefinitions>
+            <!--  background  -->
+            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="3"
+                       Fill="Black"
+                       Opacity="{StaticResource BackgroundOpacity}" />
 
-                        <!-- close Button -->
-                        <Button Style="{StaticResource ButtonContentOnlyStyle}"
-                                Grid.ColumnSpan="3" Grid.RowSpan="2" Command="{Binding CloseCommand}">
-                            <Rectangle Fill="Transparent" />
-                        </Button>
+            <!--  close Button  -->
+            <Button Grid.RowSpan="2" Grid.ColumnSpan="3"
+                    Command="{Binding CloseCommand}"
+                    Style="{StaticResource ButtonContentOnlyStyle}">
+              <Rectangle Fill="Transparent" />
+            </Button>
 
-                        <!-- title -->
-                        <DockPanel Grid.Column="1" Margin="{StaticResource BrowserBarMargin}"
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                            <TextBox Style="{StaticResource TitleTextBoxStyle}" Text="{Binding Title}"
-                                     DockPanel.Dock="Left" VerticalAlignment="Bottom"
-                                     Visibility="{Binding Title, Converter={StaticResource CollapsedNoDataConverter}}" />
-                            <TextBox Style="{StaticResource SubtitleTextBoxStyle}" Text="{Binding Subtitle}"
-                                     DockPanel.Dock="Left" VerticalAlignment="Bottom"
-                                     Visibility="{Binding Subtitle, Converter={StaticResource CollapsedNoDataConverter}}"
-                                     Margin="5,0,0,1" />
-                        </DockPanel>
+            <!--  title  -->
+            <DockPanel Grid.Column="1"
+                       Margin="{StaticResource BrowserBarMargin}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+              <TextBox VerticalAlignment="Bottom"
+                       DockPanel.Dock="Left"
+                       Style="{StaticResource TitleTextBoxStyle}"
+                       Text="{Binding Title}"
+                       Visibility="{Binding Title, Converter={StaticResource CollapsedNoDataConverter}}" />
+              <TextBox Margin="5,0,0,1" VerticalAlignment="Bottom"
+                       DockPanel.Dock="Left"
+                       Style="{StaticResource SubtitleTextBoxStyle}"
+                       Text="{Binding Subtitle}"
+                       Visibility="{Binding Subtitle, Converter={StaticResource CollapsedNoDataConverter}}" />
+            </DockPanel>
 
-                        <!-- Close Button Icon -->
-                        <Grid IsHitTestVisible="False" Grid.Row="0" Grid.Column="1"
-                              Margin="{StaticResource BrowserBarMargin}"
-                              HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <TextBlock Style="{DynamicResource CloseFontIcon}"
-                                       FontSize="{DynamicResource FontSizeMassive}"
-                                       Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                        </Grid>
+            <!--  Close Button Icon  -->
+            <Grid Grid.Row="0" Grid.Column="1"
+                  Margin="{StaticResource BrowserBarMargin}"
+                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  IsHitTestVisible="False">
+              <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                         Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                         Style="{DynamicResource CloseFontIcon}" />
+            </Grid>
 
-                        <!-- browser -->
-                        <Border Grid.Row="1" Grid.Column="1" Background="White">
-                            <views:ContentViewPresenter Content="{TemplateBinding ContentControl.Content}"
-                                                        Margin="{TemplateBinding Padding}" />
-                        </Border>
+            <!--  browser  -->
+            <Border Grid.Row="1" Grid.Column="1"
+                    Background="White">
+              <views:ContentViewPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding ContentControl.Content}" />
+            </Border>
 
-                        <DockPanel Grid.Row="2" Grid.Column="1" Margin="{StaticResource BrowserBarMargin}"
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <DockPanel Grid.Row="2" Grid.Column="1"
+                       Margin="{StaticResource BrowserBarMargin}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
-                            <!-- back button -->
-                            <Button DockPanel.Dock="Left" Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.BackCommand}"
-                                    IsEnabled="{Binding Content.CefBrowser.CanGoBack}"
-                                    VerticalAlignment="Center">
-                                <TextBlock Style="{DynamicResource BackFontIcon}"
-                                           FontSize="{DynamicResource FontSizeMassive}"
-                                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                            </Button>
+              <!--  back button  -->
+              <Button VerticalAlignment="Center"
+                      Command="{Binding Content.CefBrowser.BackCommand}"
+                      DockPanel.Dock="Left"
+                      IsEnabled="{Binding Content.CefBrowser.CanGoBack}"
+                      Style="{StaticResource ButtonContentOnlyStyle}">
+                <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                           Style="{DynamicResource BackFontIcon}" />
+              </Button>
 
-                            <!-- forward button -->
-                            <Button DockPanel.Dock="Left" Margin="20,0,0,0"
-                                    Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ForwardCommand}"
-                                    IsEnabled="{Binding Content.CefBrowser.CanGoForward}"
-                                    VerticalAlignment="Center">
-                                <TextBlock Style="{DynamicResource ForwardFontIcon}"
-                                           FontSize="{DynamicResource FontSizeMassive}"
-                                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                            </Button>
+              <!--  forward button  -->
+              <Button Margin="20,0,0,0" VerticalAlignment="Center"
+                      Command="{Binding Content.CefBrowser.ForwardCommand}"
+                      DockPanel.Dock="Left"
+                      IsEnabled="{Binding Content.CefBrowser.CanGoForward}"
+                      Style="{StaticResource ButtonContentOnlyStyle}">
+                <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                           Style="{DynamicResource ForwardFontIcon}" />
+              </Button>
 
-                            <!-- reload button -->
-                            <Button DockPanel.Dock="Left" Margin="20,0,0,0"
-                                    Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ReloadCommand}"
-                                    IsEnabled="{Binding Content.CefBrowser.CanReload}"
-                                    VerticalAlignment="Center">
-                                <TextBlock Style="{DynamicResource ReloadFontIcon}"
-                                           FontSize="{DynamicResource FontSizeMassive}"
-                                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                            </Button>
+              <!--  reload button  -->
+              <Button Margin="20,0,0,0" VerticalAlignment="Center"
+                      Command="{Binding Content.CefBrowser.ReloadCommand}"
+                      DockPanel.Dock="Left"
+                      IsEnabled="{Binding Content.CefBrowser.CanReload}"
+                      Style="{StaticResource ButtonContentOnlyStyle}">
+                <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                           Style="{DynamicResource ReloadFontIcon}" />
+              </Button>
 
 
-                            <!-- zoom in -->
-                            <Button DockPanel.Dock="Right" Margin="20,0,0,0"
-                                    Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ZoomInCommand}"
-                                    VerticalAlignment="Center" Visibility="Hidden">
-                                <TextBlock Style="{DynamicResource ZoomInFontIcon}"
-                                           FontSize="{DynamicResource FontSizeMassive}"
-                                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                            </Button>
+              <!--  zoom in  -->
+              <Button Margin="20,0,0,0" VerticalAlignment="Center"
+                      Command="{Binding Content.CefBrowser.ZoomInCommand}"
+                      DockPanel.Dock="Right"
+                      Style="{StaticResource ButtonContentOnlyStyle}"
+                      Visibility="Hidden">
+                <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                           Style="{DynamicResource ZoomInFontIcon}" />
+              </Button>
 
-                            <!-- zoom out -->
-                            <Button DockPanel.Dock="Right" Margin="20,0,0,0"
-                                    Style="{StaticResource ButtonContentOnlyStyle}"
-                                    Command="{Binding Content.CefBrowser.ZoomOutCommand}"
-                                    VerticalAlignment="Center" Visibility="Hidden">
-                                <TextBlock Style="{DynamicResource ZoomOutFontIcon}"
-                                           FontSize="{DynamicResource FontSizeMassive}"
-                                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}" />
-                            </Button>
+              <!--  zoom out  -->
+              <Button Margin="20,0,0,0" VerticalAlignment="Center"
+                      Command="{Binding Content.CefBrowser.ZoomOutCommand}"
+                      DockPanel.Dock="Right"
+                      Style="{StaticResource ButtonContentOnlyStyle}"
+                      Visibility="Hidden">
+                <TextBlock FontSize="{DynamicResource FontSizeMassive}"
+                           Foreground="{DynamicResource HBS_BLUE_LIGHT_BRUSH}"
+                           Style="{DynamicResource ZoomOutFontIcon}" />
+              </Button>
 
-                            <!-- address text -->
-                            <TextBox DockPanel.Dock="Right" Margin="20,0,0,0"
-                                     Style="{StaticResource AddressTextBoxStyle}" HorizontalAlignment="Stretch"
-                                     Text="{Binding Content.Address}" VerticalAlignment="Center"
-                                     HorizontalContentAlignment="Left" />
+              <!--  address text  -->
+              <TextBox Margin="20,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left"
+                       DockPanel.Dock="Right"
+                       Style="{StaticResource AddressTextBoxStyle}"
+                       Text="{Binding Content.Address}" />
 
-                        </DockPanel>
+            </DockPanel>
 
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 </ResourceDictionary>

@@ -1,224 +1,207 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/modernui/ScrollBarStyles.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/modernui/ScrollBarStyles.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="LabelBaseStyle" TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
-    </Style>
+  <Style x:Key="LabelBaseStyle" TargetType="{x:Type Label}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+  </Style>
 
-    <Style x:Key="LabelSuperFatStyle" TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
-        <Setter Property="FontSize" Value="40" />
-    </Style>
+  <Style x:Key="LabelSuperFatStyle" TargetType="{x:Type Label}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+    <Setter Property="FontSize" Value="40" />
+  </Style>
 
-    <Style x:Key="TextBoxBaseStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="AcceptsReturn" Value="True" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoSlab}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-    </Style>
+  <Style x:Key="TextBoxBaseStyle" TargetType="{x:Type TextBox}">
+    <Setter Property="AcceptsReturn" Value="True" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoSlab}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+  </Style>
 
-    <Style x:Key="TextBlockBaseStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoSlab}" />
-        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-    </Style>
+  <Style x:Key="TextBlockBaseStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoSlab}" />
+    <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+  </Style>
 
-    <Style
-        x:Key="VerticalScrollViewerStyle"
-        BasedOn="{StaticResource TouchScrollViewer}"
-        TargetType="{x:Type ScrollViewer}">
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
-        <Setter Property="CanContentScroll" Value="False" />
-        <Setter Property="PanningMode" Value="VerticalOnly" />
-    </Style>
+  <Style x:Key="VerticalScrollViewerStyle"
+         BasedOn="{StaticResource TouchScrollViewer}"
+         TargetType="{x:Type ScrollViewer}">
+    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+    <Setter Property="CanContentScroll" Value="False" />
+    <Setter Property="PanningMode" Value="VerticalOnly" />
+  </Style>
 
-    <Style
-        x:Key="HorizonatalScrollViewerStyle"
-        BasedOn="{StaticResource TouchScrollViewer}"
-        TargetType="{x:Type ScrollViewer}">
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
-        <Setter Property="CanContentScroll" Value="False" />
-        <Setter Property="PanningMode" Value="HorizontalOnly" />
-    </Style>
+  <Style x:Key="HorizonatalScrollViewerStyle"
+         BasedOn="{StaticResource TouchScrollViewer}"
+         TargetType="{x:Type ScrollViewer}">
+    <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+    <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="CanContentScroll" Value="False" />
+    <Setter Property="PanningMode" Value="HorizontalOnly" />
+  </Style>
 
-    <!--  BUTTON  -->
+  <!--  BUTTON  -->
 
-    <Style
-        x:Key="ButtonContentOnlyStyle"
-        BasedOn="{StaticResource {x:Type Button}}"
-        TargetType="{x:Type Button}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="Transparent">
-                        <ContentPresenter
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Opacity" Value="1" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.25" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+  <Style x:Key="ButtonContentOnlyStyle"
+         BasedOn="{StaticResource {x:Type Button}}"
+         TargetType="{x:Type Button}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="Transparent">
+            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="True">
+        <Setter Property="Opacity" Value="1" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Opacity" Value="0.25" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
 
-    <!--  COVER BASE STYLES  -->
+  <!--  COVER BASE STYLES  -->
 
-    <Style
-        x:Key="BackCoverTextBoxStyle"
-        BasedOn="{StaticResource TextBoxBaseStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{StaticResource HBS_WHITE_BRUSH}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoThin}" />
-        <Setter Property="FontSize" Value="{StaticResource BackCoverFontSize}" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Secondary}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BackCoverTextBoxStyle"
+         BasedOn="{StaticResource TextBoxBaseStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="Foreground" Value="{StaticResource HBS_WHITE_BRUSH}" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoThin}" />
+    <Setter Property="FontSize" Value="{StaticResource BackCoverFontSize}" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
+    <Setter Property="Foreground">
+      <Setter.Value>
+        <SolidColorBrush Color="{Binding Model.CoverColorScheme.Secondary}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style x:Key="BackCoverDataGridStyle" TargetType="{x:Type Grid}">
-        <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
-    </Style>
+  <Style x:Key="BackCoverDataGridStyle" TargetType="{x:Type Grid}">
+    <Setter Property="Margin" Value="{StaticResource BackCoverBottomMargin}" />
+  </Style>
 
-    <Style
-        x:Key="BackCoverTextBoxFatStyle"
-        BasedOn="{StaticResource BackCoverTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
-    </Style>
+  <Style x:Key="BackCoverTextBoxFatStyle"
+         BasedOn="{StaticResource BackCoverTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+  </Style>
 
-    <Style
-        x:Key="BackCoverTextBoxSuperFatStyle"
-        BasedOn="{StaticResource BackCoverTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-    </Style>
+  <Style x:Key="BackCoverTextBoxSuperFatStyle"
+         BasedOn="{StaticResource BackCoverTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+  </Style>
 
 
-    <Style
-        x:Key="BackCoverExtrasTextBoxStyle"
-        BasedOn="{StaticResource BackCoverTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BackCoverExtrasTextBoxStyle"
+         BasedOn="{StaticResource BackCoverTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="Foreground">
+      <Setter.Value>
+        <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="BackCoverExtrasTextBoxFatStyle"
-        BasedOn="{StaticResource BackCoverTextBoxFatStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BackCoverExtrasTextBoxFatStyle"
+         BasedOn="{StaticResource BackCoverTextBoxFatStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="Foreground">
+      <Setter.Value>
+        <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="SpineTextBoxStyle"
-        BasedOn="{StaticResource BackCoverTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SpineFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="SpineTextBoxStyle"
+         BasedOn="{StaticResource BackCoverTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="{StaticResource SpineFontSize}" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+    <Setter Property="Foreground">
+      <Setter.Value>
+        <SolidColorBrush Color="{Binding Model.CoverColorScheme.Primary, Mode=OneWay}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="SpineTextBoxSmallStyle"
-        BasedOn="{StaticResource SpineTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="{StaticResource SpineSmallFontSize}" />
-    </Style>
+  <Style x:Key="SpineTextBoxSmallStyle"
+         BasedOn="{StaticResource SpineTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{StaticResource SpineSmallFontSize}" />
+  </Style>
 
-    <Style
-        x:Key="SpineTextBoxTinyStyle"
-        BasedOn="{StaticResource SpineTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="{StaticResource SpineFontSizeTiny}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
-    </Style>
+  <Style x:Key="SpineTextBoxTinyStyle"
+         BasedOn="{StaticResource SpineTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{StaticResource SpineFontSizeTiny}" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+  </Style>
 
-    <Style
-        x:Key="SpineTitleTextBoxStyle"
-        BasedOn="{StaticResource SpineTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
-    </Style>
+  <Style x:Key="SpineTitleTextBoxStyle"
+         BasedOn="{StaticResource SpineTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+  </Style>
 
-    <!--  FILTER BASE STYLES  -->
+  <!--  FILTER BASE STYLES  -->
 
-    <Style
-        x:Key="FilterTextBoxStyle"
-        BasedOn="{StaticResource TextBoxBaseStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
-        <Setter Property="FontSize" Value="{StaticResource FilterFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Margin" Value="4" />
-        <Setter Property="TextWrapping" Value="NoWrap" />
-    </Style>
+  <Style x:Key="FilterTextBoxStyle"
+         BasedOn="{StaticResource TextBoxBaseStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+    <Setter Property="FontSize" Value="{StaticResource FilterFontSize}" />
+    <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Margin" Value="4" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+  </Style>
 
-    <Style
-        x:Key="FilterTextBlockStyle"
-        BasedOn="{StaticResource TextBlockBaseStyle}"
-        TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
-        <Setter Property="FontSize" Value="{StaticResource FilterFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
-        <Setter Property="Margin" Value="4" />
-        <Setter Property="TextAlignment" Value="Center" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="TextTrimming" Value="WordEllipsis" />
-    </Style>
+  <Style x:Key="FilterTextBlockStyle"
+         BasedOn="{StaticResource TextBlockBaseStyle}"
+         TargetType="{x:Type TextBlock}">
+    <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+    <Setter Property="FontSize" Value="{StaticResource FilterFontSize}" />
+    <Setter Property="Foreground" Value="{StaticResource HBS_BLUE_BRUSH}" />
+    <Setter Property="Margin" Value="4" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="TextTrimming" Value="WordEllipsis" />
+  </Style>
 
-    <Style
-        x:Key="FilterTitleTextBoxStyle"
-        BasedOn="{StaticResource FilterTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="{StaticResource FilterTitleFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
-    </Style>
+  <Style x:Key="FilterTitleTextBoxStyle"
+         BasedOn="{StaticResource FilterTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="{StaticResource FilterTitleFontSize}" />
+    <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+  </Style>
 
 </ResourceDictionary>

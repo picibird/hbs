@@ -1,46 +1,45 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clr="clr-namespace:System;assembly=mscorlib">
 
-    <!-- urls -->
-    <clr:String x:Key="bibshelfShortUrl">www.kn.bibshelf.de</clr:String>
+  <!--  urls  -->
+  <clr:String x:Key="bibshelfShortUrl">www.kn.bibshelf.de</clr:String>
 
 
-    <!-- strings -->
-    <clr:String x:Key="Author">Autor</clr:String>
-    <clr:String x:Key="SeriesTitle">Serientitel</clr:String>
-    <clr:String x:Key="JournalTitle">Publikationstitel</clr:String>
-    <clr:String x:Key="Language">Sprache</clr:String>
-    <clr:String x:Key="Publisher">Verlag</clr:String>
-    <clr:String x:Key="PublicationDate">Datum</clr:String>
-    <clr:String x:Key="PublicationPlace">Ort</clr:String>
-    <clr:String x:Key="Edition">Edition</clr:String>
-    <clr:String x:Key="Medium">Medium</clr:String>
-    <clr:String x:Key="Pages">Seiten</clr:String>
-    <clr:String x:Key="Shelf">Regal</clr:String>
-    <clr:String x:Key="Description">Beschreibung</clr:String>
-    <clr:String x:Key="ISBN">ISBNs</clr:String>
-    <clr:String x:Key="Department">Fachbereich</clr:String>
-    <clr:String x:Key="Availability">Verfügbarkeit</clr:String>
+  <!--  strings  -->
+  <clr:String x:Key="Author">Autor</clr:String>
+  <clr:String x:Key="SeriesTitle">Serientitel</clr:String>
+  <clr:String x:Key="JournalTitle">Publikationstitel</clr:String>
+  <clr:String x:Key="Language">Sprache</clr:String>
+  <clr:String x:Key="Publisher">Verlag</clr:String>
+  <clr:String x:Key="PublicationDate">Datum</clr:String>
+  <clr:String x:Key="PublicationPlace">Ort</clr:String>
+  <clr:String x:Key="Edition">Edition</clr:String>
+  <clr:String x:Key="Medium">Medium</clr:String>
+  <clr:String x:Key="Pages">Seiten</clr:String>
+  <clr:String x:Key="Shelf">Regal</clr:String>
+  <clr:String x:Key="Description">Beschreibung</clr:String>
+  <clr:String x:Key="ISBN">ISBNs</clr:String>
+  <clr:String x:Key="Department">Fachbereich</clr:String>
+  <clr:String x:Key="Availability">Verfügbarkeit</clr:String>
 
-    <clr:String x:Key="Links">Links</clr:String>
-    <clr:String x:Key="FullText">Volltext</clr:String>
+  <clr:String x:Key="Links">Links</clr:String>
+  <clr:String x:Key="FullText">Volltext</clr:String>
 
-    <clr:String x:Key="Of">von</clr:String>
-    <clr:String x:Key="To">bis</clr:String>
+  <clr:String x:Key="Of">von</clr:String>
+  <clr:String x:Key="To">bis</clr:String>
 
-    <clr:String x:Key="SortedBy">Sortiert nach</clr:String>
+  <clr:String x:Key="SortedBy">Sortiert nach</clr:String>
 
-    <clr:String x:Key="ascending">aufsteigend</clr:String>
-    <clr:String x:Key="descending">absteigend</clr:String>
+  <clr:String x:Key="ascending">aufsteigend</clr:String>
+  <clr:String x:Key="descending">absteigend</clr:String>
 
-    <clr:String x:Key="relevance">Relevanz</clr:String>
-    <clr:String x:Key="date">Datum</clr:String>
-    <clr:String x:Key="author">Author</clr:String>
-    <clr:String x:Key="title">Titel</clr:String>
+  <clr:String x:Key="relevance">Relevanz</clr:String>
+  <clr:String x:Key="date">Datum</clr:String>
+  <clr:String x:Key="author">Author</clr:String>
+  <clr:String x:Key="title">Titel</clr:String>
 
 
-    <!--<clr:String x:Key="Author">Author</clr:String>
+  <!--<clr:String x:Key="Author">Author</clr:String>
     <clr:String x:Key="SeriesTitle">Series Title</clr:String>
     <clr:String x:Key="JournalTitle">Journal Title</clr:String>
     <clr:String x:Key="Language">Language</clr:String>
@@ -56,74 +55,74 @@
     <clr:String x:Key="Availability">Availability</clr:String>-->
 
 
-    <!-- defaults -->
+  <!--  defaults  -->
 
-    <clr:Double x:Key="BackgroundOpacity">0.7</clr:Double>
+  <clr:Double x:Key="BackgroundOpacity">0.7</clr:Double>
 
-    <Thickness x:Key="TextBoxPaddingDefault">10</Thickness>
-    <CornerRadius x:Key="CornerRadiusDefault">3</CornerRadius>
+  <Thickness x:Key="TextBoxPaddingDefault">10</Thickness>
+  <CornerRadius x:Key="CornerRadiusDefault">3</CornerRadius>
 
-    <!--shelf -->
-    <Thickness x:Key="ShelfMargin">10,0,10,0</Thickness>
-    <GridLength x:Key="ShelfGridWidth">1400</GridLength>
+  <!--  shelf  -->
+  <Thickness x:Key="ShelfMargin">10,0,10,0</Thickness>
+  <GridLength x:Key="ShelfGridWidth">1400</GridLength>
 
-    <!-- Font Sizes-->
-    <clr:Double x:Key="DefaultFontSizeTiny">12</clr:Double>
-    <clr:Double x:Key="DefaultFontSizeSmall">14</clr:Double>
-    <clr:Double x:Key="DefaultFontSize">18</clr:Double>
-    <clr:Double x:Key="DefaultFontSizeBig">20</clr:Double>
-    <clr:Double x:Key="DefaultFontSizeFat">24</clr:Double>
-    <clr:Double x:Key="DefaultFontSizeExtrem">34</clr:Double>
+  <!--  Font Sizes  -->
+  <clr:Double x:Key="DefaultFontSizeTiny">12</clr:Double>
+  <clr:Double x:Key="DefaultFontSizeSmall">14</clr:Double>
+  <clr:Double x:Key="DefaultFontSize">18</clr:Double>
+  <clr:Double x:Key="DefaultFontSizeBig">20</clr:Double>
+  <clr:Double x:Key="DefaultFontSizeFat">24</clr:Double>
+  <clr:Double x:Key="DefaultFontSizeExtrem">34</clr:Double>
 
-    <clr:Double x:Key="TitleFontSize">28</clr:Double>
+  <clr:Double x:Key="TitleFontSize">28</clr:Double>
 
-    <clr:Double x:Key="ShelfLabelFontSize">16</clr:Double>
-    <clr:Double x:Key="ShelfLabelFontSizeSmall">13</clr:Double>
-    <clr:Double x:Key="ShelfLabelFontSizeTiny">12</clr:Double>
+  <clr:Double x:Key="ShelfLabelFontSize">16</clr:Double>
+  <clr:Double x:Key="ShelfLabelFontSizeSmall">13</clr:Double>
+  <clr:Double x:Key="ShelfLabelFontSizeTiny">12</clr:Double>
 
-    <clr:Double x:Key="CoverTitleFontSize">60</clr:Double>
-    <clr:Double x:Key="CoverAuthorFontSize">45</clr:Double>
+  <clr:Double x:Key="CoverTitleFontSize">60</clr:Double>
+  <clr:Double x:Key="CoverAuthorFontSize">45</clr:Double>
 
-    <clr:Double x:Key="SpineFontSize">16</clr:Double>
-    <clr:Double x:Key="SpineSmallFontSize">15</clr:Double>
-    <clr:Double x:Key="SpineFontSizeTiny">14</clr:Double>
+  <clr:Double x:Key="SpineFontSize">16</clr:Double>
+  <clr:Double x:Key="SpineSmallFontSize">15</clr:Double>
+  <clr:Double x:Key="SpineFontSizeTiny">14</clr:Double>
 
-    <clr:Double x:Key="BackCoverTitleFontSize">24</clr:Double>
-    <clr:Double x:Key="BackCoverFontSize">18</clr:Double>
+  <clr:Double x:Key="BackCoverTitleFontSize">24</clr:Double>
+  <clr:Double x:Key="BackCoverFontSize">18</clr:Double>
 
-    <!-- Filter -->
+  <!--  Filter  -->
 
-    <clr:Double x:Key="FilterFontSize">22</clr:Double>
-    <clr:Double x:Key="FilterTitleFontSize">25</clr:Double>
+  <clr:Double x:Key="FilterFontSize">22</clr:Double>
+  <clr:Double x:Key="FilterTitleFontSize">25</clr:Double>
 
-    <clr:Double x:Key="FilterCardWidth">430</clr:Double>
-    <GridLength x:Key="FilterCardGridWidth">430</GridLength>
+  <clr:Double x:Key="FilterCardWidth">430</clr:Double>
+  <GridLength x:Key="FilterCardGridWidth">430</GridLength>
 
-    <clr:Double x:Key="MaxFilterCardHeight">300</clr:Double>
+  <clr:Double x:Key="MaxFilterCardHeight">300</clr:Double>
 
 
-    <clr:Double x:Key="FilterChooserCardHeight">220</clr:Double>
-    <clr:Double x:Key="FilterChooserFontSize">20</clr:Double>
-    <clr:Double x:Key="FilterChooserSmallFontSize">13</clr:Double>
+  <clr:Double x:Key="FilterChooserCardHeight">220</clr:Double>
+  <clr:Double x:Key="FilterChooserFontSize">20</clr:Double>
+  <clr:Double x:Key="FilterChooserSmallFontSize">13</clr:Double>
 
-    <!-- COVER -->
-    <Thickness x:Key="CoverMargin">25</Thickness>
-    <Thickness x:Key="SpineMargin">10</Thickness>
+  <!--  COVER  -->
+  <Thickness x:Key="CoverMargin">25</Thickness>
+  <Thickness x:Key="SpineMargin">10</Thickness>
 
-    <GridLength x:Key="BackCoverColumnWidth">160</GridLength>
-    <Thickness x:Key="BackCoverBottomMargin">0,0,0,4</Thickness>
+  <GridLength x:Key="BackCoverColumnWidth">160</GridLength>
+  <Thickness x:Key="BackCoverBottomMargin">0,0,0,4</Thickness>
 
-    <Thickness x:Key="SpineBorderThickness">10</Thickness>
+  <Thickness x:Key="SpineBorderThickness">10</Thickness>
 
-    <!-- availability -->
-    <Thickness x:Key="AvailabilityTextBoxPadding">8,8,8,8</Thickness>
-    <clr:Double x:Key="AvailabilityMaxWidth">360</clr:Double>
-    <clr:Double x:Key="AvailabilityMinWidth">160</clr:Double>
+  <!--  availability  -->
+  <Thickness x:Key="AvailabilityTextBoxPadding">8,8,8,8</Thickness>
+  <clr:Double x:Key="AvailabilityMaxWidth">360</clr:Double>
+  <clr:Double x:Key="AvailabilityMinWidth">160</clr:Double>
 
-    <!-- info shield -->
-    <GridLength x:Key="SortDirectionRadioButtonHeight">30</GridLength>
-    <PointCollection x:Key="AscendingTriangle">0,10 12,0, 24,10</PointCollection>
-    <PointCollection x:Key="DescendingTriangle">0,0 12,10, 24,0</PointCollection>
+  <!--  info shield  -->
+  <GridLength x:Key="SortDirectionRadioButtonHeight">30</GridLength>
+  <PointCollection x:Key="AscendingTriangle">0,10 12,0, 24,10</PointCollection>
+  <PointCollection x:Key="DescendingTriangle">0,0 12,10, 24,0</PointCollection>
 
 
 </ResourceDictionary>

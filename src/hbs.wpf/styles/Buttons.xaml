@@ -1,35 +1,38 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.fontawesome.io/icons/">
 
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/Buttons.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
-        
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/Buttons.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/picibits.wpf.app;component/styles/CoreStyles.xaml" />
+
+  </ResourceDictionary.MergedDictionaries>
 
 
-    <Style x:Key="ButtonBorderStyle" TargetType="{x:Type Border}"
-           BasedOn="{StaticResource ResourceKey=ButtonBorderStyle}">
-        <Setter Property="CornerRadius" Value="{StaticResource PiciCornerRadius}" />
-        <Setter Property="Background" Value="{StaticResource PiciBackgroundBrush}" />
-    </Style>
+  <Style x:Key="ButtonBorderStyle"
+         BasedOn="{StaticResource ResourceKey=ButtonBorderStyle}"
+         TargetType="{x:Type Border}">
+    <Setter Property="CornerRadius" Value="{StaticResource PiciCornerRadius}" />
+    <Setter Property="Background" Value="{StaticResource PiciBackgroundBrush}" />
+  </Style>
 
-    <Style x:Key="InfoButtonStyle"
-           BasedOn="{StaticResource ViewBaseStyle}"
-           TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <ContentControl Style="{StaticResource ButtonContentControlStyle}" Padding="0" Margin="0">
-                        <fa:FontAwesome Icon="InfoCircle" Foreground="{DynamicResource PiciForegroundBrush}"
-                               FontSize="50" Padding="0" Margin="0"/>
-                    </ContentControl>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="InfoButtonStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <ContentControl Margin="0" Padding="0"
+                          Style="{StaticResource ButtonContentControlStyle}">
+            <fa:FontAwesome Margin="0" Padding="0"
+                            FontSize="50"
+                            Foreground="{DynamicResource PiciForegroundBrush}"
+                            Icon="InfoCircle" />
+          </ContentControl>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 </ResourceDictionary>

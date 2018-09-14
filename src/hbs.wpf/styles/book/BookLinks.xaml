@@ -1,77 +1,68 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:picibird.wpf.core.views;assembly=picibits.wpf.core">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Values.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Colors.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Fonts.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Converter.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Controls.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/hbs.wpf;component/styles/Images.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 
-    <Style
-        x:Key="BookLinkTextStyle"
-        BasedOn="{StaticResource BackCoverTextBoxStyle}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding Hit.CoverColorScheme.Secondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="TextWrapping" Value="NoWrap" />
-        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
-    </Style>
+  <Style x:Key="BookLinkTextStyle"
+         BasedOn="{StaticResource BackCoverTextBoxStyle}"
+         TargetType="{x:Type TextBox}">
+    <Setter Property="Foreground">
+      <Setter.Value>
+        <SolidColorBrush Color="{Binding Hit.CoverColorScheme.Secondary}" />
+      </Setter.Value>
+    </Setter>
+    <Setter Property="TextWrapping" Value="NoWrap" />
+    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+  </Style>
 
-    <Style
-        x:Key="BookLinkButtonStyle"
-        BasedOn="{StaticResource ViewBaseStyle}"
-        TargetType="{x:Type Control}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate />
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BookLinkButtonStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type Control}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate />
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 
-    <Style
-        x:Key="BookLinksStyle"
-        BasedOn="{StaticResource ViewBaseStyle}"
-        TargetType="{x:Type ItemsControl}">
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Button
-                        Margin="0,0,0,5"
-                        Command="{Binding ClickCommand}"
-                        Style="{StaticResource ButtonContentOnlyStyle}"
-                        ToolTip="{Binding Tooltip}">
-                        <Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" CornerRadius="{StaticResource CornerRadiusDefault}">
-                            <Label
-                                Margin="10,0,10,0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Content="{Binding Title}"
-                                FontFamily="{StaticResource RobotoMedium}"
-                                FontSize="{StaticResource FilterFontSize}">
-                                <Label.Foreground>
-                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Primary, Mode=OneWay, FallbackValue={StaticResource HBS_BLUE}}" />
-                                </Label.Foreground>
-                            </Label>
-                        </Border>
-                    </Button>
+  <Style x:Key="BookLinksStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type ItemsControl}">
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <StackPanel IsItemsHost="True" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Button Margin="0,0,0,5"
+                  Command="{Binding ClickCommand}"
+                  Style="{StaticResource ButtonContentOnlyStyle}"
+                  ToolTip="{Binding Tooltip}">
+            <Border Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Secondary}" CornerRadius="{StaticResource CornerRadiusDefault}">
+              <Label Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     Content="{Binding Title}"
+                     FontFamily="{StaticResource RobotoMedium}"
+                     FontSize="{StaticResource FilterFontSize}">
+                <Label.Foreground>
+                  <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Model.CoverColorScheme.Primary, Mode=OneWay, FallbackValue={StaticResource HBS_BLUE}}" />
+                </Label.Foreground>
+              </Label>
+            </Border>
+          </Button>
 
-                    <!--<Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
+          <!--<Button Command="{Binding ClickCommand}" Style="{StaticResource ButtonContentOnlyStyle}">
                         <Grid Style="{StaticResource BackCoverDataGridStyle}" Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
@@ -83,81 +74,74 @@
                                      TextWrapping="NoWrap" ClipToBounds="True" TextDecorations="Underline"/>
                         </Grid>
                     </Button>-->
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
-    <Style
-        x:Key="BookLinksSimpleStyle"
-        BasedOn="{StaticResource ViewBaseStyle}"
-        TargetType="{x:Type ItemsControl}">
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Button
-                        Margin="0,0,0,5"
-                        Command="{Binding ClickCommand}"
-                        Style="{StaticResource ButtonContentOnlyStyle}">
-                        <Grid Background="Transparent" Style="{StaticResource BackCoverDataGridStyle}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox
-                                ClipToBounds="True"
-                                Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
-                                Text="{Binding Title, Mode=OneWay}"
-                                TextDecorations="Underline"
-                                TextWrapping="NoWrap" />
-                        </Grid>
-                    </Button>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="BookLinksSimpleStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type ItemsControl}">
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <StackPanel IsItemsHost="True" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Button Margin="0,0,0,5"
+                  Command="{Binding ClickCommand}"
+                  Style="{StaticResource ButtonContentOnlyStyle}">
+            <Grid Background="Transparent" Style="{StaticResource BackCoverDataGridStyle}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBox ClipToBounds="True"
+                       Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
+                       Text="{Binding Title, Mode=OneWay}"
+                       TextDecorations="Underline" TextWrapping="NoWrap" />
+            </Grid>
+          </Button>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 
-    <Style
-        x:Key="LocationStyle"
-        BasedOn="{StaticResource ViewBaseStyle}"
-        TargetType="{x:Type ItemsControl}">
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Grid Background="Transparent" Style="{StaticResource BackCoverDataGridStyle}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox
-                            ClipToBounds="True"
-                            Style="{StaticResource BackCoverExtrasTextBoxStyle}"
-                            Text="{Binding Title, Mode=OneWay}"
-                            TextWrapping="NoWrap" />
-                        <TextBox
-                            Grid.Column="2"
-                            ClipToBounds="True"
-                            Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
-                            Text="{Binding Signature, Mode=OneWay}"
-                            TextWrapping="NoWrap" />
-                    </Grid>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  <Style x:Key="LocationStyle"
+         BasedOn="{StaticResource ViewBaseStyle}"
+         TargetType="{x:Type ItemsControl}">
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <StackPanel IsItemsHost="True" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Grid Background="Transparent" Style="{StaticResource BackCoverDataGridStyle}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource BackCoverColumnWidth}" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox ClipToBounds="True"
+                     Style="{StaticResource BackCoverExtrasTextBoxStyle}"
+                     Text="{Binding Title, Mode=OneWay}"
+                     TextWrapping="NoWrap" />
+            <TextBox Grid.Column="2"
+                     ClipToBounds="True"
+                     Style="{StaticResource BackCoverExtrasTextBoxFatStyle}"
+                     Text="{Binding Signature, Mode=OneWay}"
+                     TextWrapping="NoWrap" />
+          </Grid>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 </ResourceDictionary>

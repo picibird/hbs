@@ -1,6 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ImageSource x:Key="EdgePagesImageSource">/hbs.wpf;component/assets/edgePages.png</ImageSource>
+  <ImageSource x:Key="EdgePagesImageSource">/hbs.wpf;component/assets/edgePages.png</ImageSource>
 
 </ResourceDictionary>

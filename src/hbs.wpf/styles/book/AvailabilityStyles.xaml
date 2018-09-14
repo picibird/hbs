@@ -19,7 +19,6 @@
         BasedOn="{StaticResource AvailTouchScrollViewer}"
         TargetType="{x:Type ScrollViewer}">
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="IsDeferredScrollingEnabled" Value="True" />
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
         <Setter Property="CanContentScroll" Value="False" />
         <Setter Property="PanningMode" Value="HorizontalOnly" />

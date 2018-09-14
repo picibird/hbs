@@ -6,7 +6,7 @@ namespace System.Windows.Controls
     {
         protected override void OnRender(DrawingContext dc)
         {
-            this.VisualBitmapScalingMode = BitmapScalingMode.NearestNeighbor;
+            //this.VisualBitmapScalingMode = BitmapScalingMode.NearestNeighbor;
             base.OnRender(dc);
         }
     }

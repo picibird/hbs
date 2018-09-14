@@ -457,10 +457,12 @@
         x:Key="FilterSelectionListViewStyle"
         BasedOn="{StaticResource ItemsViewStyle}"
         TargetType="{x:Type ItemsControl}">
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="False" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
@@ -471,13 +473,19 @@
                         MaxHeight="{Binding MaxHeight}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
+
+                        <ScrollViewer
+                            Padding="{TemplateBinding Control.Padding}"
+                            CanContentScroll="True"
+                            Focusable="False"
+                            Style="{StaticResource VerticalScrollViewerStyle}">
                             <ContentControl
                                 x:Name="cc"
                                 helper:StateHelper.State="{Binding VisualState}"
                                 Background="Transparent">
-                                <ItemsPresenter />
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                             </ContentControl>
                         </ScrollViewer>
                     </Border>

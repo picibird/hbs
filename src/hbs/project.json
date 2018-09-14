@@ -1,9 +1,9 @@
 ﻿{
   "supports": {},
   "dependencies": {
-    "Newtonsoft.Json": "11.0.2",
+    "Newtonsoft.Json": "10.0.3",
     "Nito.AsyncEx": "3.0.1",
-    "picibits": "0.1.73",
+    "picibits": "0.1.76",
     "SimpleInjector": "3.2.0"
   },
   "frameworks": {

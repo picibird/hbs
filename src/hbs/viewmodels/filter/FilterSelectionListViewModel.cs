@@ -164,5 +164,15 @@ namespace picibird.hbs.viewmodels.filter
         {
             return Items.IndexOf(GetItemForFilter(filter));
         }
+
+        public override IView CreateView()
+        {
+            return base.CreateView();
+        }
+
+        protected override void OnViewChanged(IView oldView, IView newView)
+        {
+            base.OnViewChanged(oldView, newView);
+        }
     }
 }

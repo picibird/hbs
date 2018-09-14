@@ -235,10 +235,6 @@
       <Project>{5f31c0dc-c38a-4378-a2f4-73c02fc8b535}</Project>
       <Name>hbs.ldu</Name>
     </ProjectReference>
-    <ProjectReference Include="..\picibits.bib\picibits.bib.csproj">
-      <Project>{ffc47df7-8f90-49a6-b822-58438bb6c3ee}</Project>
-      <Name>picibits.bib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="favicon.ico" />

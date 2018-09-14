@@ -84,12 +84,10 @@
       <Project>{1bae9a89-e5d1-48e1-b003-0b44a4f329d0}</Project>
       <Name>Shelfhub</Name>
     </ProjectReference>
-    <ProjectReference Include="..\picibits.bib\picibits.bib.csproj">
-      <Project>{ffc47df7-8f90-49a6-b822-58438bb6c3ee}</Project>
-      <Name>picibits.bib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistomatColorScheme.cs" />
+    <Compile Include="ICoverService.cs" />
     <Compile Include="IHitCoverLoader.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="ShelfhubHelper.cs" />

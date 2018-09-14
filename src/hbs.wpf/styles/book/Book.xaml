@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:System.Windows.Controls"
     xmlns:converter="clr-namespace:picibird.hbs.wpf.converter"
     xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -67,6 +68,7 @@
     
     
     
+    
     <!--  FRONT COVER  -->
 
 
@@ -80,6 +82,7 @@
         </Setter>
     </Style>
 
+    
     
     
     
@@ -191,6 +194,7 @@
         
         
         
+        
         <!--<Setter Property="Text" Value="{Binding Model.title, Converter={StaticResource ResourceKey=FormCConverter}}"/>-->
         <Setter Property="Text">
             <Setter.Value>
@@ -254,7 +258,7 @@
                                 </Viewbox>
                             </Grid>
                         </Border>
-                        <Image Source="{Binding Model.CoverImage.Native}" />
+                        <controls:HbsImage Source="{Binding Model.CoverImage.Native}" />
                     </Grid>
 
                 </ControlTemplate>
@@ -266,13 +270,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Image Source="{Binding Model.CoverImage.Native}" />
+                    <controls:HbsImage Source="{Binding Model.CoverImage.Native}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
 
+    
     
     
     
@@ -397,6 +402,7 @@
                                 
                                 
                                 
+                                
                                 <!--  medium icon & name  -->
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -410,6 +416,7 @@
                                     Margin="0,5,0,25"
                                     Style="{StaticResource SpineTitleTextBoxStyle}"
                                     Text="{Binding Model.Medium, Mode=OneWay}" />
+                                
                                 
                                 
                                 
@@ -506,6 +513,7 @@
                                 
                                 
                                 
+                                
                                 <!--  DEPARTMENT  -->
                                 <TextBox
                                     Style="{StaticResource SpineTextBoxStyle}"
@@ -523,7 +531,7 @@
                                 Command="{Binding QRCodeClickCommand}"
                                 DockPanel.Dock="Bottom"
                                 Style="{StaticResource ButtonContentOnlyStyle}">
-                                <Image Source="{Binding Model.QRCodeImage.Native}" Stretch="Uniform" />
+                                <controls:HbsImage Source="{Binding Model.QRCodeImage.Native}" Stretch="Uniform" />
                             </Button>
 
                             <TextBox
@@ -539,6 +547,7 @@
         </Setter>
     </Style>
 
+    
     
     
     
@@ -642,6 +651,7 @@
                                 
                                 
                                 
+                                
                                 <!--  series title  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.SeriesTitle, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -654,6 +664,7 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.SeriesTitle, Mode=OneWay}" />
                                 </Grid>
+                                
                                 
                                 
                                 
@@ -752,6 +763,7 @@
                                 
                                 
                                 
+                                
                                 <!--  author  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.authorBackCoverString, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -764,6 +776,7 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.authorBackCoverString, Mode=OneWay}" />
                                 </Grid>
+                                
                                 
                                 
                                 
@@ -864,6 +877,7 @@
                                 
                                 
                                 
+                                
                                 <!--  medium format  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.Medium, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -876,6 +890,7 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.Medium, Mode=OneWay}" />
                                 </Grid>
+                                
                                 
                                 
                                 
@@ -975,6 +990,7 @@
                                 
                                 
                                 
+                                
                                 <!--  publication places  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.publicationPlaces, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -1030,6 +1046,7 @@
                                 
                                 
                                 
+                                
                                 <!--  publication name  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.publicationName, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -1042,6 +1059,7 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.publicationName, Mode=OneWay}" />
                                 </Grid>
+                                
                                 
                                 
                                 
@@ -1142,6 +1160,7 @@
                                 
                                 
                                 
+                                
                                 <!--  callnumber  -->
                                 <Grid Style="{StaticResource BackCoverDataGridStyle}" Visibility="{Binding Model.Callnumber, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <Grid.ColumnDefinitions>
@@ -1154,6 +1173,7 @@
                                         Style="{StaticResource BackCoverTextBoxFatStyle}"
                                         Text="{Binding Model.Callnumber, Mode=OneWay}" />
                                 </Grid>
+                                
                                 
                                 
                                 
@@ -1254,11 +1274,13 @@
                                 
                                 
                                 
+                                
                                 <!--  locations  -->
                                 <StackPanel Orientation="Vertical" Visibility="{Binding Model.shelfhubItem.Locations, Converter={StaticResource CollapsedNoDataConverter}}">
                                     <TextBox Style="{StaticResource BackCoverTextBoxSuperFatStyle}" Text="{Binding Resources[locations]}" />
                                     <ItemsControl ItemsSource="{Binding Model.shelfhubItem.Locations}" Style="{StaticResource LocationStyle}" />
                                 </StackPanel>
+                                
                                 
                                 
                                 
@@ -1343,11 +1365,13 @@
                                 
                                 
                                 
+                                
                                 <!--  availability  -->
                                 <views:View
                                     Margin="0,15,0,0"
                                     DataContext="{Binding Ressources}"
                                     Visibility="{Binding Has, Converter={StaticResource CollapsedNoDataConverter}}" />
+                                
                                 
                                 
                                 
@@ -1447,6 +1471,7 @@
                                 
                                 
                                 
+                                
                                 <!--  Other Links  -->
                                 <StackPanel
                                     Margin="0,15,0,0"
@@ -1455,6 +1480,7 @@
                                     <TextBox Style="{StaticResource BackCoverTextBoxSuperFatStyle}" Text="{Binding Resources[links]}" />
                                     <ItemsControl ItemsSource="{Binding Model.Links}" Style="{StaticResource BookLinksStyle}" />
                                 </StackPanel>
+                                
                                 
                                 
                                 
@@ -1561,6 +1587,7 @@
                                 
                                 
                                 
+                                
                                 <!--  multivolume works  -->
                                 <StackPanel
                                     Margin="0,15,0,0"
@@ -1572,6 +1599,7 @@
                                 
                                 
 
+                                
                                 
                                 
                                 
@@ -1670,7 +1698,9 @@
                                 
                                 
                                 
+                                
                                 <!--  SHELFHUB EXTRAS  -->
+                                
                                 
                                 
                                 
@@ -1783,13 +1813,14 @@
     
     
     
+    
     <!--  EDGES  -->
 
     <Style x:Key="EdgePagesStyle" TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Image Source="{StaticResource ResourceKey=EdgePagesImageSource}" />
+                    <controls:HbsImage Source="{StaticResource ResourceKey=EdgePagesImageSource}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

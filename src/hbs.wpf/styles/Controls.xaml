@@ -46,6 +46,7 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="CanContentScroll" Value="False" />
         <Setter Property="PanningMode" Value="VerticalOnly" />
+        <Setter Property="IsDeferredScrollingEnabled" Value="True" />
     </Style>
 
     <Style
@@ -56,6 +57,7 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
         <Setter Property="CanContentScroll" Value="False" />
         <Setter Property="PanningMode" Value="HorizontalOnly" />
+        <Setter Property="IsDeferredScrollingEnabled" Value="True" />
     </Style>
 
     <!--  BUTTON  -->
